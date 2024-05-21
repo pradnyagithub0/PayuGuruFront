@@ -1,6 +1,8 @@
 import React,{ useState, useEffect } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Dheader.css';
 
 
@@ -32,6 +34,20 @@ const Header = () => {
         setUserData('');
         navigate('/')
     }
+
+	const ConditionalHeader =  () => {
+        if(userData){
+            if(userData.name){
+                sessionStorage.setItem('userInfo',JSON.stringify(userData))
+                return(
+                    <div>
+					
+                        
+                    </div>
+                )
+            }
+        }
+	}
 
 	
 
@@ -65,36 +81,6 @@ const Header = () => {
 							   
 					    	<li className="nav-item dropdown">
 
-				{/*<div className="hero">
-					<img src="https://i.ibb.co/WKxztwB/profile.png" className="user-pic" onClick={toggleMenu}></img>
-					<div className="sub-menu-wrap" id="subMenu">
-					<div className="sub-menu">
-					<div className="user-info">
-					<img src="https://i.ibb.co/WKxztwB/profile.png"></img>
-					<h2>James Bond</h2>
-					
-					</div>
-					<hr></hr>
-					<a href="/userprofile" className="sub-menu-link">
-					<img src="https://i.ibb.co/WKxztwB/profile.png"></img>
-					<p>Edit Profile</p>
-					<span> &#129170;</span>
-					</a>
-
-					<a href="/account" className="sub-menu-link">
-					<img src="https://i.ibb.co/WKxztwB/profile.png"></img>
-					<p>Setting</p>
-					<span>&#129170;</span>
-					</a>
-
-					<a href="" className="sub-menu-link" onClick={handleLogout}>
-					<img src="https://i.ibb.co/WKxztwB/profile.png"></img>
-					<p>Logout</p>
-					<span>&#129170;</span>
-					</a>
-					</div>
-					</div>
-	          </div>*/}
 	      <Dropdown>
 	         <Dropdown.Toggle variant="Secondary'" id="dropdown-basic">
                <img src="https://i.ibb.co/WKxztwB/profile.png"></img>
@@ -137,4 +123,5 @@ const Header = () => {
 		
     )
 }
+			
 export default  Header;
