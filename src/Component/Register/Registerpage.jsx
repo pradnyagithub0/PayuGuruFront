@@ -1,10 +1,14 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Registerpage.css";
 import lodingImg from "../../assets/img/loading.gif";
 import { register_API } from "../../utils/api_endpoints.js";
+import { ApplicationContext } from '../../context/ApplicationContext';
+
+
 
 const Register = () => {
+  const { setClientId } = useContext(ApplicationContext); // Use the context
   const [loader, setLoader] = useState(false);
   const [registerErr, setregisterErr] = useState("");
   const [fieldErrors, setFieldErrors] = useState({
@@ -43,6 +47,8 @@ const Register = () => {
       setLoader(false);
 
       if (responseData.StatusCodes && responseData.StatusCodes === "00") {
+        setClientId(responseData.responsed.clientId);
+        localStorage.setItem('clientId', responseData.responsed.clientId);
         console.log(
           "Registration successful:",
           responseData.responsed.clientId
@@ -50,7 +56,6 @@ const Register = () => {
         navigate(`/success`);
       } else if (responseData.success === false) {
         console.log("Registration error:", responseData.message);
-        setregisterErr(responseData.message);
         parseFieldErrors(responseData.message);
       } else {
         console.error("Unexpected response structure:", responseData);
@@ -73,18 +78,18 @@ const Register = () => {
       companyName: "",
     };
     if (errorMessage.includes('"name"'))
-      fieldErrors.userName = "Name is not allowed to be empty";
+      fieldErrors.userName = "*Name is not allowed to be empty";
     if (errorMessage.includes('"mobile"'))
-      fieldErrors.userPhone = "Mobile number already exist.";
+      fieldErrors.userPhone = "*Mobile number already exist.";
     if (errorMessage.includes('"email"'))
-      fieldErrors.userEmail = "Invalid email address.";
+      fieldErrors.userEmail = "*Invalid email address.";
     if (errorMessage.includes('"password"'))
       fieldErrors.password =
-        "password length must be at least 8 characters long, must contain one uppercase letter, one lowercase letter, and one digit";
+        "*password length must be at least 8 characters long, must contain one uppercase letter, one lowercase letter, and one digit";
     if (errorMessage.includes('"confirmedpassword"'))
-      fieldErrors.confirmPass = "Passwords do not match.";
+      fieldErrors.confirmPass = "*Passwords do not match.";
     if (errorMessage.includes('"com_name"'))
-      fieldErrors.companyName = "Company name is not allowed to be empty";
+      fieldErrors.companyName = "*Company name is not allowed to be empty";
 
     setFieldErrors(fieldErrors);
   };
@@ -99,14 +104,14 @@ const Register = () => {
               <div className="form">
                 <h3 className="text-center">REGISTRATION FORM</h3>
                 <p className="text-center">
-                  <a href="/" className="text-white">
+                  <Link to="/" className="text-white">
                     <img
                       src="https://i.ibb.co/vzTTh9B/home.png"
                       alt="home-icon"
                       className="home-icon"
                     />
                     Home
-                  </a>
+                  </Link>
                 </p>
                 <div className="inputbox">
                   <label>Name</label>
@@ -138,11 +143,11 @@ const Register = () => {
                   <input type="password" name="confirmPass" id="confirmPass" />
                   <p className="msg text-warning">{fieldErrors.confirmPass}</p>
                 </div>
-                {/* <span id="mobileOtpError" className="text-danger">{ registerErr }</span> */}
+                <span id="mobileOtpError" className="text-danger">{ registerErr }</span>
                 <div class="tacbox">
                   <input id="checkbox" type="checkbox" className="checkbox" />
                   <label for="checkbox">
-                    I agree to these <a href="#">Terms and Conditions</a>.
+                    I agree to these <Link to="#">Terms and Conditions</Link>.
                   </label>
                 </div>
                 <div>

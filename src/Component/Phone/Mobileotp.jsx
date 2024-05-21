@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Mobileotp.css";
 import lodingImg from '../../assets/img/loading.gif';
+import { ApplicationContext } from '../../context/ApplicationContext'; 
 import { otp_verify } from "../../utils/api_endpoints.js";
 
 
 const MobileVerifyPage = () => {
+  const { clientId } = useContext(ApplicationContext); //value coming from context
+  const clientId2 = localStorage.getItem('clientId');
+  console.log('MobileVerifyPage clientId:', clientId);
+
   const [mobileOtpErr, setMobileOtpErr] = useState("");
   const [loader, setLoader] = useState(false);
 
@@ -63,7 +68,7 @@ const MobileVerifyPage = () => {
           <div className="row">
             <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
               <div className="form">
-                <h3 className="text-center">Mobile Verification</h3>
+                <h3 className="text-center">Mobile Verification {clientId }</h3>
                 <p className="text-center">
                   <a href="/" className="text-white">
                     <img

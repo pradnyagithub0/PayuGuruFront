@@ -40,16 +40,11 @@ import TermsandCondition from './Pages/TermsandCondition';
 
 const Routing = () =>{
 
-
-       
-      
-
     return(
         <div>
             <BrowserRouter>
-                    <Routes>
-                    
-                        <Route path="/" element={<Main/>}>
+                <Routes>
+                    <Route path="/" element={<Main/>}>
                         <Route index element={<Home/>}/>
                         <Route path="Home" element={<Home/>}/>
                         <Route path="login" element={<Loginpage/>}/>
@@ -79,13 +74,8 @@ const Routing = () =>{
                         <Route path="PrivacyPolicy" element={<PrivacyPolicy/>}/>
                         <Route path="RedressalPolicy" element={<RedressalPolicy/>}/>
                         <Route path="TermsandCondition" element={<TermsandCondition/>}/>
-                        
-                        
-                        
                     </Route>
-                    
-                    
-                    </Routes>
+                </Routes>
             </BrowserRouter>
         </div>
     )
