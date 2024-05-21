@@ -1,6 +1,5 @@
 import React,{ useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import './Emailotp.css'; 
 
 
@@ -13,10 +12,7 @@ const EmailVerifyPage = () => {
   let navigate = useNavigate();
   const initialValues = {
     
-      
-      
-      
-  };
+};
 
   const [values, setValues] = useState(initialValues);
     const [message,setMessage] = useState()

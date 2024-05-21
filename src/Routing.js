@@ -1,7 +1,6 @@
 import React from 'react';
-import { BrowserRouter,Route,Routes } from 'react-router-dom';
+import { BrowserRouter,Route,Routes,Switch } from 'react-router-dom';
 import { ProtectedRoute } from "protected-route-react";
-
 import Home from './Component/Home/Home';
 import Main from './Main';
 import Loginpage from './Component/Login/Loginpage';
@@ -47,7 +46,9 @@ const Routing = () =>{
     return(
         <div>
             <BrowserRouter>
+                  
                     <Routes>
+                
                     
                         <Route path="/" element={<Main/>}>
                         <Route index element={<Home/>}/>
@@ -57,8 +58,9 @@ const Routing = () =>{
                         <Route path="emailotp" element={<Emailotp/>}/>
                         <Route path="mobileotp" element={<Mobileotp/>}/>
                         <Route path="Forgotun" element={<Forgotun/>}/>
-                        
+                    
                         <Route path="/dashboard" element={<Dashboards/>}/>
+                        
 
                         <Route path="virtualaccount" element={<Virtualaccount/>}/> 
                         <Route path="upi" element={<Upi/>}/>
@@ -80,12 +82,10 @@ const Routing = () =>{
                         <Route path="RedressalPolicy" element={<RedressalPolicy/>}/>
                         <Route path="TermsandCondition" element={<TermsandCondition/>}/>
                         
-                        
-                        
-                    </Route>
+                        </Route>
                     
-                    
-                    </Routes>
+                </Routes>
+            
             </BrowserRouter>
         </div>
     )
