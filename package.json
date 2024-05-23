@@ -10,6 +10,7 @@
     "@wds-ui/switch": "^0.0.1",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
+    "dotenv-webpack": "^8.1.0",
     "formik": "^2.4.5",
     "protected-route-react": "^1.0.1",
     "react": "^18.2.0",
