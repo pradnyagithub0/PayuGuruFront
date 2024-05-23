@@ -41,20 +41,15 @@ const Routing = () =>{
     
     
 
-
-       
-      
-
     return(
         <div>
             <BrowserRouter>
             
         
                   
-                    <Routes>
+                <Routes>
                 
-                    
-                        <Route path="/" element={<Main/>}>
+                    <Route path="/" element={<Main/>}>
                         <Route index element={<Home/>}/>
                         <Route path="Home" element={<Home/>}/>
                         <Route path="login" element={<Loginpage/>}/>
@@ -88,12 +83,19 @@ const Routing = () =>{
                         <Route path="RedressalPolicy" element={<RedressalPolicy/>}/>
                         <Route path="TermsandCondition" element={<TermsandCondition/>}/>
                         
-                        </Route>
+                        
+                        
+                    </Route>
                     
+<<<<<<< HEAD
                 </Routes>
                 
                 
             
+=======
+                    
+                    </Routes>
+>>>>>>> 9d5b978877624018db5ed16cfb37f61d511fda8d
             </BrowserRouter>
         </div>
     )
