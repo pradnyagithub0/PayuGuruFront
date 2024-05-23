@@ -1,48 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate,Navigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import toast, { Toaster } from 'react-hot-toast';
 import './Resetpassword.css';
 
 
-const url = '';
-
 const Resetpassword = () => {
-    let navigate = useNavigate();
-    const initialValues = {
+    
+   
 
-    };
-
-    const [values, setValues] = useState(initialValues);
-    const [message,setMessage] = useState()
-
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setValues({
-        values,
-        [name]: value,
-      });
-    };
-    const checkout = () => {
-        console.log(values)
-        fetch(url,{
-            method: 'POST',
-            headers:{
-                'accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify(values)
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if(data.auth === false){
-                setMessage(data.token)
-            }else{
-                sessionStorage.setItem('ltk',data.token)
-                navigate(`/success`)
-            }
-        })
-        .then(navigate(`/success`))
-    }
 
 
     return (
@@ -61,21 +27,23 @@ const Resetpassword = () => {
                         
 
                         <div className="inputbox">
-                                 <label>New Password</label>
-                                 <input type="text" placeholder='New Password' />
+                                 <label>Password</label>
+                                 <input   type="text" placeholder='New Password' />
                                  
                                  <p className="msg"></p>
                         </div>
 
                         <div className="inputbox">
-                             <label>Repeat Password</label>
-                             <input className="" type="text" placeholder='Repeat Password' />
+                             <label>Confirm Password</label>
+                             <input  type="text" placeholder='Repeat Password' />
                             
                         <p className="msg"></p>
                         </div>
                         
                         
-                        <input type="submit" value="RESET" className="submit" onClick={checkout}/>
+                        <button className="submitButton">
+                        Reset
+                      </button>
                         
 
                         
@@ -91,5 +59,5 @@ const Resetpassword = () => {
     
             
       )
-}
+};
 export default Resetpassword;

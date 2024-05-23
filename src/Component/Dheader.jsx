@@ -1,12 +1,10 @@
 import React,{ useState, useEffect } from "react";
 import Dropdown from 'react-bootstrap/Dropdown';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
 import './Dheader.css';
 
 
-const url = "";
+const url = "https://apiv1.bapaupipaymentgatewayapi.com/api/dashboard/logout";
 
 const Header = () => {
 
@@ -35,19 +33,7 @@ const Header = () => {
         navigate('/')
     }
 
-	const ConditionalHeader =  () => {
-        if(userData){
-            if(userData.name){
-                sessionStorage.setItem('userInfo',JSON.stringify(userData))
-                return(
-                    <div>
-					
-                        
-                    </div>
-                )
-            }
-        }
-	}
+
 
 	
 

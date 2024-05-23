@@ -1,51 +1,13 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Navigate } from 'react-router-dom';
+import { useFormik } from 'formik';
 import './Forgotun.css';
 
 
-const url = "";
 
 const ForgotPasswordPage = () => {
   
-  let navigate = useNavigate();
-  const initialValues = {
-      
-      
-      
-  };
-
-  const [values, setValues] = useState(initialValues);
-  const [message,setMessage] = useState()
-
-  const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setValues({
-        values,
-        [name]: value,
-      });
-  };
-
-  const checkout = () => {
-      console.log(values)
-      fetch(url,{
-          method: 'POST',
-          headers:{
-              'accept':'application/json',
-              'Content-Type':'application/json'
-          },
-          body:JSON.stringify(values)
-      })
-      .then((res) => res.json())
-      .then((data) => {
-          if(data.auth === false){
-              setMessage(data.token)
-          }else{
-              sessionStorage.setItem('ltk',data.token)
-              navigate(`/otppage`)
-          }
-      })
-      .then(navigate(`/otppage`))
-  }
+  
   
 
   return (
@@ -67,7 +29,7 @@ const ForgotPasswordPage = () => {
                              </div>
                              
                              
-                             <input type="submit" value="SUBMIT" className="submit" onClick={checkout}/>
+                             <input type="submit" value="SUBMIT" className="submit"/>
                              <div className="inputbox text-center">
                              <p>You Don't have An Account ? <a href='/Register'>  Register</a></p> 
 							               </div>

@@ -1,56 +1,34 @@
 import React,{ useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Emailotp.css'; 
 
 
 
-const url = "";
 
-const EmailVerifyPage = () => {
 
-  
-  let navigate = useNavigate();
-  const initialValues = {
-    
-};
-
-  const [values, setValues] = useState(initialValues);
-    const [message,setMessage] = useState()
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setValues({
-          values,
-          [name]: value,
-        });
+  const EmailVerifyOtp = ({ email }) =>{
+    const[otp,setOtp] = useState('');
+    const[ message,setMessage ] = useState('');
+    const emailVerifyOtp= async () => {
+        try {
+          const response = await axios.post('https://apiv1.bapaupipaymentgatewayapi.com/api/user/emailcheck', { email, otp });
+          setMessage(response.data.message);
+        } catch (error) {
+          setMessage('Invalid OTP. Please try again.');
+        }
     };
+  
 
-    const checkout = () => {
-      console.log(values)
-      fetch(url,{
-          method: 'POST',
-          headers:{
-              'accept':'application/json',
-              'Content-Type':'application/json'
-          },
-          body:JSON.stringify(values)
-      })
-      .then((res) => res.json())
-      .then((data) => {
-          if(data.auth === false){
-              setMessage(data.token)
-          }else{
-              sessionStorage.setItem('ltk',data.token)
-              navigate(`/Mobileotp`)
-          }
-      })
-      .then(navigate(`/Mobileotp`))
-  }
+  
+  
+
+
   
 
   
 
-
+  
   
   return (
     <div>
@@ -66,14 +44,18 @@ const EmailVerifyPage = () => {
 
                         <div className="inputbox">
                         <label>Enter Your Email OTP</label>
-                        <input type="" id="" name="" maxLength="6" />
+                        <input type="text" id="" name="" value={otp}
+                        maxLength="6" onChange={(e) => setOtp(e.target.value)}/>
                          </div>
 
-                         <input type="Submit" value="Resend Otp" className="submit" onClick={handleInputChange}/>
+                         <input type="Submit" value="Resend Otp" className="submit"/>
                          <div className="inputbox text-center">
                         
                         </div>
-                         <input type="submit" value="Verify Email" onClick={checkout} className="submit" />
+                        <button className="submitButton" onClick={emailVerifyOtp}>
+                        Submit
+                      </button>
+                      {message && <p>{message}</p>}
                          <div className="inputbox text-center">
                         
                         </div>
@@ -92,4 +74,4 @@ const EmailVerifyPage = () => {
   )
 }
 
-export default EmailVerifyPage;
+export default EmailVerifyOtp;
