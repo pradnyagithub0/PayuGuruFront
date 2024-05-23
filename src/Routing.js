@@ -87,15 +87,8 @@ const Routing = () =>{
                         
                     </Route>
                     
-<<<<<<< HEAD
-                </Routes>
-                
-                
-            
-=======
                     
                     </Routes>
->>>>>>> 9d5b978877624018db5ed16cfb37f61d511fda8d
             </BrowserRouter>
         </div>
     )

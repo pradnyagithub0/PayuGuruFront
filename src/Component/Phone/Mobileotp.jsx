@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Mobileotp.css";
 import lodingImg from '../../assets/img/loading.gif';
 import { ApplicationContext } from '../../context/ApplicationContext'; 
-import { otp_verify_API, otp_resend_API } from "../../utils/api_endpoints.js";
+import { ENDPOINTS } from "../../utils/apiConfig";
 
 
 const MobileVerifyPage = () => {
@@ -23,7 +23,7 @@ const MobileVerifyPage = () => {
     setMobileOtpErr("");
   
     try {
-      const response = await fetch(otp_verify_API, {
+      const response = await fetch(ENDPOINTS.OTP_VERIFY, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -69,7 +69,7 @@ const MobileVerifyPage = () => {
     setResendMobileOtpErr("");
 
     try {
-      const response = await fetch(otp_resend_API, {
+      const response = await fetch(ENDPOINTS.RE_SEND_M_OTP, {
         method: "POST",
         headers: {
           accept: "application/json",

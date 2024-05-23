@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Registerpage.css";
 import lodingImg from "../../assets/img/loading.gif";
-import { register_API } from "../../utils/api_endpoints.js";
+import { ENDPOINTS } from "../../utils/apiConfig.js";
 import { ApplicationContext } from '../../context/ApplicationContext';
 
 
@@ -27,7 +27,7 @@ const Register = () => {
     setFieldErrors({});
 
     try {
-      const response = await fetch(register_API, {
+      const response = await fetch(ENDPOINTS.REGISTER_USER, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -124,7 +124,7 @@ const Register = () => {
                   <p className="msg text-warning">{fieldErrors.companyName}</p>
                 </div>
                 <div className="inputbox">
-                  <label for="email">Email</label>
+                  <label htmlFor="email">Email</label>
                   <input type="email" name="userEmail" id="userEmail" />
                   <p className="msg text-warning">{fieldErrors.userEmail}</p>
                 </div>
@@ -144,9 +144,9 @@ const Register = () => {
                   <p className="msg text-warning">{fieldErrors.confirmPass}</p>
                 </div>
                 <span id="mobileOtpError" className="text-danger">{ registerErr }</span>
-                <div class="tacbox">
+                <div className="tacbox">
                   <input id="checkbox" type="checkbox" className="checkbox" />
-                  <label for="checkbox">
+                  <label htmlFor="checkbox">
                     I agree to these <Link to="#">Terms and Conditions</Link>.
                   </label>
                 </div>
