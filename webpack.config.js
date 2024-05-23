@@ -5,6 +5,9 @@ module.exports = {
   plugins: [
     new Dotenv(),
   ],
+  resolve: {
+    extensions: ['*', '.js', '.jsx'],
+  },
   module: {
     rules: [
       // Other rules...
@@ -22,13 +25,4 @@ module.exports = {
       },
     ],
   },
-<<<<<<< HEAD
-=======
-  plugins: [
-    new Dotenv(),
-  ],
-  resolve: {
-    extensions: ['*', '.js', '.jsx'],
-  },
->>>>>>> origin/master
 };
