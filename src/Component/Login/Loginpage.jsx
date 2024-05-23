@@ -2,11 +2,11 @@ import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Loginpage.css';
 
+import { ENDPOINTS } from '../../utils/apiConfig';
 
 
 
-
-const url = "https://apiv1.bapaupipaymentgatewayapi.com/api/user/login";
+const url = ENDPOINTS.LOGIN_USER;
 
 const Login = () => {
 

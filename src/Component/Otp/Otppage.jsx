@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Otppage.css';
+import { ENDPOINTS } from '../../utils/apiConfig';
 
-
-const url = "";
+const url = ENDPOINTS.VERIFY_EMAIL;
 
 var otp1 = "";
 

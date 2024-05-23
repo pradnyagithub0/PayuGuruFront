@@ -1,5 +1,6 @@
 import React from "react";
 import './Header.css';
+import { Link } from "react-router-dom";
 
 
 
@@ -14,7 +15,9 @@ function Header(){
                             <img src="https://i.ibb.co/GTr3w2M/logo.webp" alt="logo" width="160" height="25"/>
                         </a>
                         <div className="number ml-auto">
-                            <a className="btn-warning mr-sm-2 p-xy" href="/Login">Login</a>
+                            <Link className="btn-warning mr-sm-2 p-xy" to="/Login">
+                                Login
+                            </Link>
                         </div>
                         <button type="button" data-target="#navbarCollapse" data-toggle="collapse" className="navbar-toggler">
                         <span className="navbar-toggler-icon"></span>
@@ -41,7 +44,7 @@ function Header(){
                                 </li>
                             </ul>
                             <div className="form-inline my-2">
-                                <a className="btn-warning mr-sm-2" href="/Login">Login</a>
+                                <Link className="btn-warning mr-sm-2" to="/Login">Login</Link>
                             </div>
                         </div>
                     </nav>
