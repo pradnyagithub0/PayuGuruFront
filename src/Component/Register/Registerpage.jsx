@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Registerpage.css";
 import lodingImg from "../../assets/img/loading.gif";
-import { register_API } from "../../utils/api_endpoints.js";
+import { ENDPOINTS } from "../../utils/apiConfig.js";
 import { ApplicationContext } from '../../context/ApplicationContext';
 
 
 
 const Register = () => {
-  // const { setClientId } = useContext(ApplicationContext); // Use the context
+  const { setClientId } = useContext(ApplicationContext); // Use the context
   const [loader, setLoader] = useState(false);
   const [registerErr, setregisterErr] = useState("");
   const [fieldErrors, setFieldErrors] = useState({
@@ -20,7 +20,6 @@ const Register = () => {
     companyName: "",
   });
   let navigate = useNavigate();
-  const register_API1 = process.env.REACT_APP_REGISTER_API;
 
   const registerUser = async () => {
     setLoader(true);
@@ -28,7 +27,7 @@ const Register = () => {
     setFieldErrors({});
 
     try {
-      const response = await fetch(register_API, {
+      const response = await fetch(ENDPOINTS.REGISTER_USER, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -48,13 +47,13 @@ const Register = () => {
       setLoader(false);
 
       if (responseData.StatusCodes && responseData.StatusCodes === "00") {
-        // setClientId(responseData.responsed.clientId);
+        setClientId(responseData.responsed.clientId);
         localStorage.setItem('clientId', responseData.responsed.clientId);
         console.log(
           "Registration successful:",
           responseData.responsed.clientId
         );
-        navigate(`/mobileotp`);
+        navigate(`/success`);
       } else if (responseData.success === false) {
         console.log("Registration error:", responseData.message);
         parseFieldErrors(responseData.message);
@@ -125,7 +124,7 @@ const Register = () => {
                   <p className="msg text-warning">{fieldErrors.companyName}</p>
                 </div>
                 <div className="inputbox">
-                  <label htmlFor="email">Email</label>
+                  <label for="email">Email</label>
                   <input type="email" name="userEmail" id="userEmail" />
                   <p className="msg text-warning">{fieldErrors.userEmail}</p>
                 </div>
@@ -145,9 +144,9 @@ const Register = () => {
                   <p className="msg text-warning">{fieldErrors.confirmPass}</p>
                 </div>
                 <span id="mobileOtpError" className="text-danger">{ registerErr }</span>
-                <div className="tacbox">
+                <div class="tacbox">
                   <input id="checkbox" type="checkbox" className="checkbox" />
-                  <label htmlFor="checkbox">
+                  <label for="checkbox">
                     I agree to these <Link to="#">Terms and Conditions</Link>.
                   </label>
                 </div>
