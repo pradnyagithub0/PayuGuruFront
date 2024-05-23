@@ -3,16 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Emailotp.css'; 
 
+import { ENDPOINTS } from '../../utils/apiConfig';
 
-
-
+let url = ENDPOINTS.VERIFY_EMAIL;
 
   const EmailVerifyOtp = ({ email }) =>{
     const[otp,setOtp] = useState('');
     const[ message,setMessage ] = useState('');
     const emailVerifyOtp= async () => {
         try {
-          const response = await axios.post('https://apiv1.bapaupipaymentgatewayapi.com/api/user/emailcheck', { email, otp });
+          const response = await axios.post(url, { email, otp });
           setMessage(response.data.message);
         } catch (error) {
           setMessage('Invalid OTP. Please try again.');
