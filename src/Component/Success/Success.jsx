@@ -30,6 +30,13 @@ const RegisterSuccessPage = ({ username }) => {
               Login
             </Button>
           </Link>
+          {/* <div>
+            <Link to="/mobileotp">
+              <Button variant="contained" color="success">
+                Verify your Mobile
+              </Button>
+            </Link>
+          </div> */}
         </div>
       </div>
 
