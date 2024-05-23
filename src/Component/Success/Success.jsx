@@ -1,27 +1,87 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
 import "./Success.css";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import { Button } from "@mui/material";
+import { email_check_API} from "../../utils/api_endpoints.js";
 
-const RegisterSuccessPage = ({ username }) => {
-  const [values, setValues] = useState();
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
-  };
+const RegisterSuccessPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const Email_Check = process.env.REACT_APP_VERIFY_EMAIL;
+
+
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get("token");
+
+  useEffect(() => {
+    const verifyToken = async () => {
+      try {
+        const response = await fetch(Email_Check, {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            token: token
+            
+          }),
+        });
+    
+        const resData = await response.json();
+    
+        if (resData.mess) {
+          if (resData.mess.StatusCodes === "E00") {
+            console.log(resData.mess.message);
+            setLoading(false);
+          } else {
+            console.log(resData.mess.message);
+            setError("Verification failed. Please try again.");
+            setLoading(false);
+          }
+        } else if (resData.message) {
+          // Handle the 'Internal Server Error' case
+          console.log(resData.message);
+          setError("Verification failed. Please try again.");
+          setLoading(false);
+        } else {
+          // Handle unexpected response structure
+          console.error("Unexpected response structure:", resData);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    if (token) {
+      verifyToken();
+    } else {
+      setError("Invalid token.");
+      setLoading(false);
+    }
+  }, [token]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+ 
 
   return (
     <div>
       <Header />
       <div className="register-success-container">
-        <h2>Welcome To PayuGuru {username}!</h2>
+        <h2>Welcome To PayUGuru !</h2>
         <p>Your registration was successful. Thank you for joining us!</p>
-        <div className="inputbox text-center" onClick={handleInputChange}>
+        <div className="inputbox text-center">
           <p>
             You can Login Here...
           </p>
@@ -30,13 +90,7 @@ const RegisterSuccessPage = ({ username }) => {
               Login
             </Button>
           </Link>
-          {/* <div>
-            <Link to="/mobileotp">
-              <Button variant="contained" color="success">
-                Verify your Mobile
-              </Button>
-            </Link>
-          </div> */}
+          
         </div>
       </div>
 

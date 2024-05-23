@@ -1,5 +1,5 @@
-import React,{ useState } from 'react';
-import { BrowserRouter,Route,Routes } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter,Route,Routes,Switch } from 'react-router-dom';
 import { ProtectedRoute } from "protected-route-react";
 import Home from './Component/Home/Home';
 import Main from './Main';
@@ -38,14 +38,10 @@ import TermsandCondition from './Pages/TermsandCondition';
 
 
 const Routing = () =>{
-    
-    
 
     return(
         <div>
             <BrowserRouter>
-            
-        
                   
                 <Routes>
                 
@@ -58,9 +54,9 @@ const Routing = () =>{
                         <Route path="mobileotp" element={<Mobileotp/>}/>
                         <Route path="Forgotun" element={<Forgotun/>}/>
                     
-                        
-                        
                         <Route path="/dashboard" element={<Dashboards/>}/>
+                        
+
                         <Route path="virtualaccount" element={<Virtualaccount/>}/> 
                         <Route path="upi" element={<Upi/>}/>
                         <Route path="reports" element={<Reports/>}/>
@@ -69,8 +65,6 @@ const Routing = () =>{
                         <Route path="api" element={<Api/>}/>
                         <Route path="webhook" element={<Webhook/>}/>
                         <Route path="userprofile" element={<Userprofile/>}/>
-                        
-                        
                         <Route path="kycform" element={<KycForm/>}/>
                         <Route path="kybform" element={<KybForm/>}/>
                         <Route path="enquiry" element={<Enquiry/>}/>
@@ -87,15 +81,8 @@ const Routing = () =>{
                         
                     </Route>
                     
-<<<<<<< HEAD
-                </Routes>
-                
-                
-            
-=======
                     
                     </Routes>
->>>>>>> 9d5b978877624018db5ed16cfb37f61d511fda8d
             </BrowserRouter>
         </div>
     )

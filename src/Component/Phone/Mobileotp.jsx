@@ -3,20 +3,20 @@ import { useNavigate } from "react-router-dom";
 import "./Mobileotp.css";
 import lodingImg from '../../assets/img/loading.gif';
 import { ApplicationContext } from '../../context/ApplicationContext'; 
-import { otp_verify_API, otp_resend_API } from "../../utils/api_endpoints.js";
+// import { otp_verify_API, otp_resend_API } from "../../utils/api_endpoints.js";
 
 
 const MobileVerifyPage = () => {
   const {clientId}  = useContext(ApplicationContext); //value coming from context
   const clientId2 = localStorage.getItem('clientId'); // value coming from local storage
-  console.log('MobileVerifyPage clientId from useContext storage:', clientId);
-  console.log('MobileVerifyPage clientId from local storage:', clientId2);
-
   const [mobileOtpErr, setMobileOtpErr] = useState("");
   const [resendMobileOtpErr, setResendMobileOtpErr] = useState("");
   const [loader, setLoader] = useState(false);
 
   let navigate = useNavigate();
+  const otp_verify_API = process.env.REACT_APP_MOBILE_VERIFY;
+  const otp_resend_API = process.env.REACT_APP_RESEND_MOBILE_OTP;
+
   
   const mobileOtpVerify = async () => {
     setLoader(true);
@@ -41,10 +41,11 @@ const MobileVerifyPage = () => {
       if (otpData.mess) {
         if (otpData.mess.StatusCodes === "M00") {
           console.log(otpData.mess.message);
-          navigate(`/success`);
+          // navigate(`/success`);
         } else {
           console.log(otpData.mess.message);
           setMobileOtpErr(otpData.mess.message);
+          alert(otpData.mess.message);
         }
       } else if (otpData.message) {
         // Handle the 'Internal Server Error' case
@@ -127,7 +128,7 @@ const MobileVerifyPage = () => {
                     Home
                   </a>
                 </p>
-
+                
                 <div className="inputbox">
                   <label>Enter Your Mobile OTP</label>
                   <input
@@ -136,7 +137,7 @@ const MobileVerifyPage = () => {
                     name="mobileOtp"
                     maxLength="6"
                   />
-                  <span id="mobileOtpError" className="text-danger">{ mobileOtpErr }</span>
+                  <span id="mobileOtpError" className="text-warning">{ mobileOtpErr }</span>
                   <span id="resendMobileOtpErr" className="text-warning">{ resendMobileOtpErr }</span>
                 </div>
                 <div>
