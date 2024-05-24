@@ -1,65 +1,64 @@
-import React,{ useState, useEffect } from "react";
-import Dropdown from 'react-bootstrap/Dropdown';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import './Dheader.css';
+import React, { useState, useEffect } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import lodingImg from "../assets/img/loading.gif";
+import { ENDPOINTS } from "../utils/apiConfig";
+import "./Dheader.css";
 
-
-const url = "https://apiv1.bapaupipaymentgatewayapi.com/api/dashboard/logout";
+const Logout_API = ENDPOINTS.LOGOUT_REQUEST;
+const sessionid = sessionStorage.getItem("sessionid");
 
 const Header = () => {
   const [userData, setUserData] = useState("");
   let navigate = useNavigate();
 
-    useEffect(() => {
-        if(sessionStorage.getItem('ltk') !== null){
-            fetch(url,{
-                method:'GET',
-                headers:{
-                    'x-access-token':sessionStorage.getItem('ltk')
-                }
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                setUserData(data)
-            })
-        }
-    },[])
+  const handleLogout = async () => {
+    try {
+      const response = await fetch(Logout_API, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+        }),
+      });
 
-	const handleLogout = () => {
-        sessionStorage.removeItem('ltk');
-        sessionStorage.removeItem('userInfo')
-        setUserData('');
-        navigate('/')
+      const resData = await response.json();
+
+      if (resData.message) {
+        if (resData.StatusCodes === "U00") {
+          sessionStorage.removeItem("sessionid");
+          navigate(`/`);
+        } else {
+          alert(resData.message);
+        }
+      } else {
+        // Handle unexpected response structure
+        console.error("Unexpected response structure:", resData);
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
     }
+  };
 
-	const ConditionalHeader =  () => {
-        if(userData){
-            if(userData.name){
-                sessionStorage.setItem('userInfo',JSON.stringify(userData))
-                return(
-                    <div>
-					
-                        
-                    </div>
-                )
-            }
-        }
-	}
-
-	
+  
 
 
-
-
-	return(
-        <div>
-        <header>
-				<nav className="container-fluid navbar navbar-expand-lg navbar-light bg-white px-5">
-				  	<div className="navbar-brand" href="">
-				  		<img src="https://i.ibb.co/GTr3w2M/logo.webp" alt="logo" width="150" height="25"/>
-				  	</div>
+  return (
+    <div>
+      <header>
+        <nav className="container-fluid navbar navbar-expand-lg navbar-light bg-white px-5">
+          <div className="navbar-brand" href="">
+            <img
+              src="https://i.ibb.co/GTr3w2M/logo.webp"
+              alt="logo"
+              width="150"
+              height="25"
+            />
+          </div>
 
           <button
             className="navbar-toggler"
@@ -92,15 +91,16 @@ const Header = () => {
               <li className="nav-item dropdown">
                 <Dropdown>
                   <Dropdown.Toggle variant="Secondary'" id="dropdown-basic">
-                    <img src="https://i.ibb.co/WKxztwB/profile.png" alt="imageAvtar"></img>
+                    <img
+                      src="https://i.ibb.co/WKxztwB/profile.png"
+                      alt="imageAvtar"
+                    ></img>
                   </Dropdown.Toggle>
 
                   <Dropdown.Menu>
                     <Dropdown.Item href="/userprofile">Profile</Dropdown.Item>
                     <Dropdown.Item href="/account">Setting</Dropdown.Item>
-                    <Dropdown.Item href="/" onClick={handleLogout}>
-                      Logout
-                    </Dropdown.Item>
+                    <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
               </li>

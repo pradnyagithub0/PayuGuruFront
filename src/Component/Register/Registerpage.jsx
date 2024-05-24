@@ -20,7 +20,7 @@ const Register = () => {
     companyName: "",
   });
   let navigate = useNavigate();
-
+  
   const registerUser = async () => {
     setLoader(true);
     setregisterErr("");
