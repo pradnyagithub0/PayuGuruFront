@@ -17,10 +17,61 @@ function Dashboard() {
   const [accountDetails, setAccountDetials] = useState({});
 
   useEffect(() => {
-    const dashboardIndexData = async () => {
+    dashboardIndexData();
+  },[sessionid]);
+
+  const dashboardIndexData = async () => {
+    setLoader(true);
+    try {
+      const response = await fetch(dash_index, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+        }),
+      });
+
+      const resData = await response.json();
+      setLoader(false);
+
+      if (resData.mess) {
+        if (resData.mess.StatusCodes === "DI00") {
+          setDashboardIndex(resData.mess);
+        } else {
+          console.log("If status code not match");
+        }
+        if (resData.mess.kyc_status === "N")
+        {
+          const myModal = new window.bootstrap.Modal(
+            document.getElementById("docsReqModal")
+          );
+          myModal.show();
+        }
+      } else {
+        // Handle unexpected response structure
+        console.error("Unexpected response structure:", resData);
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error :", error);
+    }
+  };
+
+
+  const add_UPI_id = async () => {
+    if (dashboardIndex.kyc_status === "N") {
+      const myModal = new window.bootstrap.Modal(
+        document.getElementById("docsReqModal")
+      );
+      myModal.show();
+    }
+    else{
       setLoader(true);
       try {
-        const response = await fetch(dash_index, {
+        const response = await fetch(add_upi, {
           method: "POST",
           headers: {
             accept: "application/json",
@@ -34,98 +85,71 @@ function Dashboard() {
         const resData = await response.json();
         setLoader(false);
 
-        if (resData.mess) {
-          if (resData.mess.StatusCodes === "DI00") {
-            setDashboardIndex(resData.mess);
+        if (resData.StatusCodes) {
+          if (resData.StatusCodes === "00") {
+            setUpiId(resData.responsed.upi_id);
+            const myModal = new window.bootstrap.Modal(
+              document.getElementById("upiModal")
+            );
+            myModal.show();
           } else {
-            console.log("If status code not match");
+            console.log("If status code not 00, then go to this else condition");
           }
         } else {
           // Handle unexpected response structure
+          alert(resData.mess.message);
           console.error("Unexpected response structure:", resData);
         }
       } catch (error) {
         setLoader(false);
         console.error("Error during OTP verification:", error);
       }
-    };
-
-    if (sessionid) {
-      dashboardIndexData();
-    }
-  }, [dash_index, sessionid]);
-
-  const add_UPI_id = async () => {
-    setLoader(true);
-    try {
-      const response = await fetch(add_upi, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sessionid: sessionid,
-        }),
-      });
-
-      const resData = await response.json();
-      setLoader(false);
-
-      if (resData.StatusCodes) {
-        if (resData.StatusCodes === "00") {
-          setUpiId(resData.responsed.upi_id);
-          const myModal = new window.bootstrap.Modal(
-            document.getElementById("upiModal")
-          );
-          myModal.show();
-        } else {
-          console.log("If status code not 00, then go to this else condition");
-        }
-      } else {
-        // Handle unexpected response structure
-        console.error("Unexpected response structure:", resData);
-      }
-    } catch (error) {
-      setLoader(false);
-      console.error("Error during OTP verification:", error);
     }
   };
 
   const add_Account = async () => {
-    setLoader(true);
-    try {
-      const response = await fetch(add_acc, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sessionid: sessionid,
-        }),
-      });
+    if (dashboardIndex.kyc_status === "N") {
+      const myModal = new window.bootstrap.Modal(
+        document.getElementById("docsReqModal")
+      );
+      myModal.show();
+    }
+    else {
+      setLoader(true);
+      try {
+        const response = await fetch(add_acc, {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            sessionid: sessionid,
+          }),
+        });
 
-      const resData = await response.json();
-      setLoader(false);
+        const resData = await response.json();
+        setLoader(false);
 
-      if (resData.StatusCodes) {
-        if (resData.StatusCodes === "00") {
-          setAccountDetials(resData.responsed);
-          const myModal = new window.bootstrap.Modal(
-            document.getElementById("accountDetailsModal")
-          );
-          myModal.show();
+        if (resData.StatusCodes) {
+          if (resData.StatusCodes === "00") {
+            setAccountDetials(resData.responsed);
+            const myModal = new window.bootstrap.Modal(
+              document.getElementById("accountDetailsModal")
+            );
+            myModal.show();
+          } else {
+            console.log("If status code not 00, then go to this else condition");
+          }
         } else {
-          console.log("If status code not 00, then go to this else condition");
+          // Handle unexpected response structure
+          alert(resData.mess.message);
+          console.error("Unexpected response structure:", resData);
         }
-      } else {
-        // Handle unexpected response structure
-        console.error("Unexpected response structure:", resData);
+      } catch (error) {
+        setLoader(false);
+        console.error("Error during OTP verification:", error);
       }
-    } catch (error) {
-      setLoader(false);
-      console.error("Error during OTP verification:", error);
     }
   };
 
@@ -368,7 +392,7 @@ function Dashboard() {
                 <h6>Your account is pending activation.</h6>
                 <p>
                   Please submit your document to{" "}
-                  <a href="#"> verify@payuguru.in </a> for activating your pay u
+                  <span className="text-primary"> verify@payuguru.in </span> for activating your pay u
                   guru account. you can also chat with our support team and
                   share your documents.
                 </p>

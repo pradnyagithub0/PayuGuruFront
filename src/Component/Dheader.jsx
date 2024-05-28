@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import lodingImg from "../assets/img/loading.gif";
 import { ENDPOINTS } from "../utils/apiConfig";
 import "./Dheader.css";
 
@@ -10,7 +9,6 @@ const Logout_API = ENDPOINTS.LOGOUT_REQUEST;
 const sessionid = sessionStorage.getItem("sessionid");
 
 const Header = () => {
-  const [userData, setUserData] = useState("");
   let navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -31,7 +29,7 @@ const Header = () => {
       if (resData.message) {
         if (resData.StatusCodes === "U00") {
           sessionStorage.removeItem("sessionid");
-          navigate(`/`);
+          navigate(`/login`);
         } else {
           alert(resData.message);
         }

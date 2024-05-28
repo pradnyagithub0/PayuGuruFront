@@ -53,7 +53,7 @@ const Register = () => {
           "Registration successful:",
           responseData.responsed.clientId
         );
-        navigate(`/success`);
+        navigate(`/mobileotp`);
       } else if (responseData.success === false) {
         console.log("Registration error:", responseData.message);
         parseFieldErrors(responseData.message);
@@ -99,8 +99,7 @@ const Register = () => {
       <section className="mt-5 py-5 enquiry-section1">
         <div className="container position-relative">
           <div className="row">
-            <div className="col-lg-3 col-md-2 col-12 "></div>
-            <div className="col-lg-6 col-md-8 col-12">
+            <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
               <div className="form">
                 <h3 className="text-center">REGISTRATION FORM</h3>
                 <p className="text-center">
@@ -162,7 +161,6 @@ const Register = () => {
                 </div>
               </div>
             </div>
-            <div className="col-lg-3 col-md-2 col-12 "></div>
           </div>
           <div className="loaderContainer">
             <div className="inputbox text-center loader-box">

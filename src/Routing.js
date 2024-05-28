@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter,Route,Routes,Switch } from 'react-router-dom';
-import { ProtectedRoute } from "protected-route-react";
+import { BrowserRouter,Route,Routes } from 'react-router-dom';
+// import { ProtectedRoute } from "protected-route-react";
 import Home from './Component/Home/Home';
 import Main from './Main';
 import Loginpage from './Component/Login/Loginpage';
