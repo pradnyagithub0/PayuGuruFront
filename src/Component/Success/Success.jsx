@@ -4,22 +4,22 @@ import "./Success.css";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import { Button } from "@mui/material";
-import { ENDPOINTS } from "../../utils/apiConfig.js";
+import { email_check_API} from "../../utils/api_endpoints.js";
 
 const RegisterSuccessPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const Email_Check = process.env.REACT_APP_VERIFY_EMAIL;
 
 
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get("token");
-  console.log(token);
 
   useEffect(() => {
     const verifyToken = async () => {
       try {
-        const response = await fetch(ENDPOINTS.VERIFY_EMAIL, {
+        const response = await fetch(Email_Check, {
           method: "POST",
           headers: {
             accept: "application/json",
