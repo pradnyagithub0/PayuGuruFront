@@ -1,5 +1,5 @@
 import "./Resetpassword.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
 import lodingImg from "../../assets/img/loading.gif";
@@ -7,12 +7,14 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Resetpassword = () => {
   const [loader, setLoader] = useState(false);
-  const [mobileOtpErr, setResetPassErr] = useState("");
+  const [resetPassErr, setResetPassErr] = useState("");
+  const [loginBtn, setLoginBtn] = useState(false);
 
   let navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get("token");
+  
   console.log(token);
 
   const HandleResetPassword = async () => {
@@ -20,42 +22,36 @@ const Resetpassword = () => {
     setResetPassErr("");
 
     try {
-      const response = await fetch(ENDPOINTS.OTP_VERIFY, {
+      const response = await fetch(ENDPOINTS.CHANGE_PASSWORD, {
         method: "POST",
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          tokan: token,
-          newaPass: document.getElementById("newPassword").value,
-          RePass: document.getElementById("repeatPassword").value
+          password: document.getElementById("newPassword").value,
+          confirmedpassword: document.getElementById("repeatPassword").value,
+          token: token,
         }),
       });
 
-      const otpData = await response.json();
+      const resData = await response.json();
+      console.log(resData);
       setLoader(false);
 
-      if (otpData.mess) {
-        if (otpData.mess.StatusCodes === "M00") {
-          console.log(otpData.mess.message);
-          navigate(`/success`);
+      if (resData.mess) {
+        if (resData.mess.StatusCodes === "U00") {
+          setResetPassErr("Password has been successFully Changed.");
+          setLoginBtn(true);
+          // navigate(`/login`);
         } else {
-          console.log(otpData.mess.message);
-          setResetPassErr(otpData.mess.message);
+          console.log(resData.mess.message);
+          setResetPassErr(resData.mess.message);
         }
-      } else if (otpData.message) {
-        // Handle the 'Internal Server Error' case
-        console.log(otpData.message);
-        setResetPassErr(otpData.message);
-      } else {
-        // Handle unexpected response structure
-        console.error("Unexpected response structure:", otpData);
-        setResetPassErr("An unexpected error occurred. Please try again.");
-      }
+      } 
     } catch (error) {
       setLoader(false);
-      console.error("Error during OTP verification:", error);
+      console.error("Error:", error);
       setResetPassErr("Internal Server Error. Please try again later.");
     }
   };
@@ -82,17 +78,19 @@ const Resetpassword = () => {
                 <div className="inputbox">
                   <label>Password</label>
                   <input type="text" id="newPassword" placeholder="New Password" />
-
-                  <p className="msg"></p>
                 </div>
 
                 <div className="inputbox">
                   <label>Confirm Password</label>
                   <input type="text" id="repeatPassword" placeholder="Repeat Password" />
-
-                  <p className="msg"></p>
                 </div>
-
+                <span id="resetaPassError" className="text-warning">{resetPassErr}</span>
+                {loginBtn && <div>
+                  <Link to="/login">
+                    click here to login
+                  </Link>
+                </div>}
+                
                 <div>
                   <button className="submitButton" onClick={HandleResetPassword}>
                     Submit

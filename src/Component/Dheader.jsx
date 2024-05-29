@@ -1,14 +1,14 @@
-import React from "react";
+import React  from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ENDPOINTS } from "../utils/apiConfig";
 import "./Dheader.css";
 
-const Logout_API = ENDPOINTS.LOGOUT_REQUEST;
-const sessionid = sessionStorage.getItem("sessionid");
 
 const Header = () => {
+  const Logout_API = ENDPOINTS.LOGOUT_REQUEST;
+  const sessionid = sessionStorage.getItem("sessionid");
   let navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -26,7 +26,7 @@ const Header = () => {
 
       const resData = await response.json();
 
-      if (resData.message) {
+      if (resData.StatusCodes) {
         if (resData.StatusCodes === "U00") {
           sessionStorage.removeItem("sessionid");
           navigate(`/login`);
