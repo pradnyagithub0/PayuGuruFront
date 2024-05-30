@@ -4,6 +4,7 @@ import Dheader from '../Dheader';
 import Dfooter from '../Dfooter';
 
 function Dashboard() {
+<<<<<<< HEAD
     return(
         <div>
 			<div className="wrapper">
@@ -19,6 +20,17 @@ function Dashboard() {
 							</div>
 						</div>
 					</div>
+=======
+  const dash_index = ENDPOINTS.DASH_BOARD;
+  const add_upi = ENDPOINTS.CREATE_UPI_ID;
+  const add_acc = ENDPOINTS.CREATE_VIRTUAL_BANK_ACCOUNT;
+  const sessionid = sessionStorage.getItem("sessionid");
+  const [loader, setLoader] = useState(false);
+  const [dashboardIndex, setDashboardIndex] = useState({});
+  const [upiID, setUpiId] = useState("");
+  const [accountDetails, setAccountDetials] = useState({});
+  console.log(dashboardIndex.mainBalance);
+>>>>>>> 2592c66d708b42a43fcf608c93a382057a1e79b9
 
 					<div className="row">
 						<div className="card account-card mt-4">
