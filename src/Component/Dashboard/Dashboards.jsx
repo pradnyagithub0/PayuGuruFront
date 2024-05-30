@@ -15,6 +15,7 @@ function Dashboard() {
   const [dashboardIndex, setDashboardIndex] = useState({});
   const [upiID, setUpiId] = useState("");
   const [accountDetails, setAccountDetials] = useState({});
+  console.log(dashboardIndex.mainBalance);
 
   useEffect(() => {
     dashboardIndexData();

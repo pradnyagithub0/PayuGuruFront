@@ -14,9 +14,12 @@ const Resetpassword = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get("token");
+  const [fieldErrors, setFieldErrors] = useState({
+    password: "",
+    confirmPass: "",
+    token: "",
+  });
   
-  console.log(token);
-
   const HandleResetPassword = async () => {
     setLoader(true);
     setResetPassErr("");
@@ -48,12 +51,32 @@ const Resetpassword = () => {
           console.log(resData.mess.message);
           setResetPassErr(resData.mess.message);
         }
-      } 
+      } else if (resData.success === false) {
+        parseFieldErrors(resData.message);
+      }
     } catch (error) {
       setLoader(false);
       console.error("Error:", error);
       setResetPassErr("Internal Server Error. Please try again later.");
     }
+  };
+
+  const parseFieldErrors = (errorMessage) => {
+    const fieldErrors = {
+      password: "",
+      confirmPass: "",
+      token: "",
+    };
+    
+    if (errorMessage.includes('"password"'))
+      fieldErrors.password = "*password length must be at least 8 characters long, must contain one uppercase letter, one lowercase letter, and one digit";
+    if (errorMessage.includes('"confirmedpassword"'))
+      fieldErrors.confirmPass =
+        "Password do not match";
+    if (errorMessage.includes('"token"'))
+      fieldErrors.token =
+        "Token must be string";
+    setFieldErrors(fieldErrors);
   };
 
   return (
@@ -78,12 +101,15 @@ const Resetpassword = () => {
                 <div className="inputbox">
                   <label>Password</label>
                   <input type="text" id="newPassword" placeholder="New Password" />
+                  <p className="msg text-warning">{fieldErrors.password}</p>
                 </div>
 
                 <div className="inputbox">
                   <label>Confirm Password</label>
                   <input type="text" id="repeatPassword" placeholder="Repeat Password" />
+                  <p className="msg text-warning">{fieldErrors.confirmPass}</p>
                 </div>
+                <p className="msg text-warning">{fieldErrors.token}</p>
                 <span id="resetaPassError" className="text-warning">{resetPassErr}</span>
                 {loginBtn && <div>
                   <Link to="/login">

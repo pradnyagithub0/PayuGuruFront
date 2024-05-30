@@ -73,17 +73,17 @@ const Header = () => {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item my-auto">
-                {/*<Link className="nav-link" href="#">API Docs</Link>*/}
+                <Link className="nav-link" to="/api">API Docs</Link>
 
-                <a href="api" className="nav-link">
+                {/* <a href="api" className="nav-link">
                   API Docs
-                </a>
+                </a> */}
               </li>
               <li className="nav-item my-auto ">
-                {/*<Link className="nav-link"  href="#">Status</Link>*/}
-                <a href="kybform" className="nav-link">
+                <Link className="nav-link"  to="/kybform">Status</Link>
+                {/* <a href="kybform" className="nav-link">
                   Status
-                </a>
+                </a> */}
               </li>
 
               <li className="nav-item dropdown">
@@ -116,7 +116,7 @@ const Header = () => {
             </Link>
           </li>
           <li className="nav-link">
-            <Link to="Virtualaccount">
+            <Link to="/Virtualaccount">
               <span>
                 <i className="fa fa-bank bg-blue p-xy rounded-circle fa-lg mr-2"></i>
                 Virtual Account

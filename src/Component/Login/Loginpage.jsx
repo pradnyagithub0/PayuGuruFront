@@ -15,11 +15,17 @@ const Login = () => {
   const resend_email_API = ENDPOINTS.RE_SEND_E_VERIFY;
   const clientId = localStorage.getItem("clientId");
   let navigate = useNavigate();
+  const [fieldErrors, setFieldErrors] = useState({
+    userMobile: "",
+    password: "",
+  });
+
 
   const loginUser = async () => {
     setLoader(true);
     setLoginErr("");
     setMobileNotVerified(false);
+    setFieldErrors({});
     try {
       const response = await fetch(Login_API, {
         method: "POST",
@@ -50,10 +56,10 @@ const Login = () => {
         } else if (resData.responsed.email_verify !== "Y") {
           setMobileNotVerified(true);
         }
-      } else if (resData.mess.message) {
+      } else if (resData.success  === false) {
         // Handle the 'Internal Server Error' case
-        console.log(resData.mess.message);
-        setLoginErr(resData.mess.message);
+        console.log(resData.message);
+        parseFieldErrors(resData.message);
       } else {
         // Handle unexpected response structure
         console.error("Unexpected response structure:", resData);
@@ -64,6 +70,20 @@ const Login = () => {
       console.error("Error during OTP verification:", error);
       setLoginErr("Internal Server Error. Please try again later.");
     }
+  };
+
+  const parseFieldErrors = (errorMessage) => {
+    const fieldErrors = {
+      userMobile: "",
+      password: "",
+    };
+    
+    if (errorMessage.includes('"mobile"'))
+      fieldErrors.userMobile = "Mobile is not allowed to be empty.";
+    if (errorMessage.includes('"password"'))
+      fieldErrors.password =
+        "Password is not allowed to be empty";
+    setFieldErrors(fieldErrors);
   };
 
   const resendEmail = async () => {
@@ -124,12 +144,12 @@ const Login = () => {
                 <div className="inputbox">
                   <label>Mobile</label>
                   <input type="Mobile" name="mobile" id="mobile" />
-                  <p className="msg text-warning"></p>
+                  <p className="msg text-warning">{fieldErrors.userMobile}</p>
                 </div>
                 <div className="inputbox">
                   <label>Password</label>
                   <input type="Password" name="password" id="password" />
-                  <p className="msg text-warning"></p>
+                  <p className="msg text-warning">{fieldErrors.password}</p>
                 </div>
                 <span className="text-warning">{loginErr}</span>
                 <div
