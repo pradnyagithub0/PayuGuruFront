@@ -110,7 +110,7 @@ const Header = () => {
       <div className="sidebar sidebar-collapse" id="navbarSupportedContent">
         <ul>
           <li className="nav-link active">
-            <Link to="dashboard">
+            <Link to="/dashboard">
               <i className="fa fa-home bg-white text-dark rounded-circle fa-lg mr-2"></i>
               Home
             </Link>
@@ -130,7 +130,7 @@ const Header = () => {
             </Link>
           </li>
           <li className="nav-link">
-            <Link to="reports">
+            <Link to="/reports">
               <i className="fa fa-file bg-pink rounded-circle fa-lg mr-2"></i>
               Reports
             </Link>
