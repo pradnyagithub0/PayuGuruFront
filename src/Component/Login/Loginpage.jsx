@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import lodingImg from "../../assets/img/loading.gif";
+import loadingImg from "../../assets/img/loading.gif";
 import "./Loginpage.css";
-
 import { ENDPOINTS } from "../../utils/apiConfig";
 import { Button } from "@mui/material";
 
@@ -20,11 +19,11 @@ const Login = () => {
     password: "",
   });
 
-
   const loginUser = async () => {
     setLoader(true);
     setLoginErr("");
     setMobileNotVerified(false);
+    setEmailNotVerified(false);
     setFieldErrors({});
     try {
       const response = await fetch(Login_API, {
@@ -54,14 +53,12 @@ const Login = () => {
         } else if (resData.responsed.mobile_verify !== "Y") {
           setMobileNotVerified(true);
         } else if (resData.responsed.email_verify !== "Y") {
-          setMobileNotVerified(true);
+          setEmailNotVerified(true);
         }
-      } else if (resData.success  === false) {
-        // Handle the 'Internal Server Error' case
+      } else if (resData.success === false) {
         console.log(resData.message);
         parseFieldErrors(resData.message);
       } else {
-        // Handle unexpected response structure
         console.error("Unexpected response structure:", resData);
         setLoginErr("An unexpected error occurred. Please try again.");
       }
@@ -77,12 +74,11 @@ const Login = () => {
       userMobile: "",
       password: "",
     };
-    
+
     if (errorMessage.includes('"mobile"'))
       fieldErrors.userMobile = "Mobile is not allowed to be empty.";
     if (errorMessage.includes('"password"'))
-      fieldErrors.password =
-        "Password is not allowed to be empty";
+      fieldErrors.password = "Password is not allowed to be empty";
     setFieldErrors(fieldErrors);
   };
 
@@ -106,13 +102,8 @@ const Login = () => {
       setLoader(false);
 
       if (resData.mess) {
-        if (resData.mess.StatusCodes === "E302") {
-          alert(resData.mess.message);
-        } else {
-          alert(resData.mess.message);
-        }
+        alert(resData.mess.message);
       } else {
-        // Handle unexpected response structure
         console.error("Unexpected response structure:", resData);
         setLoginErr("An unexpected error occurred. Please try again.");
       }
@@ -158,16 +149,16 @@ const Login = () => {
                   }`}
                   id="mobile-not-verify-err"
                 >
-                  Your mobile is not verify , please{" "}
+                  Your mobile is not verified, please{" "}
                   <Link to="mobileotp">Click Here</Link> to verify.
                 </div>
                 <div
                   className={`text-warning ${
                     emailNotVerified ? "d-block" : "d-none"
                   }`}
-                  id="mobile-not-verify-err"
+                  id="email-not-verify-err"
                 >
-                  Your email is not verify , please{" "}
+                  Your email is not verified, please{" "}
                   <Button
                     variant="contained"
                     color="primary"
@@ -185,7 +176,6 @@ const Login = () => {
                     Submit
                   </button>
                 </div>
-
                 <div className="inputbox text-center">
                   <p>
                     You Don't have An Account ? <a href="/Register">Register</a>
@@ -197,7 +187,7 @@ const Login = () => {
           <div className="loaderContainer">
             <div className="inputbox text-center loader-box">
               {loader && (
-                <img src={lodingImg} alt="loading..." className="loaderImg" />
+                <img src={loadingImg} alt="loading..." className="loaderImg" />
               )}
             </div>
           </div>
