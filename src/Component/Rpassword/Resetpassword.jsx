@@ -1,13 +1,15 @@
-import './Resetpassword.css';
-
+import "./Resetpassword.css";
+import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { ENDPOINTS } from "../../utils/apiConfig.js";
+import lodingImg from "../../assets/img/loading.gif";
+import { Link, useNavigate } from "react-router-dom";
 
 const Resetpassword = () => {
-    
-   
+  const [loader, setLoader] = useState(false);
+  const [resetPassErr, setResetPassErr] = useState("");
+  const [loginBtn, setLoginBtn] = useState(false);
 
-<<<<<<< HEAD
-
-=======
   let navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -21,49 +23,25 @@ const Resetpassword = () => {
   const HandleResetPassword = async () => {
     setLoader(true);
     setResetPassErr("");
->>>>>>> 2592c66d708b42a43fcf608c93a382057a1e79b9
 
-    return (
-        <div>
-        
-        <section className="mt-5 py-5 enquiry-section1">
-        <div className="container">
-            <div className="row">
-                <div className="col-lg-3 col-md-2 col-12 "></div>
-                <div className="col-lg-6 col-md-8 col-12">
-                    <form className="form">
-                        <h3 className="text-center">Reset Password</h3>
-                        <p className="text-center"><a href="/" className="text-white"><img src="https://i.ibb.co/vzTTh9B/home.png" 
-                        alt="home-icon"/> Home</a> </p>
+    try {
+      const response = await fetch(ENDPOINTS.CHANGE_PASSWORD, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: document.getElementById("newPassword").value,
+          confirmedpassword: document.getElementById("repeatPassword").value,
+          token: token,
+        }),
+      });
 
-                        
+      const resData = await response.json();
+      console.log(resData);
+      setLoader(false);
 
-<<<<<<< HEAD
-                        <div className="inputbox">
-                                 <label>Password</label>
-                                 <input   type="text" placeholder='New Password' />
-                                 
-                                 <p className="msg"></p>
-                        </div>
-
-                        <div className="inputbox">
-                             <label>Confirm Password</label>
-                             <input  type="text" placeholder='Repeat Password' />
-                            
-                        <p className="msg"></p>
-                        </div>
-                        
-                        
-                        <button className="submitButton">
-                        Reset
-                      </button>
-                        
-
-                        
-                    </form>
-                        
-               </div>
-=======
       if (resData.mess) {
         if (resData.mess.StatusCodes === "U00") {
           setResetPassErr("Password has been successFully Changed.");
@@ -138,15 +116,25 @@ const Resetpassword = () => {
                     click here to login
                   </Link>
                 </div>}
->>>>>>> 2592c66d708b42a43fcf608c93a382057a1e79b9
                 
+                <div>
+                  <button className="submitButton" onClick={HandleResetPassword}>
+                    Submit
+                  </button>
+                </div>
+              </div>
             </div>
+          </div>
+          <div className="loaderContainer">
+            <div className="inputbox text-center loader-box">
+              {loader && (
+                <img src={lodingImg} alt="loading..." className="loaderImg" />
+              )}
+            </div>
+          </div>
         </div>
-    </section>
-    
+      </section>
     </div>
-    
-            
-      )
+  );
 };
 export default Resetpassword;

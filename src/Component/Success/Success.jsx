@@ -4,12 +4,12 @@ import "./Success.css";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import { Button } from "@mui/material";
-import { email_check_API} from "../../utils/api_endpoints.js";
+import { ENDPOINTS } from "../../utils/apiConfig.js";
 
 const RegisterSuccessPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const Email_Check = process.env.REACT_APP_VERIFY_EMAIL;
+  const Email_Check = ENDPOINTS.VERIFY_EMAIL;
 
 
   const location = useLocation();

@@ -1,22 +1,12 @@
-import React,{useState} from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Loginpage.css';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import lodingImg from "../../assets/img/loading.gif";
+import "./Loginpage.css";
 
-import { ENDPOINTS } from '../../utils/apiConfig';
-
-
-
-const url = ENDPOINTS.LOGIN_USER;
+import { ENDPOINTS } from "../../utils/apiConfig";
+import { Button } from "@mui/material";
 
 const Login = () => {
-<<<<<<< HEAD
-
-    let navigate = useNavigate();
-    const initialValues = {
-        mobile: "",
-        password:'',
-    };
-=======
   const [loader, setLoader] = useState(false);
   const [loginErr, setLoginErr] = useState("");
   const [mobileNotVerified, setMobileNotVerified] = useState(false);
@@ -48,34 +38,10 @@ const Login = () => {
           password: document.getElementById("password").value,
         }),
       });
->>>>>>> 2592c66d708b42a43fcf608c93a382057a1e79b9
 
-    const [values, setValues] = useState(initialValues);
-    const [message,setMessage] = useState()
+      const resData = await response.json();
+      setLoader(false);
 
-<<<<<<< HEAD
-    
-
-    const loginChange = () => {
-        console.log(values)
-        fetch(url,{
-            method: 'POST',
-            headers:{
-                'accept':'application/json',
-                'Content-Type':'application/json'
-            },
-            body:JSON.stringify(values)
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if(data.auth === false){
-                setMessage(data.token)
-            }else{
-                sessionStorage.setItem('ltk',data.token)
-                navigate(`/`)
-            }
-        })
-=======
       if (resData.responsed) {
         if (
           resData.responsed.user_status === "Y" &&
@@ -103,15 +69,9 @@ const Login = () => {
       setLoader(false);
       console.error("Error during OTP verification:", error);
       setLoginErr("Internal Server Error. Please try again later.");
->>>>>>> 2592c66d708b42a43fcf608c93a382057a1e79b9
     }
-    
-          
+  };
 
-<<<<<<< HEAD
-    
-   
-=======
   const parseFieldErrors = (errorMessage) => {
     const fieldErrors = {
       userMobile: "",
@@ -141,47 +101,28 @@ const Login = () => {
           clientId: clientId,
         }),
       });
->>>>>>> 2592c66d708b42a43fcf608c93a382057a1e79b9
 
-    
+      const resData = await response.json();
+      setLoader(false);
 
-    return(
-        <div className='stack'>
-             
-             <section className="mt-5 py-5 enquiry-section1">
-             <div className="container">
-                 <div className="row" >
-                 
-                      
-                    <div className="col-lg-3 col-md-2 col-12 "></div>
-                     <div className="col-lg-6 col-md-8 col-12">
+      if (resData.mess) {
+        if (resData.mess.StatusCodes === "E302") {
+          alert(resData.mess.message);
+        } else {
+          alert(resData.mess.message);
+        }
+      } else {
+        // Handle unexpected response structure
+        console.error("Unexpected response structure:", resData);
+        setLoginErr("An unexpected error occurred. Please try again.");
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error during OTP verification:", error);
+      setLoginErr("Internal Server Error. Please try again later.");
+    }
+  };
 
-<<<<<<< HEAD
-                     <form className="form">
-                     <h3 className="text-center">LOGIN FORM</h3>
-                     <p className="text-center"><a href="/" className="text-white"><img src="https://i.ibb.co/vzTTh9B/home.png" alt="home-icon"/> Home</a> </p>
-                     <div className="inputbox">
-                         <label>Mobile</label>
-                         <input type="Mobile" name="mobile" id="mobile"/>
-                         <p className="msg text-warning"></p>
-                     </div>
-                     <div className="inputbox">
-                         <label>Password</label>
-                         <input type="Password" name="password" id="password"/>
-                         <p className="msg text-warning"></p>
-                     </div>
-                     <div className="inputbox text-right forgot">
-                         <a href="/Forgotun">Forgot Password?</a>
-                     </div>
-                     <button className="submitButton" onClick={loginChange}>
-                     Submit
-                   </button>
-                   
-                     <div className="inputbox text-center">
-                     <p>You Don't have An Account ? <a href='/Register'>Register</a></p> 
-                     </div>
-                 </form>
-=======
   return (
     <div className="stack">
       <section className="mt-5 py-5 enquiry-section1">
@@ -244,17 +185,26 @@ const Login = () => {
                     Submit
                   </button>
                 </div>
->>>>>>> 2592c66d708b42a43fcf608c93a382057a1e79b9
 
-                     </div>
-                    
-                 </div>
-             </div>
-         </section>
-         
-         
+                <div className="inputbox text-center">
+                  <p>
+                    You Don't have An Account ? <a href="/Register">Register</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="loaderContainer">
+            <div className="inputbox text-center loader-box">
+              {loader && (
+                <img src={lodingImg} alt="loading..." className="loaderImg" />
+              )}
+            </div>
+          </div>
         </div>
-    )
-}
+      </section>
+    </div>
+  );
+};
 
 export default Login;
