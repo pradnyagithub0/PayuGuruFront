@@ -12,3 +12,14 @@
   width: 75%;
   margin-left: 10%;
 }
+.mymenu:hover {
+  background-color: #eee;
+  }
+hr{
+  color: #818182;
+  margin-left: 5%;
+}
+.abc{
+  font-size: 22px;
+    margin-left: 15px;
+}

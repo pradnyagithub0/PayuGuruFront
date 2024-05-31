@@ -6,28 +6,25 @@ import './Docs.css';
 
   
   
-  
-
-
-
-  return (
+return (
     <div>
     <div className="container-fluid">
     <div className="row">
         <div className="col-2 collapse show d-md-flex bg-light pt-2 pl-0 min-vh-100" id="sidebar">
-            <ul className="nav flex-column flex-nowrap overflow-hidden">
+            <ul className="nav flex-column flex-nowrap overflow-hidden ">
             <div className='head'>
                 <img src="https://i.ibb.co/GTr3w2M/logo.webp" alt="logo"></img>
             </div>
+            <hr/>
            
-                <li className="nav-item">
+                <li className="nav-item mymenu">
                     <a className="nav-link text-truncate" href="#"> 
-                    <span className="d-none d-sm-inline">Api Url</span>
+                    <span className="d-none d-sm-inline ">Api Url</span>
                     
                     </a>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item mymenu">
                     <a className="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1">
                     <span className="d-none d-sm-inline">Payments</span>
                     </a>
@@ -41,7 +38,7 @@ import './Docs.css';
                     </div>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item mymenu">
                     <a className="nav-link collapsed text-truncate" href="#submenu2" data-toggle="collapse" data-target="#submenu2">
                     <span className="d-none d-sm-inline">Bankings</span>
                     </a>
@@ -54,8 +51,8 @@ import './Docs.css';
                         </ul>
                     </div>
                 </li>
-                <h3><span>UPI</span></h3>
-                <li className="nav-item">
+                <h3><span className='abc'>UPI</span></h3>
+                <li className="nav-item mymenu">
                     <a className="nav-link collapsed text-truncate" href="#submenu3" data-toggle="collapse" data-target="#submenu3">
                     <span className="d-none d-sm-inline">Virtual UPI ID</span>
                     </a>
@@ -69,7 +66,7 @@ import './Docs.css';
                     </div>
                 </li>
 
-                <li className="nav-item">
+                <li className="nav-item mymenu">
                     <a className="nav-link collapsed text-truncate" href="#submenu4" data-toggle="collapse" data-target="#submenu4">
                     <span className="d-none d-sm-inline"> UPI Collection Request </span>
                     </a>
@@ -84,15 +81,15 @@ import './Docs.css';
                 </li>
 
                 
-                <li className="nav-item"><a className="nav-link text-truncate" href="#"> <span className="d-none d-sm-inline">Banking</span></a></li>
-                <li className="nav-item"><a className="nav-link text-truncate" href="#"> <span className="d-none d-sm-inline">Virtual UPI ID</span></a></li>
-                <li className="nav-item"><a className="nav-link text-truncate" href="#"> <span className="d-none d-sm-inline">UPI Collection Request</span></a></li>
+                <li className="nav-item mymenu"><a className="nav-link text-truncate" href="#"> <span className="d-none d-sm-inline">Status</span></a></li>
+                <li className="nav-item mymenu"><a className="nav-link text-truncate" href="#"> <span className="d-none d-sm-inline">Generate QR Code</span></a></li>
+                <li className="nav-item mymenu"><a className="nav-link text-truncate" href="#"> <span className="d-none d-sm-inline">Run in Postman </span></a></li>
             </ul>
             
         </div>
-        <div className="col pt-2">
+        <div className="col pt-2 api-content">
             <h2>
-                <a href="" data-target="#sidebar" data-toggle="collapse" className="d-md-none"></a> Payuguru 
+                <a href="" data-target="#sidebar" data-toggle="collapse" className="d-md-none "></a> Payuguru 
             </h2>
             <h6 className="hidden-sm-down hypo">Payuguru Partner APIs are completely RESTful and all our responses are returned in JSON.</h6>
             <p></p>
