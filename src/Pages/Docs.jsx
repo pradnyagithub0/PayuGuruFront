@@ -16,6 +16,10 @@ import './Docs.css';
     <div className="row">
         <div className="col-2 collapse show d-md-flex bg-light pt-2 pl-0 min-vh-100" id="sidebar">
             <ul className="nav flex-column flex-nowrap overflow-hidden">
+            <div className='head'>
+                <img src="https://i.ibb.co/GTr3w2M/logo.webp" alt="logo"></img>
+            </div>
+           
                 <li className="nav-item">
                     <a className="nav-link text-truncate" href="#"> 
                     <span className="d-none d-sm-inline">Api Url</span>
