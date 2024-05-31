@@ -30,4 +30,7 @@
   .submitButton:hover{
     color: white !important;
   }
+  .dashboardTopbar{
+    height: auto;
+  }
   

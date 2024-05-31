@@ -48,7 +48,7 @@ const DashboardTopbar = () => {
                 <h6>Your account is pending activation.</h6>
                 <p>
                   Please submit your document to{" "}
-                  <span className="text-primary"> verify@payu.guru </span> for
+                  <span className="text-primary"> info@payu.guru </span> for
                   activating your pay u guru account. you can also chat with our
                   support team and share your documents.
                 </p>

@@ -169,7 +169,7 @@ function Dashboard() {
       <div className="wrapper">
         <Dheader />
         <div className="main-content">
-          <div className="top bg-white rounded-lg p-2">
+          <div className="top bg-white rounded-lg p-2 dashboardTopbar">
             <DashboardTopbar />
           </div>
 
@@ -224,7 +224,7 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <h4 className="card-header mt-0 py-3">
@@ -267,9 +267,9 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="row">
+          <div className="row mt-3">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <div className="card-header">
