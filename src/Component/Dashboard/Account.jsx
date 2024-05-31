@@ -2,6 +2,8 @@ import React  from "react";
 import Dheader from '../Dheader';
 import Dfooter from '../Dfooter';
 import './Account.css';
+import ProfileTopbar from "./commonComponents/ProfileTopbar";
+import DashboardTopbar from "./commonComponents/DashboardTopbar";
 
 
 function Account(){
@@ -13,23 +15,11 @@ function Account(){
         <Dheader/>
                 <div className="main-content">
                     <div className="top bg-white mt-0 p-2">
-                        <div className="row mt-0">
-                            <div className="col-lg-9 col-md-9 col-12">
-                                <p className="text-dark float-left"><i className="fa fa-info-circle"></i> Your account is pending activation. Please submit your documents to payuguru.com</p>
-                            </div>
-                            <div className="col-lg-3 col-md-3 col-12">
-                                <button type="button" className="btn btn-top">Docs Required</button>
-                            </div>
-                        </div>
+                        <DashboardTopbar />
                     </div>
 
                     <div className="row">
-                        <div className="col-12 mt-3">
-                            <a href="/account" className="btn virtual-btn active">Account</a>
-                            {/*<a href="/api" type="button" className="btn btn1 virtual-btn ">API</a>*/}
-                            <a href="/webhook" type="button" className="btn btn1 virtual-btn ">Webhooks</a>
-                            <a href="/userprofile" type="button" className="btn btn1 virtual-btn ">User Profile</a>
-                        </div>
+                        <ProfileTopbar />
                     </div>
 
                     <div className="row">
@@ -57,7 +47,7 @@ function Account(){
                                     </form>	
                                 </div>
                                 <hr></hr>
-                                <h4 className="bg-transparent mt-0 p-3">Balance Settings</h4>
+                                {/* <h4 className="bg-transparent mt-0 p-3">Balance Settings</h4>
                                 <div className="card-body p-3">
                                     <form action="#">
                                         <label className="form-label">Low Balance Alert Limit</label>
@@ -84,7 +74,7 @@ function Account(){
                                         </div>
                                         <a type="button" className="btn btn1 btn-outline-secondary virtual-btn mb-5"><i className="fa fa-info-circle mr-3"></i>How to setup 2FA</a>
                                     </form>	
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
