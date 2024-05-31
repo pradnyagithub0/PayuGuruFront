@@ -88,7 +88,7 @@ import './Docs.css';
         </div>
         <div className="col pt-2">
             <h2>
-                <a href="" data-target="#sidebar" data-toggle="collapse" className="d-md-none"></a> Payuguru (1.0.0)
+                <a href="" data-target="#sidebar" data-toggle="collapse" className="d-md-none"></a> Payuguru 
             </h2>
             <h6 className="hidden-sm-down hypo">Payuguru Partner APIs are completely RESTful and all our responses are returned in JSON.</h6>
             <p></p>
