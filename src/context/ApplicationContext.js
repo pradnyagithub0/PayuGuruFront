@@ -1,16 +1,15 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
-export const ApplicationContext = createContext();
+const ApplicationContext = createContext();
 
-export const ApplicationContextProvider = ({ children }) => {
-  const [clientId, setClientId] = useState(null);
-  const [otherState, setOtherState] = useState(null);
-
-  console.log('ApplicationContextProvider clientId:', clientId); // Debug log
+const ApplicationContextProvider = ({ children }) => {
+  const [kycStatus, setKycStatus] = useState(null);
 
   return (
-    <ApplicationContext.Provider value={{ clientId, setClientId, otherState, setOtherState }}>
+    <ApplicationContext.Provider value={{ kycStatus, setKycStatus }}>
       {children}
     </ApplicationContext.Provider>
   );
 };
+
+export { ApplicationContext, ApplicationContextProvider };
