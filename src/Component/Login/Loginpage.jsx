@@ -124,8 +124,8 @@ const Login = () => {
   };
 
   return (
-    <div className="stack">
-      <section className="mt-5 py-5 enquiry-section1">
+    <div>
+      <section className="mt-5 py-5 enquiry-section1 stack">
         <div className="container position-relative">
           <div className="row">
             <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
