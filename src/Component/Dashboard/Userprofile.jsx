@@ -1,12 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import "./Userprofile.css";
 import { Link } from "react-router-dom";
 import ProfileTopbar from "./commonComponents/ProfileTopbar";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
+import { ENDPOINTS } from "../../utils/apiConfig.js";
+import lodingImg from "../../assets/img/loading.gif";
+import { Button } from "@mui/material";
 
 function Userprofile() {
+  const [loader, setLoader] = useState(false);
+  const [resetPassErr, setResetPassErr] = useState("");
+  const sessionid = sessionStorage.getItem("sessionid");
+  const [fieldErrors, setFieldErrors] = useState({
+    password: "",
+    confirmPass: "",
+    sessionid: "",
+  });
+
+  const HandleResetPassword = async () => {
+    setLoader(true);
+    setResetPassErr("");
+
+    try {
+      const response = await fetch(ENDPOINTS.CHANGE_PASSWORD_DASH, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: document.getElementById("newPassword").value,
+          confirmedpassword: document.getElementById("repeatPassword").value,
+          sessionid: sessionid,
+        }),
+      });
+
+      const resData = await response.json();
+      console.log(resData);
+      setLoader(false);
+
+      if (resData.mess) {
+        if (resData.mess.StatusCodes === "U00") {
+          setResetPassErr("Password has been successFully Changed.");
+          // navigate(`/login`);
+        } else {
+          console.log(resData.mess.message);
+          setResetPassErr(resData.mess.message);
+        }
+      } else if (resData.success === false) {
+        parseFieldErrors(resData.message);
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error:", error);
+      setResetPassErr("Internal Server Error. Please try again later.");
+    }
+  };
+
+  const parseFieldErrors = (errorMessage) => {
+    const fieldErrors = {
+      password: "",
+      confirmPass: "",
+      sessionid: "",
+    };
+
+    if (errorMessage.includes('"password"'))
+      fieldErrors.password =
+        "*password length must be at least 8 characters long, must contain one uppercase letter, one lowercase letter, and one digit";
+    if (errorMessage.includes('"confirmedpassword"'))
+      fieldErrors.confirmPass = "*Password do not match";
+    if (errorMessage.includes('"sessionid"'))
+      fieldErrors.token = "sessionid must be string";
+    setFieldErrors(fieldErrors);
+  };
+
   return (
     <div>
       <div className="wrapper">
@@ -26,14 +95,14 @@ function Userprofile() {
                 <div className="col-lg-8 col-md-8 col-12">
                   <h3 className=" mt-0 p-3">User Profile</h3>
                   <div className="card-body p-3">
-                    <form action="#" className="user_profile">
+                    <div className="user_profile">
                       <table className="table table-borderless ">
                         <tbody>
                           <tr>
                             <th>Email :</th>
                             <td>info@arenaitech.com</td>
-                                                  </tr>
-                                                  <tr>
+                          </tr>
+                          <tr>
                             <th>Mobile :</th>
                             <td>9988776655</td>
                           </tr>
@@ -57,14 +126,15 @@ function Userprofile() {
                             <input type="text" className="form-control" id="name" aria-label="Name"/>
                             <span className="input-group-text border-0"><i className="fa fa-pencil"></i></span>
                         </div> */}
-                      <a
-                        type="button"
+                      <button
                         className="btn btn1 btn-outline-secondary virtual-btn mt-3"
+                        data-bs-toggle="modal"
+                        data-bs-target="#change_pass_modal"
                       >
                         <i className="fa fa-lock mr-3"></i>Change Account
                         Password
-                      </a>
-                    </form>
+                      </button>
+                    </div>
                   </div>
                 </div>
                 {/* <hr></hr>
@@ -174,6 +244,69 @@ function Userprofile() {
             </div>
           </div>
           <Dfooter />
+        </div>
+      </div>
+
+      <div
+        className="modal fade docReqModal"
+        id="change_pass_modal"
+        aria-labelledby="change_pass_modalLabel"
+        aria-hidden="false"
+      >
+        <div className="modal-dialog modal-md">
+          <div className="modal-content docsReqModal-content">
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="change_pass_modalLabel">
+                Change Password
+              </h1>
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              <div>
+                <div className="inputbox">
+                  <label>Password</label>
+                  <input
+                    type="text"
+                    id="newPassword"
+                    placeholder="New Password"
+                  />
+                  <p className="msg text-danger">{fieldErrors.password}</p>
+                </div>
+
+                <div className="inputbox">
+                  <label>Confirm Password</label>
+
+                  <input
+                    type="text"
+                    id="repeatPassword"
+                    placeholder="Repeat Password"
+                  />
+                  <p className="msg text-danger">{fieldErrors.confirmPass}</p>
+                </div>
+                <p className="msg text-danger">{fieldErrors.token}</p>
+                <span id="resetaPassError" className="text-success">
+                  {resetPassErr}
+                </span>
+                <div className="text-right">
+                  <Button variant="contained" color="primary"  onClick={HandleResetPassword}>
+                    Submit
+                  </Button>
+                </div>
+              </div>
+            </div>
+                  </div>
+                  <div className="loaderContainer">
+            <div className="inputbox text-center loader-box">
+              {loader && (
+                <img src={lodingImg} alt="loading..." className="loaderImg" />
+              )}
+            </div>
+          </div>  
         </div>
       </div>
     </div>

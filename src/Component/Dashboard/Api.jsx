@@ -63,7 +63,7 @@ function Api() {
                       type="button"
                       className="btn btn1 float-right virtual-btn bg-red mb-5"
                     >
-                      Add API Address
+                      Add IP Address
                     </a>
                   </form>
                 </div>
