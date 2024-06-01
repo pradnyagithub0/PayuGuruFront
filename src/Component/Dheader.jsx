@@ -29,6 +29,7 @@ const Header = () => {
       if (resData.StatusCodes) {
         if (resData.StatusCodes === "U00") {
           sessionStorage.removeItem("sessionid");
+          localStorage.removeItem('clientId');
           navigate(`/login`);
         } else {
           alert(resData.message);

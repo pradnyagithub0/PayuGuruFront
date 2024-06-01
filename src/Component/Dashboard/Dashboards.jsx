@@ -6,6 +6,7 @@ import lodingImg from "../../assets/img/loading.gif";
 import { useNavigate } from "react-router-dom";
 
 import { ENDPOINTS } from "../../utils/apiConfig";
+import DashboardTopbar from "./commonComponents/DashboardTopbar";
 
 function Dashboard() {
   const dash_index = ENDPOINTS.DASH_BOARD;
@@ -168,30 +169,8 @@ function Dashboard() {
       <div className="wrapper">
         <Dheader />
         <div className="main-content">
-          <div className="top bg-white rounded-lg p-2">
-            <div className="row mt-0">
-              <div className="col-lg-9 col-md-9 col-12">
-                {dashboardIndex.kyc_status !== "Y" ? (
-                  <p className="text-dark float-left">
-                    <i className="fa fa-info-circle"></i> Your account is
-                    pending activation. Please submit your documents to
-                    payuguru.com
-                  </p>
-                ) : (
-                  ""
-                )}
-              </div>
-              <div className="col-lg-3 col-md-3 col-12">
-                <button
-                  type="button"
-                  className="btn btn-top"
-                  data-bs-toggle="modal"
-                  data-bs-target="#docsReqModal"
-                >
-                  Docs Required
-                </button>
-              </div>
-            </div>
+          <div className="top bg-white rounded-lg p-2 dashboardTopbar">
+            <DashboardTopbar />
           </div>
 
           <div className="row">
@@ -245,7 +224,7 @@ function Dashboard() {
             </div>
           </div>
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <h4 className="card-header mt-0 py-3">
@@ -288,9 +267,9 @@ function Dashboard() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="row">
+          <div className="row mt-3">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <div className="card-header">
@@ -307,7 +286,7 @@ function Dashboard() {
                     </div>
                   </div>
                 </div>
-                <div className="card-body p-2">
+                <div className="card-body p-3">
                   <div className="table-responsive">
                     <table
                       id="example"
@@ -381,112 +360,6 @@ function Dashboard() {
           </div>
 
           <Dfooter />
-        </div>
-      </div>
-
-      <div
-        className="modal fade docReqModal"
-        id="docsReqModal"
-        aria-labelledby="docsReqModalLabel"
-        aria-hidden="false"
-      >
-        <div className="modal-dialog modal-xl">
-          <div className="modal-content docsReqModal-content">
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="docsReqModalLabel">
-                Your account is pending Activation!
-              </h1>
-              <button
-                type="button"
-                className="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div className="modal-body modalBodySection">
-              <div className="text-center mb-3">
-                <h6>Your account is pending activation.</h6>
-                <p>
-                  Please submit your document to{" "}
-                  <span className="text-primary"> verify@payu.guru </span> for activating your pay u
-                  guru account. you can also chat with our support team and
-                  share your documents.
-                </p>
-              </div>
-              <div className="table-responsive">
-                <table className="table table-striped reqDocsModalBorder">
-                  <thead className="reqDocsModalBorder">
-                    <tr className="reqDocsModalBorder">
-                      <th className="reqDocsModalBorder">
-                        Sol Propriotership
-                      </th>
-                      <th className="reqDocsModalBorder">Partnership</th>
-                      <th className="reqDocsModalBorder">
-                        Private Limited
-                      </th>
-                      <th className="reqDocsModalBorder">
-                        LLP
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>GST</td>
-                      <td>Partnership Deed</td>
-                      <td>MOA</td>
-                      <td>LLP Deed</td>
-                    </tr>
-                    <tr>
-                      <td>IEC Certificate</td>
-                      <td>GST</td>
-                      <td>AOA</td>
-                      <td>COI</td>
-                    </tr>
-                    <tr>
-                      <td>Shop Act</td>
-                      <td>IEC Certificate</td>
-                      <td>COI</td>
-                      <td>PAN Card</td>
-                    </tr>
-                    <tr>
-                      <td>KYC Individual</td>
-                      <td>PAN Card </td>
-                      <td>PAN Card </td>
-                      <td>GST </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td>KYC Individual</td>
-                      <td>GST</td>
-                      <td>KYC Individual</td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>KYC Individual</td>
-                      <td>IEC Certificate</td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td>IEC Certificate</td>
-                      <td></td>
-                    </tr>
-                    
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-secondary btn-sm"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-            </div>
-          </div>
         </div>
       </div>
 

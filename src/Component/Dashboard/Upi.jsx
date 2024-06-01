@@ -2,6 +2,7 @@ import React from "react";
 import Dheader from '../Dheader';
 import Dfooter from '../Dfooter';
 import './Upi.css';
+import DashboardTopbar from "./commonComponents/DashboardTopbar";
 
 
 function Upi(){
@@ -11,23 +12,8 @@ function Upi(){
                <Dheader/>
                 <div className="main-content">
                     <div className="top bg-white mt-0 p-2">
-                        <div className="row mt-0">
-                            <div className="col-lg-9 col-md-9 col-12">
-                                <p className="text-dark float-left"><i className="fa fa-info-circle"></i> Your account is pending activation. Please submit your documents to payuguru.com</p>
-                            </div>
-                            <div className="col-lg-3 col-md-3 col-12">
-                                <button type="button" className="btn btn-top">Docs Required</button>
-                            </div>
-                        </div>
+                        <DashboardTopbar />
                     </div>
-
-                    {/*<div className="row">
-                        <div className="col-12 mt-3">
-                            <a className="btn virtual-btn active">List</a>
-                            <a type="button" className="btn btn1 virtual-btn">Collections</a>
-                            <a type="button" className="btn btn1 virtual-btn">Invalid Credits</a>	
-                        </div>
-	                  </div>*/}
 
                     <div className="row">
                     <div className="col-lg-12 col-md-12 col-12">

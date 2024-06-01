@@ -14,6 +14,9 @@ export const ENDPOINTS = {
   LOGIN_USER: `${API_BASE_URL}/user/login`,
   CHANGE_PASSWORD: `${API_BASE_URL}/user/changepassword`,
 
+  CHANGE_PASSWORD_DASH: `${API_BASE_URL}/dashboard/changepass`,
+  GET_API_KEY: `${API_BASE_URL}/dashboard/getapi`,
+
   // Add more endpoints as needed
 };
 

@@ -1,25 +1,59 @@
-
-.nav-link[data-toggle].collapsed:after {
-  content: " ▾";
-}
-.nav-link[data-toggle]:not(.collapsed):after {
-  content: " ▴";
-}
-.hypo{
-  text-align: center;
-}
-.head img{
-  width: 75%;
-  margin-left: 10%;
-}
-.mymenu:hover {
-  background-color: #eee;
+* {
+    box-sizing: border-box;
   }
-hr{
-  color: #818182;
-  margin-left: 5%;
-}
-.abc{
-  font-size: 22px;
-    margin-left: 15px;
-}
+  hr{
+    color: #818182;
+    margin-top: 2%;
+  }
+  
+  /* Create a column layout with Flexbox */
+  .row {
+    display: flex;
+  }
+  
+  /* Left column (menu) */
+  .left {
+    flex: 20%;
+    padding: 15px 35px;
+    background-color: rgb(250, 251, 255)
+  }
+  
+  .left h2 {
+    padding-left: 8px;
+  }
+  
+  /* Right column (page content) */
+  .right {
+    flex: 80%;
+    padding: 15px;
+    background-color: white;
+  }
+  .right p{
+    text-align: center;
+  }
+  
+  /* Style the search box */
+  #mySearch {
+    width: 100%;
+    font-size: 18px;
+    padding: 11px;
+    /* border: 1px solid #ddd; */
+  }
+  
+  /* Style the navigation menu inside the left column */
+  #myMenu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  #myMenu li a {
+    padding: 12px;
+    text-decoration: none;
+    color: black;
+    display: block
+  }
+  
+  #myMenu li a:hover {
+    background-color: #eee;
+  }
