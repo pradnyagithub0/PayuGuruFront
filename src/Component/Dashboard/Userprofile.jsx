@@ -293,20 +293,24 @@ function Userprofile() {
                   {resetPassErr}
                 </span>
                 <div className="text-right">
-                  <Button variant="contained" color="primary"  onClick={HandleResetPassword}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={HandleResetPassword}
+                  >
                     Submit
                   </Button>
                 </div>
               </div>
             </div>
-                  </div>
-                  <div className="loaderContainer">
+          </div>
+          <div className="loaderContainer">
             <div className="inputbox text-center loader-box">
               {loader && (
                 <img src={lodingImg} alt="loading..." className="loaderImg" />
               )}
             </div>
-          </div>  
+          </div>
         </div>
       </div>
     </div>

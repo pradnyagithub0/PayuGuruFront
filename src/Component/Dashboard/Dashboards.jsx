@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "./Dashboards.css";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import lodingImg from "../../assets/img/loading.gif";
 import { useNavigate } from "react-router-dom";
-
+import { ApplicationContext } from "../../context/ApplicationContext"; 
 import { ENDPOINTS } from "../../utils/apiConfig";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 
 function Dashboard() {
+  const { setKycStatus } = useContext(ApplicationContext);
   const dash_index = ENDPOINTS.DASH_BOARD;
   const add_upi = ENDPOINTS.CREATE_UPI_ID;
   const add_acc = ENDPOINTS.CREATE_VIRTUAL_BANK_ACCOUNT;
@@ -49,6 +50,7 @@ function Dashboard() {
           setDashboardIndex(resData.mess);
           setMainBalance(resData.mess.mainbalance);
           setTotalSettalment(resData.mess.settelment);
+          setKycStatus(resData.mess.kyc_status); 
         } else {
           // navigate(`/login`);
 
