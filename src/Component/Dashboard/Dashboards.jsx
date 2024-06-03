@@ -21,7 +21,6 @@ function Dashboard() {
   const [upiID, setUpiId] = useState("");
   const [accountDetails, setAccountDetials] = useState({});
   let navigate = useNavigate();
-  console.log(dashboardIndex.mainBalance);
 
   useEffect(() => {
     dashboardIndexData();
@@ -42,7 +41,6 @@ function Dashboard() {
       });
 
       const resData = await response.json();
-      console.log(resData);
       setLoader(false);
 
       if (resData.mess) {
