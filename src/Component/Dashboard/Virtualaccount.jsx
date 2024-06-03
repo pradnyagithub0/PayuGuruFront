@@ -62,6 +62,34 @@ function VirtualAccount(){
 		console.error("Error:", error);
 	  }
 	};
+	const toggleStatus = async (account) => {
+		const updatedStatus = account.upistatus === 'Y' ? 'N' : 'Y';
+		try {
+		let accountNumber = account.AC_id;
+		  const response = await fetch(ENDPOINTS.UPDATE_VIRTUAL_ACCOUNT_STATUS, {
+			method: 'POST',
+			headers: {
+			  accept: 'application/json',
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+			  AC_id: accountNumber,
+			  upistatus: updatedStatus,
+			  sessionid: sessionid,
+			}),
+		  });
+	
+		  const resData = await response.json();
+		  if (resData.mess && resData.mess.StatusCodes === 'DK00') {
+			fetchData(currentPage); // Refresh the data after updating the status
+		  } else {
+			console.log(resData.mess.message);
+			// alert(resData.mess.message);
+		  }
+		} catch (error) {
+		  console.error('Error:', error);
+		}
+	  };
   
 	// Fetch data on component mount
 	useEffect(() => {
@@ -142,7 +170,7 @@ function VirtualAccount(){
 									        </tr>
 								        </tbody>
 								    </table> */}
-									 <VirtualAccountTable data={acList} />
+									 <VirtualAccountTable data={acList} toggleStatus={toggleStatus}/>
 
 									<Pagination
 									currentPage={currentPage}

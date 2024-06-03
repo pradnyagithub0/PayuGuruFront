@@ -63,6 +63,35 @@ function Upi(){
 		console.error("Error:", error);
 	  }
 	};
+
+	const toggleStatus = async (account) => {
+		const updatedStatus = account.upistatus === 'Y' ? 'N' : 'Y';
+		try {
+		let accountId = account.upi_id;
+		  const response = await fetch(ENDPOINTS.UPDATE_UPI_ID_STATUS, {
+			method: 'POST',
+			headers: {
+			  accept: 'application/json',
+			  'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+			  upi_id: accountId,
+			  upistatus: updatedStatus,
+			  sessionid: sessionid,
+			}),
+		  });
+	
+		  const resData = await response.json();
+		  if (resData.mess && resData.mess.StatusCodes === 'DK00') {
+			fetchData(currentPage); // Refresh the data after updating the status
+		  } else {
+			console.log(resData.mess.message);
+			// alert(resData.mess.message);
+		  }
+		} catch (error) {
+		  console.error('Error:', error);
+		}
+	  };
   
 	// Fetch data on component mount
 	useEffect(() => {
@@ -111,7 +140,7 @@ function Upi(){
 				  </div>
 				  <div className="card-body p-0">
 					<div className="table-responsive">
-					  <UpiListTable data={upiList} />
+					  <UpiListTable data={upiList}  toggleStatus={toggleStatus}/>
 					  <Pagination
                       currentPage={currentPage}
                       itemsPerPage={itemsPerPage}
