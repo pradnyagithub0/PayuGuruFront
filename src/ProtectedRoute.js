@@ -1,18 +1,16 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
-import { getToken } from './AuthUtils';
+import { Navigate } from 'react-router-dom';
 
-const ProtectedRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={(props) =>
-      getToken() ? (
-        <Component {...props} />
-      ) : (
-        <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-      )
-    }
-  />
-);
+const ProtectedRoute = ({ children }) => {
+  const isAuthenticated = sessionStorage.getItem('sessionid'); // Check if sessionid exists in sessionStorage
+
+  if (!isAuthenticated) {
+    // If not authenticated, redirect to the login page
+    return <Navigate to="/login" replace />;
+  }
+
+  // If authenticated, render the children components
+  return children;
+};
 
 export default ProtectedRoute;

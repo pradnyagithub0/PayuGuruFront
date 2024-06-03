@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { BrowserRouter,Route,Routes,Switch } from 'react-router-dom';
 import { ProtectedRoute } from "protected-route-react";
 import Home from './Component/Home/Home';
@@ -28,67 +29,96 @@ import CookiesPolicy from './Pages/CookiesPolicy';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import RedressalPolicy from './Pages/RedressalPolicy';
 import TermsandCondition from './Pages/TermsandCondition';
+import ProtectedRoute from './ProtectedRoute'; // Import ProtectedRoute component
 
+const Routing = () => {
+  return (
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />}>
+            <Route index element={<Home />} />
+            <Route path="Home" element={<Home />} />
+            <Route path="login" element={<Loginpage />} />
+            <Route path="register" element={<Registerpage />} />
+            <Route path="emailotp" element={<Emailotp />} />
+            <Route path="mobileotp" element={<Mobileotp />} />
+            <Route path="Forgotun" element={<Forgotun />} />
+            <Route path="success" element={<Success />} />
+            <Route path="otppage" element={<Otppage />} />
+            <Route path="Resetpassword" element={<Resetpassword />} />
+            <Route path="Amlpolicy" element={<AmlPolicy />} />
+            <Route path="CookiesPolicy" element={<CookiesPolicy />} />
+            <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="RedressalPolicy" element={<RedressalPolicy />} />
+            <Route path="TermsandCondition" element={<TermsandCondition />} />
 
-
-
-
-
-
-
-
-const Routing = () =>{
-
-    return(
-        <div>
-            <BrowserRouter>
-                  
-                <Routes>
-                
-                    <Route path="/" element={<Main/>}>
-                        <Route index element={<Home/>}/>
-                        <Route path="Home" element={<Home/>}/>
-                        <Route path="login" element={<Loginpage/>}/>
-                        <Route path="register" element={<Registerpage/>}/>
-                        <Route path="emailotp" element={<Emailotp/>}/>
-                        <Route path="mobileotp" element={<Mobileotp/>}/>
-                        <Route path="Forgotun" element={<Forgotun/>}/>
-                    
-                        <Route path="/dashboard" element={<Dashboards/>}/>
-                        
-
-                        <Route path="virtualaccount" element={<Virtualaccount/>}/> 
-                        <Route path="upi" element={<Upi/>}/>
-                        <Route path="reports" element={<Reports/>}/>
-                        <Route path="invoices" element={<Invoices/>}/>
-                        <Route path="account" element={<Account/>}/>
-                        <Route path="api" element={<Api/>}/>
-                        <Route path="webhook" element={<Webhook/>}/>
-                        <Route path="userprofile" element={<Userprofile/>}/>
-                        <Route path="kycform" element={<KycForm/>}/>
-                        <Route path="kybform" element={<KybForm/>}/>
-                        <Route path="enquiry" element={<Enquiry/>}/>
-                        <Route path="success" element={<Success/>}/>
-                        <Route path="otppage" element={<Otppage/>}/>
-                        <Route path="Resetpassword" element={<Resetpassword/>}/>
-                        <Route path="Amlpolicy" element={<AmlPolicy/>}/>
-                        <Route path="CookiesPolicy" element={<CookiesPolicy/>}/>
-                        <Route path="PrivacyPolicy" element={<PrivacyPolicy/>}/>
-                        <Route path="RedressalPolicy" element={<RedressalPolicy/>}/>
-                        <Route path="TermsandCondition" element={<TermsandCondition/>}/>
-                        
-                        
-                        
-                    </Route>
-                    
-                    
-                    </Routes>
-            </BrowserRouter>
-        </div>
-    )
+            {/* Protected Routes */}
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboards />
+              </ProtectedRoute>
+            } />
+            <Route path="virtualaccount" element={
+              <ProtectedRoute>
+                <Virtualaccount />
+              </ProtectedRoute>
+            } />
+            <Route path="upi" element={
+              <ProtectedRoute>
+                <Upi />
+              </ProtectedRoute>
+            } />
+            <Route path="reports" element={
+              <ProtectedRoute>
+                <Reports />
+              </ProtectedRoute>
+            } />
+            <Route path="invoices" element={
+              <ProtectedRoute>
+                <Invoices />
+              </ProtectedRoute>
+            } />
+            <Route path="account" element={
+              <ProtectedRoute>
+                <Account />
+              </ProtectedRoute>
+            } />
+            <Route path="api" element={
+              <ProtectedRoute>
+                <Api />
+              </ProtectedRoute>
+            } />
+            <Route path="webhook" element={
+              <ProtectedRoute>
+                <Webhook />
+              </ProtectedRoute>
+            } />
+            <Route path="userprofile" element={
+              <ProtectedRoute>
+                <Userprofile />
+              </ProtectedRoute>
+            } />
+            <Route path="kycform" element={
+              <ProtectedRoute>
+                <KycForm />
+              </ProtectedRoute>
+            } />
+            <Route path="kybform" element={
+              <ProtectedRoute>
+                <KybForm />
+              </ProtectedRoute>
+            } />
+            <Route path="enquiry" element={
+              <ProtectedRoute>
+                <Enquiry />
+              </ProtectedRoute>
+            } />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
-                        
-                        
-                    
-                        
+
 export default Routing;

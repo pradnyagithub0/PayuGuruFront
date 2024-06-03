@@ -3,6 +3,7 @@ import "./Dashboards.css";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import lodingImg from "../../assets/img/loading.gif";
+import { useNavigate } from "react-router-dom";
 
 import { ENDPOINTS } from "../../utils/apiConfig";
 
@@ -13,8 +14,11 @@ function Dashboard() {
   const sessionid = sessionStorage.getItem("sessionid");
   const [loader, setLoader] = useState(false);
   const [dashboardIndex, setDashboardIndex] = useState({});
+  const [mainBalance, setMainBalance] = useState("");
+  const [totalSettalment, setTotalSettalment] = useState("");
   const [upiID, setUpiId] = useState("");
   const [accountDetails, setAccountDetials] = useState({});
+  let navigate = useNavigate();
   console.log(dashboardIndex.mainBalance);
 
   useEffect(() => {
@@ -36,13 +40,17 @@ function Dashboard() {
       });
 
       const resData = await response.json();
+      console.log(resData);
       setLoader(false);
 
       if (resData.mess) {
         if (resData.mess.StatusCodes === "DI00") {
           setDashboardIndex(resData.mess);
+          setMainBalance(resData.mess.mainbalance);
+          setTotalSettalment(resData.mess.settelment);
         } else {
-          console.log("If status code not match");
+          // navigate(`/login`);
+
         }
         if (resData.mess.kyc_status === "N")
         {
@@ -159,7 +167,7 @@ function Dashboard() {
     <div>
       <div className="wrapper">
         <Dheader />
-        <div className="main-content position-relative">
+        <div className="main-content">
           <div className="top bg-white rounded-lg p-2">
             <div className="row mt-0">
               <div className="col-lg-9 col-md-9 col-12">
@@ -192,11 +200,11 @@ function Dashboard() {
                 <div className="row">
                   <div className="col-lg-4 col-md-4 col-12 my-auto">
                     <p>Account Balance</p>
-                    <h3 id="mainBalance">{dashboardIndex.mainBalance ? dashboardIndex.mainBalance : "₹ 2000.98" }</h3>
+                    <h3>{mainBalance }</h3>
                   </div>
                   <div className="col-lg-5 col-md-5 col-12 my-auto">
                     <p>Total Settlement</p>
-                    <h3 id="mainBalance">{dashboardIndex.settelment ? dashboardIndex.settelment : "₹ 2000.98" }</h3>
+                    <h3>{totalSettalment}</h3>
                   </div>
                   <div className="col-lg-3 col-md-3 col-12">
                     <div className="img-bg">
@@ -244,6 +252,11 @@ function Dashboard() {
                   Transfer funds to the following account to use PayUGuru
                 </h4>
                 <div className="card-body p-0 table-responsive">
+                {dashboardIndex.kyc_status !== "Y" ? (
+                  <p className="text-dark text-start ps-5">
+                    <i className="fa fa-info-circle"></i> Please update your KYC.
+                  </p>
+                ) : (
                   <table className="table table-borderless account-table">
                     <tbody>
                       <tr>
@@ -270,6 +283,8 @@ function Dashboard() {
                       </tr>
                     </tbody>
                   </table>
+                )}
+                  
                 </div>
               </div>
             </div>
@@ -393,7 +408,7 @@ function Dashboard() {
                 <h6>Your account is pending activation.</h6>
                 <p>
                   Please submit your document to{" "}
-                  <span className="text-primary"> verify@payuguru.in </span> for activating your pay u
+                  <span className="text-primary"> verify@payu.guru </span> for activating your pay u
                   guru account. you can also chat with our support team and
                   share your documents.
                 </p>
@@ -403,60 +418,61 @@ function Dashboard() {
                   <thead className="reqDocsModalBorder">
                     <tr className="reqDocsModalBorder">
                       <th className="reqDocsModalBorder">
-                        Private/public limited companies
+                        Sol Propriotership
                       </th>
-                      <th className="reqDocsModalBorder">Partnership firms</th>
+                      <th className="reqDocsModalBorder">Partnership</th>
                       <th className="reqDocsModalBorder">
-                        Propriotership firm
+                        Private Limited
+                      </th>
+                      <th className="reqDocsModalBorder">
+                        LLP
                       </th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>certificate of incorporation</td>
-                      <td>Registration certificate</td>
-                      <td>Registration certificate</td>
+                      <td>GST</td>
+                      <td>Partnership Deed</td>
+                      <td>MOA</td>
+                      <td>LLP Deed</td>
                     </tr>
                     <tr>
-                      <td>Company PAN card</td>
-                      <td>Company PAN card</td>
+                      <td>IEC Certificate</td>
+                      <td>GST</td>
+                      <td>AOA</td>
+                      <td>COI</td>
+                    </tr>
+                    <tr>
+                      <td>Shop Act</td>
+                      <td>IEC Certificate</td>
+                      <td>COI</td>
+                      <td>PAN Card</td>
+                    </tr>
+                    <tr>
+                      <td>KYC Individual</td>
+                      <td>PAN Card </td>
+                      <td>PAN Card </td>
+                      <td>GST </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>KYC Individual</td>
+                      <td>GST</td>
+                      <td>KYC Individual</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>KYC Individual</td>
+                      <td>IEC Certificate</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>IEC Certificate</td>
                       <td></td>
                     </tr>
-                    <tr>
-                      <td>Company cancelled cheque</td>
-                      <td>Company cancelled cheque</td>
-                      <td>Company cancelled cheque</td>
-                    </tr>
-                    <tr>
-                      <td>Company GST (optional) </td>
-                      <td>Company GST (optional) </td>
-                      <td>Company GST </td>
-                    </tr>
-                    <tr>
-                      <td>AoA & MoA</td>
-                      <td>Partnership deed</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>Authorized Signatory PAN card</td>
-                      <td>Partner PAN card</td>
-                      <td>Proprioter PAN card</td>
-                    </tr>
-                    <tr>
-                      <td>Authorized Signatory Aadhaar card</td>
-                      <td>Partner Aadhaar card</td>
-                      <td>Proprioter Aadhaar card</td>
-                    </tr>
-                    <tr>
-                      <td>Business details</td>
-                      <td>Business details</td>
-                      <td>Business details</td>
-                    </tr>
-                    <tr>
-                      <td>Website</td>
-                      <td>Website</td>
-                      <td>Website</td>
-                    </tr>
+                    
                   </tbody>
                 </table>
               </div>
