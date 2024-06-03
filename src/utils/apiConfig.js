@@ -15,6 +15,8 @@ export const ENDPOINTS = {
   
   CHANGE_PASSWORD_DASH: `${API_BASE_URL}/dashboard/changepass`,
   GET_API_KEY: `${API_BASE_URL}/dashboard/getapi`,
+  GET_UPI_LIST:  `${API_BASE_URL}/dashboard/upilist`,
+  GET_VIRTUAL_ACCOUNT_LIST:  `${API_BASE_URL}/dashboard/aclist`
 
   // Add more endpoints as needed
 };
