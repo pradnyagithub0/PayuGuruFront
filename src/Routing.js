@@ -30,6 +30,7 @@ import PrivacyPolicy from './Pages/PrivacyPolicy';
 import RedressalPolicy from './Pages/RedressalPolicy';
 import TermsandCondition from './Pages/TermsandCondition';
 import ProtectedRoute from './ProtectedRoute'; // Import ProtectedRoute component
+import Docs from './Pages/Docs';
 
 const Routing = () => {
   return (
@@ -52,6 +53,7 @@ const Routing = () => {
             <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
             <Route path="RedressalPolicy" element={<RedressalPolicy />} />
             <Route path="TermsandCondition" element={<TermsandCondition />} />
+            <Route path="docs" element={<Docs/>}/>
 
             {/* Protected Routes */}
             <Route path="/dashboard" element={
