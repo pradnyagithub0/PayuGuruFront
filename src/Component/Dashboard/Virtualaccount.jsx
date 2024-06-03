@@ -40,12 +40,12 @@ function VirtualAccount(){
 		});
 		
 		const messData  = await response.text();
-		console.log(messData)
+		// console.log(messData)
 		const resData = messData.split('[');
-		console.log(JSON.stringify(resData[1]));
+		// console.log(JSON.stringify(resData[1]));
 		let dataA = JSON.stringify(resData[1].replace(']',''))
-		console.log("{'virtual_account_list':"+'['+JSON.parse(dataA)+']}')
-		console.log(messData.match('mess').input.search('StatusCodes'));
+		// console.log("{'virtual_account_list':"+'['+JSON.parse(dataA)+']}')
+		// console.log(messData.match('mess').input.search('StatusCodes'));
 		setLoader(false);
 		setAcList(JSON.parse('['+JSON.parse(dataA)+']'));
 		setTotalItems(JSON.parse('['+JSON.parse(dataA)+']').length);
@@ -59,7 +59,7 @@ function VirtualAccount(){
 		// }
 	  } catch (error) {
 		setLoader(false);
-		console.error("Error:", error);
+		// console.error("Error:", error);
 	  }
 	};
 	const toggleStatus = async (account) => {
@@ -83,7 +83,7 @@ function VirtualAccount(){
 		  if (resData.mess && resData.mess.StatusCodes === 'DK00') {
 			fetchData(currentPage); // Refresh the data after updating the status
 		  } else {
-			console.log(resData.mess.message);
+			// console.log(resData.mess.message);
 			// alert(resData.mess.message);
 		  }
 		} catch (error) {

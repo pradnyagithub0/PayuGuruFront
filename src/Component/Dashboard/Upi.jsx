@@ -43,10 +43,10 @@ function Upi(){
 		
 		const messData  = await response.text();
 		const resData = messData.split('[');
-		console.log(JSON.stringify(resData[1]));
+		// console.log(JSON.stringify(resData[1]));
 		let dataA = JSON.stringify(resData[1].replace(']',''))
-		console.log("{'upi_list':"+'['+JSON.parse(dataA)+']}')
-		console.log(messData.match('mess').input.search('StatusCodes'));
+		// console.log("{'upi_list':"+'['+JSON.parse(dataA)+']}')
+		// console.log(messData.match('mess').input.search('StatusCodes'));
 		setLoader(false);
 		setUpiList(JSON.parse('['+JSON.parse(dataA)+']'));
 		setTotalItems(JSON.parse('['+JSON.parse(dataA)+']').length);
