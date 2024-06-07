@@ -2,6 +2,7 @@ import React, {useEffect,useState} from "react";
 import Dheader from '../Dheader';
 import Dfooter from '../Dfooter';
 import './Virtualaccount.css';
+import axios from "axios";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import VirtualAccountTable from "./commonComponents/VirtualAccountTable"; // Adjust the path as necessary
 import { ENDPOINTS } from '../../utils/apiConfig';
@@ -12,8 +13,8 @@ function VirtualAccount(){
 	const sessionid = sessionStorage.getItem("sessionid");
 	const [loader, setLoader] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
-	const itemsPerPage = 10;
 	const [totalItems, setTotalItems] = useState(0);
+	const [itemsPerPage, setItemsPerPage] = useState(10);
   
 	// Function to fetch the data
 	const fetchData = async (page = 1) => {
@@ -21,34 +22,32 @@ function VirtualAccount(){
 	  try {
 		const currentDate = new Date().toISOString();
 		const startDate = new Date();
-		startDate.setDate(startDate.getDate() - 7); // Adjust range as needed
+		startDate.setDate(startDate.getDate() - 30); // Adjust range as needed
 		const startDateISO = startDate.toISOString();
-		const response = await fetch(ENDPOINTS.GET_VIRTUAL_ACCOUNT_LIST, {
-		  method: "POST",
-		  headers: {
-			accept: "application/json",
-			"Content-Type": "application/json",
-		  },
-		  body: JSON.stringify({
-			range: [startDateISO, currentDate],
-			pagination: {
-			  skip: (page - 1) * itemsPerPage,
-			  limit: itemsPerPage,
-			},
-			sessionid: sessionid,
-		  }),
-		});
-		
-		const messData  = await response.text();
-		// console.log(messData)
-		const resData = messData.split('[');
-		// console.log(JSON.stringify(resData[1]));
-		let dataA = JSON.stringify(resData[1].replace(']',''))
-		// console.log("{'virtual_account_list':"+'['+JSON.parse(dataA)+']}')
-		// console.log(messData.match('mess').input.search('StatusCodes'));
+		const response = await axios.post(ENDPOINTS.GET_VIRTUAL_ACCOUNT_LIST, {
+			sessionid: sessionid, // Replace with actual session ID
+			range: [startDate, currentDate], // Replace with actual date range
+			pagination: { skip: (currentPage - 1) * itemsPerPage, limit: itemsPerPage }
+		  });
 		setLoader(false);
-		setAcList(JSON.parse('['+JSON.parse(dataA)+']'));
-		setTotalItems(JSON.parse('['+JSON.parse(dataA)+']').length);
+		
+		// setTotalItems(JSON.parse('['+JSON.parse(dataA)+']').length);
+		const responseData = await response.data;
+		// console.log('Result:', responseData);
+
+		const resDataT = responseData.split('[');
+		const resDataPg = responseData.split(',');
+		let dataCount = resDataPg[3].replace(/\\/g,'');
+		let dataCurentP = resDataPg[4].replace(/\\/g,'').replace('}','');
+		console.log('Count data: ', dataCount.replace('"totalCount":', ""));
+		console.log('Pagination data: ', dataCurentP.replace('"currentPage":', ""));
+		var dataT = JSON.stringify(resDataT[1].replace(']',''))
+		// console.log("Virtual List Response: ", JSON.parse(dataT));
+		// setData(JSON.parse(dataT));
+		setTotalItems(dataCount.replace('"totalCount":', ""));
+		setItemsPerPage(responseData.itemsPerPage);
+		setAcList(JSON.parse('['+JSON.parse(dataT)+']'));
+		setCurrentPage(dataCurentP.replace('"currentPage":', ""));
 		// if (messData.match('mess').length >= 0) {
 		//   if (messData.match('mess').input.search('StatusCodes') === "DK00") {
 		// 	setUpiList(JSON.parse('['+JSON.parse(dataA)+']'));
