@@ -13,7 +13,7 @@ const KYBForm = () => {
 
     const [values] = useState(initialValues);
 
-    const checkout = () =>{
+    const Submitform = () =>{
         console.log(values)
         fetch(url,{
             method: 'POST',
@@ -313,7 +313,7 @@ const KYBForm = () => {
                                         </div>
                                         <ul className="list-inline pull-right d-flex">
                                             <li><button type="button" className="btn default-btn prev-step mx-1">Back</button></li>
-                                            <li><button type="button" className="btn default-btn next-step mx-1">Submit</button></li>
+                                            <li><button type="button" className="btn default-btn next-step mx-1" onClick={Submitform}>Submit</button></li>
                                         </ul>
                                 </div>
                                 <div className="clearfix"></div>

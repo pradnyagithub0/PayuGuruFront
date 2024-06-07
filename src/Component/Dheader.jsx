@@ -74,7 +74,7 @@ const Header = () => {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item my-auto">
-                <Link className="nav-link" to="/api">API Docs</Link>
+                <Link className="nav-link" to="/docs">API Docs</Link>
 
                 {/* <a href="api" className="nav-link">
                   API Docs

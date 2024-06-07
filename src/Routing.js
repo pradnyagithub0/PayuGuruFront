@@ -104,11 +104,15 @@ const Routing = () => {
               <ProtectedRoute>
                 <KycForm />
               </ProtectedRoute>
+              
+              
             } />
             <Route path="kybform" element={
               <ProtectedRoute>
                 <KybForm />
               </ProtectedRoute>
+            
+              
             } />
             <Route path="enquiry" element={
               <ProtectedRoute>
