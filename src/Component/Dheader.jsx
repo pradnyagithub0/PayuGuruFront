@@ -149,10 +149,10 @@ const Header = () => {
             </Link>
           </li>
           <li className="nav-link">
-            <Link to="/">
-              <i
+            <Link onClick={handleLogout} to='/'>
+             <i
                 className="fa fa-power-off bg-warning rounded-circle fa-lg mr-2"
-                onClick={handleLogout}
+               
               ></i>
               Logout
             </Link>
