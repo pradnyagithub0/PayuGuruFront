@@ -14,7 +14,7 @@ function VirtualAccount() {
 	const sessionid = sessionStorage.getItem("sessionid");
 	const [loader, setLoader] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
-	const itemsPerPage = 10;
+	const itemsPerPage = 50;
 	const [totalItems, setTotalItems] = useState(0);
   
 	// Function to fetch the data
