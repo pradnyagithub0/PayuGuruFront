@@ -1,105 +1,15 @@
-import React, {useEffect,useState} from "react";
-import Dheader from '../Dheader';
-import Dfooter from '../Dfooter';
-import './Virtualaccount.css';
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import Dheader from "../Dheader";
+import Dfooter from "../Dfooter";
+import "./Virtualaccount.css";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
-import VirtualAccountTable from "./commonComponents/VirtualAccountTable"; // Adjust the path as necessary
-import { ENDPOINTS } from '../../utils/apiConfig';
+import { ENDPOINTS } from "../../utils/apiConfig.js";
+import VirtualAccountTable from "./commonComponents/VirtualAccountTable"; 
 import Pagination from '../Pagination';
 
+
+
 function VirtualAccount(){
-	const [acList, setAcList] = useState([]);
-	const sessionid = sessionStorage.getItem("sessionid");
-	const [loader, setLoader] = useState(false);
-	const [currentPage, setCurrentPage] = useState(1);
-	const [totalItems, setTotalItems] = useState(0);
-	const [itemsPerPage, setItemsPerPage] = useState(10);
-  
-	// Function to fetch the data
-	const fetchData = async (page = 1) => {
-	  setLoader(true);
-	  try {
-		const currentDate = new Date().toISOString();
-		const startDate = new Date();
-		startDate.setDate(startDate.getDate() - 30); // Adjust range as needed
-		const startDateISO = startDate.toISOString();
-		const response = await axios.post(ENDPOINTS.GET_VIRTUAL_ACCOUNT_LIST, {
-			sessionid: sessionid, // Replace with actual session ID
-			range: [startDate, currentDate], // Replace with actual date range
-			pagination: { skip: (currentPage - 1) * itemsPerPage, limit: itemsPerPage }
-		  });
-		setLoader(false);
-		
-		// setTotalItems(JSON.parse('['+JSON.parse(dataA)+']').length);
-		const responseData = await response.data;
-		// console.log('Result:', responseData);
-
-		const resDataT = responseData.split('[');
-		const resDataPg = responseData.split(',');
-		let dataCount = resDataPg[3].replace(/\\/g,'');
-		let dataCurentP = resDataPg[4].replace(/\\/g,'').replace('}','');
-		console.log('Count data: ', dataCount.replace('"totalCount":', ""));
-		console.log('Pagination data: ', dataCurentP.replace('"currentPage":', ""));
-		var dataT = JSON.stringify(resDataT[1].replace(']',''))
-		// console.log("Virtual List Response: ", JSON.parse(dataT));
-		// setData(JSON.parse(dataT));
-		setTotalItems(dataCount.replace('"totalCount":', ""));
-		setItemsPerPage(responseData.itemsPerPage);
-		setAcList(JSON.parse('['+JSON.parse(dataT)+']'));
-		setCurrentPage(dataCurentP.replace('"currentPage":', ""));
-		// if (messData.match('mess').length >= 0) {
-		//   if (messData.match('mess').input.search('StatusCodes') === "DK00") {
-		// 	setUpiList(JSON.parse('['+JSON.parse(dataA)+']'));
-		//   } else {
-		// 	console.log(messData.match('mess').input.search('StatusCodes'));
-		// 	alert(messData.match('mess').map(m => m.message));
-		//   }
-		// }
-	  } catch (error) {
-		setLoader(false);
-		// console.error("Error:", error);
-	  }
-	};
-	const toggleStatus = async (account) => {
-		const updatedStatus = account.upistatus === 'Y' ? 'N' : 'Y';
-		try {
-		let accountNumber = account.AC_id;
-		  const response = await fetch(ENDPOINTS.UPDATE_VIRTUAL_ACCOUNT_STATUS, {
-			method: 'POST',
-			headers: {
-			  accept: 'application/json',
-			  'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-			  AC_id: accountNumber,
-			  upistatus: updatedStatus,
-			  sessionid: sessionid,
-			}),
-		  });
-	
-		  const resData = await response.json();
-		  if (resData.mess && resData.mess.StatusCodes === 'DK00') {
-			fetchData(currentPage); // Refresh the data after updating the status
-		  } else {
-			// console.log(resData.mess.message);
-			// alert(resData.mess.message);
-		  }
-		} catch (error) {
-		  console.error('Error:', error);
-		}
-	  };
-  
-	// Fetch data on component mount
-	useEffect(() => {
-		fetchData(currentPage);
-	  }, [currentPage]);
-	
-	  const handlePageChange = (newPage) => {
-		setCurrentPage(newPage);
-	  };
-  
-
     return(
         <div>
             <div className="wrapper">
@@ -136,7 +46,7 @@ function VirtualAccount(){
                         	</div>
                         	<div className="card-body p-0">
 	                        	<div className="table-responsive">
-			                        {/* <table className="table table-striped table-bordered " >
+			                        <table className="table table-striped table-bordered " >
 								        <thead className="bg-light">
 								            <tr>
 								                <th>ID</th>
@@ -168,21 +78,7 @@ function VirtualAccount(){
 									            <td>Active</td>
 									        </tr>
 								        </tbody>
-								    </table> */}
-									 <VirtualAccountTable data={acList} toggleStatus={toggleStatus}/>
-
-									<Pagination
-									currentPage={currentPage}
-									itemsPerPage={itemsPerPage}
-									totalItems={totalItems}
-									onPageChange={handlePageChange}
-									/>
-									 {/* <Pagination
-										currentPage={currentPage}
-										itemsPerPage={itemsPerPage}
-										totalItems={acList.length}
-										onPageChange={handlePageChange}
-									/> */}
+								    </table>
                          		</div>       
 	                        </div>
 	                    </div>
