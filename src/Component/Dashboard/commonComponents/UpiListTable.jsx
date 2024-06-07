@@ -1,11 +1,41 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // UpiListTable.js
 import React from 'react';
 import { useTable } from 'react-table';
-
+import axios from 'axios';
+import { ENDPOINTS } from '../../../utils/apiConfig';
 const UpiListTable = ({ data, toggleStatus  }) => {
+
+
+  const handleStatusToggle = (rowData) => {
+    const requestBody = {
+      upi_id: rowData.upi_id,
+      sessionid: sessionStorage.getItem("sessionid"),
+    };
+    console.log('request: ', requestBody)
+    return axios.post(ENDPOINTS.UPDATE_UPI_ID_STATUS, requestBody, {
+      headers: {
+        "Content-Type": "application/json",
+        // "Cookie": '',
+      },
+    })
+      .then((response) => {
+        console.log(response.data); // Handle response as needed
+      })
+      .catch((error) => {
+        console.error(error); // Handle error
+      });
+  };
   const columns = React.useMemo(
     () => [
     //   { Header: 'ID', accessor: '_id' },
+    {
+      Header: 'S.No',
+      id: 'row',
+      Cell: ({ row }) => {
+        return <div>{row.index + 1}</div>;
+      }
+    },
       { Header: 'Date', accessor: 'date' },
       { Header: 'Time', accessor: 'time' },
     //   { Header: 'Timestamp', accessor: 'timestamp' },
@@ -13,27 +43,26 @@ const UpiListTable = ({ data, toggleStatus  }) => {
       { Header: 'UPI Address', accessor: 'upi_id' },
       { Header: 'Status', accessor: 'upistatus' },
       { Header: 'Request Type', accessor: 'request_type' },
-      {Header: 'Action', accessor: '  ',
-      Cell: ({ row }) => (
-        <button
-          onClick={() => toggleStatus(row.original)}
-          style={{
-            padding: '5px 10px',
-            backgroundColor: row.original.upistatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
-            color: row.original.upistatus === 'N' ? 'black':'white',
-            border: 'none',
-            borderRadius: '25px',
-          }}
-        >
-          {row.original.upistatus === 'Y' ? 'Active' : 'Disable'}
-        </button>
-      ),
-
-       },
-    //   { Header: 'Updated At', accessor: 'updatedAt' },
-    //   { Header: 'Created At', accessor: 'createdAt' },
+      {
+        Header: 'Action',
+        accessor: '  ',
+        Cell: ({ row }) => (
+          <button
+            onClick={() => handleStatusToggle(row.original)}
+            style={{
+              padding: '5px 10px',
+              backgroundColor: row.original.upistatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
+              color: row.original.upistatus === 'N' ? 'black' : 'white',
+              border: 'none',
+              borderRadius: '25px',
+            }}
+          >
+            {row.original.upistatus === 'Y' ? 'Active' : 'Disable'}
+          </button>
+        ),
+      },
     ],
-    []
+    [handleStatusToggle]
   );
 
   const {

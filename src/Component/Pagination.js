@@ -1,4 +1,3 @@
-// Pagination.js
 import React from 'react';
 
 const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => {
@@ -25,10 +24,7 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => 
     for (let i = 1; i <= totalPages; i++) {
       pageNumbers.push(
         <li key={i} className={`page-item ${i === currentPage ? 'active' : ''}`}>
-          <button
-            onClick={() => handlePageClick(i)}
-            className="page-link"
-          >
+          <button onClick={() => handlePageClick(i)} className="page-link">
             {i}
           </button>
         </li>
@@ -52,7 +48,7 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => 
           </button>
         </li>
       </ul>
-      <div className="pagination-info"  style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign:'center'}}>
+      <div className="pagination-info" style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
         Page {currentPage} of {totalPages} | Total Entries: {totalItems}
       </div>
     </nav>
