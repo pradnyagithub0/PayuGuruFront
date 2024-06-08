@@ -1,14 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Registerpage.css";
 import lodingImg from "../../assets/img/loading.gif";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
-import { ApplicationContext } from '../../context/ApplicationContext';
 
 
 
 const Register = () => {
-  const { setClientId } = useContext(ApplicationContext); // Use the context
   const [loader, setLoader] = useState(false);
   const [registerErr, setregisterErr] = useState("");
   const [fieldErrors, setFieldErrors] = useState({
@@ -44,16 +42,16 @@ const Register = () => {
       });
 
       const responseData = await response.json();
+      console.log(responseData)
       setLoader(false);
 
       if (responseData.StatusCodes && responseData.StatusCodes === "00") {
-        setClientId(responseData.responsed.clientId);
         localStorage.setItem('clientId', responseData.responsed.clientId);
         console.log(
           "Registration successful:",
           responseData.responsed.clientId
         );
-        navigate(`/success`);
+        navigate(`/mobileotp`);
       } else if (responseData.success === false) {
         console.log("Registration error:", responseData.message);
         parseFieldErrors(responseData.message);
@@ -144,7 +142,7 @@ const Register = () => {
                   <p className="msg text-warning">{fieldErrors.confirmPass}</p>
                 </div>
                 <span id="mobileOtpError" className="text-danger">{ registerErr }</span>
-                <div class="tacbox">
+                <div className="tacbox">
                   <input id="checkbox" type="checkbox" className="checkbox" />
                   <label for="checkbox">
                     I agree to these <Link to="#">Terms and Conditions</Link>.
