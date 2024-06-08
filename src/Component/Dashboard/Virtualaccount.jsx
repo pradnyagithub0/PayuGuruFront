@@ -14,7 +14,7 @@ function VirtualAccount() {
   const [loader, setLoader] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(100);
+  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFetching, setIsFetching] = useState(false);
 
   const fetchData = useCallback(async (page = 1, loadMore = false) => {
@@ -42,7 +42,7 @@ function VirtualAccount() {
       let dataCurentP = resDataPg[4].replace(/\\/g, '').replace('}', '');
       console.log('Count data: ', dataCount.replace('"totalCount":', ""));
       console.log('Pagination data: ', dataCurentP.replace('"currentPage":', ""));
-      var dataT = JSON.stringify(resDataT[1].replace(']', ''))
+      var dataT = JSON.stringify(resDataT[1].replace(']', ''));
       setTotalItems(dataCount.replace('"totalCount":', ""));
       setItemsPerPage(responseData.itemsPerPage);
 
@@ -60,7 +60,6 @@ function VirtualAccount() {
   }, [sessionid, itemsPerPage]);
 
   const toggleStatus = async (account) => {
-    const updatedStatus = account.upistatus === 'Y' ? 'N' : 'Y';
     try {
       let accountNumber = account.AC_id;
       const response = await fetch(ENDPOINTS.UPDATE_VIRTUAL_ACCOUNT_STATUS, {
@@ -71,7 +70,6 @@ function VirtualAccount() {
         },
         body: JSON.stringify({
           AC_id: accountNumber,
-          ACStatus: updatedStatus,
           sessionid: sessionid,
         }),
       });
@@ -109,13 +107,9 @@ function VirtualAccount() {
       setCurrentPage((prevPage) => prevPage + 1);
     });
   }, [isFetching, currentPage, fetchData]);
-// Fetch data on component mount
-// useEffect(() => {
-// 	fetchData(currentPage);
-//   }, [currentPage]);
 
   const handlePageChange = (newPage) => {
-	setCurrentPage(newPage);
+    setCurrentPage(newPage);
   };
 
   return (
@@ -154,7 +148,7 @@ function VirtualAccount() {
                 </div>
                 <div className="card-body p-0">
                   <div className="table-responsive">
-				  {loader ? (
+                    {loader ? (
                       <div className="text-center p-5">
                         <div
                           className="spinner-border text-primary"
@@ -164,15 +158,14 @@ function VirtualAccount() {
                         </div>
                       </div>
                     ) : (
-
-						<>
-                      <VirtualAccountTable data={acList} toggleStatus={toggleStatus} />
-                          <Pagination
-                              currentPage={currentPage}
-                              itemsPerPage={itemsPerPage}
-                              totalItems={totalItems}
-                              onPageChange={handlePageChange}
-                            />
+                      <>
+                        <VirtualAccountTable data={acList} toggleStatus={toggleStatus} />
+                        <Pagination
+                          currentPage={currentPage}
+                          itemsPerPage={itemsPerPage}
+                          totalItems={totalItems}
+                          onPageChange={handlePageChange}
+                        />
                       </>
                     )}
                   </div>

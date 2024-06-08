@@ -1,28 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios'; // Import Axios
 import { useTable } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
 
 const VirtualAccountTable = ({ data, toggleStatus }) => {
   const handleStatusToggle = (rowData) => {
-    const requestBody = {
-      AC_id: rowData.AC_id,
-      sessionid: sessionStorage.getItem("sessionid"),
-    };
-    console.log('request: ', requestBody)
-    return axios.post(ENDPOINTS.UPDATE_VIRTUAL_ACCOUNT_STATUS, requestBody, {
-      headers: {
-        "Content-Type": "application/json",
-        // "Cookie": '',
-      },
-    })
-      .then((response) => {
-        console.log(response.data); // Handle response as needed
-      })
-      .catch((error) => {
-        console.error(error); // Handle error
-      });
+    toggleStatus(rowData); // Call the function from parent
   };
 
   const columns = React.useMemo(
@@ -61,7 +44,7 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
         ),
       },
     ],
-    [handleStatusToggle]
+    []
   );
 
   const {
