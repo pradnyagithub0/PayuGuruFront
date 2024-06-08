@@ -172,20 +172,6 @@ h5 {
     letter-spacing: 1px;
 } 
 
-
-/* .tester_new .carousel-indicators li {
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-    background-image: url(https://s17.postimg.org/mqjuw14bz/profile1.png);
-    background-position: center;
-    background-size: cover;
-    border: 5px solid #f1f2f3;
-    opacity: 0.4;
-    box-shadow: 0px 0px 5px 1px #ccc;
-    margin: 0 10px;
-    cursor:pointer;
-  } */
 .tester_new .carousel-indicators li:nth-child(2) {
     background-image: url(https://s17.postimg.org/5q0yndefz/profile2.png);
 }
@@ -872,10 +858,7 @@ h5 {
         line-height: 40px;
         margin-top: -3px;
     }
-    .right-border {
-        border-right-style: dotted;
-        height: 60px;
-    }
+   
     .jumbotron h4 {
         font-size: 16px;
         text-align: center;

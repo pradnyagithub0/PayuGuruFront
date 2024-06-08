@@ -110,45 +110,45 @@ const Header = () => {
 
       <div className="sidebar sidebar-collapse" id="navbarSupportedContent">
         <ul>
-          <li className="nav-link active">
-            <Link to="/dashboard">
+          <li className="active">
+            <Link exact to="/dashboard">
               <i className="fa fa-home bg-white text-dark rounded-circle fa-lg mr-2"></i>
               Home
             </Link>
           </li>
-          <li className="nav-link">
-            <Link to="/Virtualaccount">
+          <li className="">
+            <Link exact to="/Virtualaccount">
               <span>
                 <i className="fa fa-bank bg-blue p-xy rounded-circle fa-lg mr-2"></i>
                 Virtual Account
               </span>
             </Link>
           </li>
-          <li className="nav-link">
-            <Link to="/upi">
+          <li className="">
+            <Link to="/upi" >
               <i className="fa fa-cube bg-primary rounded-circle fa-lg mr-2"></i>
               UPIS
             </Link>
           </li>
-          <li className="nav-link">
+          <li className="">
             <Link to="/reports">
               <i className="fa fa-file bg-pink rounded-circle fa-lg mr-2"></i>
               Reports
             </Link>
           </li>
-          <li className="nav-link">
+          <li className="">
             <Link to="/invoices">
               <i className="fa fa-file bg-purple rounded-circle fa-lg mr-2"></i>
               Invoices
             </Link>
           </li>
-          <li className="nav-link">
+          <li className="">
             <Link to="/account">
               <i className="fa fa-cog bg-success rounded-circle fa-lg mr-2"></i>
               Settings
             </Link>
           </li>
-          <li className="nav-link">
+          <li className="">
             <Link onClick={handleLogout} to='/'>
              <i
                 className="fa fa-power-off bg-warning rounded-circle fa-lg mr-2"

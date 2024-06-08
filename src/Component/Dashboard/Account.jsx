@@ -25,27 +25,27 @@ function Account(){
                     <div className="row">
                         <div className="col-xl-6 col-lg-9 col-md-8 col-12">
                             <div className="card pb-0 account-details border-0 shadow-lg">
-                                <h4 className="bg-transparent mt-0 p-3">Account Settings</h4>
-                                <div className="card-body p-3">
-                                    <form action="#">
-                                        <div className="mb-3">
-                                            <label className="form-label">Company Name</label>
-                                            <input type="text" className="form-control" placeholder="Arena Itech" />
-                                        </div>
+                                    <h4 className="bg-transparent mt-0 p-3">Account Settings</h4>
+                                        <div className="card-body p-3">
+                                            <form action="#">
+                                                <div className="mb-3">
+                                                    <label className="form-label">Company Name</label>
+                                                    <input type="text" className="form-control" placeholder="Arena Itech" />
+                                                </div>
 
-                                        <label className="form-label">GSTIN of Arena Itech</label>
-                                        <div className="input-group mb-3">
-                                            <input type="text" className="form-control"/>
-                                            <span className="input-group-text border-0"><i className="fa fa-pencil"></i></span>
-                                        </div>
+                                                <label className="form-label">GSTIN of Arena Itech</label>
+                                                <div className="input-group mb-3">
+                                                    <input type="text" className="form-control"/>
+                                                    <span className="input-group-text border-0"><i className="fa fa-pencil"></i></span>
+                                                </div>
 
-                                        <label className="form-label">Billing Address</label>
-                                        <div className="input-group mb-3">
-                                            <textarea type="text" className="form-control" placeholder="" rows="3"></textarea>
-                                            <span className="input-group-text border-0"><i className="fa fa-pencil"></i></span>
+                                                <label className="form-label">Billing Address</label>
+                                                <div className="input-group mb-3">
+                                                    <textarea type="text" className="form-control" placeholder="" rows="3"></textarea>
+                                                    <span className="input-group-text border-0"><i className="fa fa-pencil"></i></span>
+                                                </div>
+                                            </form>	
                                         </div>
-                                    </form>	
-                                </div>
                                 <hr></hr>
                                 {/* <h4 className="bg-transparent mt-0 p-3">Balance Settings</h4>
                                 <div className="card-body p-3">
@@ -80,11 +80,9 @@ function Account(){
                     </div>
 
                 
-                 <Dfooter/>   
+                    <Dfooter/>   
                 </div>
-               
             </div>
-            
         </div>
     )
 }
