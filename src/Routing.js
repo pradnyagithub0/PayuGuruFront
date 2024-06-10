@@ -56,8 +56,9 @@ const Routing = () => {
 
             {/* Protected Routes */}
             <Route path="/dashboard" element={
-              
+              <ProtectedRoute>
                 <Dashboards />
+              </ProtectedRoute>
             
             } />
             <Route path="virtualaccount" element={
@@ -101,14 +102,14 @@ const Routing = () => {
               </ProtectedRoute>
             } />
             <Route path="kycform" element={
-              
+              <ProtectedRoute>
                 <KycForm />
-              
+              </ProtectedRoute>
             } />
             <Route path="kybform" element={
-              
+              <ProtectedRoute>
                 <KybForm />
-            
+              </ProtectedRoute>
             } />
             <Route path="enquiry" element={
               <ProtectedRoute>
