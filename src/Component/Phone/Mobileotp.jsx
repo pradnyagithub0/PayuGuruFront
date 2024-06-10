@@ -1,17 +1,12 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Mobileotp.css";
 import lodingImg from '../../assets/img/loading.gif';
-import { ApplicationContext } from '../../context/ApplicationContext'; 
 import { ENDPOINTS } from "../../utils/apiConfig";
 
 
 const MobileVerifyPage = () => {
-  const {clientId}  = useContext(ApplicationContext); //value coming from context
   const clientId2 = localStorage.getItem('clientId'); // value coming from local storage
-  console.log('MobileVerifyPage clientId from useContext storage:', clientId);
-  console.log('MobileVerifyPage clientId from local storage:', clientId2);
-
   const [mobileOtpErr, setMobileOtpErr] = useState("");
   const [resendMobileOtpErr, setResendMobileOtpErr] = useState("");
   const [loader, setLoader] = useState(false);
@@ -41,7 +36,8 @@ const MobileVerifyPage = () => {
       if (otpData.mess) {
         if (otpData.mess.StatusCodes === "M00") {
           console.log(otpData.mess.message);
-          navigate(`/success`);
+          setMobileOtpErr(otpData.mess.message);
+
         } else {
           console.log(otpData.mess.message);
           setMobileOtpErr(otpData.mess.message);
@@ -122,7 +118,7 @@ const MobileVerifyPage = () => {
           <div className="row">
             <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
               <div className="form">
-                <h3 className="text-center">Mobile Verification {clientId }</h3>
+                <h3 className="text-center">Mobile Verification</h3>
                 <p className="text-center">
                   <a href="/" className="text-white">
                     <img
@@ -142,7 +138,7 @@ const MobileVerifyPage = () => {
                     name="mobileOtp"
                     maxLength="6"
                   />
-                  <span id="mobileOtpError" className="text-danger">{ mobileOtpErr }</span>
+                  <span id="mobileOtpError" className="text-warning">{ mobileOtpErr }</span>
                   <span id="resendMobileOtpErr" className="text-warning">{ resendMobileOtpErr }</span>
                 </div>
                 <div>

@@ -1,23 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import "./Userprofile.css";
-import { Link } from "react-router-dom";
 import ProfileTopbar from "./commonComponents/ProfileTopbar";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
 import lodingImg from "../../assets/img/loading.gif";
 import { Button } from "@mui/material";
+import { BsCheckLg } from "react-icons/bs";
+import { ImCross } from "react-icons/im";
+
 
 function Userprofile() {
   const [loader, setLoader] = useState(false);
   const [resetPassErr, setResetPassErr] = useState("");
+  const [userInfo, setUserInfo] = useState([]);
   const sessionid = sessionStorage.getItem("sessionid");
   const [fieldErrors, setFieldErrors] = useState({
     password: "",
     confirmPass: "",
     sessionid: "",
   });
+
+  useEffect(() => {
+    userProfileData();
+  },[]);
+
+  const userProfileData = async () => {
+    setLoader(true);
+    try {
+      const response = await fetch(ENDPOINTS.DASHBOARD_PROFILE, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+        }),
+      });
+
+      const resData = await response.json();
+      setLoader(false);
+
+      if (resData.mess) {
+        if (resData.mess.StatusCodes === "DK00") {
+          setUserInfo(resData.mess);
+           
+        } else {
+         console.log("status code not match")
+
+        }
+        
+      } else {
+        // Handle unexpected response structure
+        console.error("Unexpected response structure:", resData);
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error :", error);
+    }
+  };
 
   const HandleResetPassword = async () => {
     setLoader(true);
@@ -93,18 +136,39 @@ function Userprofile() {
             <div className="col-lg-10 col-md-10 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <div className="col-lg-8 col-md-8 col-12">
-                  <h3 className=" mt-0 p-3">User Profile</h3>
-                  <div className="card-body p-3">
+                  <h3 className=" my-0 p-3">User Profile</h3>
+                  <div className="card-body p-0">
+                    <div className="p-2 mb-2 text-success">*{userInfo.message}</div>
                     <div className="user_profile">
                       <table className="table table-borderless ">
                         <tbody>
                           <tr>
                             <th>Email :</th>
-                            <td>info@arenaitech.com</td>
+                            <td>{ userInfo.email}</td>
                           </tr>
                           <tr>
                             <th>Mobile :</th>
-                            <td>9988776655</td>
+                            <td>{ userInfo.mobile}</td>
+                          </tr>
+                          <tr>
+                            <th>Company Name :</th>
+                            <td>{ userInfo.com_name}</td>
+                          </tr>
+                          <tr>
+                            <th>Mobile Verified :</th>
+                            <td>{ userInfo.mobile_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold "/>}</td>
+                          </tr>
+                          <tr>
+                            <th>Email Verified :</th>
+                            <td>{ userInfo.email_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold"/>}</td>
+                          </tr>
+                          <tr>
+                            <th>KYC Status :</th>
+                            <td>{ userInfo.kyc_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold"/>}</td>
+                          </tr>
+                          <tr>
+                            <th>User Status :</th>
+                            <td>{ userInfo.user_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold"/>}</td>
                           </tr>
                           {/* <tr>
                                 <th>Role :</th>
@@ -127,7 +191,7 @@ function Userprofile() {
                             <span className="input-group-text border-0"><i className="fa fa-pencil"></i></span>
                         </div> */}
                       <button
-                        className="btn btn1 btn-outline-secondary virtual-btn mt-3"
+                        className="btn btn1 btn-outline-secondary virtual-btn my-3"
                         data-bs-toggle="modal"
                         data-bs-target="#change_pass_modal"
                       >
