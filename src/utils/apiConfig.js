@@ -19,7 +19,8 @@ export const ENDPOINTS = {
   GET_UPI_LIST:  `${API_BASE_URL}/dashboard/upilist`,
   GET_VIRTUAL_ACCOUNT_LIST:  `${API_BASE_URL}/dashboard/aclist`,
   UPDATE_VIRTUAL_ACCOUNT_STATUS: `${API_BASE_URL}/dashboard/updateac`,
-  UPDATE_UPI_ID_STATUS: `${API_BASE_URL}/dashboard/updateupi`
+  UPDATE_UPI_ID_STATUS: `${API_BASE_URL}/dashboard/updateupi`,
+  DASHBOARD_PROFILE: `${API_BASE_URL}/dashboard/profile`
   // Add more endpoints as needed
 };
 
