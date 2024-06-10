@@ -78,6 +78,12 @@ const Resetpassword = () => {
         "Token must be string";
     setFieldErrors(fieldErrors);
   };
+  //allow form submission with the enter key
+  document.addEventListener('keydown', function(event){
+    if (event.key === 'Enter'){
+        document.getElementById('reset-button').click();
+    }
+  });
 
   return (
     <div>
@@ -118,7 +124,7 @@ const Resetpassword = () => {
                 </div>}
                 
                 <div>
-                  <button className="submitButton" onClick={HandleResetPassword}>
+                  <button type="submit" id="reset-button" className="submitButton" onClick={HandleResetPassword}>
                     Submit
                   </button>
                 </div>

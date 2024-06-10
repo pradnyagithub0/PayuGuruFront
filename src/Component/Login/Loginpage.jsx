@@ -113,6 +113,12 @@ const Login = () => {
       setLoginErr("Internal Server Error. Please try again later.");
     }
   };
+  //allow form submission with the enter key
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        document.getElementById('login-button').click();
+    }
+});
 
   return (
     <div>
@@ -172,7 +178,7 @@ const Login = () => {
                   <a href="/Forgotun">Forgot Password?</a>
                 </div>
                 <div>
-                  <button className="submitButton" onClick={loginUser}>
+                  <button type="submit" id="login-button" className="submitButton" onClick={loginUser}>
                     Submit
                   </button>
                 </div>

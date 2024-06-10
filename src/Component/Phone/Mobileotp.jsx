@@ -107,6 +107,12 @@ const MobileVerifyPage = () => {
       setResendMobileOtpErr("Internal Server Error. Please try again later.");
     }
   }
+  //allow form submission for enter button
+  document.addEventListener('keydown', function(event){
+    if (event.key === 'Enter') {
+      document.getElementById('otp-button').click();
+    }
+  });
   
 
   return (
@@ -145,7 +151,7 @@ const MobileVerifyPage = () => {
                   </button>
                 </div>
                 <div>
-                  <button className="submitButton" onClick={mobileOtpVerify}>
+                  <button type="submit" id="otp-button" className="submitButton" onClick={mobileOtpVerify}>
                     Submit
                   </button>
                 </div>

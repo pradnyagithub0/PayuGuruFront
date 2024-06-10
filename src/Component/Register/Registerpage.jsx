@@ -91,6 +91,13 @@ const Register = () => {
 
     setFieldErrors(fieldErrors);
   };
+  //allow form submission with the enter key
+  document.addEventListener('keydown', function(event){
+    if (event.key === 'Enter'){
+      document.getElementById('register-button').click();
+    }
+
+  });
 
   return (
     <div>
@@ -149,7 +156,7 @@ const Register = () => {
                   </label>
                 </div>
                 <div>
-                  <button className="submitButton" onClick={registerUser}>
+                  <button type="submit" id="register-button" className="submitButton" onClick={registerUser}>
                     Submit
                   </button>
                 </div>

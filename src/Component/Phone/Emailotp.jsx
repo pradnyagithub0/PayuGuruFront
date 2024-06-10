@@ -18,18 +18,14 @@ let url = ENDPOINTS.VERIFY_EMAIL;
           setMessage('Invalid OTP. Please try again.');
         }
     };
+// allow form submission for enter button
+  document.addEventListener('keydown', function(event){
+  if (event.key === 'Enter') {
+    document.getElementById('email-button').click();
+  }
+  });
   
 
-  
-  
-
-
-  
-
-  
-
-  
-  
   return (
     <div>
     
@@ -52,7 +48,7 @@ let url = ENDPOINTS.VERIFY_EMAIL;
                          <div className="inputbox text-center">
                         
                         </div>
-                        <button className="submitButton" onClick={emailVerifyOtp}>
+                        <button type='submit' id='email-button' className="submitButton" onClick={emailVerifyOtp}>
                         Submit
                       </button>
                       {message && <p>{message}</p>}
