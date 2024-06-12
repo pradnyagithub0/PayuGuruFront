@@ -8,6 +8,7 @@ import UpiListTable from "./commonComponents/UpiListTable";
 import { ENDPOINTS } from "../../utils/apiConfig";
 import Pagination from "../Pagination";
 import axios from "axios";
+
 function Upi() {
   const [upiList, setUpiList] = useState([]);
   const sessionid = sessionStorage.getItem("sessionid");
@@ -16,8 +17,8 @@ function Upi() {
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(100);
   const [isFetching, setIsFetching] = useState(false);
-  
-	// Function to fetch the data
+  const [searchText, setSearchText] = useState("");
+
   const fetchData = useCallback(async (page = 1, loadMore = false) => {
     setLoader(true);
     try {
@@ -35,7 +36,7 @@ function Upi() {
       });
       setLoader(false);
 
-      const responseData = await response.data;
+      const responseData = response.data;
 
       console.log('Result: ', responseData.data);
 
@@ -51,17 +52,19 @@ function Upi() {
 
       setCurrentPage(dataCurentP.replace('"currentPage":', ""));
 
+      const parsedData = JSON.parse('[' + JSON.parse(dataT) + ']');
+
       if (!loadMore) {
-        setUpiList(JSON.parse('[' + JSON.parse(dataT) + ']').slice(0, itemsPerPage));
+        setUpiList(parsedData.slice(0, itemsPerPage));
       } else {
-        setUpiList((prevList) => [...prevList, ...JSON.parse('[' + JSON.parse(dataT) + ']')]);
+        setUpiList((prevList) => [...prevList, ...parsedData]);
       }
     } catch (error) {
       setLoader(false);
       console.error("Error:", error);
     }
   }, [sessionid, itemsPerPage]);
-	
+
   const toggleStatus = async (account) => {
     const updatedStatus = account.upistatus === 'Y' ? 'N' : 'Y';
     try {
@@ -91,7 +94,7 @@ function Upi() {
   };
 
   useEffect(() => {
-    fetchData(1, false);
+    fetchData(1);
   }, [fetchData]);
 
   useEffect(() => {
@@ -109,17 +112,48 @@ function Upi() {
     if (!isFetching) return;
     fetchData(currentPage + 1, true).then(() => {
       setIsFetching(false);
-      setCurrentPage((prevPage) => prevPage + 1);
     });
-  }, [isFetching, currentPage, fetchData]);
-// Fetch data on component mount
-// useEffect(() => {
-// 	fetchData(currentPage);
-//   }, [currentPage]);
+  }, [isFetching, fetchData, currentPage]);
 
   const handlePageChange = (newPage) => {
-	setCurrentPage(newPage);
+    setCurrentPage(newPage);
+    fetchData(newPage);
   };
+
+  const handleSearchUpi = async () => {
+    setLoader(true);
+  
+    try {
+      const response = await fetch(ENDPOINTS.SEARCH_UPI_ID, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+          upi_id: searchText,
+        }),
+      });
+  
+      const resData = await response.json();
+      setLoader(false);
+  
+      if (resData.StatusCodes) {
+        if (resData.StatusCodes === "00") {
+          // Convert the single object response to an array
+          const responseArray = [resData.responsed];
+          setUpiList(responseArray);
+        } else {
+          console.log(resData.mess.message);
+        }
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error during account search:", error);
+    }
+  };
+
   return (
     <div>
       <div className="wrapper">
@@ -144,11 +178,19 @@ function Upi() {
                             type="text"
                             className="searchTerm"
                             placeholder="Search ID/Ref Number"
+                            value={searchText}
+                            onChange={(e) => {
+                              setSearchText(e.target.value);
+                            }}
                           />
                           <button
                             type="submit"
                             className="searchButton"
                             aria-label="Search"
+                            onClick={() => {
+                              console.log(searchText);
+                              handleSearchUpi();
+                            }}
                           >
                             <i className="fa fa-search"></i>
                           </button>
@@ -178,7 +220,7 @@ function Upi() {
                           type="button"
                           className="btn btn1 mt-15 bg-dark text-white mr-2"
                         >
-                          Fiter <i className="fa fa-filter ml-2"></i>
+                          Filter <i className="fa fa-filter ml-2"></i>
                         </a>
                       </div>
                     </div>
@@ -216,7 +258,7 @@ function Upi() {
         </div>
       </div>
     </div>
-  );
+);
 }
 
 export default Upi;
