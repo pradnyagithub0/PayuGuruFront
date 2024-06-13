@@ -8,6 +8,7 @@ import UpiListTable from "./commonComponents/UpiListTable";
 import { ENDPOINTS } from "../../utils/apiConfig";
 import Pagination from "../Pagination";
 import axios from "axios";
+import { FiSearch } from "react-icons/fi";
 
 function Upi() {
   const [upiList, setUpiList] = useState([]);
@@ -19,77 +20,81 @@ function Upi() {
   const [isFetching, setIsFetching] = useState(false);
   const [searchText, setSearchText] = useState("");
 
-  const fetchData = useCallback(async (page = 1, loadMore = false) => {
-    setLoader(true);
-    try {
-      const currentDate = new Date().toISOString();
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() - 30); // Adjust range as needed
-      const startDateISO = startDate.toISOString();
-      const response = await axios.post(ENDPOINTS.GET_UPI_LIST, {
-        range: [startDateISO, currentDate],
-        pagination: {
-          skip: (page - 1) * itemsPerPage,
-          limit: itemsPerPage,
-        },
-        sessionid: sessionid,
-      });
-      setLoader(false);
+  const fetchData = useCallback(
+    async (page = 1, loadMore = false) => {
+      setLoader(true);
+      try {
+        const currentDate = new Date().toISOString();
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - 30); // Adjust range as needed
+        const startDateISO = startDate.toISOString();
+        const response = await axios.post(ENDPOINTS.GET_UPI_LIST, {
+          range: [startDateISO, currentDate],
+          pagination: {
+            skip: (page - 1) * itemsPerPage,
+            limit: itemsPerPage,
+          },
+          sessionid: sessionid,
+        });
+        setLoader(false);
 
-      const responseData = response.data;
+        const responseData = response.data;
 
-      console.log('Result: ', responseData.data);
+        console.log("Result: ", responseData.data);
 
-      const resDataT = responseData.split('[');
-      const resDataPg = responseData.split(',');
-      let dataCount = resDataPg[3].replace(/\\/g, '');
-      let dataCurentP = resDataPg[4].replace(/\\/g, '').replace('}', '');
-      console.log('Count data: ', dataCount.replace('"totalCount":', ""));
-      console.log('Pagination data: ', dataCurentP.replace('"currentPage":', ""));
-      var dataT = JSON.stringify(resDataT[1].replace(']', ''))
-      setTotalItems(dataCount.replace('"totalCount":', ""));
-      setItemsPerPage(responseData.itemsPerPage);
+        const resDataT = responseData.split("[");
+        const resDataPg = responseData.split(",");
+        let dataCount = resDataPg[3].replace(/\\/g, "");
+        let dataCurentP = resDataPg[4].replace(/\\/g, "").replace("}", "");
+        console.log("Count data: ", dataCount.replace('"totalCount":', ""));
+        console.log(
+          "Pagination data: ",
+          dataCurentP.replace('"currentPage":', "")
+        );
+        var dataT = JSON.stringify(resDataT[1].replace("]", ""));
+        setTotalItems(dataCount.replace('"totalCount":', ""));
+        setItemsPerPage(responseData.itemsPerPage);
 
-      setCurrentPage(dataCurentP.replace('"currentPage":', ""));
+        setCurrentPage(dataCurentP.replace('"currentPage":', ""));
 
-      const parsedData = JSON.parse('[' + JSON.parse(dataT) + ']');
+        const parsedData = JSON.parse("[" + JSON.parse(dataT) + "]");
 
-      if (!loadMore) {
-        setUpiList(parsedData.slice(0, itemsPerPage));
-      } else {
-        setUpiList((prevList) => [...prevList, ...parsedData]);
+        if (!loadMore) {
+          setUpiList(parsedData.slice(0, itemsPerPage));
+        } else {
+          setUpiList((prevList) => [...prevList, ...parsedData]);
+        }
+      } catch (error) {
+        setLoader(false);
+        console.error("Error:", error);
       }
-    } catch (error) {
-      setLoader(false);
-      console.error("Error:", error);
-    }
-  }, [sessionid, itemsPerPage]);
+    },
+    [sessionid, itemsPerPage]
+  );
 
   const toggleStatus = async (account) => {
-    const updatedStatus = account.upistatus === 'Y' ? 'N' : 'Y';
     try {
       let upiID = account.upi_id;
       const response = await fetch(ENDPOINTS.UPDATE_UPI_ID_STATUS, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json',
+          accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           upi_id: upiID,
-          upistatus: updatedStatus,
           sessionid: sessionid,
         }),
       });
 
       const resData = await response.json();
-      if (resData.mess && resData.mess.StatusCodes === 'DK00') {
+      if (resData.mess && resData.mess.StatusCodes === "DK00") {
         fetchData(currentPage); // Refresh the data after updating the status
       } else {
         // Handle error
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -99,13 +104,17 @@ function Upi() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight && !isFetching) {
+      if (
+        window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight &&
+        !isFetching
+      ) {
         setIsFetching(true);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isFetching]);
 
   useEffect(() => {
@@ -122,7 +131,7 @@ function Upi() {
 
   const handleSearchUpi = async () => {
     setLoader(true);
-  
+
     try {
       const response = await fetch(ENDPOINTS.SEARCH_UPI_ID, {
         method: "POST",
@@ -135,10 +144,10 @@ function Upi() {
           upi_id: searchText,
         }),
       });
-  
+
       const resData = await response.json();
       setLoader(false);
-  
+
       if (resData.StatusCodes) {
         if (resData.StatusCodes === "00") {
           // Convert the single object response to an array
@@ -171,58 +180,37 @@ function Upi() {
                     <h4 className="bg-transparent mt-0 p-3">UPIs</h4>
                   </div>
                   <div className="col-xl-8 col-lg-12 col-md-12 col-12">
-                    <div className="ml-auto mt-0 p-3 d-flex float-right">
-                      <div className="wrap upi-wrap">
-                        <div className="search mt-3">
-                          <input
-                            type="text"
-                            className="searchTerm"
-                            placeholder="Search ID/Ref Number"
-                            value={searchText}
-                            onChange={(e) => {
-                              setSearchText(e.target.value);
-                            }}
-                          />
-                          <button
-                            type="submit"
-                            className="searchButton"
-                            aria-label="Search"
-                            onClick={() => {
-                              console.log(searchText);
-                              handleSearchUpi();
-                            }}
-                          >
-                            <i className="fa fa-search"></i>
-                          </button>
-                        </div>
+                    <div className="d-flex justify-content-end align-items-center pt-2">
+                      <div className="d-flex mr-2">
+                        <input
+                          type="text"
+                          className="searchTerm"
+                          placeholder="Search ID/Ref Number"
+                          value={searchText}
+                          onChange={(e) => {
+                            setSearchText(e.target.value);
+                          }}
+                        />
+                        <button
+                          className="searchIconBtn"
+                          onClick={() => {
+                            console.log(searchText);
+                            handleSearchUpi();
+                          }}
+                        >
+                          <FiSearch />
+                        </button>
                       </div>
-                      <div className="mx-auto text-center mt--40">
-                        <a
-                          type="button"
-                          className="btn btn1 mt-15  btn-outline-secondary mr-2"
-                        >
-                          UPI Prefixes
-                          <i className="fa fa-address-book ml-2"></i>
-                        </a>
-                        <a
-                          type="button"
-                          className="btn btn1 mt-15 btn-outline-secondary mr-2"
-                        >
-                          Create UPI<i className="fa fa-plus ml-2"></i>
-                        </a>
-                        <a
-                          type="button"
-                          className="btn btn1 mt-15 btn-outline-secondary mr-2"
-                        >
-                          Export <i className="fa fa-external-link ml-2"></i>
-                        </a>
-                        <a
-                          type="button"
-                          className="btn btn1 mt-15 bg-dark text-white mr-2"
-                        >
-                          Filter <i className="fa fa-filter ml-2"></i>
-                        </a>
-                      </div>
+                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                        UPI Prefixes
+                        <i className="fa fa-address-book ml-2"></i>
+                      </button>
+                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                        Create UPI<i className="fa fa-plus ml-2"></i>
+                      </button>
+                      <button className="btn btn1 bg-dark text-white mr-2">
+                        Filter <i className="fa fa-filter ml-2"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -239,13 +227,16 @@ function Upi() {
                       </div>
                     ) : (
                       <>
-                         <UpiListTable data={upiList}  toggleStatus={toggleStatus}/>
-                          <Pagination
-                              currentPage={currentPage}
-                              itemsPerPage={itemsPerPage}
-                              totalItems={totalItems}
-                              onPageChange={handlePageChange}
-                            />
+                        <UpiListTable
+                          data={upiList}
+                          toggleStatus={toggleStatus}
+                        />
+                        <Pagination
+                          currentPage={currentPage}
+                          itemsPerPage={itemsPerPage}
+                          totalItems={totalItems}
+                          onPageChange={handlePageChange}
+                        />
                       </>
                     )}
                   </div>
@@ -258,7 +249,7 @@ function Upi() {
         </div>
       </div>
     </div>
-);
+  );
 }
 
 export default Upi;

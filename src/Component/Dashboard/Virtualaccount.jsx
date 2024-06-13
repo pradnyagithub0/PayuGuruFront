@@ -7,6 +7,7 @@ import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import VirtualAccountTable from "./commonComponents/VirtualAccountTable"; // Adjust the path as necessary
 import { ENDPOINTS } from "../../utils/apiConfig";
 import Pagination from "../Pagination";
+import { FiSearch } from "react-icons/fi";
 
 function VirtualAccount() {
   const [acList, setAcList] = useState([]);
@@ -16,7 +17,6 @@ function VirtualAccount() {
   const [totalItems, setTotalItems] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [isFetching, setIsFetching] = useState(false);
-  
 
   const [searchText, setSearchText] = useState("");
 
@@ -59,13 +59,11 @@ function VirtualAccount() {
           setAcList(
             JSON.parse("[" + JSON.parse(dataT) + "]").slice(0, itemsPerPage)
           );
-          
         } else {
           setAcList((prevList) => [
             ...prevList,
             ...JSON.parse("[" + JSON.parse(dataT) + "]"),
           ]);
-          
         }
       } catch (error) {
         setLoader(false);
@@ -134,7 +132,7 @@ function VirtualAccount() {
 
   const handleSearchAcc = async () => {
     setLoader(true);
-  
+
     try {
       const response = await fetch(ENDPOINTS.SEARCH_VIRTUAL_ACC, {
         method: "POST",
@@ -147,10 +145,10 @@ function VirtualAccount() {
           AC_id: searchText,
         }),
       });
-  
+
       const resData = await response.json();
       setLoader(false);
-  
+
       if (resData.StatusCodes) {
         if (resData.StatusCodes === "00") {
           // Convert the single object response to an array
@@ -165,7 +163,6 @@ function VirtualAccount() {
       console.error("Error during account search:", error);
     }
   };
-  
 
   return (
     <div>
@@ -176,60 +173,47 @@ function VirtualAccount() {
             <DashboardTopbar />
           </div>
 
-          <div className="row">
+          <div className="row mb-3">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <div className="row">
-                  <div className=" col-xl-4 col-lg-12 col-md-12 col-12">
+                  <div className=" col-xl-4 col-lg-4 col-md-12 col-12">
                     <h4 className="bg-transparent mt-0 p-3">
                       Virtual Accounts
                     </h4>
                   </div>
+
                   <div className="col-xl-8 col-lg-12 col-md-12 col-12">
-                    <div className="mt-0 p-3 d-flex float-right">
-                      <div className="wrap wrap1">
-                        <div className="search mt-3">
-                          <input
-                            type="text"
-                            className="searchTerm"
-                            placeholder="Search ID/Ref Number"
-                            value={searchText}
-                            onChange={(e) => {
-                              setSearchText(e.target.value);
-                            }}
-                          />
-                          <button
-                            className="searchButton"
-                            aria-label="Search"
-                            onClick={() => {
-                              console.log(searchText);
-                              handleSearchAcc();
-                            }}
-                          >
-                            <i className="fa fa-search"></i>
-                          </button>
-                        </div>
+                    <div className="d-flex justify-content-end align-items-center pt-2">
+                      <div className="d-flex mr-2">
+                        <input
+                          type="text"
+                          className="searchTerm"
+                          placeholder="Search ID/Ref Number"
+                          value={searchText}
+                          onChange={(e) => {
+                            setSearchText(e.target.value);
+                          }}
+                        />
+                        <button
+                          className="searchIconBtn"
+                          onClick={() => {
+                            console.log(searchText);
+                            handleSearchAcc();
+                          }}
+                        >
+                          <FiSearch />
+                        </button>
                       </div>
-                      <div className="mx-auto text-center mt--40">
-                        <a
-                          type="button"
-                          className="btn btn1 mr-2 mt-15 btn-outline-secondary"
-                        >
-                          Add Virtual Account<i className="fa fa-plus ml-2"></i>
-                        </a>
-                        <a
-                          type="button"
-                          className="btn btn1 mt-15 mr-2 btn-outline-secondary"
-                        >
-                          Export <i className="fa fa-external-link ml-2"></i>
-                        </a>
-                        <a
-                          type="button"
-                          className="btn btn1 bg-dark mt-15 text-white mr-2"
-                        >
-                          Filter <i className="fa fa-filter ml-2"></i>
-                        </a>
-                      </div>
+                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                        Add Virtual Account<i className="fa fa-plus ml-2"></i>
+                      </button>
+                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                        Export <i className="fa fa-external-link ml-2"></i>
+                      </button>
+                      <button className="btn btn1 bg-dark text-white mr-2">
+                        Filter <i className="fa fa-filter ml-2"></i>
+                      </button>
                     </div>
                   </div>
                 </div>

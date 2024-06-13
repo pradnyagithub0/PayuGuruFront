@@ -46,3 +46,16 @@
     height: 100vh !important;
     padding-top: 0px !important;
 }
+.searchIconBtn{
+  width: 40px;
+  height: 40px;
+  border: 1px solid #ff5f25;
+  background: #ff5f25;
+  text-align: center;
+  color: #fff;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0px !important;
+  padding: 0px !important;
+}
