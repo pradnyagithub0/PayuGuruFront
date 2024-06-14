@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { ApplicationContext } from "../../context/ApplicationContext"; 
 import { ENDPOINTS } from "../../utils/apiConfig";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
+import { Button } from "@mui/material";
 
 function Dashboard() {
   const { setKycStatus } = useContext(ApplicationContext);
@@ -163,6 +164,15 @@ function Dashboard() {
     }
   };
 
+  const copyToClipboard = async () => {
+    const tokenInput = document.getElementById("upi_id");
+    try {
+      await navigator.clipboard.writeText(tokenInput.innerHTML);
+      alert("UPI ID copied to clipboard");
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
 
   return (
     <div>
@@ -365,7 +375,7 @@ function Dashboard() {
 
       {/* create UPI Modal */}
       <div
-        className="modal fade upiIdModal"
+        className="modal fade docReqModal"
         id="upiModal"
         aria-labelledby="upiModalLabel"
         aria-hidden="false"
@@ -386,7 +396,18 @@ function Dashboard() {
             <div className="modal-body modalBodySection">
               <div className="text-center mb-3">
                 <h6>Your UPI ID - </h6>
-                <h6>{upiID} </h6>
+                <div className="d-flex justify-content-center align-items-center">
+                  <h6 id="upi_id" className="me-2">{upiID} </h6>
+                      <Button
+                        variant="contained"
+                        color="success"
+                        title="Copy"
+                        onClick={copyToClipboard}
+                      >
+                        <i className="fa fa-copy"></i>
+                      </Button>
+                </div>
+                
                 <p className="mt-5 text-success">
                   {" "}
                   Please copy it or save screenshot.
@@ -408,7 +429,7 @@ function Dashboard() {
 
       {/* Account Details Modal */}
       <div
-        className="modal fade upiIdModal"
+        className="modal fade docReqModal"
         id="accountDetailsModal"
         aria-labelledby="accountDetailsModalLabel"
         aria-hidden="false"
