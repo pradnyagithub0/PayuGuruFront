@@ -7,8 +7,8 @@ import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import UpiListTable from "./commonComponents/UpiListTable";
 import { ENDPOINTS } from "../../utils/apiConfig";
 import Pagination from "../Pagination";
-import axios from "axios";
 import { FiSearch } from "react-icons/fi";
+import axios from "axios";
 
 function Upi() {
   const [upiList, setUpiList] = useState([]);
@@ -31,8 +31,8 @@ function Upi() {
         const response = await axios.post(ENDPOINTS.GET_UPI_LIST, {
           range: [startDateISO, currentDate],
           pagination: {
-            skip: (page - 1) * itemsPerPage,
-            limit: itemsPerPage,
+            skip: (page - 1) * (itemsPerPage ? itemsPerPage : 10),
+            limit: itemsPerPage ? itemsPerPage : 10,
           },
           sessionid: sessionid,
         });
@@ -45,17 +45,17 @@ function Upi() {
         const resDataT = responseData.split("[");
         const resDataPg = responseData.split(",");
         let dataCount = resDataPg[3].replace(/\\/g, "");
-        let dataCurentP = resDataPg[4].replace(/\\/g, "").replace("}", "");
+        let dataCurrentPage = resDataPg[4].replace(/\\/g, "").replace("}", "");
         console.log("Count data: ", dataCount.replace('"totalCount":', ""));
         console.log(
           "Pagination data: ",
-          dataCurentP.replace('"currentPage":', "")
+          dataCurrentPage.replace('"currentPage":', "")
         );
         var dataT = JSON.stringify(resDataT[1].replace("]", ""));
         setTotalItems(dataCount.replace('"totalCount":', ""));
         setItemsPerPage(responseData.itemsPerPage);
 
-        setCurrentPage(dataCurentP.replace('"currentPage":', ""));
+        setCurrentPage(dataCurrentPage.replace('"currentPage":', ""));
 
         const parsedData = JSON.parse("[" + JSON.parse(dataT) + "]");
 
@@ -88,7 +88,17 @@ function Upi() {
       });
 
       const resData = await response.json();
-      if (resData.mess && resData.mess.StatusCodes === "DK00") {
+      if (resData && resData.StatusCodes === "00") {
+        // Updating the specific item in the state
+        setUpiList((prevList) =>
+          prevList.map((item) =>
+            item.upi_id === upiID
+              ? { ...item, status: item.status === "enabled" ? "disabled" : "enabled" }
+              : item
+          )
+        );
+
+        // Re-fetch data to ensure consistency
         fetchData(currentPage); // Refresh the data after updating the status
       } else {
         // Handle error
@@ -124,9 +134,12 @@ function Upi() {
     });
   }, [isFetching, fetchData, currentPage]);
 
+  useEffect(() => {
+    fetchData(currentPage);
+  }, [currentPage, fetchData]);
+
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-    fetchData(newPage);
   };
 
   const handleSearchUpi = async () => {
@@ -172,19 +185,19 @@ function Upi() {
             <DashboardTopbar />
           </div>
 
-          <div className="row">
-            <div className="col-lg-12 col-md-12 col-12">
-              <div className="card pb-0 account-details border-0 shadow-lg">
-                <div className="row">
-                  <div className="col-xl-4 col-lg-12 col-md-12 col-12">
-                    <h4 className="bg-transparent mt-0 p-3">UPIs</h4>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="card pb-0 account-details border-0 shadow-lg">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-12 col-md-12 col-12">
+                    <h4 class="bg-transparent mt-0 p-3">UPIs</h4>
                   </div>
-                  <div className="col-xl-8 col-lg-12 col-md-12 col-12">
-                    <div className="d-flex justify-content-end align-items-center pt-2">
-                      <div className="d-flex mr-2">
+                  <div class="col-xl-8 col-lg-12 col-md-12 col-12">
+                    <div class="d-flex justify-content-end align-items-center pt-2">
+                      <div class="d-flex mr-2">
                         <input
                           type="text"
-                          className="searchTerm"
+                          class="searchTerm"
                           placeholder="Search ID/Ref Number"
                           value={searchText}
                           onChange={(e) => {
@@ -192,7 +205,7 @@ function Upi() {
                           }}
                         />
                         <button
-                          className="searchIconBtn"
+                          class="searchIconBtn"
                           onClick={() => {
                             console.log(searchText);
                             handleSearchUpi();
@@ -201,28 +214,25 @@ function Upi() {
                           <FiSearch />
                         </button>
                       </div>
-                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                      <button class="btn btn1 mr-2 btn-outline-secondary">
                         UPI Prefixes
-                        <i className="fa fa-address-book ml-2"></i>
+                        <i class="fa fa-address-book ml-2"></i>
                       </button>
-                      <button className="btn btn1 mr-2 btn-outline-secondary">
-                        Create UPI<i className="fa fa-plus ml-2"></i>
+                      <button class="btn btn1 mr-2 btn-outline-secondary">
+                        Create UPI<i class="fa fa-plus ml-2"></i>
                       </button>
-                      <button className="btn btn1 bg-dark text-white mr-2">
-                        Filter <i className="fa fa-filter ml-2"></i>
+                      <button class="btn btn1 bg-dark text-white mr-2">
+                        Filter <i class="fa fa-filter ml-2"></i>
                       </button>
                     </div>
                   </div>
                 </div>
-                <div className="card-body p-3">
-                  <div className="table-responsive">
+                <div class="card-body p-3">
+                  <div class="table-responsive">
                     {loader ? (
-                      <div className="text-center p-5">
-                        <div
-                          className="spinner-border text-primary"
-                          role="status"
-                        >
-                          <span className="sr-only">Loading...</span>
+                      <div class="text-center p-5">
+                        <div class="spinner-border text-primary" role="status">
+                          <span class="sr-only">Loading...</span>
                         </div>
                       </div>
                     ) : (

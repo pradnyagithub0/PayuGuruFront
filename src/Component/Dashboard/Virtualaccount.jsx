@@ -15,7 +15,7 @@ function VirtualAccount() {
   const [loader, setLoader] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [isFetching, setIsFetching] = useState(false);
 
   const [searchText, setSearchText] = useState("");
@@ -31,8 +31,8 @@ function VirtualAccount() {
         const response = await axios.post(ENDPOINTS.GET_VIRTUAL_ACCOUNT_LIST, {
           range: [startDateISO, currentDate],
           pagination: {
-            skip: (page - 1) * itemsPerPage,
-            limit: itemsPerPage,
+            skip: (page - 1) * (itemsPerPage ? itemsPerPage : 5),
+            limit: itemsPerPage ? itemsPerPage : 5,
           },
           sessionid: sessionid,
         });
@@ -89,10 +89,10 @@ function VirtualAccount() {
       });
 
       const resData = await response.json();
-      if (resData.mess && resData.mess.StatusCodes === "DK00") {
-        fetchData(currentPage); // Refresh the data after updating the status
+      if (resData && resData.StatusCodes === "00") {
+        // fetchData(currentPage); // Refresh the data after updating the status
       } else {
-        // Handle error
+        console.log("status code not match")
       }
     } catch (error) {
       console.error("Error:", error);
