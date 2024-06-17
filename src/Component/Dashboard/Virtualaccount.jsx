@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useCallback } from "react";
-import Dheader from '../Dheader';
-import Dfooter from '../Dfooter';
-import './Virtualaccount.css';
+import Dheader from "../Dheader";
+import Dfooter from "../Dfooter";
+import "./Virtualaccount.css";
 import axios from "axios";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import VirtualAccountTable from "./commonComponents/VirtualAccountTable"; // Adjust the path as necessary
-import { ENDPOINTS } from '../../utils/apiConfig';
+import { ENDPOINTS } from "../../utils/apiConfig";
 import Pagination from "../Pagination";
+import { FiSearch } from "react-icons/fi";
 
 function VirtualAccount() {
   const [acList, setAcList] = useState([]);
@@ -14,59 +15,72 @@ function VirtualAccount() {
   const [loader, setLoader] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
   const [isFetching, setIsFetching] = useState(false);
 
-  const fetchData = useCallback(async (page = 1, loadMore = false) => {
-    setLoader(true);
-    try {
-      const currentDate = new Date().toISOString();
-      const startDate = new Date();
-      startDate.setDate(startDate.getDate() - 30); // Adjust range as needed
-      const startDateISO = startDate.toISOString();
-      const response = await axios.post(ENDPOINTS.GET_VIRTUAL_ACCOUNT_LIST, {
-        range: [startDateISO, currentDate],
-        pagination: {
-          skip: (page - 1) * itemsPerPage,
-          limit: itemsPerPage,
-        },
-        sessionid: sessionid,
-      });
-      setLoader(false);
+  const [searchText, setSearchText] = useState("");
 
-      const responseData = await response.data;
+  const fetchData = useCallback(
+    async (page = 1, loadMore = false) => {
+      setLoader(true);
+      try {
+        const currentDate = new Date().toISOString();
+        const startDate = new Date();
+        startDate.setDate(startDate.getDate() - 30); // Adjust range as needed
+        const startDateISO = startDate.toISOString();
+        const response = await axios.post(ENDPOINTS.GET_VIRTUAL_ACCOUNT_LIST, {
+          range: [startDateISO, currentDate],
+          pagination: {
+            skip: (page - 1) * (itemsPerPage ? itemsPerPage : 5),
+            limit: itemsPerPage ? itemsPerPage : 5,
+          },
+          sessionid: sessionid,
+        });
+        setLoader(false);
 
-      const resDataT = responseData.split('[');
-      const resDataPg = responseData.split(',');
-      let dataCount = resDataPg[3].replace(/\\/g, '');
-      let dataCurentP = resDataPg[4].replace(/\\/g, '').replace('}', '');
-      console.log('Count data: ', dataCount.replace('"totalCount":', ""));
-      console.log('Pagination data: ', dataCurentP.replace('"currentPage":', ""));
-      var dataT = JSON.stringify(resDataT[1].replace(']', ''));
-      setTotalItems(dataCount.replace('"totalCount":', ""));
-      setItemsPerPage(responseData.itemsPerPage);
+        const responseData = await response.data;
 
-      setCurrentPage(dataCurentP.replace('"currentPage":', ""));
+        const resDataT = responseData.split("[");
+        const resDataPg = responseData.split(",");
+        let dataCount = resDataPg[3].replace(/\\/g, "");
+        let dataCurentP = resDataPg[4].replace(/\\/g, "").replace("}", "");
+        console.log("Count data: ", dataCount.replace('"totalCount":', ""));
+        console.log(
+          "Pagination data: ",
+          dataCurentP.replace('"currentPage":', "")
+        );
+        var dataT = JSON.stringify(resDataT[1].replace("]", ""));
+        setTotalItems(dataCount.replace('"totalCount":', ""));
+        setItemsPerPage(responseData.itemsPerPage);
 
-      if (!loadMore) {
-        setAcList(JSON.parse('[' + JSON.parse(dataT) + ']').slice(0, itemsPerPage));
-      } else {
-        setAcList((prevList) => [...prevList, ...JSON.parse('[' + JSON.parse(dataT) + ']')]);
+        setCurrentPage(dataCurentP.replace('"currentPage":', ""));
+
+        if (!loadMore) {
+          setAcList(
+            JSON.parse("[" + JSON.parse(dataT) + "]").slice(0, itemsPerPage)
+          );
+        } else {
+          setAcList((prevList) => [
+            ...prevList,
+            ...JSON.parse("[" + JSON.parse(dataT) + "]"),
+          ]);
+        }
+      } catch (error) {
+        setLoader(false);
+        console.error("Error:", error);
       }
-    } catch (error) {
-      setLoader(false);
-      console.error("Error:", error);
-    }
-  }, [sessionid, itemsPerPage]);
+    },
+    [sessionid, itemsPerPage]
+  );
 
   const toggleStatus = async (account) => {
     try {
       let accountNumber = account.AC_id;
       const response = await fetch(ENDPOINTS.UPDATE_VIRTUAL_ACCOUNT_STATUS, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          accept: 'application/json',
-          'Content-Type': 'application/json',
+          accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           AC_id: accountNumber,
@@ -75,13 +89,13 @@ function VirtualAccount() {
       });
 
       const resData = await response.json();
-      if (resData.mess && resData.mess.StatusCodes === 'DK00') {
-        fetchData(currentPage); // Refresh the data after updating the status
+      if (resData && resData.StatusCodes === "00") {
+        // fetchData(currentPage); // Refresh the data after updating the status
       } else {
-        // Handle error
+        console.log("status code not match")
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.error("Error:", error);
     }
   };
 
@@ -91,13 +105,17 @@ function VirtualAccount() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight && !isFetching) {
+      if (
+        window.innerHeight + window.scrollY >=
+          document.documentElement.scrollHeight &&
+        !isFetching
+      ) {
         setIsFetching(true);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isFetching]);
 
   useEffect(() => {
@@ -112,6 +130,40 @@ function VirtualAccount() {
     setCurrentPage(newPage);
   };
 
+  const handleSearchAcc = async () => {
+    setLoader(true);
+
+    try {
+      const response = await fetch(ENDPOINTS.SEARCH_VIRTUAL_ACC, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+          AC_id: searchText,
+        }),
+      });
+
+      const resData = await response.json();
+      setLoader(false);
+
+      if (resData.StatusCodes) {
+        if (resData.StatusCodes === "00") {
+          // Convert the single object response to an array
+          const responseArray = [resData.responsed];
+          setAcList(responseArray);
+        } else {
+          console.log(resData.mess.message);
+        }
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error during account search:", error);
+    }
+  };
+
   return (
     <div>
       <div className="wrapper">
@@ -121,28 +173,47 @@ function VirtualAccount() {
             <DashboardTopbar />
           </div>
 
-          <div className="row">
+          <div className="row mb-3">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <div className="row">
-                  <div className=" col-xl-4 col-lg-12 col-md-12 col-12">
-                    <h4 className="bg-transparent mt-0 p-3">Virtual Accounts</h4>
+                  <div className=" col-xl-4 col-lg-4 col-md-12 col-12">
+                    <h4 className="bg-transparent mt-0 p-3">
+                      Virtual Accounts
+                    </h4>
                   </div>
+
                   <div className="col-xl-8 col-lg-12 col-md-12 col-12">
-                    <div className="mt-0 p-3 d-flex float-right">
-                      <div className="wrap wrap1">
-                        <div className="search mt-3">
-                          <input type="text" className="searchTerm" placeholder="Search ID/Ref Number" />
-                          <button type="submit" className="searchButton" aria-label="Search">
-                            <i className="fa fa-search"></i>
-                          </button>
-                        </div>
+                    <div className="d-flex justify-content-end align-items-center pt-2">
+                      <div className="d-flex mr-2">
+                        <input
+                          type="text"
+                          className="searchTerm"
+                          placeholder="Search ID/Ref Number"
+                          value={searchText}
+                          onChange={(e) => {
+                            setSearchText(e.target.value);
+                          }}
+                        />
+                        <button
+                          className="searchIconBtn"
+                          onClick={() => {
+                            console.log(searchText);
+                            handleSearchAcc();
+                          }}
+                        >
+                          <FiSearch />
+                        </button>
                       </div>
-                      <div className="mx-auto text-center mt--40">
-                        <a type="button" className="btn btn1 mr-2 mt-15 btn-outline-secondary">Add Virtual Account<i className="fa fa-plus ml-2"></i></a>
-                        <a type="button" className="btn btn1 mt-15 mr-2 btn-outline-secondary">Export <i className="fa fa-external-link ml-2"></i></a>
-                        <a type="button" className="btn btn1 bg-dark mt-15 text-white mr-2">Filter <i className="fa fa-filter ml-2"></i></a>
-                      </div>
+                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                        Add Virtual Account<i className="fa fa-plus ml-2"></i>
+                      </button>
+                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                        Export <i className="fa fa-external-link ml-2"></i>
+                      </button>
+                      <button className="btn btn1 bg-dark text-white mr-2">
+                        Filter <i className="fa fa-filter ml-2"></i>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -159,7 +230,10 @@ function VirtualAccount() {
                       </div>
                     ) : (
                       <>
-                        <VirtualAccountTable data={acList} toggleStatus={toggleStatus} />
+                        <VirtualAccountTable
+                          data={acList}
+                          toggleStatus={toggleStatus}
+                        />
                         <Pagination
                           currentPage={currentPage}
                           itemsPerPage={itemsPerPage}

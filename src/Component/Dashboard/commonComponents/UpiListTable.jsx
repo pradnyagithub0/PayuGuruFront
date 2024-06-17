@@ -4,28 +4,15 @@ import React from 'react';
 import { useTable } from 'react-table';
 import axios from 'axios';
 import { ENDPOINTS } from '../../../utils/apiConfig';
+
+
 const UpiListTable = ({ data, toggleStatus  }) => {
 
 
   const handleStatusToggle = (rowData) => {
-    const requestBody = {
-      upi_id: rowData.upi_id,
-      sessionid: sessionStorage.getItem("sessionid"),
-    };
-    console.log('request: ', requestBody)
-    return axios.post(ENDPOINTS.UPDATE_UPI_ID_STATUS, requestBody, {
-      headers: {
-        "Content-Type": "application/json",
-        // "Cookie": '',
-      },
-    })
-      .then((response) => {
-        console.log(response.data); // Handle response as needed
-      })
-      .catch((error) => {
-        console.error(error); // Handle error
-      });
+    toggleStatus(rowData); // Call the function from parent
   };
+
   const columns = React.useMemo(
     () => [
     //   { Header: 'ID', accessor: '_id' },
@@ -62,7 +49,7 @@ const UpiListTable = ({ data, toggleStatus  }) => {
         ),
       },
     ],
-    [handleStatusToggle]
+    []
   );
 
   const {

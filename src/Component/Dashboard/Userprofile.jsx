@@ -143,32 +143,32 @@ function Userprofile() {
                       <table className="table table-borderless ">
                         <tbody>
                           <tr>
-                            <th>Email :</th>
+                            <th className="w-50">Email :</th>
                             <td>{ userInfo.email}</td>
                           </tr>
                           <tr>
-                            <th>Mobile :</th>
+                            <th className="w-50">Mobile :</th>
                             <td>{ userInfo.mobile}</td>
                           </tr>
                           <tr>
-                            <th>Company Name :</th>
+                            <th className="w-50">Company Name :</th>
                             <td>{ userInfo.com_name}</td>
                           </tr>
                           <tr>
-                            <th>Mobile Verified :</th>
-                            <td>{ userInfo.mobile_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold "/>}</td>
+                            <th className="w-50">Mobile Verified :</th>
+                            <td>{ userInfo.mobile_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold "/>}</td>
                           </tr>
                           <tr>
-                            <th>Email Verified :</th>
-                            <td>{ userInfo.email_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold"/>}</td>
+                            <th className="w-50">Email Verified :</th>
+                            <td>{ userInfo.email_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold"/>}</td>
                           </tr>
                           <tr>
-                            <th>KYC Status :</th>
-                            <td>{ userInfo.kyc_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold"/>}</td>
+                            <th className="w-50">KYC Status :</th>
+                            <td>{ userInfo.kyc_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold"/>}</td>
                           </tr>
                           <tr>
-                            <th>User Status :</th>
-                            <td>{ userInfo.user_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-2 fw-bold"/>}</td>
+                            <th className="w-50">User Status :</th>
+                            <td>{ userInfo.user_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold"/>}</td>
                           </tr>
                           {/* <tr>
                                 <th>Role :</th>
@@ -337,6 +337,7 @@ function Userprofile() {
                   <input
                     type="text"
                     id="newPassword"
+                    className="form-control"
                     placeholder="New Password"
                   />
                   <p className="msg text-danger">{fieldErrors.password}</p>
@@ -348,6 +349,7 @@ function Userprofile() {
                   <input
                     type="text"
                     id="repeatPassword"
+                    className="form-control"
                     placeholder="Repeat Password"
                   />
                   <p className="msg text-danger">{fieldErrors.confirmPass}</p>
