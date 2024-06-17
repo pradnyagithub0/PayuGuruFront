@@ -62,7 +62,6 @@ const verifyOTP=()=>{
               navigate(`/resetpassword`)
           }
       })
-      .then(navigate(`/resetpassword`))
   }
   
 

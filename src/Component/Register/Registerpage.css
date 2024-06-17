@@ -8,6 +8,10 @@ form p img {
     margin: 0;
     padding: 0;
    }
+   #stack1{
+    margin: 0px!important;
+    background-color:#e9ecef;
+   }
   
   .mt-100{
     margin-top: 100px;
@@ -16,7 +20,7 @@ form p img {
       background: rgba(0,0,0,.70);
       padding: 50px 40px;
       color: #fff;
-      margin-top: -50px;
+      /* margin-top: -50px; */
       border-radius: 10px;
       box-shadow: -1px 4px 28px 0px #21252938;
   }

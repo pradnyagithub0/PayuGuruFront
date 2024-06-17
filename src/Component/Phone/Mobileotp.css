@@ -1,5 +1,14 @@
-body {font-family: Arial, Helvetica, sans-serif;}
-* {box-sizing: border-box;}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+* {
+  box-sizing: border-box;
+}
+#stack3{
+  background-color:#e9ecef;
+  height: 100vh;
+  margin: 0px!important;
+}
 
 /* Full-width input fields */
 /* input[type=text], input[type=password] {

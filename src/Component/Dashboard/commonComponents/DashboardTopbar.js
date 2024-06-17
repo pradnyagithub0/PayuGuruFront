@@ -49,7 +49,7 @@ const DashboardTopbar = () => {
                 <p>
                   Please submit your document to{" "}
                   <span className="text-primary"> info@payu.guru </span> for
-                  activating your pay u guru account. you can also chat with our
+                  activating your PayuGuru account. you can also chat with our
                   support team and share your documents.
                 </p>
               </div>

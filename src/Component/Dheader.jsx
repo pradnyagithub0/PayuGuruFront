@@ -1,6 +1,6 @@
-import React  from "react";
+import React, { useEffect, useRef } from 'react';
 import Dropdown from "react-bootstrap/Dropdown";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useHistory  } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ENDPOINTS } from "../utils/apiConfig";
 import "./Dheader.css";
@@ -42,6 +42,7 @@ const Header = () => {
       console.error("Error during logout:", error);
     }
   };
+  
 
   
 

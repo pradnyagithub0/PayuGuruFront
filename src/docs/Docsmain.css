@@ -10,26 +10,33 @@
     margin-top: 0px!important;
   }
   /* image part start */
-.YzuTm img {
-    margin: 15px auto;
-    height: 30px;
-    margin-left: 10%;
-}
+
+/* .YzuTm {
+    width: 300px;
+    background-color: #f1f1f1;
+} */
 .YzuTm {
-    text-align: center;
+  text-align: center;
 }
+.cCiYxb {
+  display: inline-block;
+}
+.sidebar2 .YzuTm img {
+  margin: 15px auto;
+  height: 30px;
+}
+
 .cCiYxb {
     display: inline-block;
 }
 .hZCbNs {
     max-height: 260px;
     max-width: 260px;
-    padding: 2px;
-    width: 100%;
+    padding: 1px;
+    /* width: 100%; */
     display: block;
 }
-  .bxcHYI {
-    font-family: Roboto, sans-serif;
+/* .bxcHYI {
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5em;
@@ -40,12 +47,13 @@
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
     text-rendering: optimizespeed !important;
-}
-#sidebar {
-    top: 0 !important;
-    height: 100vh !important;
-    background: #fafbff;
-    border-right: 1px solid #e4e7e7;
+} */
+
+.sidebar2 {
+  top: 0 !important;
+  height: 100vh !important;
+  background: #fafbff;
+  border-right: 1px solid #e4e7e7;
 }
 .jzMYjV {
     width: 260px;
@@ -56,7 +64,7 @@
     position: sticky;
 
 }
-  /* right side part content */
+  /* right side blue section content start */
   .dtUibw, .fLUKgj {
     background: #011f3f !important;
 }
@@ -65,8 +73,8 @@
     position: absolute;
     top: 0px;
     bottom: 0px;
-    right: 0px;
-    width: calc(40% - 104px);
+    right: 0px; 
+    width: calc(45% - 104px);
 }
 .iniCdN {
     z-index: 1;
@@ -78,7 +86,7 @@
 .dTJWQH {
     color: #0857ab !important;
     font-weight: 600;
-    text-align: left;
+    /* text-align: left; */
 }
 .dluJDj, .hiuczA {
     padding: 10px 0;
@@ -86,23 +94,22 @@
 .hiuczA {
     position: relative;
 }
-.eesUPo {
-    display: flex;
-    width: 100%;
-    padding: 0px;
-}
+
 .cjtbAK {
-    width: calc(60%);
+    width: calc(100%);
     padding: 0px 40px;
 }
 /* hover part start */
 .gcUzvG:hover {
     background-color: rgb(237, 237, 237);
 }
-.content1{
-    margin-left: 3%;
+/* .content1{
+    margin-left: 15%;
+} */
+.gpbcFk:hover {
+    background-color: rgb(225, 225, 225);
 }
-/* main content side start */
+/* middle content side start */
 .bSFXlp {
     display: flex;
     width: 100%;
@@ -110,13 +117,6 @@
     backface-visibility: hidden;
     contain: content;
     overflow: hidden;
-}
-.cjtbAK {
-    width: calc(60%);
-    padding: 0px 40px;
-}
-.dtUibw, .fLUKgj {
-    background: #011f3f !important;
 }
 .dtUibw {
     width: 40%;
@@ -129,6 +129,25 @@
     position: relative;
     margin-bottom: 5px;
 }
+.eesUPo {
+  display: flex;
+  width: 100%;
+  padding: 0px;
+}
+.cjtbAK {
+  width: calc(60%);
+  padding: 0px 40px;
+}
+.dTJWQH {
+  color: #0857ab !important;
+  font-weight: 700;
+}
+.flfxUM {
+  
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
 /* search bar content part */
 .kKQhLA {
     padding: 5px 0px;
@@ -137,9 +156,8 @@
     font-weight: 400;
 }
 .kzNiFq {
-    width: calc(100% - 40px);
+    width: calc(100% - 10px);
     box-sizing: border-box;
-    margin: 0px 20px;
     padding: 5px 10px 5px 20px;
     border-width: 0px 0px 1px;
     border-top-style: initial;
@@ -156,19 +174,60 @@
     background-color: transparent;
     outline: none;
 }
-/* postman content part start */
-.postman {
-    cursor: pointer;
-    display: inline-block;
+
+
+/* new sidebar full responsive */
+.sidebar2 {
+    margin: 0;
+    padding: 0;
+    width: 300px;
+    background: #fafbff;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .sidebar2 a {
+    display: block;
+    color: black;
+    padding: 16px;
     text-decoration: none;
-    font-size: .929em;
-    color: #333;
-    padding: 12.5px 20px 12.5px 25px;
-}
-.postman img {
-    height: 20px;
-    margin-left: 10px;
-    vertical-align: middle;
-}
+    margin-left: 10%;
+  }
+   
+  /* .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  } */
+  
+  /* .sidebar2 a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  } */
+  
+  div.content {
+    margin-left: 255px;
+    padding: 1px 16px;
+    height: 2000px;
+    text-align: center;
+  }
+ 
+  
+  @media screen and (max-width: 700px) {
+    .sidebar2 {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar2 a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar2 a {
+      text-align: center;
+      float: none;
+    }
+  }
  
 

@@ -15,7 +15,9 @@ function Api() {
   const sessionid = sessionStorage.getItem("sessionid");
   const [loader, setLoader] = useState(false);
   const [apiKey, setApiKey] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
   const [showApiKey, setShowApiKey] = useState(false);
+  const [showClientSecret, setShowClientSecret] = useState(false);
 
   const copyToClipboard = async () => {
     const tokenInput = document.getElementById("api-token");
@@ -49,6 +51,7 @@ function Api() {
       if (resData.mess) {
         if (resData.mess.StatusCodes === "DK00") {
           setApiKey(resData.mess.api_key);
+          setClientSecret(resData.mess.client_secret);
         } else {
           console.log(resData.mess.message);
           alert(resData.mess.message);
@@ -62,6 +65,10 @@ function Api() {
 
   const toggleApiKeyVisibility = () => {
     setShowApiKey(!showApiKey);
+  };
+
+  const toggleSecretClientVisibility = () => {
+    setShowClientSecret(!showClientSecret);
   };
 
   return (
@@ -84,13 +91,13 @@ function Api() {
                 <div className="card-body p-3">
                   <div>
                     <div className="d-flex justify-content-between align-items-center">
-                      <label className="form-label">API Token</label>
+                      <label className="form-label">API Token: api_id</label>
                       <label
                         className="form-label text-primary"
                         onClick={getApiToken}
                         style={{ cursor: "pointer" }}
                       >
-                        Get ap token
+                        Click here
                       </label>
                     </div>
                     <div className="input-group mb-3">
@@ -99,9 +106,10 @@ function Api() {
                         className="form-control mt-0"
                         id="api-token"
                         value={
-                          apiKey ? apiKey : "qer45rgg-655ffggdd-5567gvxhgav"
+                          apiKey ? apiKey : "XXXXXX-XXXXXX-XXXXXXXX"
                         }
                       />
+                      
                       <Button
                         variant="outlined"
                         title={showApiKey ? "Hide" : "Show"}
@@ -122,7 +130,52 @@ function Api() {
                       >
                         <i className="fa fa-copy"></i>
                       </Button>
+                      
                     </div>
+                    <div className="d-flex justify-content-between align-items-center">
+                      <label className="form-label">Secret: client_secret </label>
+                      <label
+                        className="form-label text-primary"
+                        onClick={getApiToken}
+                        style={{ cursor: "pointer" }}
+                      >
+                        
+                      </label>
+                    </div>
+                    <div className="input-group mb-3">
+                      <input
+                        type={showClientSecret ? "text" : "password"}
+                        className="form-control mt-0"
+                        id="api-token"
+                        value={
+                          clientSecret ? clientSecret : "XXXXXX-XXXXXX-XXXXXXXX"
+                        }
+                      />
+                      
+                      <Button
+                        variant="outlined"
+                        title={showClientSecret ? "Hide" : "Show"}
+                        onClick={toggleSecretClientVisibility}
+                      >
+                        <i
+                          className={`fa ${
+                            showClientSecret ? "fa-eye-slash" : "fa-eye"
+                          }`}
+                        ></i>
+                      </Button>
+
+                      <Button
+                        variant="contained"
+                        color="success"
+                        title="Copy"
+                        onClick={copyToClipboard}
+                      >
+                        <i className="fa fa-copy"></i>
+                      </Button>
+                      
+                    </div>
+                    
+                    
 
                     <label className="form-label">Whitelisted IPs</label>
                     <div className="mb-3">

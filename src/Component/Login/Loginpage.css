@@ -3,12 +3,10 @@
   font-family: Plus Jakarta Sans, 'Source Sans Pro';
   
 }
- /* .stack{
-    background:#e9ecef;
-    margin: 0;
-    padding: 0;
-    
-} */
+#stack{
+    background-color:#e9ecef;
+    margin: 0px!important;
+} 
  .enquiry1-section .mt-100{
     margin-top: 100px;
 }

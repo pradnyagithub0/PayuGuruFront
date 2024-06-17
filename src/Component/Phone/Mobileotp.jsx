@@ -113,7 +113,7 @@ const MobileVerifyPage = () => {
 
   return (
     <div>
-      <section className="mt-5 py-5 enquiry-section1">
+      <section className="mt-5 py-5 enquiry-section1" id="stack3">
         <div className="container ">
           <div className="row">
             <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">

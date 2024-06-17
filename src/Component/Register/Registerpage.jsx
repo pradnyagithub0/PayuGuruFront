@@ -101,7 +101,7 @@ const Register = () => {
 
   return (
     <div>
-      <section className="mt-5 py-5 enquiry-section1">
+      <section className="mt-5 py-5 enquiry-section1" id="stack1">
         <div className="container position-relative">
           <div className="row">
             <div className="col-lg-3 col-md-2 col-12 "></div>
@@ -129,7 +129,7 @@ const Register = () => {
                   <p className="msg text-warning">{fieldErrors.companyName}</p>
                 </div>
                 <div className="inputbox">
-                  <label for="email">Email</label>
+                  <label htmlFor="email">Email</label>
                   <input type="email" name="userEmail" id="userEmail" />
                   <p className="msg text-warning">{fieldErrors.userEmail}</p>
                 </div>
@@ -151,7 +151,7 @@ const Register = () => {
                 <span id="mobileOtpError" className="text-danger">{ registerErr }</span>
                 <div className="tacbox">
                   <input id="checkbox" type="checkbox" className="checkbox" />
-                  <label for="checkbox">
+                  <label htmlFor="checkbox">
                     I agree to these <Link to="#">Terms and Conditions</Link>.
                   </label>
                 </div>
