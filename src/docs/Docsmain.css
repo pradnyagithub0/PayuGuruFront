@@ -150,7 +150,7 @@
 
 /* search bar content part */
 .kKQhLA {
-    padding: 5px 0px;
+    padding: 5px 10px;
 }
 .search-input {
     font-weight: 400;
@@ -173,6 +173,12 @@
     color: rgb(51, 51, 51);
     background-color: transparent;
     outline: none;
+}
+.ibpoCO {
+  position: absolute;
+  left: 20px;
+  height: 1.8em;
+  width: 0.9em;
 }
 
 

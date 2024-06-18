@@ -1,3 +1,4 @@
+// src/pages/Login.js
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loadingImg from "../../assets/img/loading.gif";
@@ -113,12 +114,13 @@ const Login = () => {
       setLoginErr("Internal Server Error. Please try again later.");
     }
   };
-  //allow form submission with the enter key
+
+  // Allow form submission with the enter key
   document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        document.getElementById('login-button').click();
+      document.getElementById('login-button').click();
     }
-});
+  });
 
   return (
     <div>

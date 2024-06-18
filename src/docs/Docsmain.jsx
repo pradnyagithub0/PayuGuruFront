@@ -44,15 +44,15 @@ function Docsmain() {
   return (
     <>
     
-    <div class="sidebar2">
+    <div className="sidebar2">
         <div className="sc-feJyhm YzuTm">
             <a href="#" className="sc-iELTvK cCiYxb">
                 <img src="assets/img/logo.webp" alt="logo" title='PayuGuru' className="sc-kafWEX hZCbNs"/>
             </a>
         </div>
-        <div role="search" class="sc-esOvli kKQhLA">
-            <svg class="sc-hMFtBS ibpoCO search-icon" version="1.1" viewBox="0 0 1000 1000" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"></svg>
-            <input placeholder="Search..." type="text" class="sc-cmthru kzNiFq search-input" value=""/>
+        <div role="search" className="sc-esOvli kKQhLA">
+            <svg className="sc-hMFtBS ibpoCO search-icon" version="1.1" viewBox="0 0 1000 1000" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px"></svg>
+            <input placeholder="Search..." type="text" className="sc-cmthru kzNiFq search-input" value=""/>
         </div>
         
         <ul className="nav flex-column flex-nowrap overflow-hidden content1">
@@ -84,11 +84,11 @@ function Docsmain() {
                 </ul>
     </div>
   
-  <div class="content iniCdN api-content">
-    <div class="sc-gzVnrw eesUPo">
-      <div class="sc-bxivhb cjtbAK api-info">
-        <h1 class="sc-htoDjs sc-fYxtnH dTJWQH">PayuGuru <span>(1.0.0)</span></h1>
-        <div class="sc-jWBwVP sc-iRbamj flfxUM">
+  <div className="content iniCdN api-content">
+    <div className="sc-gzVnrw eesUPo">
+      <div className="sc-bxivhb cjtbAK api-info">
+        <h1 className="sc-htoDjs sc-fYxtnH dTJWQH">PayuGuru <span>(1.0.0)</span></h1>
+        <div className="sc-jWBwVP sc-iRbamj flfxUM">
           <p>PayuGuru Partner APIs are completely RESTful and all our responses are returned in JSON.</p>
         </div>
       </div>
@@ -111,19 +111,19 @@ function Docsmain() {
             </div>
       </div>
     </div>
-    <div id="operation/fund_transfer" data-section-id="operation/fund_transfer" class="sc-ifAKCX hiuczA">
-        <div class="sc-gzVnrw sc-ibxdXY bSFXlp">
-            <div class="sc-bxivhb cjtbAK">
-                  <h2 class="sc-dnqmqq ioYTqA"><a class="sc-VigVT kGvRyb" href="#operation/fund_transfer"></a>Initiate Fund Transfers </h2>
-              <div class="sc-RefOD boajtD">
-                <div class="sc-jWBwVP sc-iRbamj flfxUM">
+    <div id="operation/fund_transfer" data-section-id="operation/fund_transfer" className="sc-ifAKCX hiuczA">
+        <div className="sc-gzVnrw sc-ibxdXY bSFXlp">
+            <div className="sc-bxivhb cjtbAK">
+                  <h2 className="sc-dnqmqq ioYTqA"><a className="sc-VigVT kGvRyb" href="#operation/fund_transfer"></a>Initiate Fund Transfers </h2>
+              <div className="sc-RefOD boajtD">
+                <div className="sc-jWBwVP sc-iRbamj flfxUM">
                   <p>Transfer amount to any bank account</p>
                 </div>
               </div>
                               
             <div></div>
-            <h5 class="sc-gqjmRU LiUBH">Request Body schema: <span class="sc-hSdWYo hoUoen">application/json</span></h5>
-            <div class="sc-jWBwVP sc-iRbamj flfxUM"></div>
+            <h5 className="sc-gqjmRU LiUBH">Request Body schema: <span className="sc-hSdWYo hoUoen">application/json</span></h5>
+            <div className="sc-jWBwVP sc-iRbamj flfxUM"></div>
             <table></table>
             <div></div>
             </div>
