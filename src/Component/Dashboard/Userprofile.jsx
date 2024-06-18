@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import "./Userprofile.css";
+import { useNavigate } from "react-router-dom";
 import ProfileTopbar from "./commonComponents/ProfileTopbar";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
@@ -9,6 +10,7 @@ import lodingImg from "../../assets/img/loading.gif";
 import { Button } from "@mui/material";
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
+import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 
 function Userprofile() {
@@ -118,6 +120,16 @@ function Userprofile() {
       fieldErrors.token = "sessionid must be string";
     setFieldErrors(fieldErrors);
   };
+  // Timeout Activity
+  const isInactive = useInactivityTimeout(600000); // 10 minutes
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (isInactive) {
+      sessionStorage.removeItem("sessionid");
+      navigate("/login");
+    }
+  }, [isInactive, navigate]);
 
   return (
     <div>

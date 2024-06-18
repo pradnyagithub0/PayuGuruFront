@@ -194,7 +194,7 @@ function Upi() {
                   </div>
                   <div class="col-xl-8 col-lg-12 col-md-12 col-12">
                     <div class="d-flex justify-content-end align-items-center pt-2">
-                      <div class="d-flex mr-2">
+                      {/* <div class="d-flex mr-2">
                         <input
                           type="text"
                           class="searchTerm"
@@ -213,7 +213,7 @@ function Upi() {
                         >
                           <FiSearch />
                         </button>
-                      </div>
+                      </div> */}
                       <button class="btn btn1 mr-2 btn-outline-secondary">
                         UPI Prefixes
                         <i class="fa fa-address-book ml-2"></i>

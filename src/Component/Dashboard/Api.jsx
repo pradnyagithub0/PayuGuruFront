@@ -1,13 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import "./Api.css";
+import { useNavigate } from "react-router-dom";
 import ProfileTopbar from "./commonComponents/ProfileTopbar";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import { Button } from "@mui/material";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
 import lodingImg from "../../assets/img/loading.gif";
 import { ApplicationContext } from "../../context/ApplicationContext";
+import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 function Api() {
   const { kycStatus } = useContext(ApplicationContext);
@@ -70,6 +72,16 @@ function Api() {
   const toggleSecretClientVisibility = () => {
     setShowClientSecret(!showClientSecret);
   };
+  // Timeout activity
+  const isInactive = useInactivityTimeout(600000); // 10 minutes
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (isInactive) {
+      sessionStorage.removeItem("sessionid");
+      navigate("/login");
+    }
+  }, [isInactive, navigate]);
 
   return (
     <div>

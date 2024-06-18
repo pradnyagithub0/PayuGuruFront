@@ -90,7 +90,13 @@ function VirtualAccount() {
 
       const resData = await response.json();
       if (resData && resData.StatusCodes === "00") {
-        // fetchData(currentPage); // Refresh the data after updating the status
+        setAcList((prevList)=>
+         prevList.map((item) => 
+          item.AC_id === accountNumber ? {...item, status: item.status === "enabled" ? "disabled" : "enabled" }
+              : item
+          )
+        );
+        fetchData(currentPage); // Refresh the data after updating the status
       } else {
         console.log("status code not match")
       }
@@ -185,7 +191,7 @@ function VirtualAccount() {
 
                   <div className="col-xl-8 col-lg-12 col-md-12 col-12">
                     <div className="d-flex justify-content-end align-items-center pt-2">
-                      <div className="d-flex mr-2">
+                      {/* <div className="d-flex mr-2">
                         <input
                           type="text"
                           className="searchTerm"
@@ -204,7 +210,7 @@ function VirtualAccount() {
                         >
                           <FiSearch />
                         </button>
-                      </div>
+                      </div> */}
                       <button className="btn btn1 mr-2 btn-outline-secondary">
                         Add Virtual Account<i className="fa fa-plus ml-2"></i>
                       </button>

@@ -1,7 +1,7 @@
 // src/hooks/useInactivityTimeout.js
 import { useEffect, useState } from 'react';
 
-const useInactivityTimeout = (timeout = 60000) => { // default to 10 minutes
+const useInactivityTimeout = (timeout = 600000) => { // default to 10 minutes
   const [isInactive, setIsInactive] = useState(false);
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import { ApplicationContext } from "../../context/ApplicationContext";
 import { ENDPOINTS } from "../../utils/apiConfig";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import { Button } from "@mui/material";
+import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 function Dashboard() {
   const { setKycStatus } = useContext(ApplicationContext);
@@ -173,6 +174,16 @@ function Dashboard() {
       console.error("Failed to copy: ", err);
     }
   };
+  // Timeout activity
+  const isInactive = useInactivityTimeout(600000); // 10 minutes
+  
+
+  useEffect(() => {
+    if (isInactive) {
+      sessionStorage.removeItem("sessionid");
+      navigate("/login");
+    }
+  }, [isInactive, navigate]);
 
   return (
     <div>

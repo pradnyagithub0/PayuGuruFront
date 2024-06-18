@@ -1,12 +1,61 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // UpiListTable.js
-import React from 'react';
+import React, { useState, useMemo } from 'react';
+import { FiSearch } from 'react-icons/fi';
 import { useTable } from 'react-table';
-import axios from 'axios';
 import { ENDPOINTS } from '../../../utils/apiConfig';
 
 
 const UpiListTable = ({ data, toggleStatus  }) => {
+
+  const [search, setSearch] = useState('');
+  const [acList, setAcList] = useState([]);
+  const sessionid = sessionStorage.getItem("sessionid");
+  const [loader, setLoader] = useState(false);
+
+
+  const handleSearchAcc = async () => {
+    setLoader(true);
+
+    try {
+      const response = await fetch(ENDPOINTS.SEARCH_VIRTUAL_ACC, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+          AC_id: search,
+        }),
+      });
+
+      const resData = await response.json();
+      setLoader(false);
+
+      if (resData.StatusCodes) {
+        if (resData.StatusCodes === "00") {
+          // Convert the single object response to an array
+          const responseArray = [resData.responsed];
+          setAcList(responseArray);
+        } else {
+          console.log(resData.mess.message);
+        }
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error during account search:", error);
+    }
+  };
+
+  // Filter data based on search input
+  const filteredData = useMemo(() => {
+    return data.filter((item) => {
+      return Object.values(item).some(val =>
+        String(val).toLowerCase().includes(search.toLowerCase())
+      );
+    });
+  }, [data, search]);
 
 
   const handleStatusToggle = (rowData) => {
@@ -58,10 +107,43 @@ const UpiListTable = ({ data, toggleStatus  }) => {
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data });
+  } = useTable({ columns, data: filteredData });
 
   return (
-    <table {...getTableProps()} style={{ border: 'solid 1px blue' , width:'100%'}}>
+
+    <div>
+        <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
+      <div className="d-flex mr-2">
+                        <input
+                          type="text"
+                          className="searchTerm"
+                          placeholder="Search ID/Ref Number"
+                          value={search}
+                          onChange={(e) => {
+                            setSearch(e.target.value);
+                          }}
+                        />
+                        <button
+                          className="searchIconBtn"
+                          onClick={() => {
+                            console.log(search);
+                            handleSearchAcc();
+                          }}
+                        >
+                          <FiSearch />
+                        </button>
+         </div>
+      </div>
+    {/* <div style={{ marginBottom: '20px' }}>
+      <input
+        type="text"
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        placeholder="Search..."
+        style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', border: '1px solid #ccc' ,alignItems:'center' , alignContent:'center' }}
+      />
+    </div> */}
+    <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -98,6 +180,7 @@ const UpiListTable = ({ data, toggleStatus  }) => {
         })}
       </tbody>
     </table>
+    </div>
   );
 };
 

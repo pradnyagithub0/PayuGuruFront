@@ -9,7 +9,7 @@ import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 const Account = () => {
-  const isInactive = useInactivityTimeout(60000); // 10 minutes
+  const isInactive = useInactivityTimeout(600000); // 10 minutes
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -52,6 +52,35 @@ const Account = () => {
                     </div>
                   </form>	
                 </div>
+                <hr></hr>
+             {/* <h4 className="bg-transparent mt-0 p-3">Balance Settings</h4>
+                    <div className="card-body p-3">
+                        <form action="#">
+                            <label className="form-label">Low Balance Alert Limit</label>
+                                <div className="input-group mb-3  input-info">
+                                    <span className="input-group-text border-0">₹</span>
+                                    <input type="text" className="form-control"/>
+                                    <span className="input-group-text border-0"><i className="fa fa-pencil"></i></span>
+                                </div>
+                            <label className="form-label text-secondary">(Configure webhook or email alert to receive notification)</label>
+                        </form>	
+                    </div>
+                <hr></hr>
+                <h4 className=" mt-0 px-3">Account-Level 2FA Settings</h4>
+                    <div className="card-body p-3">
+                        <form action="#">
+                            <div className="row mb-3">
+                                <div className="col-lg-8 col-8">
+                                    <h6>2FA required</h6>
+                                </div>
+
+                            <div className="col-lg-4 col-4">
+                                <input  type="checkbox" id="switch" /><label for="switch" className="toggle">Toggle</label>
+                            </div>
+                            </div>
+                                    <a type="button" className="btn btn1 btn-outline-secondary virtual-btn mb-5"><i className="fa fa-info-circle mr-3"></i>How to setup 2FA</a>
+                        </form>	
+                </div> */}
               </div>
             </div>
           </div>

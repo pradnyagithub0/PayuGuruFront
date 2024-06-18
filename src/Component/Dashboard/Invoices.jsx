@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Dheader from '../Dheader';
 import Dfooter from '../Dfooter';
 import './Invoices.css';
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
+import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 function Invoices(){
+    const isInactive = useInactivityTimeout(600000); // 10 minutes
+    let navigate = useNavigate();
+
+    useEffect(() => {
+        if (isInactive) {
+         sessionStorage.removeItem("sessionid");
+        navigate("/login");
+    }
+    }, [isInactive, navigate]);
     return(
         <div>
             <div className="wrapper">
