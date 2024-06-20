@@ -43,7 +43,8 @@ function Docsmain() {
 
   return (
     <>
-    
+
+    {/**sidebar section start */}
     <div className="sidebar2">
         <div className="sc-feJyhm YzuTm">
             <a href="#" className="sc-iELTvK cCiYxb">
@@ -83,7 +84,7 @@ function Docsmain() {
                     <li className="nav-item gcUzvG"><a className="nav-link text-truncate" href="#"><i className="fa fa-download"></i> <span className="d-none d-sm-inline">UPI Collection Request</span></a></li>
                 </ul>
     </div>
-  
+  {/**Middle part section start */}
   <div className="content iniCdN api-content">
     <div className="sc-gzVnrw eesUPo">
       <div className="sc-bxivhb cjtbAK api-info">
@@ -129,20 +130,21 @@ function Docsmain() {
             </div>
         </div>
     </div>
-
-      <div className='fLUKgj'>
-        <div className="container mx-auto p-4">
-          <div className="max-w-xl mx-auto">
+    {/**blue side part start */}
+    <div className='fLUKgj'>
+      <div className="container mx-auto p-4">
+        <div className="max-w-xl mx-auto">
           <RequestForm onResponse={setResponse} onSaveHistory={handleSaveHistory} />
           {response && <ResponseDisplay response={response} />}
           {history.length > 0 && (
-          <HistoryList history={history} onSelect={handleSelectHistoryItem} />
+            <HistoryList history={history} onSelect={handleSelectHistoryItem} />
           )}
-          </div>
         </div>
       </div>
+    </div>
     
-  </div>
+    
+</div>
 
   
   

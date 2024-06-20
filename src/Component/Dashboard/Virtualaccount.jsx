@@ -3,11 +3,13 @@ import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import "./Virtualaccount.css";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import VirtualAccountTable from "./commonComponents/VirtualAccountTable"; // Adjust the path as necessary
 import { ENDPOINTS } from "../../utils/apiConfig";
 import Pagination from "../Pagination";
 import { FiSearch } from "react-icons/fi";
+import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 function VirtualAccount() {
   const [acList, setAcList] = useState([]);
@@ -169,6 +171,16 @@ function VirtualAccount() {
       console.error("Error during account search:", error);
     }
   };
+  // Timeout Activity
+  const isInactive = useInactivityTimeout(600000); // 10 minutes
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (isInactive) {
+      sessionStorage.removeItem("sessionid");
+      navigate("/login");
+    }
+  }, [isInactive, navigate]);
 
   return (
     <div>

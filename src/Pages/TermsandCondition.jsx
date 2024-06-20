@@ -12,7 +12,7 @@ function TermsandCondition(){
              <section className="mt-0 py-5 security-section">
                 <div className="container box8 mt-0 p-0">
                     <div className="row">
-                        <div class="col-md-10 mx-auto">
+                        <div className="col-md-10 mx-auto">
                             <h3>PayuGuru User Terms & Conditions</h3>
                             <div className="text-justify">
                                 <p>This document/agreement/understanding is a computer-generated electronic record, published in terms

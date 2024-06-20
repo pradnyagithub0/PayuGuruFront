@@ -184,6 +184,7 @@ function Dashboard() {
       navigate("/login");
     }
   }, [isInactive, navigate]);
+  
 
   return (
     <div>

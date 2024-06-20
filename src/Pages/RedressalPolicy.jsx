@@ -83,33 +83,38 @@ function RedressalPlicy(){
                                 <p>If a grievance received by any of the channels is not resolved within the below mentioned days from
                                     the raising of the dispute with the concerned level, then a customer/ Merchant may escalate the 
                                     to higher levels of grievance redressal.</p>
-                                <div className="table table-responsive">
+                                    <div className="table table-responsive">
                                     <table className="w-100 text-center">
+                                      <thead>
                                         <tr>
-                                            <th colspan="3" className="text-center">Escalation Matrix</th>
+                                          <th colSpan="3" className="text-center">Escalation Matrix</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td>Level 1</td>
+                                          <td>Customer Support Team</td>
+                                          <td>5-7 business days of lodging the complaint</td>
                                         </tr>
                                         <tr>
-                                            <td>Level 1</td>
-                                            <td>Customer Support Team</td>
-                                            <td>5-7 business days of lodging the complaint</td>
+                                          <td>Level 2</td>
+                                          <td>Assistant Nodal Officer</td>
+                                          <td>3-5 business days of lodging the complaint</td>
                                         </tr>
                                         <tr>
-                                            <td>Level 2</td>
-                                            <td>Assistant Nodal Officer</td>
-                                            <td>3-5 business days of lodging the complaint</td>
+                                          <td>Level 3</td>
+                                          <td>Nodal Officer</td>
+                                          <td>5-9 business days of lodging the complaint</td>
                                         </tr>
                                         <tr>
-                                            <td>Level 3</td>
-                                            <td>Nodal Officer</td>
-                                            <td>5-9 business days of lodging the complaint</td>
+                                          <td>Level 4</td>
+                                          <td>RBI Ombudsman</td>
+                                          <td>30 business days of lodging the complaint</td>
                                         </tr>
-                                        <tr>
-                                            <td>Level 4</td>
-                                            <td>RBI Ombudsman </td>
-                                            <td>30 business days of lodging the complaint</td>
-                                        </tr>
+                                      </tbody>
                                     </table>
-                                </div>
+                                  </div>
+                                  
                                 <h5>Level 2- Assistant Nodal Officer-</h5>
                                 <p>In case the User wishes to further escalate the complaints/ grievances, he/she can get the grievance
                                     registered by mailing the issue to the PayuGuru Assistant Nodal Officer- <a href="#">grievances@ payu.guru</a>.

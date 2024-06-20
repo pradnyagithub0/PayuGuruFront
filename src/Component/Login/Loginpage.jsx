@@ -1,5 +1,5 @@
 // src/pages/Login.js
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loadingImg from "../../assets/img/loading.gif";
 import "./Loginpage.css";
@@ -116,11 +116,8 @@ const Login = () => {
   };
 
   // Allow form submission with the enter key
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Enter') {
-      document.getElementById('login-button').click();
-    }
-  });
+ 
+  
 
   return (
     <div>
@@ -180,7 +177,7 @@ const Login = () => {
                   <a href="/Forgotun">Forgot Password?</a>
                 </div>
                 <div>
-                  <button type="submit" id="login-button" className="submitButton" onClick={loginUser}>
+                  <button type="submit" id="loginButton" className="submitButton" onClick={loginUser}>
                     Submit
                   </button>
                 </div>

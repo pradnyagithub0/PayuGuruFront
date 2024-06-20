@@ -11,10 +11,6 @@
   }
   /* image part start */
 
-/* .YzuTm {
-    width: 300px;
-    background-color: #f1f1f1;
-} */
 .YzuTm {
   text-align: center;
 }
@@ -36,18 +32,7 @@
     /* width: 100%; */
     display: block;
 }
-/* .bxcHYI {
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.5em;
-    color: rgb(51, 51, 51);
-    display: flex;
-    position: relative;
-    text-align: left;
-    -webkit-font-smoothing: antialiased;
-    text-size-adjust: 100%;
-    text-rendering: optimizespeed !important;
-} */
+
 
 .sidebar2 {
   top: 0 !important;
@@ -64,8 +49,8 @@
     position: sticky;
 
 }
-  /* right side blue section content start */
-  .dtUibw, .fLUKgj {
+  /* blue side part section start */
+.dtUibw, .fLUKgj {
     background: #011f3f !important;
 }
 
@@ -74,7 +59,7 @@
     top: 0px;
     bottom: 0px;
     right: 0px; 
-    width: calc(45% - 104px);
+    width: calc(53% - 72px);
 }
 .iniCdN {
     z-index: 1;
@@ -95,21 +80,16 @@
     position: relative;
 }
 
-.cjtbAK {
-    width: calc(100%);
-    padding: 0px 40px;
-}
+
 /* hover part start */
 .gcUzvG:hover {
     background-color: rgb(237, 237, 237);
 }
-/* .content1{
-    margin-left: 15%;
-} */
+
 .gpbcFk:hover {
     background-color: rgb(225, 225, 225);
 }
-/* middle content side start */
+/* middle part section start */
 .bSFXlp {
     display: flex;
     width: 100%;
@@ -135,7 +115,7 @@
   padding: 0px;
 }
 .cjtbAK {
-  width: calc(60%);
+  width: calc(55%);
   padding: 0px 40px;
 }
 .dTJWQH {
@@ -186,7 +166,7 @@
 .sidebar2 {
     margin: 0;
     padding: 0;
-    width: 300px;
+    width: 270px;
     background: #fafbff;
     position: fixed;
     height: 100%;
@@ -214,14 +194,14 @@
   div.content {
     margin-left: 255px;
     padding: 1px 16px;
-    height: 2000px;
-    text-align: center;
+    height: 500vh;
+    /* text-align: center; */
   }
  
   
   @media screen and (max-width: 700px) {
     .sidebar2 {
-      width: 100%;
+      /* width: 100%; */
       height: auto;
       position: relative;
     }
@@ -229,11 +209,12 @@
     div.content {margin-left: 0;}
   }
   
-  @media screen and (max-width: 400px) {
+  @media screen and (max-width: 555px) {
     .sidebar2 a {
       text-align: center;
       float: none;
     }
+    
   }
  
 

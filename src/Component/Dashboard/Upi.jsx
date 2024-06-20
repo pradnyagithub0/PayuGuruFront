@@ -3,12 +3,14 @@ import React, { useEffect, useState, useCallback } from "react";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
 import "./Upi.css";
+import { useNavigate } from "react-router-dom";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import UpiListTable from "./commonComponents/UpiListTable";
 import { ENDPOINTS } from "../../utils/apiConfig";
 import Pagination from "../Pagination";
 import { FiSearch } from "react-icons/fi";
 import axios from "axios";
+import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 function Upi() {
   const [upiList, setUpiList] = useState([]);
@@ -175,6 +177,16 @@ function Upi() {
       console.error("Error during account search:", error);
     }
   };
+  // Timeout Activity
+  const isInactive = useInactivityTimeout(600000); // 10 minutes
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (isInactive) {
+      sessionStorage.removeItem("sessionid");
+      navigate("/login");
+    }
+  }, [isInactive, navigate]);
 
   return (
     <div>

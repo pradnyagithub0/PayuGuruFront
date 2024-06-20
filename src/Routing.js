@@ -55,7 +55,7 @@ const Routing = () => {
             
 
             {/* Protected Routes */}
-            <Route path="/dashboard" element={
+            <Route path="/dashboard"  element={
               <ProtectedRoute>
                 <Dashboards />
               </ProtectedRoute>

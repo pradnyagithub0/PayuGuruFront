@@ -15,8 +15,8 @@ const RequestForm = ({ onResponse, onSaveHistory }) => {
   const [headers, setHeaders] = useState(JSON.stringify(headersData));
   const [body, setBody] = useState('{}');
   const [theme, setTheme] = useState('light');
-  const [mobile, setMobile] = useState('9110983897');
-  const [password, setPassword] = useState('Qwertyy@123456');
+  const [mobile, setMobile] = useState('7028442470');
+  const [password, setPassword] = useState('1234@Are');
   useEffect(() => {
     try {
       const parsedBody = JSON.parse(body);
@@ -49,8 +49,12 @@ const RequestForm = ({ onResponse, onSaveHistory }) => {
     }
   };
 
+  const handleThemeChange = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
   return (
-    <div className="p-4 border-gray-300 rounded-lg">
+    <div className="p-4  border-gray-300 rounded-lg">
       <h2 className="text-lg mb-4 text-white">Make API Request</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -111,7 +115,9 @@ const RequestForm = ({ onResponse, onSaveHistory }) => {
           </div>
         )}
         <div className="mb-3">
-        
+        {/*<button type="button" className="btn btn-secondary" onClick={handleThemeChange}>
+          {theme === 'light' ? 'Dark Theme' : 'Light Theme'}
+        </button>*/}
         <button type="submit" className="btn btn-primary ml-2">
           Send Request
         </button>

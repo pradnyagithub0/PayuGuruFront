@@ -96,108 +96,65 @@ function PrivacyPolicy(){
                                     Information. If a user opts for the said option of erasure, PayUGuru shall delete all stored 
                                     information of the User from its servers.
                                 </p>
-                                <div className="table table-responsive ">
-                                    <tr>
-                                        <th>Types of Personal Data</th>
-                                        <th>Purpose</th>
-                                        <th>Details of Personal Data</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Name and Contact Information</td>
-                                        <td>For providing payment aggregation, payouts and verification services to Our merchants,
-                                            business partners and end-customers.
-                                        </td>
-                                        <td>Full name(s), title, age, user ID, gender and Your date of birth. 
-                                            Telephone/mobile number(s), address(es), state/city of residence, country, pin code,
-                                             email address(es), and chosen billing address(es).
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Financial Information</td>
-                                        <td>Account Registration</td>
-                                        <td>Personal bank account numbers, including e-nach, NEFT, IMPS and UPI ID details, tokenized card 
-                                            information, card type, expiry date on the credit or debit card, and name on the card.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Provide a Loan on your requirement </td>
-                                        <td>For providing payment aggregation, payouts and verification services to Our merchants and
-                                             business partners and to comply with screening requirements as per Applicable Laws.</td>
-                                        <td>Know Your Customer (KYC) documents including all proofs of identity and address, 
-                                            photograph, Permanent Account Number (PAN), GST Number, etc.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Payments related data</td>
-                                        <td>For providing payment aggregation, payouts and verification services to Our merchants, 
-                                            business partners and end-customers and to comply with screening requirements as per
-                                             Applicable Laws.</td>
-                                        <td>Payment gateway ID, name of issuing bank, merchant’s name, category and other identifiers
-                                            along with the details of products or services purchased or paid for, mode of payment,
-                                            the date, currency and amount of the transaction(s), whether the payment was successful,
-                                            and other information provided by You directly or indirectly to Us or provided to Us by
-                                            banks, merchants or other service providers or business partners.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Log Data</td>
-                                        <td>Statistical analyses of User behaviour and characteristics in order to measure interest
-                                             in and use of the various areas of Our Services provided to You.</td>
-                                        <td>Browser type, IP address, location, requested URL, referring URL, timestamp information, 
-                                            application, device, versions and configurations, operating systems, device brand and
-                                             model, geo-location information, unique identifiers associated with Your device(s) and 
-                                             pages that You access on the website(s) to access or avail Our Services and paths taken.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Credit related Information</td>
-                                        <td>For providing payment aggregation, payouts and verification services to Our merchants 
-                                            that are financial institutions or account aggregators under Applicable Laws, Our business
-                                             partners and third-party service providers and end-customers.
-                                        </td>
-                                        <td>Your credit related information or assessment provided by third parties such as financial 
-                                            institutions or account aggregators under Applicable Laws including Our business partners 
-                                            and third party service providers.
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Information provided by You directly to Us or received through Our merchants, business 
-                                            partners and third party service providers
-                                        </td>
-                                        <td>We may use third party services such as Google Analytics, who may collect, monitor and 
-                                            analyze this type of information in order to facilitate Our Services, to provide the 
-                                            Service on Our behalf, to perform Service-related services or to assist us in analyzing 
-                                            how Our Services are used. Your information may also be used to contact You with 
-                                            newsletters, marketing or promotional materials and other information that may be of 
-                                            interest to You. You may opt out of receiving any, or all, of these communications from 
-                                            Us by following the unsubscribe link or instructions provided in any email that We send.
-                                        </td>
-                                        <td>Account usernames and passwords; Your email address; Your preferred settings and themes, 
-                                            Communications with customer support, promotional and marketing campaigns, surveys,
-                                            and records of Your subscriptions to marketing materials, or withdrawal, as the case 
-                                            maybe.(Note: We use "cookies" to collect information. You can instruct Your browser to
-                                            refuse all cookies or to indicate when a cookie is being sent. However, if You do not
-                                            accept cookies, You may not be able to use some portions of Our Service. We do not 
-                                            control the use of cookies by third parties. The third party service providers have
-                                            their own privacy policies addressing how they use such information.)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Your Device Information</td>
-                                        <td>We may collect Your device information in order to gain insights about Your use of Our 
-                                            website or Services, to provide a customized experience, and to show targeted 
-                                            advertisements.</td>
-                                        <td>Your contact list, call records, SMS, media files and location data in Your devices to 
-                                            enable You to access Our Services after seeking necessary permissions.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>One Time Password (OTP)</td>
-                                        <td>For enabling you to make quicker transactions and relieving you from the hassle of 
-                                            copying/keying in the Numeric Numbers OTP, we have developed advance technologies 
-                                            which would automatically retrieve the OTP and the mention the same in the relevant
-                                             column of the transaction page.</td>
-                                        <td>Your contact list, call records, SMS, media files and location data in Your device.</td>
-                                    </tr>
+                                <div className="table table-responsive">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>Types of Personal Data</th>
+                                            <th>Purpose</th>
+                                            <th>Details of Personal Data</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Name and Contact Information</td>
+                                            <td>For providing payment aggregation, payouts, and verification services to Our merchants, business partners, and end-customers.</td>
+                                            <td>Full name(s), title, age, user ID, gender, and Your date of birth. Telephone/mobile number(s), address(es), state/city of residence, country, pin code, email address(es), and chosen billing address(es).</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Financial Information</td>
+                                            <td>Account Registration</td>
+                                            <td>Personal bank account numbers, including e-nach, NEFT, IMPS, and UPI ID details, tokenized card information, card type, expiry date on the credit or debit card, and name on the card.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Provide a Loan on your requirement</td>
+                                            <td>For providing payment aggregation, payouts, and verification services to Our merchants and business partners and to comply with screening requirements as per Applicable Laws.</td>
+                                            <td>Know Your Customer (KYC) documents including all proofs of identity and address, photograph, Permanent Account Number (PAN), GST Number, etc.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Payments related data</td>
+                                            <td>For providing payment aggregation, payouts, and verification services to Our merchants, business partners, and end-customers and to comply with screening requirements as per Applicable Laws.</td>
+                                            <td>Payment gateway ID, name of issuing bank, merchant’s name, category and other identifiers along with the details of products or services purchased or paid for, mode of payment, the date, currency and amount of the transaction(s), whether the payment was successful, and other information provided by You directly or indirectly to Us or provided to Us by banks, merchants or other service providers or business partners.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Log Data</td>
+                                            <td>Statistical analyses of User behavior and characteristics in order to measure interest in and use of the various areas of Our Services provided to You.</td>
+                                            <td>Browser type, IP address, location, requested URL, referring URL, timestamp information, application, device, versions and configurations, operating systems, device brand and model, geo-location information, unique identifiers associated with Your device(s) and pages that You access on the website(s) to access or avail Our Services and paths taken.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Credit related Information</td>
+                                            <td>For providing payment aggregation, payouts, and verification services to Our merchants that are financial institutions or account aggregators under Applicable Laws, Our business partners and third-party service providers and end-customers.</td>
+                                            <td>Your credit related information or assessment provided by third parties such as financial institutions or account aggregators under Applicable Laws including Our business partners and third party service providers.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Information provided by You directly to Us or received through Our merchants, business partners, and third party service providers</td>
+                                            <td>We may use third party services such as Google Analytics, who may collect, monitor, and analyze this type of information in order to facilitate Our Services, to provide the Service on Our behalf, to perform Service-related services or to assist us in analyzing how Our Services are used. Your information may also be used to contact You with newsletters, marketing or promotional materials and other information that may be of interest to You. You may opt out of receiving any, or all, of these communications from Us by following the unsubscribe link or instructions provided in any email that We send.</td>
+                                            <td>Account usernames and passwords; Your email address; Your preferred settings and themes, communications with customer support, promotional and marketing campaigns, surveys, and records of Your subscriptions to marketing materials, or withdrawal, as the case maybe. (Note: We use "cookies" to collect information. You can instruct Your browser to refuse all cookies or to indicate when a cookie is being sent. However, if You do not accept cookies, You may not be able to use some portions of Our Service. We do not control the use of cookies by third parties. The third party service providers have their own privacy policies addressing how they use such information.)</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Your Device Information</td>
+                                            <td>We may collect Your device information in order to gain insights about Your use of Our website or Services, to provide a customized experience, and to show targeted advertisements.</td>
+                                            <td>Your contact list, call records, SMS, media files, and location data in Your devices to enable You to access Our Services after seeking necessary permissions.</td>
+                                        </tr>
+                                        <tr>
+                                            <td>One Time Password (OTP)</td>
+                                            <td>For enabling you to make quicker transactions and relieving you from the hassle of copying/keying in the Numeric Numbers OTP, we have developed advanced technologies which would automatically retrieve the OTP and the mention the same in the relevant column of the transaction page.</td>
+                                            <td>Your contact list, call records, SMS, media files, and location data in Your device.</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+
                                 <div className="text-justify">
                                     <h5>Cookies Policy and Protection from Third Party Users-</h5>
                                     <p>The term "cookies" refers to small pieces of information that a website sends to your computer's

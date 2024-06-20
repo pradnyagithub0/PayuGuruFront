@@ -12,12 +12,12 @@ const ResponseDisplay = ({ response }) => {
     <div className="p-4 mt-4 bg-white rounded-lg shadow">
       <h2 className="text-lg mb-4">Response</h2>
       <div className="relative">
-        <button
-          className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded"
-          onClick={copyToClipboard}
-        >
-          Copy
-        </button>
+      {/*<button
+      className="absolute top-2 right-2 bg-blue-500 text-white px-2 py-1 rounded"
+      onClick={copyToClipboard}
+    >
+      Copy
+    </button>*/}
       </div>
       <SyntaxHighlighter language="json" style={solarizedlight}>
         {JSON.stringify(response.data, null, 2)}

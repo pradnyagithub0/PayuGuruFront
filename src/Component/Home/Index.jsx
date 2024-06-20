@@ -558,6 +558,7 @@ const Index = () =>{
 								<div className="row mt-0 upi-card">
 									<div className="col-lg-6 col-md-6 col-12 border-right-lg my-auto">
 					                	<table className="table table-responsive border-bottom-sm  ml-60">
+										<tbody>
 											<tr>
 												<th>UPI Collection Request</th>
 											</tr>
@@ -571,11 +572,12 @@ const Index = () =>{
 					                            <th>Create a Dynamic UPI ID</th>
 					                            <td></td>
 					                        </tr>
-					                        
+										</tbody>   
 					                    </table>
 					                </div>
 					                <div className="col-lg-6 col-md-6 col-12 my-auto">
 					                	<table className="table table-responsive ml-60 ">
+										<tbody>
 					                        <tr>
 					                            
 					                            <th >Flat Rs-10/-* Per Transaction</th>
@@ -585,7 +587,7 @@ const Index = () =>{
 					                        <tr>
 					                            <th >GST as applicable</th>
 					                        </tr>
-					                        
+										</tbody>    
 					                    </table>
 					                </div>
 					                <div className="mx-auto mt-4">
