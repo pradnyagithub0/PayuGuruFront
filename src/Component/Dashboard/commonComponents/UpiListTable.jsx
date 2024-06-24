@@ -113,26 +113,26 @@ const UpiListTable = ({ data, toggleStatus  }) => {
 
     <div>
         <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
-      <div className="d-flex mr-2">
-                        <input
-                          type="text"
-                          className="searchTerm"
-                          placeholder="Search ID/Ref Number"
-                          value={search}
-                          onChange={(e) => {
-                            setSearch(e.target.value);
-                          }}
+          <div className="d-flex mr-2">
+                    <input
+                        type="text"
+                        className="searchTerm"
+                        placeholder="Search ID/Ref Number"
+                        value={search}
+                        onChange={(e) => {
+                        setSearch(e.target.value);
+                        }}
                         />
-                        <button
-                          className="searchIconBtn"
-                          onClick={() => {
-                            console.log(search);
-                            handleSearchAcc();
-                          }}
-                        >
-                          <FiSearch />
-                        </button>
-         </div>
+                      <button
+                        className="searchIconBtn"
+                        onClick={() => {
+                        console.log(search);
+                        handleSearchAcc();
+                        }}
+                      >
+                      <FiSearch />
+                      </button>
+            </div>
       </div>
     {/* <div style={{ marginBottom: '20px' }}>
       <input

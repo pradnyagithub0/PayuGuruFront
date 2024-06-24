@@ -292,86 +292,86 @@ function Dashboard() {
           </div> */}
 
           <div className="row mt-3">
-            <div className="col-lg-12 col-md-12 col-12">
-              <div className="card pb-0 account-details border-0 shadow-lg">
-                <div className="card-header">
-                  <div className="row">
-                    <div className=" col-xl-4 col-lg-4 col-md-12 col-12">
-                      <h5 className="font-weight-bold mt-0">
-                        Account Statement
-                      </h5>
-                    </div>
-                    <div className="col-xl-8 col-lg-8 col-md-12 col-12 ">
-                      <p className="float-right">
-                        *Date: 8 Nov-23, 0:00:00 to 2 Dec-23, 23:59:59
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="card-body p-3">
-                  <div className="table-responsive">
-                    <table
-                      id="example"
-                      className="table table-striped table-bordered "
-                    >
-                      <thead>
-                        <tr>
-                          <th>ID</th>
-                          <th>Transaction Time</th>
-                          <th>Transaction Type</th>
-                          <th>Payment Mode</th>
-                          <th>Transaction Amount</th>
-                          <th>Fess & GST</th>
-                          <th>Settlement Amount</th>
-                          <th>Closing Amount</th>
-                          <th>Credit/Debit</th>
-                          <th>Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>79214204</td>
-                          <td>5: 40 am</td>
-                          <td>Time Activity</td>
-                          <td>Visa</td>
-                          <td>₹ 5,600.00</td>
-                          <td>₹ 1.23</td>
-                          <td>₹ 2,500.00</td>
-                          <td>₹ 3,666.71</td>
-                          <td>₹ 855.00</td>
-                          <td>closed</td>
-                        </tr>
-                        <tr>
-                          <td>79212231</td>
-                          <td>7: 30 am</td>
-                          <td>Credit Memo</td>
-                          <td>Paypal</td>
-                          <td>₹ 16,500.00</td>
-                          <td>₹ 5.33</td>
-                          <td>₹ 16,500.00</td>
-                          <td>₹ 102.00</td>
-                          <td>₹ 232,000.00</td>
-                          <td>closed</td>
-                        </tr>
-                        <tr>
-                          <td>79214079</td>
-                          <td>8: 20 am</td>
-                          <td>Invoice</td>
-                          <td>Mastedcard</td>
-                          <td>₹ 1,380.00</td>
-                          <td>₹ 2.33</td>
-                          <td>₹ 349.00</td>
-                          <td>₹ 16,500.00</td>
-                          <td>₹ 349.00</td>
-                          <td>Overdue</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
+      <div className="col-lg-12 col-md-12 col-12">
+        <div className="card pb-0 account-details border-0 shadow-lg">
+          <div className="card-header">
+            <div className="row">
+              <div className="col-xl-4 col-lg-4 col-md-12 col-12">
+                <h5 className="font-weight-bold mt-0">
+                  Account Statement
+                </h5>
+              </div>
+              <div className="col-xl-8 col-lg-8 col-md-12 col-12">
+                <p className="float-right">
+                  *Date: 8 Nov-23, 0:00:00 to 2 Dec-23, 23:59:59
+                </p>
               </div>
             </div>
           </div>
+          <div className="card-body p-3">
+            <div className="table-responsive">
+              <table
+                id="example"
+                className="table table-striped table-bordered"
+              >
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Transaction Time</th>
+                    <th>Transaction Type</th>
+                    <th>Payment Mode</th>
+                    <th>Transaction Amount</th>
+                    <th>Fees & GST</th>
+                    <th>Settlement Amount</th>
+                    <th>Closing Amount</th>
+                    <th>Credit/Debit</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>79214204</td>
+                    <td>5:40 am</td>
+                    <td>Time Activity</td>
+                    <td>Visa</td>
+                    <td>₹ 5,600.00</td>
+                    <td>₹ 1.23</td>
+                    <td>₹ 2,500.00</td>
+                    <td>₹ 3,666.71</td>
+                    <td>₹ 855.00</td>
+                    <td>closed</td>
+                  </tr>
+                  <tr>
+                    <td>79212231</td>
+                    <td>7:30 am</td>
+                    <td>Credit Memo</td>
+                    <td>Paypal</td>
+                    <td>₹ 16,500.00</td>
+                    <td>₹ 5.33</td>
+                    <td>₹ 16,500.00</td>
+                    <td>₹ 102.00</td>
+                    <td>₹ 232,000.00</td>
+                    <td>closed</td>
+                  </tr>
+                  <tr>
+                    <td>79214079</td>
+                    <td>8:20 am</td>
+                    <td>Invoice</td>
+                    <td>Mastercard</td>
+                    <td>₹ 1,380.00</td>
+                    <td>₹ 2.33</td>
+                    <td>₹ 349.00</td>
+                    <td>₹ 16,500.00</td>
+                    <td>₹ 349.00</td>
+                    <td>Overdue</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
           <div className="loaderContainer">
             <div className="inputbox text-center loader-box">

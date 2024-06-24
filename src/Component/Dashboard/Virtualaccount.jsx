@@ -248,16 +248,16 @@ function VirtualAccount() {
                       </div>
                     ) : (
                       <>
-                        <VirtualAccountTable
-                          data={acList}
-                          toggleStatus={toggleStatus}
-                        />
-                        <Pagination
-                          currentPage={currentPage}
-                          itemsPerPage={itemsPerPage}
-                          totalItems={totalItems}
-                          onPageChange={handlePageChange}
-                        />
+                      <VirtualAccountTable
+                      data={acList}
+                      toggleStatus={toggleStatus}
+                    />
+                    <Pagination
+                      currentPage={currentPage}
+                      itemsPerPage={itemsPerPage}
+                      totalItems={totalItems}
+                      onPageChange={handlePageChange}
+                    />
                       </>
                     )}
                   </div>
@@ -271,6 +271,6 @@ function VirtualAccount() {
       </div>
     </div>
   );
-}
+};
 
 export default VirtualAccount;

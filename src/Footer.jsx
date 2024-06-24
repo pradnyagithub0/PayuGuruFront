@@ -31,16 +31,16 @@ const Footer = () =>{
                     <div className="text-left align-center">
                         <ul className="footer-social-link">
                             <li className="facebook">
-                                <a href="https://www.facebook.com/profile.php?id=61555659393005" aria-label="Facebook"><i className="fa fa-facebook"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=61555659393005" aria-label="Facebook" target="_blank"><i className="fa fa-facebook"></i></a>
                             </li>
                             <li className="twitter">
-                                <a href="https://twitter.com/payuguru" aria-label="Twitter"><i className="fa fa-twitter"></i></a>
+                                <a href="https://twitter.com/payuguru" aria-label="Twitter" target="_blank"><i className="fa fa-twitter"></i></a>
                             </li>
                             <li className="instagram">
-                                <a href="https://www.instagram.com/pay_u_guru/?hl=en" aria-label="Instagram"><i className="fa fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/pay_u_guru/?hl=en" aria-label="Instagram" target="_blank"><i className="fa fa-instagram"></i></a>
                             </li>
                             <li className="linkedin">
-                                <a href="https://www.linkedin.com/company/99346088/admin/feed/posts/" aria-label="Linkedin"><i className="fa fa-linkedin"></i></a>
+                                <a href="https://www.linkedin.com/company/99346088/admin/feed/posts/" aria-label="Linkedin" target="_blank"><i className="fa fa-linkedin"></i></a>
                             </li>
                         </ul>
                     </div>
@@ -66,19 +66,19 @@ const Footer = () =>{
                     <h4 className="footer-heading">Company</h4>
                     <ul className="footer-list">
                         <li>
-                            <a href="/AmlPolicy">AML Policy</a>
+                            <a href="/AmlPolicy" target="_blank">AML Policy</a>
                         </li>
                         <li>
-                            <a href="/PrivacyPolicy">Privacy Policy</a>
+                            <a href="/PrivacyPolicy" target="_blank">Privacy Policy</a>
                         </li>
                         <li>
-                            <a href="/CookiesPolicy">Cookies Policy</a>
+                            <a href="/CookiesPolicy" target="_blank">Cookies Policy</a>
                         </li>
                         <li>
-                            <a href="/RedressalPolicy">Grievance Redressal Policy</a>
+                            <a href="/RedressalPolicy" target="_blank">Grievance Redressal Policy</a>
                         </li>
                         <li>
-                            <a href="/TermsandCondition">Terms & Conditions</a>
+                            <a href="/TermsandCondition" target="_blank">Terms & Conditions</a>
                         </li>
                     </ul>
                 </div>

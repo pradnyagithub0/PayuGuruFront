@@ -22,9 +22,6 @@
   height: 30px;
 }
 
-.cCiYxb {
-    display: inline-block;
-}
 .hZCbNs {
     max-height: 260px;
     max-width: 260px;
@@ -33,13 +30,6 @@
     display: block;
 }
 
-
-.sidebar2 {
-  top: 0 !important;
-  height: 100vh !important;
-  background: #fafbff;
-  border-right: 1px solid #e4e7e7;
-}
 .jzMYjV {
     width: 260px;
     overflow: hidden;
@@ -198,23 +188,84 @@
     /* text-align: center; */
   }
  
-  
-  @media screen and (max-width: 700px) {
+ 
+  @media screen and (max-width: 767px) {
     .sidebar2 {
-      /* width: 100%; */
-      height: auto;
-      position: relative;
+        width: 100%; /* Full width on small screens */
+        padding: 5px;
     }
-    .sidebar2 a {float: left;}
-    div.content {margin-left: 0;}
+
+    .sc-feJyhm, .sc-esOvli {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-input {
+        width: calc(100% - 40px); /* Adjust input width to fit within container */
+    }
+
+    .nav-item {
+        text-align: center; /* Center text on small screens */
+    }
+
+    .nav-item .nav-link {
+        display: block;
+        padding: 10px;
+    }
+
+    .nav-item .nav-link span {
+        display: inline; /* Show all text */
+    }
+    .content {
+      padding: 10px;
+  }
+
+  .api-content h1, .api-content h2 {
+      font-size: 20px;
+  }
+
+  .api-content p {
+      font-size: 14px;
+  }
+
+  .api-content h5 {
+      font-size: 16px;
   }
   
-  @media screen and (max-width: 555px) {
-    .sidebar2 a {
-      text-align: center;
-      float: none;
-    }
-    
+  .sc-gqjmRU.LiUBH {
+      font-size: 14px;
   }
+
+  table {
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+  }
+  
+}
+ 
+@media screen and (max-width: 700px) {
+  .sidebar2 {
+    /* width: 100%; */
+    height: auto;
+    position: relative;
+  }
+  .sidebar2 a {
+    float: left;
+  }
+  div.content {
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 555px) {
+  .sidebar2 a {
+    text-align: center;
+    float: none;
+  }
+  
+  
+}
  
 

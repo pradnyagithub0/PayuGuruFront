@@ -1,4 +1,3 @@
-// src/pages/Login.js
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import loadingImg from "../../assets/img/loading.gif";
@@ -114,10 +113,20 @@ const Login = () => {
       setLoginErr("Internal Server Error. Please try again later.");
     }
   };
+// Allow enter key part
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Enter") {
+        loginUser();
+      }
+    };
 
-  // Allow form submission with the enter key
- 
-  
+    window.addEventListener("keypress", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
+    };
+  }, []);
 
   return (
     <div>
@@ -139,12 +148,12 @@ const Login = () => {
                 </p>
                 <div className="inputbox">
                   <label>Mobile</label>
-                  <input type="Mobile" name="mobile" id="mobile" />
+                  <input type="mobile" name="mobile" id="mobile"/>
                   <p className="msg text-warning">{fieldErrors.userMobile}</p>
                 </div>
                 <div className="inputbox">
                   <label>Password</label>
-                  <input type="Password" name="password" id="password" />
+                  <input type="Password" name="password" id="password"/>
                   <p className="msg text-warning">{fieldErrors.password}</p>
                 </div>
                 <span className="text-warning">{loginErr}</span>
@@ -177,7 +186,7 @@ const Login = () => {
                   <a href="/Forgotun">Forgot Password?</a>
                 </div>
                 <div>
-                  <button type="submit" id="loginButton" className="submitButton" onClick={loginUser}>
+                  <button type="submit" className="submitButton" onClick={loginUser}>
                     Submit
                   </button>
                 </div>

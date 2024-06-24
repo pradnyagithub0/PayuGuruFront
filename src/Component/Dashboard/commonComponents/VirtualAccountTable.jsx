@@ -109,26 +109,26 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
   return (
     <div>
       <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
-      <div className="d-flex mr-2">
-                        <input
-                          type="text"
-                          className="searchTerm"
-                          placeholder="Search ID/Ref Number"
-                          value={search}
-                          onChange={(e) => {
-                            setSearch(e.target.value);
-                          }}
-                        />
-                        <button
-                          className="searchIconBtn"
-                          onClick={() => {
-                            console.log(search);
-                            handleSearchAcc();
-                          }}
-                        >
-                          <FiSearch />
-                        </button>
-         </div>
+        <div className="d-flex mr-2">
+                    <input
+                    type="text"
+                    className="searchTerm"
+                    placeholder="Search ID/Ref Number"
+                    value={search}
+                    onChange={(e) => {
+                      setSearch(e.target.value);
+                    }}
+                  />
+                  <button
+                    className="searchIconBtn"
+                    onClick={() => {
+                      console.log(search);
+                      handleSearchAcc();
+                    }}
+                  >
+                    <FiSearch />
+                  </button>
+          </div>
       </div>
     {/* <div style={{ marginBottom: '20px' }}>
           <input
@@ -139,44 +139,44 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
             style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', border: '1px solid #ccc' ,alignItems:'center' , alignContent:'center' }}
           />
       </div> */}
-    <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
-                {column.render('Header')}
-              </th>
+        <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  <th {...column.getHeaderProps()} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
+                    {column.render('Header')}
+                  </th>
+                ))}
+              </tr>
             ))}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()} style={{ background: row.original.ACstatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
-              {row.cells.map(cell => (
-                <td
-                  {...cell.getCellProps()}
-                  style={{
-                    padding: '10px',
-                    border: 'solid 1px gray',
-                    background: 'papayawhip',
-                    fontSize: '13px',
-                    alignItems: 'center',
-                    textAlign: 'center'
-                  }}
-                >
-                  {cell.render('Cell')}
-                </td>
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-            </div>
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()} style={{ background: row.original.ACstatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
+                  {row.cells.map(cell => (
+                    <td
+                      {...cell.getCellProps()}
+                      style={{
+                        padding: '10px',
+                        border: 'solid 1px gray',
+                        background: 'papayawhip',
+                        fontSize: '13px',
+                        alignItems: 'center',
+                        textAlign: 'center'
+                      }}
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+  </div>
   );
 };
 

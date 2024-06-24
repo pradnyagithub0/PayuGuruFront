@@ -51,7 +51,7 @@ const Resetpassword = () => {
           console.log(resData.mess.message);
           setResetPassErr(resData.mess.message);
         }
-      } else if (resData.success === false) {
+      } else if (resData.success === false) { 
         parseFieldErrors(resData.message);
       }
     } catch (error) {
@@ -118,10 +118,10 @@ const Resetpassword = () => {
                 <p className="msg text-warning">{fieldErrors.token}</p>
                 <span id="resetaPassError" className="text-warning">{resetPassErr}</span>
                 {loginBtn && <div>
-                  <Link to="/login">
-                    click here to login
-                  </Link>
-                </div>}
+                                <Link to="/login">
+                                  click here to login
+                                </Link>
+                            </div>}
                 
                 <div>
                   <button type="submit" id="reset-button" className="submitButton" onClick={HandleResetPassword}>

@@ -1,82 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Forgotun.css';
 import { ENDPOINTS } from "../../utils/apiConfig";
 import lodingImg from "../../assets/img/loading.gif";
 
+
 const ForgotPasswordPage = () => {
-  const [loader, setLoader] = useState(false);
     const [email, setEmail] = useState('');
-    const [error, setError] = useState('');
-    const [message, setMessage] = useState('');
-    const navigate = useNavigate();
+  const [message, setMessage] = useState('');
+  const [loader, setLoader] = useState(false);
+  
+  let navigate = useNavigate();
 
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value);
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoader(true);
+    try {
+      const response = await fetch(ENDPOINTS.FORGET_PASSWORD, {
+        method: 'POST',
+        headers: {
+          accept: "application/json",
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          email
+        }),
+      });
 
-    const validateEmail = (email) => {
-        const re = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        return re.test(String(email).toLowerCase());
-    };
+      const data = await response.json();
+      setMessage('A reset password email has been sent to your email.');
+      setLoader(false);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoader(true);
-        if (!email) {
-            setError('Email is required');
-            return;
-        }
-        if (!validateEmail(email)) {
-            setError('Invalid email address');
-            return;
-        }
+      // Navigate to the login page after a successful response
+      navigate('/');
+    } catch (error) {
+      setMessage('Error sending reset email.');
+      setLoader(false);
+    }
+  };
 
-        // Clear any previous errors
-        setError('');
-        setMessage('');
-
-        try {
-            const response = await fetch(ENDPOINTS.CHANGE_PASSWORD, {
-                method: 'POST',
-                headers: {
-                    accept: "application/json",
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ 
-                    email: email
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error('Failed to send password reset email');
-            }
-
-            const data = await response.json();
-
-            if (data.success) {
-                setMessage('Password reset email sent successfully');
-            } else {
-                setError('Failed to send password reset email');
-            }
-        } catch (error) {
-            setError('Something went wrong. Please try again later.');
-        }
-    };
-
-    useEffect(() => {
-        const handleKeyDown = (event) => {
-            if (event.key === 'Enter') {
-                document.getElementById('forgot-button').click();
-            }
-        };
-
-        document.addEventListener('keydown', handleKeyDown);
-
-        return () => {
-            document.removeEventListener('keydown', handleKeyDown);
-        };
-    }, []);
+    
+    
+    
 
     return (
         <div>
@@ -85,7 +50,7 @@ const ForgotPasswordPage = () => {
                     <div className="row">
                         <div className="col-lg-3 col-md-2 col-12 "></div>
                         <div className="col-lg-6 col-md-8 col-12">
-                            <form className="form" >
+                            <form className="form" onSubmit={handleSubmit}>
                                 <h3 className="text-center">Forgot Password</h3>
                                 <p className="text-center">
                                     <a href="/" className="text-white">
@@ -94,19 +59,18 @@ const ForgotPasswordPage = () => {
                                 </p>
                                 <div className="inputbox">
                                     <label>Email</label>
-                                    <input 
-                                        type="email" 
-                                        name='userEmail' 
-                                        id="userEmail" 
-                                        value={email}  
-                                        onChange={handleEmailChange}
+                                    <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
                                     />
                                     <p className="msg"></p>
                                 </div>
                                 
-                                {error && <p style={{ color: 'red' }}>{error}</p>}
-                                {message && <p style={{ color: 'green' }}>{message}</p>}
-                                <button type="submit" id="forgot-button" className="submitButton" onSubmit={handleSubmit}>
+                            
+                                
+                                <button type="submit" className="submitButton" >
                                     Submit
                                 </button>
                                 <div className="inputbox text-center">
@@ -116,17 +80,15 @@ const ForgotPasswordPage = () => {
                                     <p>Already Have An Account? <a href='/Login'>Login</a></p>
                                 </div>
                             </form>
+                            {message && <p>{message}</p>}
                         </div>
                         <div className="col-lg-3 col-md-2 col-12 "></div>
                       </div>
-
-                <div className="loaderContainer">
-            <div className="inputbox text-center loader-box">
-              {loader && (
-                <img src={lodingImg} alt="loading..." className="loaderImg" />
-              )}
-            </div>
-          </div>    
+                      <div className="loaderContainer">
+                        <div className="inputbox text-center loader-box">
+                        {loader && <img src={lodingImg} alt='loading...' className="loaderImg"/>}
+                        </div>
+                    </div>
                 </div>
             </section>
         </div>

@@ -4,9 +4,8 @@ import "./Registerpage.css";
 import lodingImg from "../../assets/img/loading.gif";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
 
-
-
 const Register = () => {
+  const [isChecked, setIsChecked] = useState(false);
   const [loader, setLoader] = useState(false);
   const [registerErr, setregisterErr] = useState("");
   const [fieldErrors, setFieldErrors] = useState({
@@ -19,10 +18,24 @@ const Register = () => {
   });
   let navigate = useNavigate();
 
-  const registerUser = async () => {
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+    if (e.target.checked) {
+      setregisterErr("");
+    }
+  };
+
+  const registerUser = async (e) => {
+    e.preventDefault();
     setLoader(true);
     setregisterErr("");
     setFieldErrors({});
+
+    if (!isChecked) {
+      setLoader(false);
+      setregisterErr('You must agree to the terms and conditions.');
+      return;
+    }
 
     try {
       const response = await fetch(ENDPOINTS.REGISTER_USER, {
@@ -42,7 +55,7 @@ const Register = () => {
       });
 
       const responseData = await response.json();
-      console.log(responseData)
+      console.log(responseData);
       setLoader(false);
 
       if (responseData.StatusCodes && responseData.StatusCodes === "00") {
@@ -91,12 +104,11 @@ const Register = () => {
 
     setFieldErrors(fieldErrors);
   };
-  //allow form submission with the enter key
+
   document.addEventListener('keydown', function(event){
     if (event.key === 'Enter'){
       document.getElementById('register-button').click();
     }
-
   });
 
   return (
@@ -150,9 +162,9 @@ const Register = () => {
                 </div>
                 <span id="mobileOtpError" className="text-danger">{ registerErr }</span>
                 <div className="tacbox">
-                  <input id="checkbox" type="checkbox" className="checkbox" />
+                  <input id="checkbox" type="checkbox" className="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
                   <label htmlFor="checkbox">
-                    I agree to these <Link to="#">Terms and Conditions</Link>.
+                    I agree to these <Link to="/termsandcondition">Terms and Conditions</Link>.
                   </label>
                 </div>
                 <div>

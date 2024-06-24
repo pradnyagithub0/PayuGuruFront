@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import './Header.css';
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,7 +22,7 @@ function Header(){
                             </Link>
                         </div>
                         <button type="button" data-target="#navbarCollapse" data-toggle="collapse" className="navbar-toggler">
-                        <span className="navbar-toggler-icon"></span>
+                            <span className="navbar-toggler-icon"></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navbarCollapse">
                             <ul className="navbar-nav mx-auto">
