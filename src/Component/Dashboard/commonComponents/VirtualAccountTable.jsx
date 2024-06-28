@@ -3,7 +3,7 @@ import { FiSearch } from 'react-icons/fi';
 // Import Axios
 import { useTable , useSortBy } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
-
+import generatePDF from '../../../hooks/usePdfAccountListGenerate'
 
 const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection }) => {
 
@@ -159,6 +159,10 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
                           <FiSearch />
                         </button>
          </div>
+        
+      </div>
+      <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}>
+      {/* <button className="btn btn1" onClick={() => generatePDF('virtual-account-list', sessionid)}>PDF <i className='fa fa-pdf'></i></button> */}
       </div>
     {/* <div style={{ marginBottom: '20px' }}>
           <input
@@ -169,7 +173,7 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
             style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', border: '1px solid #ccc' ,alignItems:'center' , alignContent:'center' }}
           />
       </div> */}
-    <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
+    <table id="virtual-account-list" {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
