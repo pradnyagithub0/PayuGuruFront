@@ -9,7 +9,9 @@ import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 
 const Account = () => {
+
   const isInactive = useInactivityTimeout(600000); // 10 minutes
+
   let navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +34,8 @@ const Account = () => {
           </div>
           <div className="row">
             <div className="col-xl-6 col-lg-9 col-md-8 col-12">
-              <div className="card pb-0 account-details border-0 shadow-lg">
+              <div className="card pb-0 h-theme account-details border-0 shadow-lg">
+
                 <h4 className="bg-transparent mt-0 p-3">Account Settings</h4>
                 <div className="card-body p-3">
                   <form action="#">

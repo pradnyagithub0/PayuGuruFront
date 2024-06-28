@@ -1,11 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 // Import Axios
-import { useTable } from 'react-table';
+import { useTable , useSortBy } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
 
 
-const VirtualAccountTable = ({ data, toggleStatus }) => {
+const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection }) => {
 
   const [search, setSearch] = useState('');
   const [acList, setAcList] = useState([]);
@@ -22,6 +22,7 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
 
 
   const handleStatusToggle = (rowData) => {
+    rowData.preventDefault();
     toggleStatus(rowData); // Call the function from parent
   };
 
@@ -42,6 +43,9 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
       });
 
       const resData = await response.json();
+      console.log('====================================');
+      console.log('Account Search Result: ', resData);
+      console.log('====================================');
       setLoader(false);
 
       if (resData.StatusCodes) {
@@ -81,7 +85,10 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
         accessor: '  ',
         Cell: ({ row }) => (
           <button
-            onClick={() => handleStatusToggle(row.original)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleStatusToggle(row.original);
+            }}
             style={{
               padding: '5px 10px',
               backgroundColor: row.original.ACstatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
@@ -98,37 +105,60 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
     []
   );
 
+  const renderHeader = (column) => (
+    <th
+      {...column.getHeaderProps()}
+      onClick={(e) => { 
+        e.preventDefault()
+       onSort(column.accessor)}}
+      className={column.isSortable ? 'sortable' : ''}
+      style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}
+    >
+      {column.render('Header')}
+      {column.isSortable && (
+        <span>
+          {sortBy === column.accessor
+            ? sortDirection === 'asc'
+              ? ' 🔼'
+              : ' 🔽'
+            : ''}
+        </span>
+      )}
+    </th>
+  );
+
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-  } = useTable({ columns, data:filteredData});
+  } = useTable({ columns, data:filteredData}, useSortBy);
 
   return (
     <div>
       <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
-        <div className="d-flex mr-2">
-                    <input
-                    type="text"
-                    className="searchTerm"
-                    placeholder="Search ID/Ref Number"
-                    value={search}
-                    onChange={(e) => {
-                      setSearch(e.target.value);
-                    }}
-                  />
-                  <button
-                    className="searchIconBtn"
-                    onClick={() => {
-                      console.log(search);
-                      handleSearchAcc();
-                    }}
-                  >
-                    <FiSearch />
-                  </button>
-          </div>
+      <div className="d-flex mr-2">
+                        <input
+                          type="text"
+                          className="searchTerm"
+                          placeholder="Search ID/Ref Number"
+                          value={search}
+                          onChange={(e) => {
+                            setSearch(e.target.value);
+                          }}
+                        />
+                        <button
+                          className="searchIconBtn"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            console.log(search);
+                            handleSearchAcc();
+                          }}
+                        >
+                          <FiSearch />
+                        </button>
+         </div>
       </div>
     {/* <div style={{ marginBottom: '20px' }}>
           <input
@@ -139,44 +169,55 @@ const VirtualAccountTable = ({ data, toggleStatus }) => {
             style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', border: '1px solid #ccc' ,alignItems:'center' , alignContent:'center' }}
           />
       </div> */}
-        <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
-          <thead>
-            {headerGroups.map(headerGroup => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map(column => (
-                  <th {...column.getHeaderProps()} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
-                    {column.render('Header')}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map(row => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()} style={{ background: row.original.ACstatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
-                  {row.cells.map(cell => (
-                    <td
-                      {...cell.getCellProps()}
-                      style={{
-                        padding: '10px',
-                        border: 'solid 1px gray',
-                        background: 'papayawhip',
-                        fontSize: '13px',
-                        alignItems: 'center',
-                        textAlign: 'center'
-                      }}
-                    >
-                      {cell.render('Cell')}
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-  </div>
+    <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
+      <thead>
+        {headerGroups.map(headerGroup => (
+          <tr {...headerGroup.getHeaderGroupProps()}>
+            {/* {headerGroup.headers.map(column => (
+              // <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
+              //   {column.render('Header')}
+              //   <span>
+              //         {column.isSorted
+              //           ? column.isSortedDesc
+              //             ? ' 🔽'
+              //             : ' 🔼'
+              //           : ''}
+              //       </span>
+              // </th>
+
+              
+            // ))}  */}
+
+              {headerGroup.headers.map(renderHeader)}
+          </tr>
+        ))}
+      </thead>
+      <tbody {...getTableBodyProps()}>
+        {rows.map(row => {
+          prepareRow(row);
+          return (
+            <tr {...row.getRowProps()} style={{ background: row.original.ACstatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
+              {row.cells.map(cell => (
+                <td
+                  {...cell.getCellProps()}
+                  style={{
+                    padding: '10px',
+                    border: 'solid 1px gray',
+                    background: 'papayawhip',
+                    fontSize: '13px',
+                    alignItems: 'center',
+                    textAlign: 'center'
+                  }}
+                >
+                  {cell.render('Cell')}
+                </td>
+              ))}
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+            </div>
   );
 };
 

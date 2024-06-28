@@ -1,17 +1,19 @@
 import React from 'react';
 
-const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => {
+const Pagination = ({ currentPage, itemsPerPage, totalItems, remaining , onPageChange }) => {
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
+      sessionStorage.setItem('currentPage',parseInt(currentPage - 1))
     }
   };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       onPageChange(currentPage + 1);
+      sessionStorage.setItem('currentPage',parseInt(currentPage + 1))
     }
   };
 
@@ -49,7 +51,7 @@ const Pagination = ({ currentPage, itemsPerPage, totalItems, onPageChange }) => 
         </li>
       </ul>
       <div className="pagination-info" style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
-        Page {currentPage} of {totalPages} | Total Entries: {totalItems}
+        Page {currentPage} of {totalPages} | Total Entries: {totalItems} | Remaining Entries: {remaining}
       </div>
     </nav>
   );

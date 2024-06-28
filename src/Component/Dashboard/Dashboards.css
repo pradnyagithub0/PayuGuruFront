@@ -13,13 +13,19 @@
     text-align: left;
     margin-top: 10px;
 }
+
+.row:first-child {
+    margin-top: 20px;
+    border-radius: 8px;
+    padding: 5px;
+}
 .main-content .btn-top {
     text-decoration: none;
     font-size: 14px;
     line-height: 18px;
     padding: 0px 14px;
     background-color: #0000ff;
-    color: #fff;
+    color: var(--text-color);
     width: auto;
     height: 45px;
     float: right;
@@ -29,7 +35,11 @@
     list-style: none;
 }
 .main-content .top {
-    background: #fff !important;
+    background: var(--bg) !important;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
 }
 .account-card {
     width: 100%;
@@ -40,7 +50,7 @@
 }
 .account-card p {
     font-size: 20px;
-    color: #fff;
+    color: var(--text-color);
     font-weight: 600;
     line-height: 25px;
     letter-spacing: 0em;
@@ -48,7 +58,7 @@
 }
 .account-card h3 {
     font-size: 40px;
-    color: #fff;
+    color: var(--bg-color);
     font-weight: 700;
     line-height: 58px;
     letter-spacing: 0em;
@@ -68,7 +78,8 @@
     border-radius: 40px;
     letter-spacing: 0em;
     text-align: center;
-    background: #E7F5FF;
+    background: var(--btn-create-ac);
+    color: var(--text-color);
 }
 .btn-light-grey {
     width: 100%;
@@ -80,7 +91,8 @@
     line-height: 23px;
     letter-spacing: 0em;
     text-align: center;
-    background: #E7E8FF;
+    background: var(--btn-create-upi);
+    color: var(--text-color);
 }
 .btn-light-pink {
     width: 100%;
@@ -93,10 +105,11 @@
     letter-spacing: 0em;
     text-align: center;
     background: #FFE7F8;
+
 }
 .account-details {
     border-radius: 20px;
-    background-color: #fff;
+    background-color: var(--bg-color);
     margin-top: 25px;
 }
 .account-details h4 {
@@ -106,7 +119,7 @@
     line-height: 30px;
     letter-spacing: 0em;
     text-align: left;
-    background: #FAFBFF;
+    background: var(--bg-color);
     border-bottom: 0;
 }
 .account-details .card-header {
@@ -121,19 +134,56 @@
     line-height: 20px;
     padding: 0.75rem;
     vertical-align: top;
-    border-right: 1px solid #E8EAF3;
+    border-right: 1px solid var(--border);
 }
 .table-striped tbody tr:nth-of-type(even) {
-    background-color: #E7F5FF;
+    background-color: var(--bg-color);
 }
 
+.modal-content {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+.modal-footer {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.btn-close {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+.modal-header {
+    background-color: var(--bg-color);
+    color: var(--heading-color);
+}
+.table td {
+    color: var(--heading-color);
+}
+.table {
+    --bs-table-color: var(--text-color);
+    --bs-table-bg: var(--bg-color);
+}
+.h-theme {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+.main-content {
+    /* background-color: var(--bg-color); */
+    color: var(--text-color);
+}
+
+.h-theme p {
+    color: var(--text-color);
+}
 /* css for modal pop req docs button click */
 .docsReqModal-content{
-    background-color: #ffffff !important;
+    background-color: var(--bg-color) !important;
     border: none !important;
 }
 .docReqModal{
-    background-color: rgba(255,255,255,0.5) !important;
+    background-color: var(--bg-color) !important;
     z-index: 9999 !important;
     overflow: hidden !important;
     height: 100vh !important;
@@ -145,8 +195,97 @@
 .modalBodySection{
     height: 60vh;
     overflow: auto;
+    background-color: var(--bg-color) !important;
 }
 
+
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --heading-color: #444444;
+    --text-success: #09a13cdc;
+    --btn-create-upi:   #E7E8FF;
+    --btn-create-ac:  #E7F5FF;
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24.6 95% 53.1%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 24.6 95% 53.1%;
+    --radius: 0.5rem;
+  }
+  
+  /* Dark mode styles */
+  [data-theme="dark"] {
+    --bg-color: #333333;
+    --text-color: #ffffff;
+    --heading-color: #dddddd;
+    --text-success: #27ec63d6;
+    --btn-create-upi:   #222453;
+    --btn-create-ac:  #04426e;
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 20.5 90.2% 48.2%;
+  }
+
+  .float-left p {
+    color: var(--text-color);
+  }
+
+  .fa i {
+    color: var(--text-color);
+  }
+
+  .dropdown-menu {
+    --bs-dropdown-bg: var(--bg-color) !important;
+
+  }
+ 
+ .wrapper { 
+   display: flex;
+   height: auto;
+   /* background:  #f9fafe; */
+   background-color: var(--bg);
+   position: relative;
+   
+ }
+
+  .float-right{
+    color: var(--text-color);
+  }
+
+  .font-weight-bold {
+    color: var(--text-color) !important;
+  }
 /* Media Query */
 @media only screen and (max-width: 427px){
     .main-content {

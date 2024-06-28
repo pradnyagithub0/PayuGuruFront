@@ -2,23 +2,23 @@
 // UpiListTable.js
 import React, { useState, useMemo } from 'react';
 import { FiSearch } from 'react-icons/fi';
-import { useTable } from 'react-table';
+import { useTable, useSortBy } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
 
 
-const UpiListTable = ({ data, toggleStatus  }) => {
+const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) => {
 
   const [search, setSearch] = useState('');
-  const [acList, setAcList] = useState([]);
+  const [upiList, setUPList] = useState([]);
   const sessionid = sessionStorage.getItem("sessionid");
   const [loader, setLoader] = useState(false);
 
 
-  const handleSearchAcc = async () => {
+  const handleSearchUPI = async () => {
     setLoader(true);
 
     try {
-      const response = await fetch(ENDPOINTS.SEARCH_VIRTUAL_ACC, {
+      const response = await fetch(ENDPOINTS.SEARCH_UPI_ID, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -26,18 +26,19 @@ const UpiListTable = ({ data, toggleStatus  }) => {
         },
         body: JSON.stringify({
           sessionid: sessionid,
-          AC_id: search,
+          upi_id: search,
         }),
       });
 
       const resData = await response.json();
+
       setLoader(false);
 
       if (resData.StatusCodes) {
         if (resData.StatusCodes === "00") {
           // Convert the single object response to an array
           const responseArray = [resData.responsed];
-          setAcList(responseArray);
+          setUPList(responseArray);
         } else {
           console.log(resData.mess.message);
         }
@@ -59,8 +60,32 @@ const UpiListTable = ({ data, toggleStatus  }) => {
 
 
   const handleStatusToggle = (rowData) => {
+  
     toggleStatus(rowData); // Call the function from parent
   };
+
+  const renderHeader = (column) => (
+    <th
+      {...column.getHeaderProps()}
+      onClick={(e) => {
+        e.preventDefault()
+        onSort(column.accessor);
+      } }
+      className={column.isSortable ? 'sortable' : ''}
+      style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}
+    >
+      {column.render('Header')}
+      {column.isSortable && (
+        <span>
+          {sortBy === column.accessor
+            ? sortDirection === 'asc'
+              ? ' 🔼'
+              : ' 🔽'
+            : ''}
+        </span>
+      )}
+    </th>
+  );
 
   const columns = React.useMemo(
     () => [
@@ -84,7 +109,10 @@ const UpiListTable = ({ data, toggleStatus  }) => {
         accessor: '  ',
         Cell: ({ row }) => (
           <button
-            onClick={() => handleStatusToggle(row.original)}
+            onClick={(e) => {
+              e.preventDefault();
+              handleStatusToggle(row.original);
+            }}
             style={{
               padding: '5px 10px',
               backgroundColor: row.original.upistatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
@@ -113,26 +141,27 @@ const UpiListTable = ({ data, toggleStatus  }) => {
 
     <div>
         <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
-          <div className="d-flex mr-2">
-                    <input
-                        type="text"
-                        className="searchTerm"
-                        placeholder="Search ID/Ref Number"
-                        value={search}
-                        onChange={(e) => {
-                        setSearch(e.target.value);
-                        }}
+      <div className="d-flex mr-2">
+                        <input
+                          type="text"
+                          className="searchTerm"
+                          placeholder="Search ID/Ref Number"
+                          value={search}
+                          onChange={(e) => {
+                            setSearch(e.target.value);
+                          }}
                         />
-                      <button
-                        className="searchIconBtn"
-                        onClick={() => {
-                        console.log(search);
-                        handleSearchAcc();
-                        }}
-                      >
-                      <FiSearch />
-                      </button>
-            </div>
+                        <button
+                          className="searchIconBtn"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            console.log(search);
+                            handleSearchUPI();
+                          }}
+                        >
+                          <FiSearch />
+                        </button>
+         </div>
       </div>
     {/* <div style={{ marginBottom: '20px' }}>
       <input
@@ -147,11 +176,12 @@ const UpiListTable = ({ data, toggleStatus  }) => {
       <thead>
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
-            {headerGroup.headers.map(column => (
+            {/* {headerGroup.headers.map(column => (
               <th {...column.getHeaderProps()} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign:'center'}}>
                 {column.render('Header')}
               </th>
-            ))}
+            ))} */}
+             {headerGroup.headers.map(renderHeader)}
           </tr>
         ))}
       </thead>

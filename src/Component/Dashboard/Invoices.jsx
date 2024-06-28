@@ -28,7 +28,7 @@ function Invoices(){
                     <div className="row">
                         <div className="col-lg-12 col-md-12 col-12">
                             <div className="card pb-0 account-details border-0 shadow-lg">
-                                <h4 className="bg-transparent mt-0 p-3">Invoices</h4>
+                                <h4 className="bg-transparent mt-0 p-3 h-theme">Invoices</h4>
                                 <div className="card-body p-0">
                                     <div className="table-responsive">
                                         <table className="table table-striped table-bordered ">

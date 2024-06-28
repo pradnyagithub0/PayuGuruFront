@@ -1,15 +1,26 @@
-import React, { useEffect, useRef } from 'react';
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import Dropdown from "react-bootstrap/Dropdown";
 import { useNavigate, useHistory  } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ENDPOINTS } from "../utils/apiConfig";
 import "./Dheader.css";
-
+import {useTheme} from "./theme-context";
+import { Nav, Navbar } from 'react-bootstrap';
+import Notifications from './Dashboard/commonComponents/Notification';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { ModeToggle } from './mode-toggle';
 
 const Header = () => {
   const Logout_API = ENDPOINTS.LOGOUT_REQUEST;
   const sessionid = sessionStorage.getItem("sessionid");
+  const [showNotifications, setShowNotifications] = useState(false);
   let navigate = useNavigate();
+
+  const {theme, toggleTheme} = useTheme();
+
+  const toggleMode = () => {
+    toggleTheme();
+  };
 
   const handleLogout = async () => {
     try {
@@ -49,8 +60,9 @@ const Header = () => {
 
   return (
     <div>
-      <header>
-        <nav className="container-fluid navbar navbar-expand-lg navbar-light bg-white px-5">
+      <header className={`h-theme ${theme} theme-controller`}>
+       <div>
+       <nav className="container-fluid navbar navbar-expand-lg px-5">
           <div className="navbar-brand" href="">
             <img
               src="https://i.ibb.co/GTr3w2M/logo.webp"
@@ -71,9 +83,67 @@ const Header = () => {
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-
+          
+      {/* <ModeToggle/> */}
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ml-auto">
+
+              <li className="nav-item my-auto items-center">
+                  <div>
+                  <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round">
+                        <circle cx="12" cy="12" r="5" />
+                        <path
+                          d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                      </svg>
+                  </div>
+              </li>
+
+              <li className="nav-item my-auto items-center ">
+                  <div className="mode-switch">
+                  
+                
+                  <label className="flex cursor-pointer gap-2">
+                
+                <input
+                    type="checkbox"
+                    onChange={toggleMode}
+                    checked={theme === "dark"}
+                  />
+                  <span className="slider round"></span>
+                
+            </label>    
+              
+                </div>
+                      
+              </li>
+
+              <li className="nav-item my-auto items-center">
+              <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                  </svg>
+              
+                  </div>
+              </li>
+
               <li className="nav-item my-auto">
                 <Link className="nav-link" to="/docs">API Docs</Link>
 
@@ -81,13 +151,31 @@ const Header = () => {
                   API Docs
                 </a> */}
               </li>
+              
               <li className="nav-item my-auto ">
                 <Link className="nav-link"  to="/kybform">Status</Link>
                 {/* <a href="kybform" className="nav-link">
                   Status
                 </a> */}
               </li>
-
+                
+              {/* <li className="nav-item my-auto">
+               <FontAwesomeIcon icon="fa-regular fa-message" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ml-auto">
+                  <Dropdown onToggle={() => setShowNotifications(!showNotifications)}>
+                    <Dropdown.Toggle variant="h-theme" id="dropdown-basic">
+                   
+                    </Dropdown.Toggle>
+                    {showNotifications && (
+                      <Suspense fallback={<div>Loading...</div>}>
+                        <Notifications />
+                      </Suspense>
+                    )}
+                  </Dropdown>
+                </Nav>
+              </Navbar.Collapse>
+              </li> */}
               <li className="nav-item dropdown">
                 <Dropdown>
                   <Dropdown.Toggle variant="Secondary'" id="dropdown-basic">
@@ -106,7 +194,9 @@ const Header = () => {
               </li>
             </ul>
           </div>
+          
         </nav>
+       </div>
       </header>
 
       <div className="sidebar sidebar-collapse" id="navbarSupportedContent">

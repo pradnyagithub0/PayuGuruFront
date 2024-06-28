@@ -1,5 +1,9 @@
 
-
+* {
+    font-family: Plus Jakarta Sans, 'Source Sans Pro';
+    margin: 0;
+    padding: 0;
+}
 
 .main-content {
     margin: 110px 0px 0px 10px;
@@ -7,9 +11,9 @@
     padding-left: 320px;
     padding-right: 40px;
 }
-.main-content .top {
+/* .main-content .top {
     background: #fff !important;
-}
+} */
 .top p {
     font-size: 14px;
     font-weight: 500;

@@ -1,3 +1,4 @@
+import { useTheme } from "../../theme-context";
 import React from "react";
 
 const DashboardTopbar = () => {
@@ -8,11 +9,17 @@ const DashboardTopbar = () => {
     myModal.show();
   };
 
+  const {theme, toggleTheme} = useTheme();
+
+  const toggleMode = () => {
+    toggleTheme();
+  };
+
   return (
     <>
-      <div className="row mt-0">
+      <div className={`row mt-0 h-theme ${theme}`}>
         <div className="col-lg-9 col-md-9 col-12">
-          <p className="text-dark float-left">
+          <p className="float-left">
             <i className="fa fa-info-circle"></i> Your account is pending
             activation. Please submit your documents to payuguru.com
           </p>
@@ -46,7 +53,7 @@ const DashboardTopbar = () => {
             <div className="modal-body modalBodySection">
               <div className="text-center mb-3">
                 <h6>Your account is pending activation.</h6>
-                <p>
+                <p className={`h-theme ${theme}`}>
                   Please submit your document to{" "}
                   <span className="text-primary"> info@payu.guru </span> for
                   activating your PayuGuru account. you can also chat with our

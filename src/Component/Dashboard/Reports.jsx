@@ -35,7 +35,7 @@ function Reports(){
                             <div className="card pb-0 account-details border-0 shadow-lg">
                                 <div className="row">
                                     <div className="col-lg-4 col-md-4 col-12">
-                                        <h4 className="bg-transparent mt-0 p-3">Reports</h4>
+                                        <h4 className="bg-transparent mt-0 p-3 h-theme">Reports</h4>
                                     </div>
                                     <div className="col-lg-8 col-md-8 col-12">
                                         <div className="mt-0 p-3 d-flex float-right btn-left">

@@ -36,7 +36,7 @@
   }
   .docsReqModal-content
   {
-    background-color: #ffffff !important;
+    background-color: var(--bg-color) !important;
     border: none !important;
 }
 .docReqModal{

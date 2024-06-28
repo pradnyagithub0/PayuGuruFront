@@ -146,11 +146,11 @@ function Userprofile() {
 
           <div className="row">
             <div className="col-lg-10 col-md-10 col-12">
-              <div className="card pb-0 account-details border-0 shadow-lg">
+              <div className="card pb-0 h-theme account-details border-0 shadow-lg">
                 <div className="col-lg-8 col-md-8 col-12">
                   <h3 className=" my-0 p-3">User Profile</h3>
                   <div className="card-body p-0">
-                    <div className="p-2 mb-2 text-success">*{userInfo.message}</div>
+                    <div className="p-2 mb-2 text-succes">*{userInfo.message}</div>
                     <div className="user_profile">
                       <table className="table table-borderless ">
                         <tbody>

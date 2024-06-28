@@ -34,8 +34,8 @@ function Webhook(){
 
                     <div className="row">
                         <div className="col-xl-8 col-lg-12 col-md-12 col-12">
-                            <div className="card pb-0 account-details border-0 shadow-lg">
-                                <h3 className=" mt-0 p-3">Webhooks Settings</h3>
+                            <div className="card pb-0 h-theme account-details border-0 shadow-lg">
+                                <h3 className=" mt-0 p-3 h-theme">Webhooks Settings</h3>
                                 <div className="card-body p-3">
                                     {/* <form action="#" className="user_profile">
                                         <div className="table-responsive">

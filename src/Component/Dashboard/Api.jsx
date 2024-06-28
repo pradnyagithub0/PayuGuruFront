@@ -98,14 +98,14 @@ function Api() {
 
           <div className="row">
             <div className="col-xl-7 col-lg-9 col-md-8 col-12">
-              <div className="card pb-0 account-details border-0 shadow-lg">
+              <div className="card h-theme pb-0 account-details border-0 shadow-lg">
                 <h4 className="bg-transparent mt-0 p-3">API Settings</h4>
                 <div className="card-body p-3">
                   <div>
                     <div className="d-flex justify-content-between align-items-center">
                       <label className="form-label">API Token: api_id</label>
                       <label
-                        className="form-label text-primary"
+                        className="form-label text-info"
                         onClick={getApiToken}
                         style={{ cursor: "pointer" }}
                       >
@@ -191,7 +191,7 @@ function Api() {
 
                     <label className="form-label">Whitelisted IPs</label>
                     <div className="mb-3">
-                      <p className="text-secondary">
+                      <p className="text-info">
                         Configure which IP Addresses can access your account.
                       </p>
                     </div>
