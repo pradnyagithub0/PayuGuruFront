@@ -1,33 +1,33 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Component/Home/Home';
+import Home from './components/Home/Home';
 import Main from './Main';
-import Loginpage from './Component/Login/Loginpage';
-import Registerpage from './Component/Register/Registerpage';
-import Emailotp from './Component/Phone/Emailotp';
-import Mobileotp from './Component/Phone/Mobileotp';
-import Forgotun from './Component/ForgotUP/Forgotun';
-import Dashboards from './Component/Dashboard/Dashboards';
-import Virtualaccount from './Component/Dashboard/Virtualaccount';
-import Upi from './Component/Dashboard/Upi';
-import Reports from './Component/Dashboard/Reports';
-import Invoices from './Component/Dashboard/Invoices';
-import Account from './Component/Dashboard/Account';
-import Api from './Component/Dashboard/Api';
-import Webhook from './Component/Dashboard/Webhook';
-import Userprofile from './Component/Dashboard/Userprofile';
-import KybForm from './Component/KycForms/KybForm';
-import KycForm from './Component/KycForms/KycForm';
-import Enquiry from './Component/Enquiry/Enquiry';
-import Success from './Component/Success/Success';
-import Otppage from './Component/Otp/Otppage';
-import Resetpassword from './Component/Rpassword/Resetpassword';
+import Loginpage from './components/Login/Loginpage';
+import Registerpage from './components/Register/Registerpage';
+import Emailotp from './components/Phone/Emailotp';
+import Mobileotp from './components/Phone/Mobileotp';
+import Forgotun from './components/ForgotUP/Forgotun';
+import Dashboards from './components/Dashboard/Dashboards';
+import Virtualaccount from './components/Dashboard/Virtualaccount';
+import Upi from './components/Dashboard/Upi';
+import Reports from './components/Dashboard/Reports';
+import Invoices from './components/Dashboard/Invoices';
+import Account from './components/Dashboard/Account';
+import Api from './components/Dashboard/Api';
+import Webhook from './components/Dashboard/Webhook';
+import Userprofile from './components/Dashboard/Userprofile';
+import KybForm from './components/KycForms/KybForm';
+import KycForm from './components/KycForms/KycForm';
+import Enquiry from './components/Enquiry/Enquiry';
+import Success from './components/Success/Success';
+import Otppage from './components/Otp/Otppage';
+import Resetpassword from './components/Rpassword/Resetpassword';
 import AmlPolicy from './Pages/AmlPolicy';
 import CookiesPolicy from './Pages/CookiesPolicy';
 import PrivacyPolicy from './Pages/PrivacyPolicy';
 import RedressalPolicy from './Pages/RedressalPolicy';
 import TermsandCondition from './Pages/TermsandCondition';
-import ProtectedRoute from './ProtectedRoute'; // Import ProtectedRoute component
+import ProtectedRoute from './ProtectedRoute'; // Import ProtectedRoute components
 import Docsmain from './docs/Docsmain';
 
 const Routing = () => {

@@ -7,7 +7,7 @@ import { ApplicationContextProvider } from './context/ApplicationContext';
 // import {ThemeProvider} from './app/components/theme-provider';
 // import { Theme } from '@radix-ui/themes';
 
-import {ThemeProvider} from './Component/theme-context';
+import {ThemeProvider} from './components/theme-context';
 const container = document.getElementById('root');
 
 const root = ReactDom.createRoot(container);

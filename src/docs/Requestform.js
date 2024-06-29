@@ -1,10 +1,11 @@
 // src/components/RequestForm.js
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
+import { ENDPOINTS } from '../utils/apiConfig';
 
 const environments = {
-  dev: 'https://apiv1.bapaupipaymentgatewayapi.com/api',
-  prod: 'https://apiv1.bapaupipaymentgatewayapi.com/api/',
+  dev: ENDPOINTS,
+  prod: ENDPOINTS,
 };
 
 const RequestForm = ({ onResponse, onSaveHistory }) => {
