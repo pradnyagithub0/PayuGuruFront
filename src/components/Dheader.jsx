@@ -6,10 +6,13 @@ import { ENDPOINTS } from "../utils/apiConfig";
 import "./Dheader.css";
 import {useTheme} from "./theme-context";
 import { Nav, Navbar } from 'react-bootstrap';
-import Notifications from './Dashboard/commonComponents/Notification';
+// import Notifications from './Dashboard/commonComponents/Notification';
+import NotificationButton from './Dashboard/NotificationButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Stack, Toggle } from 'rsuite';
 // import { ModeToggle } from './mode-toggle';
-
+import 'rsuite/Toggle/styles/index.css';
+import 'rsuite/Stack/styles/index.css';
 const Header = () => {
   const Logout_API = ENDPOINTS.LOGOUT_REQUEST;
   const sessionid = sessionStorage.getItem("sessionid");
@@ -72,7 +75,7 @@ const Header = () => {
             />
           </div>
 
-          <button
+          {/* <button
             className="navbar-toggler"
             type="button"
             data-toggle="collapse"
@@ -82,7 +85,8 @@ const Header = () => {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
+          </button> */}
+          
           
       {/* <ModeToggle/> */}
           <div className="collapse navbar-collapse">
@@ -111,7 +115,7 @@ const Header = () => {
                   <div className="mode-switch">
                   
                 
-                  <label className="flex cursor-pointer gap-2">
+                  {/* <label className="flex cursor-pointer gap-2">
                 
                 <input
                     type="checkbox"
@@ -120,7 +124,13 @@ const Header = () => {
                   />
                   <span className="slider round"></span>
                 
-            </label>    
+            </label>     */}
+                  <Stack spacing={10} childrenRenderMode="clone">
+          {/* <Toggle size="lg">Large</Toggle>
+          <Toggle size="md">Medium</Toggle> */}
+                <Toggle size="sm"   onChange={toggleMode}
+                    checked={theme === "dark"}></Toggle>
+              </Stack>
               
                 </div>
                       
@@ -143,7 +153,9 @@ const Header = () => {
               
                   </div>
               </li>
-
+                <li className="nav-item my-auto px-2">
+              <NotificationButton/>
+              </li>
               <li className="nav-item my-auto">
                 <Link className="nav-link" to="/docs">API Docs</Link>
 
@@ -176,6 +188,7 @@ const Header = () => {
                 </Nav>
               </Navbar.Collapse>
               </li> */}
+              
               <li className="nav-item dropdown">
                 <Dropdown>
                   <Dropdown.Toggle variant="Secondary'" id="dropdown-basic">

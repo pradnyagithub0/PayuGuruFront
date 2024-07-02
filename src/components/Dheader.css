@@ -410,12 +410,12 @@
   } */
   .mode-switch label {
     display: inline-block;
-    width: 35px;
-    height: 20px;
+    /* width: 35px; */
+    /* height: 20px; */
     position: relative;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-top: 18px;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 10px;
   }
   
   .mode-switch .slider {
@@ -431,6 +431,9 @@
 
   }
   
+  .rs-btn-icon{
+    color: var(--noti);
+  }
   .mode-switch input:checked + .slider {
     background-color: #00ff;
   }
@@ -446,6 +449,9 @@
     transition: 0.4s;
     border-radius: 50%;
   }
+
+
+  
   
   .mode-switch input:checked + .slider:before {
     transform: translateX(20px);

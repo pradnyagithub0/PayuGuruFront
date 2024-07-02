@@ -23,6 +23,7 @@ const DashboardTopbar = () => {
             <i className="fa fa-info-circle"></i> Your account is pending
             activation. Please submit your documents to payuguru.com
           </p>
+          
         </div>
         <div className="col-lg-3 col-md-3 col-12">
           <button type="button" className="btn btn-top" onClick={docsModalOpen}>

@@ -4,7 +4,11 @@ import React, { useState, useMemo } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { useTable, useSortBy } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
-
+import PageToolbar from '../PageToolbar';
+import { Stack } from 'rsuite';
+import Panel from 'rsuite/Panel';
+import 'rsuite/Panel/styles/index.css';
+import 'rsuite/Stack/styles/index.css';
 
 const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) => {
 
@@ -140,7 +144,7 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
   return (
 
     <div>
-        <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
+        {/* <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
       <div className="d-flex mr-2">
                         <input
                           type="text"
@@ -162,6 +166,59 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
                           <FiSearch />
                         </button>
          </div>
+      </div> */}
+        <div style={{ margin:'20px',padding: '10px', width: '100%', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
+      {/* <div className="d-flex mr-2">
+                        <input
+                          type="text"
+                          className="searchTerm"
+                          placeholder="Search ID/Ref Number"
+                          value={search}
+                          onChange={(e) => {
+                            setSearch(e.target.value);
+                          }}
+                        />
+                        <button
+                          className="searchIconBtn"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            console.log(search);
+                            handleSearchUPI();
+                          }}
+                        >
+                          <FiSearch />
+                        </button>
+         </div> */}
+         <Stack>
+                    {/* <Panel header={<h3 className="title"></h3>}> */}
+                      
+                    <div className='d-flex mr-3 p-3 center' style={{width: '450px'}}>
+                      <PageToolbar />
+                    </div>           
+                    <div className='d-flex mr-3 p-3 center'>
+                      <input
+                            type="text"
+                            className="searchTerm"
+                            placeholder="Search ID/Ref Number"
+                            value={search}
+                            onChange={(e) => {
+                              setSearch(e.target.value);
+                            }}
+                            style={{width:'250px !important', justifyItems:'center'}}
+                          />
+                          <button
+                            className="searchIconBtn"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              console.log(search);
+                              handleSearchUPI();
+                            }}
+                          >
+                            <FiSearch />
+                          </button>
+                    </div>
+                        {/* </Panel> */}
+          </Stack>
       </div>
     {/* <div style={{ marginBottom: '20px' }}>
       <input

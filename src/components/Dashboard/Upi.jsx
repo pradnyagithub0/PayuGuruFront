@@ -151,20 +151,20 @@ function Upi() {
     fetchData(1);
   }, [fetchData]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >=
-          document.documentElement.scrollHeight &&
-        !isFetching
-      ) {
-        setIsFetching(true);
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (
+  //       window.innerHeight + window.scrollY >=
+  //         document.documentElement.scrollHeight &&
+  //       !isFetching
+  //     ) {
+  //       setIsFetching(true);
+  //     }
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isFetching]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [isFetching]);
 
   useEffect(() => {
     if (!isFetching) return;
@@ -224,7 +224,7 @@ function Upi() {
             <DashboardTopbar />
           </div>
 
-          <div className="row">
+          <div className="row mb-3">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <div className="row">

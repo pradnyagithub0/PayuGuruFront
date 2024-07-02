@@ -7,6 +7,7 @@ import VirtualAccountTable from "./commonComponents/VirtualAccountTable"; // Adj
 import { FetchVirtualAccountList } from "./commonComponents/data";
 import Pagination from "../Pagination";
 import { ENDPOINTS } from "../../utils/apiConfig";
+
 // import TaskComponent from "../../app/components/Table/TaskPage";
 
 function VirtualAccount() {
@@ -142,19 +143,24 @@ function VirtualAccount() {
 
                   <div className="col-xl-8 col-lg-12 col-md-12 col-12">
                     <div className="d-flex justify-content-end align-items-center pt-2">
+                    
                       <button className="btn  btn1 mr-2 btn-outline-secondary">
                         Add Virtual Account<i className="fa fa-plus ml-2"></i>
                       </button>
                       <button className="btn btn1 mr-2 btn-outline-secondary">
                         Export <i className="fa fa-external-link ml-2"></i>
                       </button>
-                      <button className="btn btn1 bg-dark text-white mr-2">
+                      {/* <button className="btn btn1 bg-dark text-white mr-2">
                         Filter <i className="fa fa-filter ml-2"></i>
-                      </button>
+                      </button> */}
+                    
                     </div>
                   </div>
                 </div>
                 <div className="card-body p-3">
+                <div className="d-flex mb-2">
+              
+                </div>
                   <div className="table-responsive">
                     {loader ? (
                       <div className="text-center p-5">
@@ -164,6 +170,7 @@ function VirtualAccount() {
                       </div>
                     ) : (
                       <>
+                   
                         <VirtualAccountTable
                           data={acList}
                           toggleStatus={toggleStatus}
