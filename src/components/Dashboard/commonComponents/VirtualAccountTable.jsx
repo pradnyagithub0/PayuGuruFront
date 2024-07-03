@@ -3,13 +3,14 @@ import { FiSearch } from 'react-icons/fi';
 // Import Axios
 import { useTable , useSortBy } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
-import generatePDF from '../../../hooks/usePdfAccountListGenerate'
+// import generatePDF from '../../../hooks/usePdfAccountListGenerate'
 
 import Panel from 'rsuite/Panel';
 import 'rsuite/Panel/styles/index.css';
-import PageToolbar from '../PageToolbar';
-import { Stack } from "rsuite";
+import DateRangeToolBar from '../PageToolbar';
+import { HStack, Stack } from "rsuite";
 import 'rsuite/Stack/styles/index.css';
+import CustomButtonGroup from './TableIconButtons';
 
 const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection }) => {
 
@@ -142,126 +143,109 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
   } = useTable({ columns, data:filteredData}, useSortBy);
 
   return (
-    <div>
-      {/* <div style={{ direction:'flex', margin:'20px',padding: '10px', width: '100%', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
-      <div className="d-flex mr-2">
-                    <div>
-                    <input
-                          type="text"
-                          className="searchTerm"
-                          placeholder="Search ID/Ref Number"
-                          value={search}
-                          onChange={(e) => {
-                            setSearch(e.target.value);
-                          }}
-                          // style={{width:'250px !important', justifyItems:'center'}}
-                        />
-                        <button
-                          className="searchIconBtn"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            console.log(search);
-                            handleSearchAcc();
-                          }}
-                        >
-                          <FiSearch />
-                        </button>
-                    </div>
-                  
-         </div>
+    <>
+     
+    {/* <Stack> */}
+    <div className='top bg-white mt-0 center'>
+      <div className='row mt-0'>
+        <div className= "col-lg-12 col-md-12 col-12">
+          <HStack>
+                          
+                        <HStack>
+                        <div className='d-flex mr-3 p-3 center' style={{width: '450px'}}>
+                          <DateRangeToolBar />
+                        </div>
+                          </HStack>           
+                      <HStack>
+                      <div className='d-flex mr-3 p-3 center'>
+                          <input
+                                type="text"
+                                className="searchTerm"
+                                placeholder="Search ID/Ref Number"
+                                value={search}
+                                onChange={(e) => {
+                                  setSearch(e.target.value);
+                                }}
+                                style={{width:'250px !important', justifyItems:'center'}}
+                              />
+                              <button
+                                className="searchIconBtn"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  console.log(search);
+                                  handleSearchAcc();
+                                }}
+                              >
+                                <FiSearch />
+                              
+                              </button>
+                        </div>
+                      </HStack>
+                      <HStack>
+                      <CustomButtonGroup appearance="ghost"/>
+                      </HStack>
+                            {/* </Panel> */}
+          </HStack>
+        </div>
+        </div>
+      <div className='row mt-0'>
+        <div className='col-lg-12 col-md-12 col-12'>
         
-      </div> */}
-      <div style={{ margin:'20px',padding: '10px', width: '100%', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}>
-      {/* <button className="btn btn1" onClick={() => generatePDF('virtual-account-list', sessionid)}>PDF <i className='fa fa-pdf'></i></button> */}
-      <Stack>
-                    {/* <Panel header={<h3 className="title"></h3>}> */}
-                      
-                    <div className='d-flex mr-3 p-3 center' style={{width: '450px'}}>
-                      <PageToolbar />
-                    </div>           
-                    <div className='d-flex mr-3 p-3 center'>
-                      <input
-                            type="text"
-                            className="searchTerm"
-                            placeholder="Search ID/Ref Number"
-                            value={search}
-                            onChange={(e) => {
-                              setSearch(e.target.value);
-                            }}
-                            style={{width:'250px !important', justifyItems:'center'}}
-                          />
-                          <button
-                            className="searchIconBtn"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              console.log(search);
-                              handleSearchAcc();
-                            }}
-                          >
-                            <FiSearch />
-                          </button>
-                    </div>
-                        {/* </Panel> */}
-          </Stack>
+            <table id="virtual-account-list" {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {/* {headerGroup.headers.map(column => (
+                  // <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
+                  //   {column.render('Header')}
+                  //   <span>
+                  //         {column.isSorted
+                  //           ? column.isSortedDesc
+                  //             ? ' 🔽'
+                  //             : ' 🔼'
+                  //           : ''}
+                  //       </span>
+                  // </th>
+
+                  
+                // ))}  */}
+
+                  {headerGroup.headers.map(renderHeader)}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {rows.map(row => {
+              prepareRow(row);
+              return (
+                <tr {...row.getRowProps()} style={{ background: row.original.ACstatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
+                  {row.cells.map(cell => (
+                    <td
+                      {...cell.getCellProps()}
+                      style={{
+                        padding: '10px',
+                        border: 'solid 1px gray',
+                        background: 'papayawhip',
+                        fontSize: '13px',
+                        alignItems: 'center',
+                        textAlign: 'center'
+                      }}
+                    >
+                      {cell.render('Cell')}
+                    </td>
+                  ))}
+                </tr>
+              );
+            })}
+          </tbody>
+            </table>
+        </div>
       </div>
-    {/* <div style={{ marginBottom: '20px' }}>
-          <input
-            type="text"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search..."
-            style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', border: '1px solid #ccc' ,alignItems:'center' , alignContent:'center' }}
-          />
-      </div> */}
-    <table id="virtual-account-list" {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {/* {headerGroup.headers.map(column => (
-              // <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}>
-              //   {column.render('Header')}
-              //   <span>
-              //         {column.isSorted
-              //           ? column.isSortedDesc
-              //             ? ' 🔽'
-              //             : ' 🔼'
-              //           : ''}
-              //       </span>
-              // </th>
-
-              
-            // ))}  */}
-
-              {headerGroup.headers.map(renderHeader)}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()} style={{ background: row.original.ACstatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
-              {row.cells.map(cell => (
-                <td
-                  {...cell.getCellProps()}
-                  style={{
-                    padding: '10px',
-                    border: 'solid 1px gray',
-                    background: 'papayawhip',
-                    fontSize: '13px',
-                    alignItems: 'center',
-                    textAlign: 'center'
-                  }}
-                >
-                  {cell.render('Cell')}
-                </td>
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
-    </table>
-            </div>
+      </div>
+    {/* </Stack> */}
+    
+    
+            </>
   );
 };
 

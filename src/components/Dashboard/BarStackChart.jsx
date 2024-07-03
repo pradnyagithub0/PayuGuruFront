@@ -71,7 +71,7 @@ const defaultOptions = {
   }
 };
 
-const BarChart = ({ title, actions, data, type, labels, options }) => (
+const BarStackChart = ({ title, actions, data, type, labels, options }) => (
   <Panel
     className="card"
     header={
@@ -90,4 +90,4 @@ const BarChart = ({ title, actions, data, type, labels, options }) => (
   </Panel>
 );
 
-export default BarChart;
+export default BarStackChart;

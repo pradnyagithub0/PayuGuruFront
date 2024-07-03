@@ -4,11 +4,14 @@ import React, { useState, useMemo } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { useTable, useSortBy } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
-import PageToolbar from '../PageToolbar';
-import { Stack } from 'rsuite';
+import DateRangeToolBar from '../PageToolbar';
 import Panel from 'rsuite/Panel';
-import 'rsuite/Panel/styles/index.css';
+
+import { HStack, Stack } from "rsuite";
 import 'rsuite/Stack/styles/index.css';
+import 'rsuite/Panel/styles/index.css';
+
+import CustomButtonGroup from './TableIconButtons';
 
 const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) => {
 
@@ -143,131 +146,95 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
 
   return (
 
-    <div>
-        {/* <div style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
-      <div className="d-flex mr-2">
-                        <input
-                          type="text"
-                          className="searchTerm"
-                          placeholder="Search ID/Ref Number"
-                          value={search}
-                          onChange={(e) => {
-                            setSearch(e.target.value);
-                          }}
-                        />
-                        <button
-                          className="searchIconBtn"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            console.log(search);
-                            handleSearchUPI();
-                          }}
-                        >
-                          <FiSearch />
-                        </button>
-         </div>
-      </div> */}
-        <div style={{ margin:'20px',padding: '10px', width: '100%', borderRadius: '4px', textAlign:'center', justifyItems: 'right' ,alignItems:'center' , alignContent:'center' }}> 
-      {/* <div className="d-flex mr-2">
-                        <input
-                          type="text"
-                          className="searchTerm"
-                          placeholder="Search ID/Ref Number"
-                          value={search}
-                          onChange={(e) => {
-                            setSearch(e.target.value);
-                          }}
-                        />
-                        <button
-                          className="searchIconBtn"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            console.log(search);
-                            handleSearchUPI();
-                          }}
-                        >
-                          <FiSearch />
-                        </button>
-         </div> */}
-         <Stack>
-                    {/* <Panel header={<h3 className="title"></h3>}> */}
+    <>
+
+        <div className='top bg-white mt-0 center'>
+          <div className='row mt-0'>
+          <div className= "col-lg-12 col-md-12 col-12">
+            <HStack>
                       
-                    <div className='d-flex mr-3 p-3 center' style={{width: '450px'}}>
-                      <PageToolbar />
-                    </div>           
-                    <div className='d-flex mr-3 p-3 center'>
-                      <input
-                            type="text"
-                            className="searchTerm"
-                            placeholder="Search ID/Ref Number"
-                            value={search}
-                            onChange={(e) => {
-                              setSearch(e.target.value);
-                            }}
-                            style={{width:'250px !important', justifyItems:'center'}}
-                          />
-                          <button
-                            className="searchIconBtn"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              console.log(search);
-                              handleSearchUPI();
-                            }}
-                          >
-                            <FiSearch />
-                          </button>
-                    </div>
-                        {/* </Panel> */}
-          </Stack>
-      </div>
-    {/* <div style={{ marginBottom: '20px' }}>
-      <input
-        type="text"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        placeholder="Search..."
-        style={{ margin:'20px',padding: '10px', width: '250px', borderRadius: '4px', border: '1px solid #ccc' ,alignItems:'center' , alignContent:'center' }}
-      />
-    </div> */}
-    <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
-      <thead>
-        {headerGroups.map(headerGroup => (
-          <tr {...headerGroup.getHeaderGroupProps()}>
-            {/* {headerGroup.headers.map(column => (
-              <th {...column.getHeaderProps()} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign:'center'}}>
-                {column.render('Header')}
-              </th>
-            ))} */}
-             {headerGroup.headers.map(renderHeader)}
-          </tr>
-        ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {rows.map(row => {
-          prepareRow(row);
-          return (
-            <tr {...row.getRowProps()} style={{ background: row.original.upistatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
-            {row.cells.map(cell => (
-                <td
-                  {...cell.getCellProps()}
-                  style={{
-                    padding: '10px',
-                    border: 'solid 1px gray',
-                    background: 'papayawhip',
-                    fontSize: '13px',
-                    alignItems: 'center',
-                    textAlign: 'center'
-                  }}
-                >
-                  {cell.render('Cell')}
-                </td>
-              ))}
-          </tr>
-          );
-        })}
-      </tbody>
-    </table>
-    </div>
+                          <HStack>
+                          <div className='d-flex mr-3 p-3 center' style={{width: '450px'}}>
+                            <DateRangeToolBar />
+                          </div>
+                            </HStack>           
+                        <HStack>
+                        <div className='d-flex mr-3 p-3 center'>
+                            <input
+                                  type="text"
+                                  className="searchTerm"
+                                  placeholder="Search ID/Ref Number"
+                                  value={search}
+                                  onChange={(e) => {
+                                    setSearch(e.target.value);
+                                  }}
+                                  style={{width:'250px !important', justifyItems:'center'}}
+                                />
+                                <button
+                                  className="searchIconBtn"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    console.log(search);
+                                    handleSearchUPI();
+                                  }}
+                                >
+                                  <FiSearch />
+                                
+                                </button>
+                          </div>
+                        </HStack>
+                        <HStack>
+                        <CustomButtonGroup appearance="ghost"/>
+                        </HStack>
+                              {/* </Panel> */}
+                </HStack>
+          </div>
+          </div>
+          <div className='row mt-0'>
+            <div className= "col-lg-12 col-md-12 col-12">
+                  <table {...getTableProps()} style={{ border: 'solid 1px blue', width: '100%', overflowY: true }}>
+                          <thead>
+                            {headerGroups.map(headerGroup => (
+                              <tr {...headerGroup.getHeaderGroupProps()}>
+                                {/* {headerGroup.headers.map(column => (
+                                  <th {...column.getHeaderProps()} style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign:'center'}}>
+                                    {column.render('Header')}
+                                  </th>
+                                ))} */}
+                                {headerGroup.headers.map(renderHeader)}
+                              </tr>
+                            ))}
+                          </thead>
+                          <tbody {...getTableBodyProps()}>
+                            {rows.map(row => {
+                              prepareRow(row);
+                              return (
+                                <tr {...row.getRowProps()} style={{ background: row.original.upistatus === 'Y' ? 'lightgreen' : 'lightcoral' }}>
+                                {row.cells.map(cell => (
+                                    <td
+                                      {...cell.getCellProps()}
+                                      style={{
+                                        padding: '10px',
+                                        border: 'solid 1px gray',
+                                        background: 'papayawhip',
+                                        fontSize: '13px',
+                                        alignItems: 'center',
+                                        textAlign: 'center'
+                                      }}
+                                    >
+                                      {cell.render('Cell')}
+                                    </td>
+                                  ))}
+                              </tr>
+                              );
+                            })}
+                          </tbody>
+                        </table>
+            </div>
+              
+              </div>
+          </div>
+    </>
   );
 };
 

@@ -8,11 +8,12 @@ import {
     Avatar,
     IconButton,
     List,
-    Button
+    Button,
+    VStack
   } from 'rsuite';
   import NoticeIcon from '@rsuite/icons/Notice';
 
-  import 'rsuite/Button/styles/index.css';
+import 'rsuite/Button/styles/index.css';
 import 'rsuite/ButtonGroup/styles/index.css';
 import 'rsuite/ButtonToolbar/styles/index.css';
 import 'rsuite/IconButton/styles/index.css';
@@ -27,43 +28,59 @@ import 'rsuite/Popover/styles/index.css';
 // (Optional) Import component styles. If you are using Less, import the `index.less` file. 
 import 'rsuite/Badge/styles/index.css';
 import { useRef } from 'react';
+import { PiTruckTrailer } from 'react-icons/pi';
+// import { overflow } from 'html2canvas/dist/types/css/property-descriptors/overflow';
 
 const renderNoticeSpeaker = ({ onClose, left, top, className }, ref) => {
     const notifications = [
       [
         '7 hours ago',
-        'The charts of the dashboard have been fully upgraded and are more visually pleasing.'
+        '₹ 100.00 rupees received from payu.xyz19393@dbs Ref: yNiueo934noiv TrsId: 8934u349k43jdc8934.'
       ],
       [
         '13 hours ago',
-        'The function of virtualizing large lists has been added, and the style of the list can be customized as required.'
+        'Received ₹ 10890.00 Through RTGS/NEFT from AC: 129394048381039239 IFSC: BOI0003283 TrsId: 8934u34qw9kjdc8934'
       ],
-      ['2 days ago', 'Upgraded React 18 and Webpack 5.'],
+      ['2 days ago', 'Today ₹ 150000 settled in your AC: 45000037273282 IFSC: IND8394893 Ref: i023nif93bfje3 TrsId: 8934u349kjdc8934'],
       [
         '3 days ago',
-        'Upgraded React Suite 5 to support TypeScript, which is more concise and efficient.'
+        'your KYC is completed.'
+      ],
+      [
+        '3 days ago',
+        'your KYC is Processing.'
+      ],
+      [
+        '3 days ago',
+        'your Profile is updated.'
       ]
     ];
   
     return (
       <Popover ref={ref} className={className} style={{ left, top, width: 300 }} title="Last updates">
-        <List>
+       <VStack style={{height: 480}}>
+       <List>
           {notifications.map((item, index) => {
             const [time, content] = item;
-            return (
+            // <ul style={{ overflowY: true, overflowX: false,}}>
+              return (
               <List.Item key={index}>
-                <Stack spacing={4}>
+              {/* <li> */}
+              <Stack spacing={4}>
                   <Badge /> <span style={{ color: '#57606a' }}>{time}</span>
                 </Stack>
   
-                <p>{content}</p>
+                <p className='notice-text'>{content}</p>
+              {/* </li> */}
               </List.Item>
             );
+            // </ul>
           })}
         </List>
         <div style={{ textAlign: 'center', marginTop: 20 }}>
           <Button onClick={onClose}>More notifications</Button>
         </div>
+       </VStack>
       </Popover>
     );
   };
@@ -82,7 +99,7 @@ const trigger = useRef(null);
               <IconButton onClick={renderNoticeSpeaker}
               icon={
                   <Badge content={5}>
-                  <NoticeIcon style={{ fontSize: 20 }} className='notice-text' />
+                  <NoticeIcon animation='pulse' style={{ fontSize: 20 }} className='notice-text' />
                   </Badge>
               }
               />

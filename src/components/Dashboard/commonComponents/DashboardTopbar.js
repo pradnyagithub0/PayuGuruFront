@@ -1,6 +1,7 @@
 import { useTheme } from "../../theme-context";
 import React from "react";
-
+// import { Clock } from "react-feather";
+import Clock from '../Clock'
 const DashboardTopbar = () => {
   const docsModalOpen = () => {
     const myModal = new window.bootstrap.Modal(
@@ -19,11 +20,8 @@ const DashboardTopbar = () => {
     <>
       <div className={`row mt-0 h-theme ${theme}`}>
         <div className="col-lg-9 col-md-9 col-12">
-          <p className="float-left">
-            <i className="fa fa-info-circle"></i> Your account is pending
-            activation. Please submit your documents to payuguru.com
-          </p>
-          
+         
+          <Clock/>
         </div>
         <div className="col-lg-3 col-md-3 col-12">
           <button type="button" className="btn btn-top" onClick={docsModalOpen}>

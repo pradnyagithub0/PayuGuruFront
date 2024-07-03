@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Row, Col, Panel, ButtonGroup } from 'rsuite';
+import { Row, Col, Panel, ButtonGroup, HStack } from 'rsuite';
 import "./Dashboards.css";
 import Dheader from "../Dheader";
 import Dfooter from "../Dfooter";
@@ -11,7 +11,8 @@ import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import { Button } from "@mui/material";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 import { useTheme } from "../theme-context";
-import  BarChart  from "./BarChart";
+import  BarChart  from "./BarStackChart";
+import CustomButtonGroup from "./commonComponents/TableIconButtons";
  
 function Dashboard() {
   const {theme, toggleTheme} = useTheme();
@@ -271,7 +272,7 @@ function Dashboard() {
                 <div className="row">
                   <div className="col-lg-4 col-md-4 col-12 my-auto">
                     <p>Account Balance</p>
-                    <h3>{mainBalance }</h3>
+                    <h3 >{mainBalance }</h3>
                   </div>
                   <div className="col-lg-5 col-md-5 col-12 my-auto">
                     <p>Total Settlement</p>
@@ -410,9 +411,12 @@ function Dashboard() {
                   title="Payments Summary"
                   actions={
                                 <ButtonGroup>
+                                  <HStack>
                                   <Button> active Day</Button>
                                   <Button>Week</Button>
                                   <Button>Month</Button>
+                                  <CustomButtonGroup/>
+                                  </HStack>
                                 </ButtonGroup>
                         }
                         data={barChartData}

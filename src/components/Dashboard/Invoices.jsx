@@ -5,6 +5,14 @@ import Dfooter from '../Dfooter';
 import './Invoices.css';
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
+import { FiSearch } from 'react-icons/fi';
+import './Reports.css';
+import Panel from 'rsuite/Panel';
+import 'rsuite/Panel/styles/index.css';
+import DateRangeToolBar from './PageToolbar';
+import { HStack, Stack } from "rsuite";
+import 'rsuite/Stack/styles/index.css';
+import CustomButtonGroup from './commonComponents/TableIconButtons';
 
 function Invoices(){
     const isInactive = useInactivityTimeout(600000); // 10 minutes
@@ -18,19 +26,67 @@ function Invoices(){
     }, [isInactive, navigate]);
     return(
         <div>
-            <div className="wrapper">
+           
               <Dheader/>
-                <div className="main-content">
+               <HStack>
+               <div className="main-content theme h-theme">
                     <div className="top bg-white mt-0 p-2">
                         <DashboardTopbar />
                     </div>
-
+                    <div className="card pb-0 account-details border-0 shadow-lg">
+                    <div className="card-body p-0">
                     <div className="row">
                         <div className="col-lg-12 col-md-12 col-12">
-                            <div className="card pb-0 account-details border-0 shadow-lg">
+                        
+                           
                                 <h4 className="bg-transparent mt-0 p-3 h-theme">Invoices</h4>
-                                <div className="card-body p-0">
-                                    <div className="table-responsive">
+                                
+                            </div>
+                        </div>
+                        <div className= "col-lg-12 col-md-12 col-12">
+                                        <HStack>
+                                            
+                                            <HStack>
+                                                    <div className='d-flex mr-3 p-3 center' style={{width: '450px'}}>
+                                                    <DateRangeToolBar />
+                                                    </div>
+                                            </HStack>           
+                                            <HStack>
+                                            <div className='d-flex mr-3 p-3 center'>
+                                                <input
+                                                        type="text"
+                                                        className="searchTerm"
+                                                        placeholder="Search ID/Ref Number"
+                                                        // value={search}
+                                                        onChange={(e) => {
+                                                        //   setSearch(e.target.value);
+                                                        }}
+                                                        style={{width:'250px !important', justifyItems:'center'}}
+                                                    />
+                                                    <button
+                                                        className="searchIconBtn"
+                                                        onClick={(e) => {
+                                                        e.preventDefault();
+                                                        //   console.log(search);
+                                                        //   handleSearchAcc();
+                                                        }}
+                                                    >
+                                                        <FiSearch />
+                                                    
+                                                    </button>
+                                                </div>
+                                            </HStack>
+                                            <HStack>
+                                                <CustomButtonGroup appearance="ghost"/>
+                                            </HStack>
+
+                                               
+                                        </HStack>
+                                        
+                                      
+                        {/* </div>
+                        <div className= "col-lg-12 col-md-12 col-12"> */}
+                        <div className="table-responsive">
                                         <table className="table table-striped table-bordered ">
                                             <thead className="bg-light">
                                                 <tr>
@@ -64,16 +120,16 @@ function Invoices(){
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>       
-                                </div>
-                            </div>
+                        </div>     
+                        </div>
                         </div>
                     </div>
-
+                    </div> 
+                
+                </HStack>                                             
                    
-                 <Dfooter/>   
-                </div>
-            </div>
+                <Dfooter/>   
+           
         </div>
     )
 }

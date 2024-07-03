@@ -25,7 +25,7 @@
     line-height: 18px;
     padding: 0px 14px;
     background-color: #0000ff;
-    color: var(--text-color);
+    color: #ffff;
     width: auto;
     height: 45px;
     float: right;
@@ -123,8 +123,8 @@
     border-bottom: 0;
 }
 .account-details .card-header {
-    border-top-right-radius: 20px;
-    border-top-left-radius: 20px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
 }
 .account-details .table {
     margin-bottom: 0;
@@ -199,6 +199,53 @@
 }
 
 
+.rs-picker-popup {
+    background-color: var(--bg-color) !important;
+    color:var(--text-color) !important;
+}
+
+.rs-btn-link {
+    color: var(--text-color) !important;
+}
+
+.rs-calendar-header-title {
+    color: #9b9494 !important;
+}
+
+
+.rs-popover {
+    background-color: var(--bg) !important;
+    color: var(--text-color) !important;
+}
+
+.rs-popover-content.rs-list-item {
+    background-color: var(--bg-slate-900) !important;
+}
+
+.rs-list{
+    background-color: var(--bg-slate-900);
+}
+.rs-list-item{
+    background-color: var(--bg-color) !important;
+    color: var(--btn-create-ac) !important;
+    padding: 4px !important;
+    font-size: .6rem;
+    /* border-radius: var(--radius); */
+    margin: 2px 0px 2px 0px !important;
+}
+
+.notice-text {
+    color: var(--text-color);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.rs-popover[class*='placement-bottom'] > .rs-popover-arrow::after { 
+    background-color: var(--bg-color) !important;
+    border-bottom-color: var(--bg) !important;
+
+}
+
 [data-theme="light"] {
     --bg-color: #ffffff;
     --text-color: #333333;
@@ -227,6 +274,9 @@
     --ring: 24.6 95% 53.1%;
     --radius: 0.5rem;
     --notice-btn: #333333;
+    --border-color: #0f172a1a;
+    --bg-sky-30-hover: #38bdf833;
+    --bg-slate-900: #0f172a1a;
   }
   
   /* Dark mode styles */
@@ -257,6 +307,8 @@
     --input: 12 6.5% 15.1%;
     --ring: 20.5 90.2% 48.2%;
     --notice-btn: #333333;
+    --border-color: #0f172a1a;
+    --bg-slate-900: #0f172abf;
   }
 
   .float-left p {
@@ -273,11 +325,11 @@
   }
  
 
-.notice-text {
+/* .notice-text {
     color: var(--notice-btn) !important;
-}
+} */
 .rs-icon {
-    color: var(--notice-btn) !important;
+    color: var(--text-color) !important;
 }
 
  .wrapper { 
@@ -297,6 +349,16 @@
     color: var(--text-color) !important;
   }
 
+  .rs-btn-icon-with-text{
+    color: var(--text-color) !important;
+    background-color: var(--bg-slate-900) !important;
+  }
+
+
+  .rs-btn-icon {
+    background-color: var(--btn-create-upi) !important;
+    color: var(--text-color) !important;
+  }
 
   .Minigraph {
     align-self: center;
