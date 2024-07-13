@@ -15,7 +15,10 @@ import  BarChart  from "./BarStackChart";
 import CustomButtonGroup from "./commonComponents/TableIconButtons";
 // import SparkleChart from "./commonComponents/Charts/SparkleChart";
 import {StatisticGrid} from './commonComponents/StatsGrid/StatisticGrid'
- 
+import { MdOutlineAccountBalance } from "react-icons/md";
+import QRCodeIcon from "./commonComponents/QRCodeIcon";
+import UPISvgIcon from "./commonComponents/UpiIcon";
+
 function Dashboard() {
   const {theme, toggleTheme} = useTheme();
   const { setKycStatus } = useContext(ApplicationContext);
@@ -305,12 +308,12 @@ function Dashboard() {
                 className="btn btn-light-blue"
                 onClick={add_Account}
               >
-                <i className="fa fa-plus"></i> Add New Account
+                <i className="fa mr-2"><MdOutlineAccountBalance height='25' width='25' /></i> Add New Account
               </button>
             </div>
             <div className="col-lg-4 col-md-4 col-12">
               <button type="button" className="btn btn-light-grey">
-                <i className="fa fa-user"></i> Settlements
+                <i className="fa fa-user mr-2"></i> Settlements
               </button>
             </div>
             <div className="col-lg-4 col-md-4 col-12">
@@ -319,7 +322,7 @@ function Dashboard() {
                 className="btn btn-light-pink"
                 onClick={add_UPI_id}
               >
-                <i className="fa fa-plus"></i> Add New UPI ID
+                <i className="fa mr-1"><UPISvgIcon size={21}/></i> Add New UPI ID
               </button>
             </div>
           </div>
