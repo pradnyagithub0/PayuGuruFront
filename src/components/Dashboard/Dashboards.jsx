@@ -13,6 +13,8 @@ import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 import { useTheme } from "../theme-context";
 import  BarChart  from "./BarStackChart";
 import CustomButtonGroup from "./commonComponents/TableIconButtons";
+// import SparkleChart from "./commonComponents/Charts/SparkleChart";
+import {StatisticGrid} from './commonComponents/StatsGrid/StatisticGrid'
  
 function Dashboard() {
   const {theme, toggleTheme} = useTheme();
@@ -29,53 +31,53 @@ function Dashboard() {
   const [accountDetails, setAccountDetials] = useState({});
   let navigate = useNavigate();
 
-  useEffect(() => {
-    dashboardIndexData();
-  },[sessionid]);
+  // useEffect(() => {
+  //   dashboardIndexData();
+  // },[sessionid]);
 
-  const dashboardIndexData = async () => {
-    setLoader(true);
-    try {
-      const response = await fetch(dash_index, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          sessionid: sessionid,
-        }),
-      });
+  // const dashboardIndexData = async () => {
+  //   setLoader(true);
+  //   try {
+  //     const response = await fetch(dash_index, {
+  //       method: "POST",
+  //       headers: {
+  //         accept: "application/json",
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         sessionid: sessionid,
+  //       }),
+  //     });
 
-      const resData = await response.json();
-      setLoader(false);
+  //     const resData = await response.json();
+  //     setLoader(false);
 
-      if (resData.mess) {
-        if (resData.mess.StatusCodes === "DI00") {
-          setDashboardIndex(resData.mess);
-          setMainBalance(resData.mess.mainbalance);
-          setTotalSettalment(resData.mess.settelment);
-          setKycStatus(resData.mess.kyc_status); 
-        } else {
-          // navigate(`/login`);
+  //     if (resData.mess) {
+  //       if (resData.mess.StatusCodes === "DI00") {
+  //         setDashboardIndex(resData.mess);
+  //         setMainBalance(resData.mess.mainbalance);
+  //         setTotalSettalment(resData.mess.settelment);
+  //         setKycStatus(resData.mess.kyc_status); 
+  //       } else {
+  //         // navigate(`/login`);
 
-        }
-        if (resData.mess.kyc_status === "N")
-        {
-          const myModal = new window.bootstrap.Modal(
-            document.getElementById("docsReqModal")
-          );
-          myModal.show();
-        }
-      } else {
-        // Handle unexpected response structure
-        console.error("Unexpected response structure:", resData);
-      }
-    } catch (error) {
-      setLoader(false);
-      console.error("Error :", error);
-    }
-  };
+  //       }
+  //       if (resData.mess.kyc_status === "N")
+  //       {
+  //         const myModal = new window.bootstrap.Modal(
+  //           document.getElementById("docsReqModal")
+  //         );
+  //         myModal.show();
+  //       }
+  //     } else {
+  //       // Handle unexpected response structure
+  //       console.error("Unexpected response structure:", resData);
+  //     }
+  //   } catch (error) {
+  //     setLoader(false);
+  //     console.error("Error :", error);
+  //   }
+  // };
 
 
   const add_UPI_id = async () => {
@@ -270,23 +272,28 @@ function Dashboard() {
             <div className="card account-card mt-4">
               <div className="card-body">
                 <div className="row">
-                  <div className="col-lg-4 col-md-4 col-12 my-auto">
+                  {/* <div className="col-lg-4 col-md-4 col-12 my-auto">
                     <p>Account Balance</p>
-                    <h3 >{mainBalance }</h3>
+                    <h3 > ₹ {mainBalance }</h3>
+                  
                   </div>
                   <div className="col-lg-5 col-md-5 col-12 my-auto">
                     <p>Total Settlement</p>
-                    <h3>{totalSettalment}</h3>
-                  </div>
-                  <div className="col-lg-3 col-md-3 col-12">
+                    <h3> ₹ {totalSettalment}</h3>
+                  </div> */}
+                   <StatisticGrid />
+                  {/* <div className="col-lg-3 col-md-3 col-12">
                     <div className="img-bg">
                       <img
                         src="https://i.ibb.co/Fx8FHCd/account-card-img.png"
                         alt="account-card-img"
                       />
                     </div>
-                  </div>
+                  </div> */}
                 </div>
+                {/* <div className="row">
+                <StatisticGrid/>
+                </div> */}
               </div>
             </div>
           </div>

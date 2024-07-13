@@ -10,7 +10,7 @@ import { ENDPOINTS } from "../../utils/apiConfig.js";
 import lodingImg from "../../assets/img/loading.gif";
 import { ApplicationContext } from "../../context/ApplicationContext";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
-
+import CopyButtonIcon from './commonComponents/CopyButtonIcon'
 function Api() {
   const { kycStatus } = useContext(ApplicationContext);
   console.log("kyc Status :", kycStatus);
@@ -25,7 +25,7 @@ function Api() {
     const tokenInput = document.getElementById("api-token");
     try {
       await navigator.clipboard.writeText(tokenInput.value);
-      alert("API Token copied to clipboard");
+      // alert("API Token copied to clipboard");
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
@@ -103,14 +103,16 @@ function Api() {
                 <div className="card-body p-3">
                   <div>
                     <div className="d-flex justify-content-between align-items-center">
-                      <label className="form-label">API Token: api_id</label>
+                      <label className="form-label">API Token: api_id   <CopyButtonIcon data={'api_id'} /></label>
                       <label
                         className="form-label text-info"
                         onClick={getApiToken}
                         style={{ cursor: "pointer" }}
                       >
                         Click here
+                       
                       </label>
+                    
                     </div>
                     <div className="input-group mb-3">
                       <input
@@ -127,31 +129,37 @@ function Api() {
                         title={showApiKey ? "Hide" : "Show"}
                         onClick={toggleApiKeyVisibility}
                       >
-                        <i
+                        <span>
+                       <i
                           className={`fa ${
-                            showApiKey ? "fa-eye-slash" : "fa-eye"
+                            showClientSecret ? "fa-eye-slash" : "fa-eye"
                           }`}
                         ></i>
+                       </span>
+                       
                       </Button>
-
-                      <Button
+                      <span>
+                       <i className="mr-4" color="success"
+                        title="Copy" onClick={copyToClipboard}><CopyButtonIcon data={copyToClipboard} /></i>
+                       </span>
+                      {/* <Button
                         variant="contained"
                         color="success"
                         title="Copy"
                         onClick={copyToClipboard}
                       >
                         <i className="fa fa-copy"></i>
-                      </Button>
+                      </Button> */}
                       
                     </div>
                     <div className="d-flex justify-content-between align-items-center">
-                      <label className="form-label">Secret: client_secret </label>
+                      <label className="form-label">Secret: client_secret  <CopyButtonIcon data={'client_secret'} /> </label>
                       <label
                         className="form-label text-primary"
                         onClick={getApiToken}
                         style={{ cursor: "pointer" }}
                       >
-                        
+                       
                       </label>
                     </div>
                     <div className="input-group mb-3">
@@ -169,21 +177,27 @@ function Api() {
                         title={showClientSecret ? "Hide" : "Show"}
                         onClick={toggleSecretClientVisibility}
                       >
-                        <i
+                       <span>
+                       <i
                           className={`fa ${
                             showClientSecret ? "fa-eye-slash" : "fa-eye"
                           }`}
                         ></i>
+                       </span>
+                       
                       </Button>
-
-                      <Button
+                      <span>
+                       <i className="mr-4" color="success"
+                        title="Copy" onClick={copyToClipboard}><CopyButtonIcon data={copyToClipboard} /></i>
+                       </span>
+                      {/* <Button
                         variant="contained"
-                        color="success"
+                        // color="success"
                         title="Copy"
                         onClick={copyToClipboard}
-                      >
-                        <i className="fa fa-copy"></i>
-                      </Button>
+                      > */}
+                        {/* <i className="" onClick={copyToClipboard}><CopyButtonIcon data={copyToClipboard} /></i> */}
+                      {/* </Button> */}
                       
                     </div>
                     

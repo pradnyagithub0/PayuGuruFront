@@ -13,6 +13,9 @@ import { Stack, Toggle } from 'rsuite';
 // import { ModeToggle } from './mode-toggle';
 import 'rsuite/Toggle/styles/index.css';
 import 'rsuite/Stack/styles/index.css';
+import UPISvgIcon from './Dashboard/commonComponents/UpiIcon';
+import InvoiceIcon from './Dashboard/commonComponents/InvoiceIcon';
+import ReportIcon from './Dashboard/commonComponents/ReportIcon';
 const Header = () => {
   const Logout_API = ENDPOINTS.LOGOUT_REQUEST;
   const sessionid = sessionStorage.getItem("sessionid");
@@ -230,19 +233,20 @@ const Header = () => {
           </li>
           <li className="">
             <Link to="/upi" >
-              <i className="fa fa-cube bg-primary rounded-circle fa-lg mr-2"></i>
+          
+              <i className="fa bg-primary rounded-circle mr-2"><UPISvgIcon size={28}/></i>
               UPIS
             </Link>
           </li>
           <li className="">
             <Link to="/reports">
-              <i className="fa fa-file bg-pink rounded-circle fa-lg mr-2"></i>
+              <i className="fa bg-pink rounded-circle fa-lg mr-2"><ReportIcon size={28}/></i>
               Reports
             </Link>
           </li>
           <li className="">
             <Link to="/invoices">
-              <i className="fa fa-file bg-purple rounded-circle fa-lg mr-2"></i>
+              <i className="fa bg-purple rounded-circle fa-lg mr-2"><InvoiceIcon size={28}/></i>
               Invoices
             </Link>
           </li>

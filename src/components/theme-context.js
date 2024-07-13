@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-
+import { MantineProvider } from '@mantine/core';
 const ThemeContext = createContext();
 
 export const useTheme = () => {
@@ -53,8 +53,11 @@ export const ThemeProvider = ({ children }) => {
   }, [theme]);
 
   return (
+    <MantineProvider withGlobalClasses={false}>
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       {children}
     </ThemeContext.Provider>
+  </MantineProvider>
+   
   );
 };

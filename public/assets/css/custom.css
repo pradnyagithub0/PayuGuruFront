@@ -356,7 +356,7 @@
      height:auto;
      margin: 20px 15px;
      border-radius: 20px;
-     background: linear-gradient(91.15deg, #4E72F0 10.36%, #8A8BF9 84.51%);
+     background: var(--bg-account-card);
  }
  .account-card p{
      font-size: 20px;

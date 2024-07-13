@@ -2,6 +2,9 @@
 .main-content {
     margin: 110px 0px 0px 10px;
     width: 100%;
+    height:100%;
+    min-height: auto;
+    min-width: auto;
     padding-left: 320px;
     padding-right: 40px;
 }
@@ -46,7 +49,7 @@
     height: auto;
     margin: 20px 15px;
     border-radius: 20px;
-    background: linear-gradient(91.15deg, #4E72F0 10.36%, #8A8BF9 84.51%);
+    /* background: linear-gradient(91.15deg, #4E72F0 10.36%, #8A8BF9 84.51%); */
 }
 .account-card p {
     font-size: 20px;
@@ -277,6 +280,8 @@
     --border-color: #0f172a1a;
     --bg-sky-30-hover: #38bdf833;
     --bg-slate-900: #0f172a1a;
+    --bg-account-card: linear-gradient(91.15deg, #4E72F0 10.36%, #8A8BF9 84.51%);
+    --bg-rs-item-card: transparent;
   }
   
   /* Dark mode styles */
@@ -309,6 +314,8 @@
     --notice-btn: #333333;
     --border-color: #0f172a1a;
     --bg-slate-900: #0f172abf;
+    --bg-account-card: linear-gradient(91.15deg, #272829 10.36%, #0a0a0a 84.51%);
+    --bg-rs-item-card: transparent;
   }
 
   .float-left p {

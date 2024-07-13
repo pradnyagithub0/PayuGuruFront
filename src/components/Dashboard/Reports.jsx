@@ -9,15 +9,16 @@ import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 import Panel from 'rsuite/Panel';
 import 'rsuite/Panel/styles/index.css';
 import DateRangeToolBar from './PageToolbar';
-import { HStack, Stack } from "rsuite";
+import { HStack, Stack, VStack } from "rsuite";
 import 'rsuite/Stack/styles/index.css';
 import CustomButtonGroup from './commonComponents/TableIconButtons';
+import { useTheme } from "../theme-context";
 
 
 function Reports(){
     const isInactive = useInactivityTimeout(600000); // 10 minutes
     let navigate = useNavigate();
-
+    const { theme } = useTheme();
     useEffect(() => {
         if (isInactive) {
          sessionStorage.removeItem("sessionid");
@@ -28,10 +29,15 @@ function Reports(){
 
 
     return(
+   
+
+
         <div>
-            
                <Dheader/>
-                <div className="main-content">
+                  <HStack>
+
+
+            <div className="main-content">
                     <div className="top bg-white mt-0 p-2">
                         <DashboardTopbar />
                     </div>
@@ -122,11 +128,14 @@ function Reports(){
                             </div>
                         </div>
                     </div>
-
-                 
-                    <Dfooter/>
-                
-            </div>
+                    </HStack>                                      
+                {/* <VStack> */}
+                <Dfooter/>
+                {/* </VStack> */}
+        {/* </div> */}
+    </div>
+   
+       
     )
 }
 

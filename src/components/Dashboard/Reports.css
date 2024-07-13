@@ -1,27 +1,32 @@
 
-* {
+/* * {
     font-family: Plus Jakarta Sans, 'Source Sans Pro';
     margin: 0;
     padding: 0;
-}
+} */
 
-.main-content {
+/* .main-content {
     margin: 110px 0px 0px 10px;
     width: 100%;
+    height: 100%;
     padding-left: 320px;
     padding-right: 40px;
-}
+} */
 /* .main-content .top {
     background: #fff !important;
 } */
-.top p {
+/* .top p {
     font-size: 14px;
     font-weight: 500;
     line-height: 20px;
     letter-spacing: 0em;
     text-align: left;
     margin-top: 10px;
+} */
+body {
+    background-color: var(--bg) !important;
 }
+
 .main-content .btn-top {
     text-decoration: none;
     font-size: 14px;
