@@ -29,6 +29,7 @@ import RedressalPolicy from './Pages/RedressalPolicy';
 import TermsandCondition from './Pages/TermsandCondition';
 import ProtectedRoute from './ProtectedRoute'; // Import ProtectedRoute components
 import Docsmain from './docs/Docsmain';
+import SystemInfo from './components/Dashboard/SystemInfo';
 
 const Routing = () => {
   return (
@@ -94,6 +95,11 @@ const Routing = () => {
             <Route path="webhook" element={
               <ProtectedRoute>
                 <Webhook />
+              </ProtectedRoute>
+            } />
+            <Route path="systeminfo" element={
+              <ProtectedRoute>
+                <SystemInfo />
               </ProtectedRoute>
             } />
             <Route path="userprofile" element={

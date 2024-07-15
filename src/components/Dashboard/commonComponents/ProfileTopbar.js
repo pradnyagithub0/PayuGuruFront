@@ -30,6 +30,11 @@ const ProfileTopbar = () => {
         onClick={() => handleLinkClick("/webhook")}>
         Webhooks
       </Link>
+      <Link to="/SystemInfo" type="button" className={`btn btn1 virtual-btn ${activeLink === "/SystemInfo" ? "active" : ""}`}
+        onClick={() => handleLinkClick("/SystemInfo")}>
+        SystemInfo
+      </Link>
+      
       
     </div>
   );

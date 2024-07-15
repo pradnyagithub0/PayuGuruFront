@@ -1,6 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import Dropdown from "react-bootstrap/Dropdown";
-import { useNavigate, useHistory  } from "react-router-dom";
+import { useNavigate, useHistory, useLocation  } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ENDPOINTS } from "../utils/apiConfig";
 import "./Dheader.css";
@@ -21,7 +21,12 @@ const Header = () => {
   const sessionid = sessionStorage.getItem("sessionid");
   const [showNotifications, setShowNotifications] = useState(false);
   let navigate = useNavigate();
+  const location = useLocation();
+  const [activeLink, setActiveLink] = useState(location.pathname);
 
+  const handleLinkClick = (path) => {
+    setActiveLink(path);
+  };
   const {theme, toggleTheme} = useTheme();
 
   const toggleMode = () => {
@@ -217,41 +222,47 @@ const Header = () => {
 
       <div className="sidebar sidebar-collapse" id="navbarSupportedContent">
         <ul>
-          <li className="active">
-            <Link exact to="/dashboard">
+          <li className={`${activeLink === "/dashboard" ? "active" : ""}`}
+        onClick={() => handleLinkClick("/dashboard")}>
+            <Link exact to="/dashboard" >
               <i className="fa fa-home bg-white text-dark rounded-circle fa-lg mr-2"></i>
               Home
             </Link>
           </li>
-          <li className="">
-            <Link exact to="/Virtualaccount">
+          <li className={`${activeLink === "/Virtualaccount" ? "active" : ""}`}
+        onClick={() => handleLinkClick("/Virtualaccount")}>
+            <Link exact to="/Virtualaccount" >
               <span>
                 <i className="fa fa-bank bg-blue p-xy rounded-circle fa-lg mr-2"></i>
                 Virtual Account
               </span>
             </Link>
           </li>
-          <li className="">
+          <li className={`${activeLink === "/upi" ? "active" : ""}`}
+        onClick={() => handleLinkClick("/upi")}>
             <Link to="/upi" >
           
               <i className="fa bg-primary rounded-circle mr-2"><UPISvgIcon size={28}/></i>
               UPIS
             </Link>
           </li>
-          <li className="">
-            <Link to="/reports">
+          <li className={`${activeLink === "/reports" ? "active" : ""}`}
+        onClick={() => handleLinkClick("/reports")}>
+            <Link to="/reports" >
               <i className="fa bg-pink rounded-circle fa-lg mr-2"><ReportIcon size={28}/></i>
               Reports
             </Link>
           </li>
-          <li className="">
-            <Link to="/invoices">
+          <li className={`${activeLink === "/invoices" ? "active" : ""}`}
+        onClick={() => handleLinkClick("/invoices")}>
+            <Link to="/invoices" >
               <i className="fa bg-purple rounded-circle fa-lg mr-2"><InvoiceIcon size={28}/></i>
               Invoices
             </Link>
           </li>
-          <li className="">
-            <Link to="/account">
+          <li className={`${activeLink === "/account" ? "active" : ""}`}
+        onClick={() => handleLinkClick("/account")}>
+            <Link to="/account" >
               <i className="fa fa-cog bg-success rounded-circle fa-lg mr-2"></i>
               Settings
             </Link>

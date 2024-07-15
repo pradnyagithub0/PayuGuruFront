@@ -11,7 +11,7 @@ import { Button } from "@mui/material";
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
-
+import { Text, Table } from '@mantine/core';
 
 function Userprofile() {
   const [loader, setLoader] = useState(false);
@@ -145,58 +145,84 @@ function Userprofile() {
           </div>
 
           <div className="row">
-            <div className="col-lg-10 col-md-10 col-12">
+            <div className="col-xl-8 col-lg-12 col-md-12 col-12">
               <div className="card pb-0 h-theme account-details border-0 shadow-lg">
                 <div className="col-lg-8 col-md-8 col-12">
-                  <h3 className=" my-0 p-3">User Profile</h3>
+                  <h3 className="bg-transparent h-theme my-0 p-3">User Profile</h3>
                   <div className="card-body p-0">
-                    <div className="p-2 mb-2 text-succes">*{userInfo.message}</div>
+                    {/* <div className="p-2 mb-2 text-succes">*{userInfo.message}</div> */}
                     <div className="user_profile">
-                      <table className="table table-borderless ">
-                        <tbody>
-                          <tr>
-                            <th className="w-50">Email :</th>
-                            <td>{ userInfo.email}</td>
-                          </tr>
-                          <tr>
-                            <th className="w-50">Mobile :</th>
-                            <td>{ userInfo.mobile}</td>
-                          </tr>
-                          <tr>
-                            <th className="w-50">Company Name :</th>
-                            <td>{ userInfo.com_name}</td>
-                          </tr>
-                          <tr>
-                            <th className="w-50">Mobile Verified :</th>
-                            <td>{ userInfo.mobile_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold "/>}</td>
-                          </tr>
-                          <tr>
-                            <th className="w-50">Email Verified :</th>
-                            <td>{ userInfo.email_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold"/>}</td>
-                          </tr>
-                          <tr>
-                            <th className="w-50">KYC Status :</th>
-                            <td>{ userInfo.kyc_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold"/>}</td>
-                          </tr>
-                          <tr>
-                            <th className="w-50">User Status :</th>
-                            <td>{ userInfo.user_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold"/>}</td>
-                          </tr>
-                          {/* <tr>
-                                <th>Role :</th>
-                                <td>Admin</td>
-                            </tr>
-                            <tr>
-                                <th>2FA : </th>
-                                <td>
-                                    <div className="float-left">
-                                    <input  type="checkbox" id="switch" /><label for="switch" className="toggle mr-3">Toggle</label>
-                                    </div>
-                                    <a type="button" className="btn btn1 btn-outline-secondary virtual-btn "><i className="fa fa-info-circle mr-3"></i>How to setup 2FA</a>
-                                </td>
-                            </tr> */}
-                        </tbody>
-                      </table>
+                    <Table maw={580} layout="fixed" mx="auto" className="h-theme">
+                                  <Table.Thead>
+                                    <Table.Tr>
+                                      <Table.Th>Property</Table.Th>
+                                      <Table.Th>Value</Table.Th>
+                                    </Table.Tr>
+                                  </Table.Thead>
+                                  <Table.Tbody>
+                                    <Table.Tr>
+                                      <Table.Td>Status:</Table.Td>
+                                      <Table.Td>
+                                        <Text size="sm" c={userInfo.message ? 'teal.6' : 'red.6'}>
+                                          {/* {networkStatus.online ? 'Online' : 'Offline'} */}
+                                          {userInfo.message ? userInfo.message : ''}
+                                        </Text>
+                                      </Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>Email:</Table.Td>
+                                      <Table.Td>
+                                        <Text size="sm">
+                                        { userInfo.email}
+                                        </Text>
+                                      </Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>Mobile:</Table.Td>
+                                      <Table.Td>
+                                      { userInfo.mobile}
+                                        </Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>Company Name :</Table.Td>
+                                      <Table.Td>
+                                      { userInfo.com_name}
+                                        </Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>Email Verified :</Table.Td>
+                                      <Table.Td>
+                                      <Text size="sm" c={userInfo.email_verify === "Y" ? 'teal.6' : 'red.6'}>
+                                      { userInfo.email_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold "/>}
+                                      </Text>
+                                        </Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>Mobile Verified :</Table.Td>
+                                      <Table.Td>
+                                        <Text size="sm" c={userInfo.mobile_verify === "Y" ? 'teal.6' : 'red.6'}>
+                                         { userInfo.mobile_verify === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold"/>}
+                                        </Text>
+                                      </Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>KYC Verified :</Table.Td>
+                                      <Table.Td>
+                                      <Text size="sm" c={userInfo.kyc_status === "Y" ? 'teal.6' : 'red.6'}>
+                                      { userInfo.kyc_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold "/>}
+                                      </Text>  
+                                      </Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>User Status :</Table.Td>
+                                      <Table.Td>
+                                      <Text size="sm" c={userInfo.user_status === "Y" ? 'teal.6' : 'red.6'}>
+                                      { userInfo.user_status === "Y" ? <BsCheckLg className="text-success fs-2 fw-bold"/> : <ImCross className="text-danger fs-4 fw-bold "/>}
+                                      </Text>  
+                                      </Table.Td>
+                                    </Table.Tr>
+                                  </Table.Tbody>
+                                </Table>
                       {/* <label className="form-label" for="name">Name</label>
                         <div className="input-group mb-3  input-info">
                             <input type="text" className="form-control" id="name" aria-label="Name"/>
@@ -212,6 +238,7 @@ function Userprofile() {
                       </button>
                     </div>
                   </div>
+                 
                 </div>
                 {/* <hr></hr>
                 <div className="col-lg-8 col-md-8 col-12">
