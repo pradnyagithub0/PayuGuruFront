@@ -7,11 +7,13 @@ import { ENDPOINTS } from '../../../utils/apiConfig';
 import DateRangeToolBar from '../PageToolbar';
 import Panel from 'rsuite/Panel';
 
-import { HStack, Stack } from "rsuite";
+import { HStack, Stack, Text } from "rsuite";
 import 'rsuite/Stack/styles/index.css';
 import 'rsuite/Panel/styles/index.css';
 
 import CustomButtonGroup from './TableIconButtons';
+import CopyButtonIcon from './CopyButtonIcon';
+import QRCodeIcon from './QRCodeIcon';
 
 const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) => {
 
@@ -108,7 +110,20 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
       { Header: 'Time', accessor: 'time' },
     //   { Header: 'Timestamp', accessor: 'timestamp' },
       { Header: 'Bank', accessor: 'upi_bank' },
-      { Header: 'UPI Address', accessor: 'upi_id' },
+      { Header: 'UPI Address', accessor: 'upi_id',
+
+        Cell: ({row}) => (
+          <div>
+           <HStack>
+           <Text className='p-2 border-2' style={{color:'var(--bg-text)'}}>
+            {row.original.upi_id}
+          </Text>
+              <CopyButtonIcon data={row.original.upi_id === row.original.upi_id ? row.original.upi_id : ''} style={{BackgroundColor:'var(--heading-color) !important'}}/>
+              <QRCodeIcon/>
+           </HStack>
+          </div>
+          )
+      },
       { Header: 'Status', accessor: 'upistatus' },
       { Header: 'Request Type', accessor: 'request_type' },
       {
@@ -216,10 +231,11 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
                                       style={{
                                         padding: '10px',
                                         border: 'solid 1px gray',
-                                        background: 'papayawhip',
+                                        background: 'var(--bg)',
                                         fontSize: '13px',
                                         alignItems: 'center',
-                                        textAlign: 'center'
+                                        textAlign: 'center',
+                                        color: 'var(--text-color)'
                                       }}
                                     >
                                       {cell.render('Cell')}

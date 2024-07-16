@@ -8,9 +8,10 @@ import { ENDPOINTS } from '../../../utils/apiConfig';
 import Panel from 'rsuite/Panel';
 import 'rsuite/Panel/styles/index.css';
 import DateRangeToolBar from '../PageToolbar';
-import { HStack, Stack } from "rsuite";
+import { HStack, Stack, Text } from "rsuite";
 import 'rsuite/Stack/styles/index.css';
 import CustomButtonGroup from './TableIconButtons';
+import CopyButtonIcon from './CopyButtonIcon';
 
 const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection }) => {
 
@@ -82,7 +83,19 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
       { Header: 'Date', accessor: 'date' },
       { Header: 'Time', accessor: 'time' },
       { Header: 'Bank', accessor: 'AC_bank' },
-      { Header: 'Bank Account No', accessor: 'AC_id' },
+      { Header: 'Bank Account No', accessor: 'AC_id' ,
+         Cell: ({row}) => (
+          <div>
+           <HStack>
+           <Text  className='p-2 border-2' style={{color:'var(--bg-text)'}}>
+            {row.original.AC_id}
+          </Text>
+              <CopyButtonIcon data={row.original.AC_id === row.original.AC_id ? row.original.AC_id : ''} />
+             
+           </HStack>
+          </div>
+          )
+      },
       { Header: 'IFSC Code', accessor: 'AC_ifsc' },
       { Header: 'Swift Code', accessor: 'AC_swift' },
       { Header: 'Status', accessor: 'ACstatus' },
@@ -225,10 +238,11 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
                       style={{
                         padding: '10px',
                         border: 'solid 1px gray',
-                        background: 'papayawhip',
+                        background: 'var(--bg)',
                         fontSize: '13px',
                         alignItems: 'center',
-                        textAlign: 'center'
+                        textAlign: 'center',
+                        color:'var(--text-color)'
                       }}
                     >
                       {cell.render('Cell')}

@@ -187,8 +187,14 @@
     
   } */
   svg {
+    color: var(--sidebar-text) !important;
+  }
+  /* svg > .sun-icon {
     color: var(--text-color) !important;
   }
+  svg > .moon-icon {
+    color: var(--text-color) !important;
+  } */
   .sidebar{
     width: 260px;
     height:910px;
