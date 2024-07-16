@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
 import lodingImg from "../../assets/img/loading.gif";
 import { Link, useNavigate } from "react-router-dom";
-
+import { PasswordInputStrength} from '../PasswordInputComponent';
 const Resetpassword = () => {
   const [loader, setLoader] = useState(false);
   const [resetPassErr, setResetPassErr] = useState("");
@@ -104,7 +104,7 @@ const Resetpassword = () => {
                   </a>{" "}
                 </p>
 
-                <div className="inputbox">
+                {/* <div className="inputbox">
                   <label>Password</label>
                   <input type="text" id="newPassword" placeholder="New Password" />
                   <p className="msg text-warning">{fieldErrors.password}</p>
@@ -114,7 +114,8 @@ const Resetpassword = () => {
                   <label>Confirm Password</label>
                   <input type="text" id="repeatPassword" placeholder="Repeat Password" />
                   <p className="msg text-warning">{fieldErrors.confirmPass}</p>
-                </div>
+                </div> */}
+                 <PasswordInputStrength/>
                 <p className="msg text-warning">{fieldErrors.token}</p>
                 <span id="resetaPassError" className="text-warning">{resetPassErr}</span>
                 {loginBtn && <div>

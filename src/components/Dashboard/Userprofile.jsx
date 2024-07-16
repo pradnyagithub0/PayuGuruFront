@@ -7,17 +7,24 @@ import ProfileTopbar from "./commonComponents/ProfileTopbar";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import { ENDPOINTS } from "../../utils/apiConfig.js";
 import lodingImg from "../../assets/img/loading.gif";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
-import { Text, Table } from '@mantine/core';
+import { Text, Table, PasswordInput } from '@mantine/core';
+import { IconXboxX } from '@tabler/icons-react';
+import { useDisclosure } from '@mantine/hooks';
+import { Modal, Button } from '@mantine/core';
+import {PasswordInputStrength} from '../PasswordInputComponent';
+import { Stack } from "rsuite";
 
 function Userprofile() {
   const [loader, setLoader] = useState(false);
   const [resetPassErr, setResetPassErr] = useState("");
   const [userInfo, setUserInfo] = useState([]);
   const sessionid = sessionStorage.getItem("sessionid");
+  const [opened, { open, close }] = useDisclosure(false);
+   const [visible, { toggle }] = useDisclosure(false);
   const [fieldErrors, setFieldErrors] = useState({
     password: "",
     confirmPass: "",
@@ -231,7 +238,7 @@ function Userprofile() {
                       <button
                         className="btn btn1 btn-outline-secondary virtual-btn my-3"
                         data-bs-toggle="modal"
-                        data-bs-target="#change_pass_modal"
+                        data-bs-target="#change_pass_modal" onClick={open}
                       >
                         <i className="fa fa-lock mr-3"></i>Change Account
                         Password
@@ -371,7 +378,7 @@ function Userprofile() {
             </div>
             <div className="modal-body">
               <div>
-                <div className="inputbox">
+                {/* <div className="inputbox">
                   <label>Password</label>
                   <input
                     type="text"
@@ -392,7 +399,8 @@ function Userprofile() {
                     placeholder="Repeat Password"
                   />
                   <p className="msg text-danger">{fieldErrors.confirmPass}</p>
-                </div>
+                </div> */}
+                <PasswordInputStrength/>
                 <p className="msg text-danger">{fieldErrors.token}</p>
                 <span id="resetaPassError" className="text-success">
                   {resetPassErr}
@@ -417,6 +425,10 @@ function Userprofile() {
             </div>
           </div>
         </div>
+      </div>
+
+      <div>
+      {/* <PasswordInputComponent/> */}
       </div>
     </div>
   );
