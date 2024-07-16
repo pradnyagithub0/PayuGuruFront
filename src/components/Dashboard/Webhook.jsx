@@ -6,6 +6,50 @@ import { useNavigate } from "react-router-dom";
 import ProfileTopbar from "./commonComponents/ProfileTopbar";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
+import classes from './Webhook.css';
+import { Card, Group, Switch, Text } from '@mantine/core';
+
+const data = [
+    { title: 'Messages', description: 'Direct messages you have received from other users' },
+    { title: 'Review requests', description: 'Code review requests from your team members' },
+    { title: 'Comments', description: 'Daily digest with comments on your posts' },
+    {
+      title: 'Recommendations',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'Credit UPI',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'Credit Virtual Account',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'Funds Added',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'Funds Transfer Status',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'Low Balance Alert',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'UPI ID Verification',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'UPI Collection Status',
+      description: 'Digest with best community posts from previous week',
+    },
+    {
+      title: 'Invalid VA Credit',
+      description: 'Digest with best community posts from previous week',
+    },
+  ];
 
 function Webhook(){
 
@@ -19,6 +63,18 @@ function Webhook(){
         navigate("/login");
         }
     }, [isInactive, navigate]);
+
+    const items = data.map((item) => (
+        <Group justify="space-between" className={classes.item} wrap="nowrap" gap="xl" key={item.title}>
+          <div>
+            <Text>{item.title}</Text>
+            <Text size="xs" c="dimmed">
+              {item.description}
+            </Text>
+          </div>
+          <Switch onLabel="ON" offLabel="OFF" className={classes.switch} size="lg" />
+        </Group>
+      ));
     return(
         <div>
             <div className="wrapper">
@@ -130,6 +186,16 @@ function Webhook(){
                                             </table>
                                         </div>
                                     </form>	 */}
+                                <Card withBorder radius="md" p="xl" className={classes.card}>
+                                <Text fz="lg" className={classes.title} fw={500}>
+                                    Configure notifications
+                                </Text>
+                                <Text fz="xs" c="dimmed" mt={3} mb="xl">
+                                    Choose what notifications you want to receive
+                                </Text>
+                                {items}
+                                </Card>
+                                
                                 </div>
                             </div>
                         </div>
