@@ -7,19 +7,21 @@ import ProfileTopbar from "./commonComponents/ProfileTopbar";
 import DashboardTopbar from "./commonComponents/DashboardTopbar";
 import useInactivityTimeout from "../../hooks/useInactivityTimeout";
 import classes from './Webhook.css';
-import { Card, Group, Switch, Text } from '@mantine/core';
+import { Card, Group, Switch, Text ,Divider  } from '@mantine/core';
+import { Toggle } from 'rsuite';
+import 'rsuite/Toggle/styles/index.css';
 
 const data = [
-    { title: 'Messages', description: 'Direct messages you have received from other users' },
-    { title: 'Review requests', description: 'Code review requests from your team members' },
-    { title: 'Comments', description: 'Daily digest with comments on your posts' },
+    { title: 'SMS Notification', description: 'Direct SMS Transactional messages you have received.' },
+    { title: 'Email Notification', description: 'Direct Email report at your email account.' },
+    { title: 'Push Notification', description: 'Push Notification event , transactional based push notification' },
     {
-      title: 'Recommendations',
-      description: 'Digest with best community posts from previous week',
+      title: 'MFA',
+      description: 'Multi Factor Authentication',
     },
     {
       title: 'Credit UPI',
-      description: 'Digest with best community posts from previous week',
+      description: 'Credit UPI Enable/Disable',
     },
     {
       title: 'Credit Virtual Account',
@@ -65,15 +67,22 @@ function Webhook(){
     }, [isInactive, navigate]);
 
     const items = data.map((item) => (
+        <div>
+
         <Group justify="space-between" className={classes.item} wrap="nowrap" gap="xl" key={item.title}>
           <div>
             <Text>{item.title}</Text>
             <Text size="xs" c="dimmed">
               {item.description}
             </Text>
+           
           </div>
-          <Switch onLabel="ON" offLabel="OFF" className={classes.switch} size="lg" />
+          <Switch onLabel="ON" offLabel="OFF" className={classes.switch} size="sm" />
+          {/* <Toggle size="sm" onLabel="ON" offLabel="OFF" className={classes.switch} ></Toggle> */}
         </Group>
+        <Divider  my="xs" />
+        </div>
+        
       ));
     return(
         <div>
@@ -188,12 +197,15 @@ function Webhook(){
                                     </form>	 */}
                                 <Card withBorder radius="md" p="xl" className={classes.card}>
                                 <Text fz="lg" className={classes.title} fw={500}>
-                                    Configure notifications
+                                    Preferences Settings
                                 </Text>
+                                
                                 <Text fz="xs" c="dimmed" mt={3} mb="xl">
-                                    Choose what notifications you want to receive
+                                    Configure preference service settings
                                 </Text>
+                                <Divider  my="xs" />
                                 {items}
+                               
                                 </Card>
                                 
                                 </div>

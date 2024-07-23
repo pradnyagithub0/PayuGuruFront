@@ -29,12 +29,12 @@ function Invoices(){
            
               <Dheader/>
                <HStack>
-               <div className="main-content theme h-theme">
+               <div className="main-content">
                     <div className="top bg-white mt-0 p-2">
                         <DashboardTopbar />
                     </div>
-                    <div className="card pb-0 account-details border-0 shadow-lg">
-                    <div className="card-body p-0">
+                    <div className="card pb-0 account-details border-0 shadow-lg" >
+                    <div className="card-body p-0 border-0">
                     <div className="row">
                         <div className="col-lg-12 col-md-12 col-12">
                         

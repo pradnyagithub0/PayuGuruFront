@@ -1,10 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { HStack, Stack, Toggle } from 'rsuite';
+// import { Input, CloseButton } from '@mantine/core';
 import { IconButton, ButtonToolbar, ButtonGroup, Button } from 'rsuite';
 import { Icon } from '@rsuite/icons';
 import { FaUserClock } from "react-icons/fa";
+import { IconSearch } from '@tabler/icons-react';
 import 'rsuite/Stack/styles/index.css';
 import 'rsuite/IconButton/styles/index.css';
+
+
+import SpotlightSearch from './commonComponents/Spotlight';
+import {  Input, CloseButton , TextInput } from '@mantine/core';
 
 
 
@@ -28,6 +34,8 @@ const ClockCustomeButton = ({appearance, formatTime,time , toggleTimeFormat}) =>
 const Clock = () => {
   // State to hold the current time
  const [time, setTime] = useState(new Date());
+ const kyc_status = sessionStorage.getItem("kyc_status");
+ console.log('status: ', kyc_status);
   // Initialize the format state from localStorage or default to true
   const [is24HourFormat, setIs24HourFormat] = useState(() => {
     const savedFormat = localStorage.getItem('is24HourFormat');
@@ -78,10 +86,27 @@ const Clock = () => {
         
                     <HStack spacing={10} childrenRenderMode="clone">
                    <HStack spacing={15}>
-                   <p className="float-left">
-                        <i className="fa fa-info-circle"></i> Your account is pending
-                        activation. Please submit your documents to payuguru.com
-                    </p>
+                   <div style={{ width:'360px !important'}}>
+
+                    {kyc_status === 'Y' ? (
+                      <div>
+                     <HStack>
+                     <Input size='lg'
+                     style={{ padding: '5px', }}
+                      //  placeholder="Search..."
+                      //  icon={<IconSearch size={16} />
+                       leftSection={<IconSearch size={16} />}
+                       rightSection={ <SpotlightSearch size='sm'/>}
+                     />
+                     
+                     </HStack>
+                      </div>
+                    ) : (
+                      <p className="float-left">
+                        <i className="fa fa-info-circle"></i> Your account is pending activation. Please submit your documents to payuguru.com
+                      </p>
+                    )}
+                  </div>
                    {/* <Toggle size="sm"   onChange={toggleTimeFormat}></Toggle> */}
                   
                    </HStack>

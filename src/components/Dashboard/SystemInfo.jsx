@@ -15,6 +15,8 @@ function SystemInfo(){
     const isInactive = useInactivityTimeout(600000); // 10 minutes
     let navigate = useNavigate();
     const networkStatus = useNetwork();
+    const API_Version = '0.0.01-beta';
+    const APP_Version = 'v1.0.0';
     const os = useOs();
     useEffect(() => {
         if (isInactive) {
@@ -81,13 +83,21 @@ function SystemInfo(){
                                       <Table.Td>{networkStatus.type ? networkStatus.type : 'unknown'}</Table.Td>
                                     </Table.Tr>
                                     <Table.Tr>
+                                      <Table.Td>Application Version</Table.Td>
+                                      <Table.Td>{APP_Version ? APP_Version : 'unknown'}</Table.Td>
+                                    </Table.Tr>
+                                    <Table.Tr>
+                                      <Table.Td>API Version</Table.Td>
+                                      <Table.Td>{API_Version ? API_Version: 'unknown'}</Table.Td>
+                                    </Table.Tr>
+                                    {/* <Table.Tr> */}
                                       {/* <Table.Td>saveData</Table.Td> */}
                                       {/* <Table.Td>
                                         <Text size="sm" c={networkStatus.saveData ? 'teal.6' : 'red.6'}>
                                           {networkStatus.saveData ? 'true' : 'false'}
                                         </Text>
                                       </Table.Td> */}
-                                    </Table.Tr>
+                                    {/* </Table.Tr> */}
                                   </Table.Tbody>
                                 </Table>
                                 </div>

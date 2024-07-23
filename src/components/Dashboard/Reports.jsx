@@ -91,7 +91,7 @@ function Reports(){
                                             <HStack>
                                             
                                             {/* <div className="mt-0 p-3 d-flex float-right btn-left"> */}
-                                                <a type="button" className="btn bg-dark text-white mr-2">Export Transaction<i className="fa fa-external-link ml-2"></i></a>
+                                                {/* <a type="button" className="btn bg-dark text-white mr-2">Export Transaction<i className="fa fa-external-link ml-2"></i></a> */}
                                         {/* </div> */}
                                         
                                             </HStack>

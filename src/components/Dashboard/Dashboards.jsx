@@ -88,6 +88,8 @@ function Dashboard() {
         document.getElementById("docsReqModal")
       );
       myModal.show();
+      sessionStorage.setItem("kyc_status", "N");
+      sessionStorage.setItem("kyc_status","N");
     }
     else{
       setLoader(true);
@@ -125,6 +127,7 @@ function Dashboard() {
         setLoader(false);
         console.error("Error during OTP verification:", error);
       }
+      sessionStorage.setItem("kyc_status", "Y");
     }
   };
 
@@ -371,18 +374,18 @@ function Dashboard() {
             </div>
           </div> */}
 
-          <div className="row mt-3">
+          <div className="row mt-3 ">
             <div className="col-lg-12 col-md-12 col-12">
               <div className="card pb-0 account-details border-0 shadow-lg">
                 <div className="card-header">
-                  <div className="row">
+                  <div className="row theme h-theme">
                     <div className=" col-xl-4 col-lg-4 col-md-12 col-12">
-                      <h5 className="font-weight-bold mt-0">
+                      <h5 className="font-weight-bold mt-2">
                         Account Statement
                       </h5>
                     </div>
                     <div className="col-xl-8 col-lg-8 col-md-12 col-12 ">
-                      <p className="float-right">
+                      <p className="float-right mt-2">
                         *Date: 8 Nov-23, 0:00:00 to 2 Dec-23, 23:59:59
                       </p>
                     </div>

@@ -177,6 +177,16 @@
     color: var(--text-color);
 }
 
+.card {
+    background-color: var(--bg-account-card) !important;
+    color: var(--text-color) !important;
+}
+
+.rs-panel {
+    background-color: #ffff !important;
+    color: #0a0a0a !important;
+}
+
 .h-theme p {
     color: var(--text-color);
 }

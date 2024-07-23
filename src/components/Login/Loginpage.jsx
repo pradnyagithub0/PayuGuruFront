@@ -49,6 +49,7 @@ const Login = () => {
         ) {
           console.log(resData.responsed.sessionid);
           sessionStorage.setItem("sessionid", resData.responsed.sessionid);
+          sessionStorage.setItem("kyc_status", resData.responsed.kyc_status);
           navigate(`/dashboard`);
         } else if (resData.responsed.mobile_verify !== "Y") {
           setMobileNotVerified(true);
