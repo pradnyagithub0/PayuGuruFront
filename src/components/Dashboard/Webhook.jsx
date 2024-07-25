@@ -12,44 +12,44 @@ import { Toggle } from 'rsuite';
 import 'rsuite/Toggle/styles/index.css';
 
 const data = [
-    { title: 'SMS Notification', description: 'Direct SMS Transactional messages you have received.' },
-    { title: 'Email Notification', description: 'Direct Email report at your email account.' },
-    { title: 'Push Notification', description: 'Push Notification event , transactional based push notification' },
+    { title: 'SMS Notification', description: 'Enable/Direct sms transactional messages you have received.' },
+    { title: 'Email Notification', description: 'Enable/Direct email report at your email account.' },
+    { title: 'Push Notification', description: 'Enable/Disable Push notification event , transactional based push notification' },
     {
       title: 'MFA',
       description: 'Multi Factor Authentication',
     },
     {
       title: 'Credit UPI',
-      description: 'Credit UPI Enable/Disable',
+      description: 'Enable/Disable credit upi notification',
     },
     {
       title: 'Credit Virtual Account',
-      description: 'Digest with best community posts from previous week',
+      description: 'Enable/Disable creating virtual account',
     },
     {
       title: 'Funds Added',
-      description: 'Digest with best community posts from previous week',
+      description: 'Enable/Disable fund add notification on channels',
     },
     {
       title: 'Funds Transfer Status',
-      description: 'Digest with best community posts from previous week',
+      description: 'Enable/Disable send notification for fund transfer status',
     },
     {
       title: 'Low Balance Alert',
-      description: 'Digest with best community posts from previous week',
+      description: 'Enable/Disable low balance alert notification',
     },
     {
       title: 'UPI ID Verification',
-      description: 'Digest with best community posts from previous week',
+      description: 'Enable/Disable upi id verification service',
     },
     {
       title: 'UPI Collection Status',
-      description: 'Digest with best community posts from previous week',
+      description: 'Enable/Disable upi payment collection status notification',
     },
     {
       title: 'Invalid VA Credit',
-      description: 'Digest with best community posts from previous week',
+      description: 'Enable/Disable Invalid RTGS/NFT/IMPS payment failure',
     },
   ];
 
