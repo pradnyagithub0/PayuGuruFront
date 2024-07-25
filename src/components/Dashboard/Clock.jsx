@@ -5,6 +5,7 @@ import { IconButton, ButtonToolbar, ButtonGroup, Button } from 'rsuite';
 import { Icon } from '@rsuite/icons';
 import { FaUserClock } from "react-icons/fa";
 import { IconSearch } from '@tabler/icons-react';
+import { Kbd } from '@mantine/core';
 import 'rsuite/Stack/styles/index.css';
 import 'rsuite/IconButton/styles/index.css';
 
@@ -91,14 +92,16 @@ const Clock = () => {
                     {kyc_status === 'Y' ? (
                       <div>
                      <HStack>
-                     <Input size='lg'
+                     <Input size='sm'
                      style={{ padding: '5px', }}
                       //  placeholder="Search..."
                       //  icon={<IconSearch size={16} />
                        leftSection={<IconSearch size={16} />}
-                       rightSection={ <SpotlightSearch size='sm'/>}
+                       rightSection={ <SpotlightSearch/>}
                      />
-                     
+                     <div dir="ltr">
+                      <Kbd>⌘</Kbd> + <Kbd>K</Kbd>
+                    </div>
                      </HStack>
                       </div>
                     ) : (

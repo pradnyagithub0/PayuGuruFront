@@ -32,10 +32,8 @@ function SpotlightSearch() {
   return (
     <>
     <HStack>
-    <div dir="ltr">
-      <Kbd>⌘</Kbd> + <Kbd>K</Kbd>
-    </div>
-      <Spotlight style={{padding: '5px' }}
+    
+      <Spotlight style={{padding: '2px' }}
         actions={actions}
         nothingFound="Nothing found..."
         highlightQuery

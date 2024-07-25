@@ -330,7 +330,7 @@
     --bg-account-card: linear-gradient(91.15deg, #272829 10.36%, #0a0a0a 84.51%);
     --bg-rs-item-card: transparent;
     --bg-backdrop-zindex: 100 !important;
-	--bg-input: #2e2d2d;
+	--bg-input: #10d00;
   }
 
   .float-left p {
