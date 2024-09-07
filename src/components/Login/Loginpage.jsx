@@ -36,6 +36,7 @@ const Login = () => {
     setEmailNotVerified(false);
     setFieldErrors({});
     try {
+  
       const login_api = (await getAPI()).Login_API;
       const response = await fetch(login_api, {
         method: "POST",
@@ -103,7 +104,8 @@ const Login = () => {
     setLoginErr("");
     setEmailNotVerified(false);
     try {
-      const response = await fetch(getAPI().resend_email_API, {
+       const resend_email_api = (await getAPI()).resend_email_API;
+      const response = await fetch(resend_email_api, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -199,7 +201,7 @@ const Login = () => {
                   to verify.
                 </div>
                 <div className="inputbox text-right">
-                  <a href="/Forgotun">Forgot Password?</a>
+                  <a href="/forget">Forgot Password?</a>
                 </div>
                 <div>
                   <button type="submit" className="submitButton" onClick={loginUser}>
@@ -208,7 +210,7 @@ const Login = () => {
                 </div>
                 <div className="inputbox text-center">
                   <p>
-                    You Don't have An Account ? <a href="/Register">Register</a>
+                    You Don't have An Account ? <a href="/register">Register</a>
                   </p>
                 </div>
               </div>
