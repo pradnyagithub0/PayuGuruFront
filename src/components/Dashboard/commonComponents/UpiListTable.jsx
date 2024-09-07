@@ -6,14 +6,15 @@ import { useTable, useSortBy } from 'react-table';
 import { ENDPOINTS } from '../../../utils/apiConfig';
 import DateRangeToolBar from '../PageToolbar';
 import Panel from 'rsuite/Panel';
-
+import { Button } from "@mui/material";
 import { HStack, Stack, Text } from "rsuite";
 import 'rsuite/Stack/styles/index.css';
 import 'rsuite/Panel/styles/index.css';
 
 import CustomButtonGroup from './TableIconButtons';
 import CopyButtonIcon from './CopyButtonIcon';
-import QRCodeIcon from './QRCodeIcon';
+import QRCodeButton from './QRCodeIcon';
+import UpiModal from './UpiModel';
 
 const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) => {
 
@@ -21,8 +22,23 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
   const [upiList, setUPList] = useState([]);
   const sessionid = sessionStorage.getItem("sessionid");
   const [loader, setLoader] = useState(false);
+  const [resetPassErr, setResetPassErr] = useState("");
+  const [upiID, setUpiID] = useState('');
+  const [qrCodeURL, setQrCodeURL] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const copyToClipboard = async () => {
+    const tokenInput = document.getElementById("upi_id");
+    try {
+      await navigator.clipboard.writeText(tokenInput.innerHTML);
+      alert("UPI ID copied to clipboard");
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+    }
+  };
 
+  
 
+  const get_upi = 'http://localhost:3031/api/dashboard/upisearch' || ENDPOINTS.GET_UPI_SEARCH;
   const handleSearchUPI = async () => {
     setLoader(true);
 
@@ -96,6 +112,37 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
     </th>
   );
 
+  const Show_UPI_id = async (upi_id) => {
+    try {
+
+      console.log('DataPass for search:', upi_id);
+      const response = await fetch(get_upi, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ upi_id, sessionid }),
+      });
+
+      const resData = await response.json();
+      console.log('UPI Data: ', resData);
+      if (resData.StatusCodes === "00") {
+        setUpiID(resData.responsed.upi_id);
+        setQrCodeURL(resData.responsed.qr_code); // Set the QR code URL
+        setIsModalOpen(true); // Open the modal
+      } else {
+        console.log("If status code is not 00, handle the error");
+      }
+    } catch (error) {
+      console.error("Error fetching UPI data:", error);
+    }
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   const columns = React.useMemo(
     () => [
     //   { Header: 'ID', accessor: '_id' },
@@ -119,7 +166,8 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
             {row.original.upi_id}
           </Text>
               <CopyButtonIcon data={row.original.upi_id === row.original.upi_id ? row.original.upi_id : ''} style={{BackgroundColor:'var(--heading-color) !important'}}/>
-              <QRCodeIcon/>
+              <QRCodeButton data={row.original.upi_id} openModal={Show_UPI_id} style={{ backgroundColor: 'var(--heading-color)' }}/>
+            
            </HStack>
           </div>
           )
@@ -250,6 +298,16 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
               
               </div>
           </div>
+{/* UPI Modal Component */}
+        <UpiModal
+                upiID={upiID}
+                qrCodeURL={qrCodeURL}
+                isOpen={isModalOpen}
+                onClose={handleModalClose}
+              />
+
+
+          
     </>
   );
 };

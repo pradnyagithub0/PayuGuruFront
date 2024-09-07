@@ -5,19 +5,29 @@ import "./Loginpage.css";
 import { ENDPOINTS } from "../../utils/apiConfig";
 import { Button } from "@mui/material";
 
+const Login_API = "";
+const resend_email_API = "";
+
+ const getAPI  = async () => {
+  return {
+    Login_API:  await ENDPOINTS.LOGIN_USER , // || "http://localhost:3031/api/user/login" ,
+    resend_email_API : await ENDPOINTS.RE_SEND_E_VERIFY// || "http://localhost:3031/api/user/emailresend"
+  }
+}
+
+
 const Login = () => {
   const [loader, setLoader] = useState(false);
   const [loginErr, setLoginErr] = useState("");
   const [mobileNotVerified, setMobileNotVerified] = useState(false);
   const [emailNotVerified, setEmailNotVerified] = useState(false);
-  const Login_API = ENDPOINTS.LOGIN_USER;
-  const resend_email_API = ENDPOINTS.RE_SEND_E_VERIFY;
-  const clientId = localStorage.getItem("clientId");
+  const clientId =  localStorage.getItem("clientId");
   let navigate = useNavigate();
   const [fieldErrors, setFieldErrors] = useState({
     userMobile: "",
     password: "",
   });
+  // getAPI();
 
   const loginUser = async () => {
     setLoader(true);
@@ -26,7 +36,8 @@ const Login = () => {
     setEmailNotVerified(false);
     setFieldErrors({});
     try {
-      const response = await fetch(Login_API, {
+      const login_api = (await getAPI()).Login_API;
+      const response = await fetch(login_api, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -36,9 +47,13 @@ const Login = () => {
           mobile: document.getElementById("mobile").value,
           password: document.getElementById("password").value,
         }),
+        credentials: 'include', // Include credentials (cookies) in the request
       });
 
       const resData = await response.json();
+
+      console.log('Response Data: ', resData);
+
       setLoader(false);
 
       if (resData.responsed) {
@@ -88,7 +103,7 @@ const Login = () => {
     setLoginErr("");
     setEmailNotVerified(false);
     try {
-      const response = await fetch(resend_email_API, {
+      const response = await fetch(getAPI().resend_email_API, {
         method: "POST",
         headers: {
           accept: "application/json",

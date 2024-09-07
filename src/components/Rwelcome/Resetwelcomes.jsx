@@ -28,7 +28,7 @@ const Resetwelcome = ({ username }) => {
       <h2>Welcome To PayuGuru {username}!</h2>
        <p>Your password has been successful Reset!</p>
        <div className="inputbox text-center" onClick={handleInputChange}>
-      <p>You can Login Here.. <a href='/Login'> Login </a></p> 
+      <p>You can Login Here.. <a href='/login'> Login </a></p> 
     </div>
     </div>
     

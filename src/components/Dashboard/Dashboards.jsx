@@ -17,6 +17,7 @@ import CustomButtonGroup from "./commonComponents/TableIconButtons";
 import {StatisticGrid} from './commonComponents/StatsGrid/StatisticGrid'
 import { MdOutlineAccountBalance } from "react-icons/md";
 import UPISvgIcon from "./commonComponents/UpiIcon";
+import UpiModal from "./commonComponents/UpiModel"
 import { FaFileContract } from "react-icons/fa";
 function Dashboard() {
   const {theme, toggleTheme} = useTheme();
@@ -29,7 +30,9 @@ function Dashboard() {
   const [dashboardIndex, setDashboardIndex] = useState({});
   const [mainBalance, setMainBalance] = useState("");
   const [totalSettalment, setTotalSettalment] = useState("");
-  const [upiID, setUpiId] = useState("");
+  const [upiID, setUpiID] = useState('');
+  const [qrCodeURL, setQrCodeURL] = useState('');
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [accountDetails, setAccountDetials] = useState({});
   let navigate = useNavigate();
 
@@ -110,11 +113,9 @@ function Dashboard() {
 
         if (resData.StatusCodes) {
           if (resData.StatusCodes === "00") {
-            setUpiId(resData.responsed.upi_id);
-            const myModal = new window.bootstrap.Modal(
-              document.getElementById("upiModal")
-            );
-            myModal.show();
+            setUpiID(resData.responsed.upi_id);
+            setQrCodeURL(resData.responsed.qr_code); // Set the QR code URL
+            setIsModalOpen(true); // Open the modal
           } else {
             console.log("If status code not 00, then go to this else condition");
           }
@@ -252,6 +253,9 @@ function Dashboard() {
     } catch (err) {
       console.error("Failed to copy: ", err);
     }
+  };
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
   // Timeout activity
   const isInactive = useInactivityTimeout(600000); // 10 minutes
@@ -515,7 +519,7 @@ function Dashboard() {
       </div>
 
       {/* create UPI Modal */}
-      <div
+      {/* <div
         className="modal fade docReqModal"
         id="upiModal"
         aria-labelledby="upiModalLabel"
@@ -566,7 +570,14 @@ function Dashboard() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
+
+              <UpiModal
+                upiID={upiID}
+                qrCodeURL={qrCodeURL}
+                isOpen={isModalOpen}
+                onClose={handleModalClose}
+              />
 
       {/* Account Details Modal */}
       <div

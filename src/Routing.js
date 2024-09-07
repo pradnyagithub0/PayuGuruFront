@@ -38,20 +38,20 @@ const Routing = () => {
         <Routes>
           <Route path="/" element={<Main />}>
             <Route index element={<Home />} />
-            <Route path="Home" element={<Home />} />
+            <Route path="home" element={<Home />} />
             <Route path="login" element={<Loginpage />} />
             <Route path="register" element={<Registerpage />} />
             <Route path="emailotp" element={<Emailotp />} />
             <Route path="mobileotp" element={<Mobileotp />} />
-            <Route path="Forgotun" element={<Forgotun />} />
+            <Route path="forget" element={<Forgotun />} />
             <Route path="success" element={<Success />} />
             <Route path="otppage" element={<Otppage />} />
             <Route path="Resetpassword" element={<Resetpassword />} />
-            <Route path="Amlpolicy" element={<AmlPolicy />} />
-            <Route path="CookiesPolicy" element={<CookiesPolicy />} />
-            <Route path="PrivacyPolicy" element={<PrivacyPolicy />} />
-            <Route path="RedressalPolicy" element={<RedressalPolicy />} />
-            <Route path="TermsandCondition" element={<TermsandCondition />} />
+            <Route path="mmlpolicy" element={<AmlPolicy />} />
+            <Route path="cookiespolicy" element={<CookiesPolicy />} />
+            <Route path="privacypolicy" element={<PrivacyPolicy />} />
+            <Route path="redressalpolicy" element={<RedressalPolicy />} />
+            <Route path="termsandcondition" element={<TermsandCondition />} />
             <Route path="docs" element={<Docsmain/>}/>
             
 

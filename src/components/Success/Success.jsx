@@ -85,7 +85,7 @@ const RegisterSuccessPage = () => {
           <p>
             You can Login Here...
           </p>
-          <Link to="/Login">
+          <Link to="/login">
             <Button variant="contained" color="success">
               Login
             </Button>
