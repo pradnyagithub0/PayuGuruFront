@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Redirect, Switch, useLocation } from 'react-router-dom';
+// import {retry} from './utils/commonFunctions';
+import {lazy, useState, Suspense, useEffect} from 'react';
 import Home from './components/Home/Home';
 import Main from './Main';
 import Loginpage from './components/Login/Loginpage';
@@ -32,6 +34,9 @@ import Docsmain from './docs/Docsmain';
 import SystemInfo from './components/Dashboard/SystemInfo';
 
 const Routing = () => {
+  // const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
+  // const location = useLocation();
+
   return (
     <div>
       <BrowserRouter>

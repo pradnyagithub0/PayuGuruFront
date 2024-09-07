@@ -6,9 +6,13 @@ import { ENDPOINTS } from '../../../utils/apiConfig';
 // import generatePDF from '../../../hooks/usePdfAccountListGenerate'
 
 import Panel from 'rsuite/Panel';
+
 import 'rsuite/Panel/styles/index.css';
 import DateRangeToolBar from '../PageToolbar';
-import { HStack, Stack, Text } from "rsuite";
+import { HStack, Stack,Toggle, Text } from "rsuite";
+import CheckIcon from '@rsuite/icons/Check';
+import CloseIcon from '@rsuite/icons/Close';
+import 'rsuite/Toggle/styles/index.css';
 import 'rsuite/Stack/styles/index.css';
 import CustomButtonGroup from './TableIconButtons';
 import CopyButtonIcon from './CopyButtonIcon';
@@ -98,27 +102,41 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
       },
       { Header: 'IFSC Code', accessor: 'AC_ifsc' },
       { Header: 'Swift Code', accessor: 'AC_swift' },
-      { Header: 'Status', accessor: 'ACstatus' },
+      // { Header: 'Status', accessor: 'ACstatus' },
       { Header: 'Request Type', accessor: 'request_type' },
       {
         Header: 'Action',
         accessor: '  ',
         Cell: ({ row }) => (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleStatusToggle(row.original);
-            }}
-            style={{
-              padding: '5px 10px',
-              backgroundColor: row.original.ACstatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
-              color: row.original.ACstatus === 'N' ? 'black' : 'white',
-              border: 'none',
-              borderRadius: '25px',
-            }}
-          >
-            {row.original.ACstatus === 'Y' ? 'Active' : 'Disable'}
-          </button>
+          // <button
+          //   onClick={(e) => {
+          //     e.preventDefault();
+          //     handleStatusToggle(row.original);
+          //   }}
+          //   style={{
+          //     padding: '5px 10px',
+          //     backgroundColor: row.original.ACstatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
+          //     color: row.original.ACstatus === 'N' ? 'black' : 'white',
+          //     border: 'none',
+          //     borderRadius: '25px',
+          //   }}
+          // >
+          //   {row.original.ACstatus === 'Y' ? 'Active' : 'Disable'}
+          // </button>
+          <div>
+          <Stack spacing={10} childrenRenderMode="clone" alignItems="center" justifyContent="center">
+        {/* <Toggle size="lg">Large</Toggle>
+        <Toggle size="md">Medium</Toggle> */}
+              <Toggle size="md" color="green"  onChange={(e) => {
+            // e.preventDefault();
+            handleStatusToggle(row.original);
+          }}
+          loading={!row.original.ACstatus}
+          defaultChecked={row.original.ACstatus === 'Y'}// Reflects the current status
+          checkedChildren={<CheckIcon />}
+          unCheckedChildren={<CloseIcon />}></Toggle>
+            </Stack>
+        </div>
         ),
       },
     ],

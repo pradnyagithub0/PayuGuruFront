@@ -7,10 +7,12 @@ import { ENDPOINTS } from '../../../utils/apiConfig';
 import DateRangeToolBar from '../PageToolbar';
 import Panel from 'rsuite/Panel';
 import { Button } from "@mui/material";
-import { HStack, Stack, Text } from "rsuite";
+import { HStack, Stack, Text, Toggle } from "rsuite";
+import CheckIcon from '@rsuite/icons/Check';
+import CloseIcon from '@rsuite/icons/Close';
+import 'rsuite/Toggle/styles/index.css';
 import 'rsuite/Stack/styles/index.css';
 import 'rsuite/Panel/styles/index.css';
-
 import CustomButtonGroup from './TableIconButtons';
 import CopyButtonIcon from './CopyButtonIcon';
 import QRCodeButton from './QRCodeIcon';
@@ -19,6 +21,7 @@ import UpiModal from './UpiModel';
 const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) => {
 
   const [search, setSearch] = useState('');
+  const [filteredDatacheck, setFilteredDatacheck] = useState(data);
   const [upiList, setUPList] = useState([]);
   const sessionid = sessionStorage.getItem("sessionid");
   const [loader, setLoader] = useState(false);
@@ -87,6 +90,8 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
   const handleStatusToggle = (rowData) => {
   
     toggleStatus(rowData); // Call the function from parent
+    
+    
   };
 
   const renderHeader = (column) => (
@@ -165,34 +170,50 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
            <Text className='p-2 border-2' style={{color:'var(--bg-text)'}}>
             {row.original.upi_id}
           </Text>
-              <CopyButtonIcon data={row.original.upi_id === row.original.upi_id ? row.original.upi_id : ''} style={{BackgroundColor:'var(--heading-color) !important'}}/>
-              <QRCodeButton data={row.original.upi_id} openModal={Show_UPI_id} style={{ backgroundColor: 'var(--heading-color)' }}/>
+              <CopyButtonIcon data={row.original.upi_id === row.original.upi_id ? row.original.upi_id : ''} style={{BackgroundColor:'#f8dcdc !important'}}/>
+              <QRCodeButton data={row.original.upi_id} openModal={Show_UPI_id} style={{ backgroundColor: '#f8dcdc !important' }}/>
             
            </HStack>
           </div>
           )
       },
-      { Header: 'Status', accessor: 'upistatus' },
+      // { Header: 'Status', accessor: 'upistatus' , Cell: ({ row }) => (
+      //   <span>{row.original.upistatus === 'Y' ? 'Active' : 'Disable'}</span>
+      // )},
       { Header: 'Request Type', accessor: 'request_type' },
       {
         Header: 'Action',
         accessor: '  ',
         Cell: ({ row }) => (
-          <button
-            onClick={(e) => {
-              e.preventDefault();
+          // <button
+          //   onClick={(e) => {
+          //     e.preventDefault();
+          //     handleStatusToggle(row.original);
+          //   }}
+          //   style={{
+          //     padding: '5px 10px',
+          //     backgroundColor: row.original.upistatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
+          //     color: row.original.upistatus === 'N' ? 'black' : 'white',
+          //     border: 'none',
+          //     borderRadius: '25px',
+          //   }}
+          // >
+          //   {row.original.upistatus === 'Y' ? 'Active' : 'Disable'}
+          // </button>
+          <div>
+            <Stack spacing={10} childrenRenderMode="clone" alignItems="center" justifyContent="center">
+          {/* <Toggle size="lg">Large</Toggle>
+          <Toggle size="md">Medium</Toggle> */}
+                <Toggle size="md" color="green"  onChange={(e) => {
+              // e.preventDefault();
               handleStatusToggle(row.original);
             }}
-            style={{
-              padding: '5px 10px',
-              backgroundColor: row.original.upistatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
-              color: row.original.upistatus === 'N' ? 'black' : 'white',
-              border: 'none',
-              borderRadius: '25px',
-            }}
-          >
-            {row.original.upistatus === 'Y' ? 'Active' : 'Disable'}
-          </button>
+            loading={!row.original.upistatus}
+            defaultChecked={row.original.upistatus === 'Y'}// Reflects the current status
+            checkedChildren={<CheckIcon />}
+            unCheckedChildren={<CloseIcon />}></Toggle>
+              </Stack>
+          </div>
         ),
       },
     ],

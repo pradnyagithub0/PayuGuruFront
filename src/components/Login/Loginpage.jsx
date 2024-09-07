@@ -38,18 +38,22 @@ const Login = () => {
     try {
   
       const login_api = (await getAPI()).Login_API;
-      const response = await fetch(login_api, {
-        method: "POST",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
           mobile: document.getElementById("mobile").value,
           password: document.getElementById("password").value,
-        }),
-        credentials: 'include', // Include credentials (cookies) in the request
-      });
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+          credentials: 'include'
+        };
+      const response = await fetch(login_api, requestOptions);
 
       const resData = await response.json();
 

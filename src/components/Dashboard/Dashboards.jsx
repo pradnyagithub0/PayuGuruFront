@@ -30,59 +30,60 @@ function Dashboard() {
   const [dashboardIndex, setDashboardIndex] = useState({});
   const [mainBalance, setMainBalance] = useState("");
   const [totalSettalment, setTotalSettalment] = useState("");
+  const [AccountTransactions, setAccountTransactions] = useState("");
   const [upiID, setUpiID] = useState('');
   const [qrCodeURL, setQrCodeURL] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [accountDetails, setAccountDetials] = useState({});
   let navigate = useNavigate();
 
-  // useEffect(() => {
-  //   dashboardIndexData();
-  // },[sessionid]);
+  useEffect(() => {
+    dashboardIndexData();
+  },[sessionid]);
 
-  // const dashboardIndexData = async () => {
-  //   setLoader(true);
-  //   try {
-  //     const response = await fetch(dash_index, {
-  //       method: "POST",
-  //       headers: {
-  //         accept: "application/json",
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({
-  //         sessionid: sessionid,
-  //       }),
-  //     });
+  const dashboardIndexData = async () => {
+    setLoader(true);
+    try {
+      const response = await fetch(dash_index, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+        }),
+      });
 
-  //     const resData = await response.json();
-  //     setLoader(false);
+      const resData = await response.json();
+      setLoader(false);
 
-  //     if (resData.mess) {
-  //       if (resData.mess.StatusCodes === "DI00") {
-  //         setDashboardIndex(resData.mess);
-  //         setMainBalance(resData.mess.mainbalance);
-  //         setTotalSettalment(resData.mess.settelment);
-  //         setKycStatus(resData.mess.kyc_status); 
-  //       } else {
-  //         // navigate(`/login`);
+      if (resData.mess) {
+        if (resData.mess.StatusCodes === "DI00") {
+          setDashboardIndex(resData.mess);
+          setMainBalance(resData.mess.mainbalance);
+          setTotalSettalment(resData.mess.settelment);
+          setKycStatus(resData.mess.kyc_status); 
+        } else {
+          // navigate(`/login`);
 
-  //       }
-  //       if (resData.mess.kyc_status === "N")
-  //       {
-  //         const myModal = new window.bootstrap.Modal(
-  //           document.getElementById("docsReqModal")
-  //         );
-  //         myModal.show();
-  //       }
-  //     } else {
-  //       // Handle unexpected response structure
-  //       console.error("Unexpected response structure:", resData);
-  //     }
-  //   } catch (error) {
-  //     setLoader(false);
-  //     console.error("Error :", error);
-  //   }
-  // };
+        }
+        if (resData.mess.kyc_status === "N")
+        {
+          const myModal = new window.bootstrap.Modal(
+            document.getElementById("docsReqModal")
+          );
+          myModal.show();
+        }
+      } else {
+        // Handle unexpected response structure
+        console.error("Unexpected response structure:", resData);
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error :", error);
+    }
+  };
 
 
   const add_UPI_id = async () => {

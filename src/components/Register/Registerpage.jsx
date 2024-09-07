@@ -66,13 +66,10 @@ const Register = () => {
 
       console.log("Registration API: ", reg_api);
 
-      const response = await fetch(reg_api, {
-        method: "POST",
-        headers: {
-          Accept: "*/*", // Capitalized for consistency
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
           name: formData.userName,
           mobile: formData.userPhone,
           email: formData.userEmail,
@@ -80,8 +77,33 @@ const Register = () => {
           confirmedpassword: formData.confirmPass,
           com_name: formData.companyName,
           accept: isChecked, // Include the accept field
-        }),
-      });
+        });
+
+        const requestOptions = {
+          method: "POST",
+          headers: myHeaders,
+          body: raw,
+          redirect: "follow",
+          credentials: 'include'
+        };
+      const response = await fetch(reg_api, requestOptions);
+
+      // const response = await fetch(reg_api, {
+      //   method: "POST",
+      //   headers: {
+      //     Accept: "*/*", // Capitalized for consistency
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     name: formData.userName,
+      //     mobile: formData.userPhone,
+      //     email: formData.userEmail,
+      //     password: formData.password,
+      //     confirmedpassword: formData.confirmPass,
+      //     com_name: formData.companyName,
+      //     accept: isChecked, // Include the accept field
+      //   }),
+      // });
 
       const responseData = await response.json();
       console.log(responseData);
