@@ -1,10 +1,9 @@
-// StatisticGrid.js
+import React, { useContext, useEffect, useState } from "react";
 import { Group, Paper, Text, ThemeIcon, SimpleGrid } from '@mantine/core';
 import { IconArrowUpRight, IconArrowDownRight } from '@tabler/icons-react';
+import { HStack } from 'rsuite';
 import classes from './StatisticGridIcon.css';
 import SparkleChart from '../Charts/SparkleChart';
-import { HStack } from 'rsuite';
-import { useContext, useEffect, useState } from 'react';
 import { ENDPOINTS } from '../../../../utils/apiConfig';
 import { ApplicationContext } from '../../../../context/ApplicationContext';
 
@@ -14,9 +13,15 @@ export function StatisticGrid() {
   const sessionid = sessionStorage.getItem("sessionid");
   const [loader, setLoader] = useState(false);
   const [dashboardIndex, setDashboardIndex] = useState({});
-  const [mainBalance, setMainBalance] = useState("");
-  const [totalSettalment, setTotalSettalment] = useState("");
-  
+  const [mainBalance, setMainBalance] = useState(0);
+  const [totalSettlement, setTotalSettlement] = useState(0);
+  const [transactionData, setTransactionData] = useState({
+    totalBySellerIdentifier: [],
+    totalByPaymentAddress: [],
+    txnTypeSummary: [],
+    ReceivedSumOfTotalAmountByPaymentAddress: 0,
+  });
+
   useEffect(() => {
     dashboardIndexData();
   }, [sessionid]);
@@ -42,8 +47,10 @@ export function StatisticGrid() {
         if (resData.mess.StatusCodes === "DI00") {
           setDashboardIndex(resData.mess);
           setMainBalance(resData.mess.mainbalance);
-          setTotalSettalment(resData.mess.settelment);
+          setTotalSettlement(resData.mess.settelment);
+          setTransactionData(resData.mess["AccountTransactions"][0]);
           setKycStatus(resData.mess.kyc_status);
+          console.log('Transactional Data: ', transactionData[0])
         } else {
           // Handle error
         }
@@ -58,19 +65,38 @@ export function StatisticGrid() {
       }
     } catch (error) {
       setLoader(false);
-      console.error("Error :", error);
+      console.error("Error:", error);
     }
   };
 
-  // Sample trend data, update with actual values from the state
+  // Extracting transaction data for visualization
+ 
+  const receivedAmount = transactionData.ReceivedSumOfTotalAmountByPaymentAddress;
+  const txnSummeryOnTransationMode = transactionData.txnTypeSummary;
+  const txnsOnAddresses = transactionData.totalByPaymentAddress;
+  console.log('Txn Summery Based on Payment Type Method Use: ', txnSummeryOnTransationMode);
+  // const totalBySeller = transactionData.totalBySellerIdentifier> 0 ? transactionData.totalBySellerIdentifier[0].totalAmountBySeller : 0;
+  // const totalByPaymentAddress = transactionData.totalByPaymentAddress > 0 ? transactionData.totalByPaymentAddress.reduce((sum, item) => sum + item.totalAmountByPaymentAddress, 0) : 0;
+
+  // Calculate the total number of transactions executed
+  // const totalTransactions = transactionData.totalBySellerIdentifier.reduce(
+  //   (sum, seller) => sum + seller.totalTransactionsBySeller, 0
+  // ) + transactionData.totalByPaymentAddress.reduce(
+  //   (sum, payment) => sum + payment.totalTransactionsByPaymentAddress, 0
+  // );
+
+  // Sample trend data, update with actual values from the state or API
   const positiveTrend = [10, 20, 40, 20, 40, 10, 50];  // Replace with dynamic data
   const negativeTrend = [50, 40, 20, 40, 20, 40, 10];  // Replace with dynamic data
   const neutralTrend = [10, 20, 40, 20, 40, 10, 50, 5, 10];  // Replace with dynamic data
 
   const data = [
-    { title: 'Received', value: mainBalance, diff: 34, trend: positiveTrend },
-    { title: 'Settled', value: totalSettalment, diff: -13, trend: negativeTrend },
-    { title: 'Pending', value: '745', diff: 18, trend: neutralTrend },
+    { title: 'Recieved Amount', value: receivedAmount, diff: 34, trend: positiveTrend },
+    // { title: 'Settlement', value: totalSettlement, diff: -13, trend: negativeTrend },
+    // { title: 'Received Amount', value: receivedAmount, diff: 18, trend: neutralTrend },
+    // { title: 'Total by Seller', value: totalBySeller, diff: 20, trend: positiveTrend },
+    // { title: 'Total by Payment Address', value: totalByPaymentAddress, diff: 15, trend: neutralTrend },
+    // { title: 'Total Transactions Executed', value: totalTransactions, diff: 10, trend: positiveTrend },
   ];
 
   const stats = data.map((stat) => {

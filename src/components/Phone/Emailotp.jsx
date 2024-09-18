@@ -1,5 +1,5 @@
 import React,{ useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import './Emailotp.css'; 
 import { PinInput } from "@mantine/core";
@@ -15,7 +15,7 @@ let url = ENDPOINTS.VERIFY_EMAIL;
     const [value, setValue] = useState('');
     const [timerSeconds, setTimerSeconds] = useState(600); // 15 minutes in seconds
     const [isTimerActive, setIsTimerActive] = useState(true);
-
+    let navigate = useNavigate();
     // Countdown timer effect
   useEffect(() => {
     let intervalId;
@@ -50,6 +50,7 @@ let url = ENDPOINTS.VERIFY_EMAIL;
           const response = await axios.post(url, { email, otp });
           setLoader(false);
           setMessage(response.data.message);
+          navigate(`/dashboard`);
         } catch (error) {
           setMessage('Invalid OTP. Please try again.');
         }

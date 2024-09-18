@@ -1,95 +1,143 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "@mui/material";
+import { notifications } from '@mantine/notifications';
+import { IconCheck, IconAlertTriangle } from '@tabler/icons-react';
 import loadingImg from "../../assets/img/loading.gif";
 import "./Loginpage.css";
 import { ENDPOINTS } from "../../utils/apiConfig";
-import { Button } from "@mui/material";
 
-const Login_API = "";
-const resend_email_API = "";
-
- const getAPI  = async () => {
+const getAPI = async () => {
   return {
-    Login_API:  await ENDPOINTS.LOGIN_USER , // || "http://localhost:3031/api/user/login" ,
-    resend_email_API : await ENDPOINTS.RE_SEND_E_VERIFY// || "http://localhost:3031/api/user/emailresend"
-  }
-}
-
+    Login_API: await ENDPOINTS.LOGIN_USER,
+    resend_email_API: await ENDPOINTS.RE_SEND_E_VERIFY,
+  };
+};
 
 const Login = () => {
   const [loader, setLoader] = useState(false);
   const [loginErr, setLoginErr] = useState("");
   const [mobileNotVerified, setMobileNotVerified] = useState(false);
   const [emailNotVerified, setEmailNotVerified] = useState(false);
-  const clientId =  localStorage.getItem("clientId");
+  const clientId = localStorage.getItem("clientId");
   let navigate = useNavigate();
   const [fieldErrors, setFieldErrors] = useState({
     userMobile: "",
     password: "",
   });
-  // getAPI();
 
+  // Function to show notifications
+  const showNotification = (title, message, color, icon, autoClose = 2000) => {
+    notifications.show({
+      title,
+      message,
+      color,
+      icon,
+      autoClose,
+    });
+  };
+
+  // Function to handle login
   const loginUser = async () => {
-    setLoader(true);
+    setLoader(true); // Start loader and show notification
     setLoginErr("");
     setMobileNotVerified(false);
     setEmailNotVerified(false);
     setFieldErrors({});
-    try {
-  
-      const login_api = (await getAPI()).Login_API;
-      const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
 
-        const raw = JSON.stringify({
+    // Show loading notification
+    const id = notifications.show({
+      loading: true,
+      title: 'Logging in...',
+      message: 'Please wait while we verify your credentials.',
+      autoClose: false, // Keep it active while loading
+      withCloseButton: false,
+    });
+
+    try {
+      const login_api = (await getAPI()).Login_API;
+      const response = await fetch(login_api, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           mobile: document.getElementById("mobile").value,
           password: document.getElementById("password").value,
-        });
-
-        const requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-          credentials: 'include'
-        };
-      const response = await fetch(login_api, requestOptions);
+        }),
+      });
 
       const resData = await response.json();
+      setLoader(false); // Stop loader
 
-      console.log('Response Data: ', resData);
-
-      setLoader(false);
-
+      // Handle the response
       if (resData.responsed) {
         if (
           resData.responsed.user_status === "Y" &&
           resData.responsed.mobile_verify === "Y" &&
           resData.responsed.email_verify === "Y"
         ) {
-          console.log(resData.responsed.sessionid);
           sessionStorage.setItem("sessionid", resData.responsed.sessionid);
           sessionStorage.setItem("kyc_status", resData.responsed.kyc_status);
+
+          notifications.update({
+            id,
+            color: 'teal',
+            title: 'Login Successful',
+            message: 'Redirecting to your dashboard...',
+            icon: <IconCheck />,
+            loading: false,
+            autoClose: 5000,
+          });
+
           navigate(`/dashboard`);
         } else if (resData.responsed.mobile_verify !== "Y") {
           setMobileNotVerified(true);
+          showNotification('Mobile Not Verified', 'Please verify your mobile number.', 'yellow', <IconAlertTriangle />);
         } else if (resData.responsed.email_verify !== "Y") {
           setEmailNotVerified(true);
+          showNotification('Email Not Verified', 'Please verify your email address.', 'yellow', <IconAlertTriangle />);
         }
       } else if (resData.success === false) {
-        console.log(resData.message);
         parseFieldErrors(resData.message);
+        notifications.update({
+          id,
+          color: 'red',
+          title: 'Login Failed',
+          message: 'Invalid credentials or missing information.',
+          icon: <IconAlertTriangle />,
+          loading: false,
+          autoClose: 2000,
+        });
       } else {
-        console.error("Unexpected response structure:", resData);
         setLoginErr("An unexpected error occurred. Please try again.");
+        notifications.update({
+          id,
+          color: 'red',
+          title: 'Error',
+          message: 'An unexpected error occurred. Please try again.',
+          icon: <IconAlertTriangle />,
+          loading: false,
+          autoClose: 2000,
+        });
       }
     } catch (error) {
       setLoader(false);
-      console.error("Error during OTP verification:", error);
       setLoginErr("Internal Server Error. Please try again later.");
+      notifications.update({
+        id,
+        color: 'red',
+        title: 'Server Error',
+        message: 'Internal Server Error. Please try again later.',
+        icon: <IconAlertTriangle />,
+        loading: false,
+        autoClose: 2000,
+      });
     }
   };
 
+  // Function to parse field errors
   const parseFieldErrors = (errorMessage) => {
     const fieldErrors = {
       userMobile: "",
@@ -103,12 +151,22 @@ const Login = () => {
     setFieldErrors(fieldErrors);
   };
 
+  // Function to resend email
   const resendEmail = async () => {
-    setLoader(true);
+    setLoader(true); // Show loader and notification
     setLoginErr("");
     setEmailNotVerified(false);
+
+    const id = notifications.show({
+      loading: true,
+      title: 'Resending email...',
+      message: 'Please wait while we resend the verification email.',
+      autoClose: false,
+      withCloseButton: false,
+    });
+
     try {
-       const resend_email_api = (await getAPI()).resend_email_API;
+      const resend_email_api = (await getAPI()).resend_email_API;
       const response = await fetch(resend_email_api, {
         method: "POST",
         headers: {
@@ -121,21 +179,45 @@ const Login = () => {
       });
 
       const resData = await response.json();
-      setLoader(false);
+      setLoader(false); // Stop loader
 
       if (resData.mess) {
-        alert(resData.mess.message);
+        notifications.update({
+          id,
+          color: 'teal',
+          title: 'Email Sent',
+          message: 'A verification email has been sent.',
+          icon: <IconCheck />,
+          loading: false,
+          autoClose: 2000,
+        });
       } else {
-        console.error("Unexpected response structure:", resData);
         setLoginErr("An unexpected error occurred. Please try again.");
+        notifications.update({
+          id,
+          color: 'red',
+          title: 'Error',
+          message: 'An unexpected error occurred. Please try again.',
+          icon: <IconAlertTriangle />,
+          loading: false,
+          autoClose: 2000,
+        });
       }
     } catch (error) {
       setLoader(false);
-      console.error("Error during OTP verification:", error);
-      setLoginErr("Internal Server Error. Please try again later.");
+      notifications.update({
+        id,
+        color: 'red',
+        title: 'Server Error',
+        message: 'Internal Server Error. Please try again later.',
+        icon: <IconAlertTriangle />,
+        loading: false,
+        autoClose: 2000,
+      });
     }
   };
-// Allow enter key part
+
+  // Allow enter key to trigger login
   useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.key === "Enter") {
@@ -149,7 +231,6 @@ const Login = () => {
       window.removeEventListener("keypress", handleKeyPress);
     };
   }, []);
-
   return (
     <div>
       <section className="mt-5 py-5 enquiry-section1" id="stack">

@@ -22,6 +22,7 @@ import KybForm from './components/KycForms/KybForm';
 import KycForm from './components/KycForms/KycForm';
 import Enquiry from './components/Enquiry/Enquiry';
 import Success from './components/Success/Success';
+import Mwelcomeverify from './components/Mwelcomeverify/Mwelcomeverify';
 import Otppage from './components/Otp/Otppage';
 import Resetpassword from './components/Rpassword/Resetpassword';
 import AmlPolicy from './Pages/AmlPolicy';
@@ -48,6 +49,7 @@ const Routing = () => {
             <Route path="register" element={<Registerpage />} />
             <Route path="emailotp" element={<Emailotp />} />
             <Route path="mobileotp" element={<Mobileotp />} />
+            <Route path="mobilemsg" element={<Mwelcomeverify />} />
             <Route path="forget" element={<Forgotun />} />
             <Route path="success" element={<Success />} />
             <Route path="otppage" element={<Otppage />} />

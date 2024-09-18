@@ -29,8 +29,9 @@ const Register = () => {
   let navigate = useNavigate();
 
   const handleCheckboxChange = (e) => {
+    console.log('Terms Status: ', e.target.checked);
     setIsChecked(e.target.checked);
-    if (e.target.checked) {
+    if (e.target.checked === false) {
       setRegisterErr("");
     }
   };
@@ -66,25 +67,22 @@ const Register = () => {
 
       console.log("Registration API: ", reg_api);
 
-      const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        const raw = JSON.stringify({
-          name: formData.userName,
-          mobile: formData.userPhone,
-          email: formData.userEmail,
-          password: formData.password,
-          confirmedpassword: formData.confirmPass,
-          com_name: formData.companyName,
-          accept: isChecked, // Include the accept field
-        });
-
+         
         const requestOptions = {
           method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-          credentials: 'include'
+          headers: {
+            accept: "*/*",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.userName,
+            mobile: formData.userPhone,
+            email: formData.userEmail,
+            password: formData.password,
+            confirmedpassword: formData.confirmPass,
+            com_name: formData.companyName
+          })
+  
         };
       const response = await fetch(reg_api, requestOptions);
 

@@ -246,6 +246,7 @@ function Dashboard() {
     '2022-02-25',
     '2022-02-26'
   ];
+  
   const copyToClipboard = async () => {
     const tokenInput = document.getElementById("upi_id");
     try {

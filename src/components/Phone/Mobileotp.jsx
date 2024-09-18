@@ -59,7 +59,7 @@ const MobileVerifyPage = () => {
         },
         body: JSON.stringify({
           clientId: clientId2,
-          otp: document.getElementById("mobileOtp").value,
+          otp: value,
         }),
       });
   
@@ -70,6 +70,7 @@ const MobileVerifyPage = () => {
         if (otpData.mess.StatusCodes === "M00") {
           console.log(otpData.mess.message);
           setMobileOtpErr(otpData.mess.message);
+          navigate(`/mobilemsg`);
 
         } else {
           console.log(otpData.mess.message);
