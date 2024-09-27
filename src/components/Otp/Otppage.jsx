@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import './Otppage.css';
 import { ENDPOINTS } from '../../utils/apiConfig';
 
@@ -74,9 +74,15 @@ const verifyOTP=()=>{
                      <div className="col-lg-3 col-md-2 col-12 "></div>
                      <div className="col-lg-6 col-md-8 col-12">
                          <form className="form">
-                             <h3 className="text-center">Enter Otp </h3>
-                             <p className="text-center"><a href="/" className="text-white"><img src="https://i.ibb.co/vzTTh9B/home.png" 
-							 alt="home-icon"/> Home</a> </p>
+                             <h3 className="text-center">Enter Otp</h3>
+                             <p className="text-center"> <Link to="/" className="text-white">
+                             <img
+                               src="https://demo.payu.guru/favicon_128.png"
+                               alt="home-icon"
+                               className="home-icon"
+                             />
+                             
+                           </Link> </p>
 
                              <div className="inputbox">
                                  <label>Enter Your Otp</label>

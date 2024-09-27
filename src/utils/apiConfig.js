@@ -3,12 +3,12 @@ const API_BASE_URL = process.env.REACT_APP_API_URL;
 console.log("API_BASE_URL:", API_BASE_URL); // Debugging check
 
 export const ENDPOINTS = {
-  REGISTER_USER: `${API_BASE_URL}/user/registration`,
+  REGISTER_USER: `${API_BASE_URL}/user/register`,
   OTP_VERIFY: `${API_BASE_URL}/user/otpcheck`,
   VERIFY_EMAIL: `${API_BASE_URL}/user/emailcheck`,
   RE_SEND_M_OTP: `${API_BASE_URL}/user/otpresend`,
   RE_SEND_E_VERIFY: `${API_BASE_URL}/user/emailresend`,
-  FORGET_PASSWORD: `${API_BASE_URL}/user/passowrdreset`,
+  FORGET_PASSWORD: `${API_BASE_URL}/user/passwordreset`,
   DASH_BOARD: `${API_BASE_URL}/dashboard/index`,
   CREATE_UPI_ID: `${API_BASE_URL}/dashboard/Creatupiid`,
   CREATE_VIRTUAL_BANK_ACCOUNT: `${API_BASE_URL}/dashboard/Creatacno`,

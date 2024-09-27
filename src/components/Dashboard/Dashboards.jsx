@@ -328,7 +328,7 @@ function Dashboard() {
               <button
                 type="button"
                 className="btn btn-light-pink"
-                onClick={add_UPI_id}
+                // onClick={add_UPI_id}
               >
                 <i className="fa mr-1"><UPISvgIcon size={21}/></i> Add New UPI ID
               </button>
@@ -400,8 +400,8 @@ function Dashboard() {
                 
                 <div className="card-body p-3">
                   <div>
-                  <Row gutter={30} className="dashboard-header">
-                      {/* <Col xs={8}>
+                 {/*   <Row gutter={30} className="dashboard-header">
+                     <Col xs={8}>
                         <Panel className="trend-box bg-gradient-red">
                           {/* <img className="chart-img" src={images.PVIcon} /> 
                           <div className="title">Page Views </div>
@@ -421,7 +421,7 @@ function Dashboard() {
                           <div className="title">Unique Visitors</div>
                           <div className="value">25,135</div>
                         </Panel>
-                      </Col> */}
+                      </Col> 
                 </Row>    
                 <Row gutter={30}>
                <Col xs={16}>
@@ -442,7 +442,7 @@ function Dashboard() {
                         labels={DateLabels}
                       />
                     </Col>
-                  </Row>
+                  </Row>*/}
                   </div>
                   <div className="table-responsive">
                     <table

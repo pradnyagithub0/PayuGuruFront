@@ -166,7 +166,7 @@ const Header = () => {
                   </div>
               </li>
                 <li className="nav-item my-auto px-2">
-              <NotificationButton/>
+             {/* <NotificationButton/>*/}
               </li>
               <li className="nav-item my-auto">
                 <Link className="nav-link" to="/docs">API Docs</Link>
@@ -177,8 +177,8 @@ const Header = () => {
               </li>
               
               <li className="nav-item my-auto ">
-                <Link className="nav-link"  to="/kybform">Status</Link>
-                {/* <a href="kybform" className="nav-link">
+                {/*<Link className="nav-link"  to="/kybform">Status</Link>
+                 <a href="kybform" className="nav-link">
                   Status
                 </a> */}
               </li>
@@ -243,20 +243,21 @@ const Header = () => {
             </Link>
           </li>
           <li className={`${activeLink === "/upi" ? "active" : ""}`}
-        onClick={() => handleLinkClick("/upi")}>
+             onClick={() => handleLinkClick("/upi")}
+             >
             <Link to="/upi" >
           
               <i className="fa bg-primary rounded-circle mr-2"><UPISvgIcon size={28}/></i>
               UPIS
             </Link>
           </li>
-          <li className={`${activeLink === "/reports" ? "active" : ""}`}
+         {/* <li className={`${activeLink === "/reports" ? "active" : ""}`}
         onClick={() => handleLinkClick("/reports")}>
             <Link to="/reports" >
               <i className="fa bg-pink rounded-circle fa-lg mr-2"><ReportIcon size={28}/></i>
               Reports
             </Link>
-          </li>
+          </li>*/}
           <li className={`${activeLink === "/invoices" ? "active" : ""}`}
         onClick={() => handleLinkClick("/invoices")}>
             <Link to="/invoices" >
@@ -281,14 +282,14 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-        <div className="sidebar-card">
+         {/* <div className="sidebar-card">
           <div className="card-body">
             <img src="https://i.ibb.co/PtMRfwP/card-img.png" alt="card-img" />
             <h3>Got Premium</h3>
             <p>Lots of Service</p>
             <button className="btn bg-white btn-rounded">Subscribe Now</button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

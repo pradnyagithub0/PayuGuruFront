@@ -18,8 +18,8 @@ function Enquiry(){
 					<div class="col-lg-3 col-md-2 col-12 "></div>
 					<div class="col-lg-6 col-md-8 col-12">
 						<form class="form">
-							<h3>ENQUIRY FORM</h3>
-					        <p class="text-center"><a href="/" class="text-white"><img src="assets/img/home.png" alt="home-icon"/> Home</a> </p>
+							<h3>Contact Us</h3>
+					        <p class="text-center"><a href="/" class="text-white"><img src="https://demo.payu.guru/favicon_128.png" alt="home-icon"/></a> </p>
 					        <div class="inputbox">
 					            <label>Your Name</label>
 					            <input type="text" name="" id="" placeholder="Enter Your Name"/>

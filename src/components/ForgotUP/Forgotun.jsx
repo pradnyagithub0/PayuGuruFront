@@ -51,10 +51,10 @@ const ForgotPasswordPage = () => {
                         <div className="col-lg-3 col-md-2 col-12 "></div>
                         <div className="col-lg-6 col-md-8 col-12">
                             <form className="form" onSubmit={handleSubmit}>
-                                <h3 className="text-center">Forgot Password</h3>
+                                <h3 className="text-center">Forget Password</h3>
                                 <p className="text-center">
                                     <a href="/" className="text-white">
-                                        <img src="https://i.ibb.co/vzTTh9B/home.png" alt="home-icon" /> Home
+                                        <img src="https://demo.payu.guru/favicon_128.png" alt="home-icon" />
                                     </a>
                                 </p>
                                 <div className="inputbox">

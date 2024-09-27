@@ -17,15 +17,41 @@ const getAPI = async () => {
 const Login = () => {
   const [loader, setLoader] = useState(false);
   const [loginErr, setLoginErr] = useState("");
+  const [input, setInput] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   const [mobileNotVerified, setMobileNotVerified] = useState(false);
   const [emailNotVerified, setEmailNotVerified] = useState(false);
   const clientId = localStorage.getItem("clientId");
   let navigate = useNavigate();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const mobileRegex = /^\+?[1-9]\d{1,14}$/;
   const [fieldErrors, setFieldErrors] = useState({
     userMobile: "",
     password: "",
   });
+  // const password = document.getElementById("password").value;
+  const validateInput = (value) => {
+    if (emailRegex.test(value)) {
+      setMessage('Valid Email Address');
+    } else if (mobileRegex.test(value)) {
+      setMessage('Valid Mobile Number');
+    } else {
+      setMessage('Invalid Input');
+    }
+  };
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInput(value);
+    validateInput(value);  // Call validation whenever the input changes
+  };
+
+  const handlePassword = (e) => {
+    const value = e.target.value;
+    setPassword(value);
+    validateInput(value);  // Call validation whenever the input changes
+  };
   // Function to show notifications
   const showNotification = (title, message, color, icon, autoClose = 2000) => {
     notifications.show({
@@ -56,16 +82,33 @@ const Login = () => {
 
     try {
       const login_api = (await getAPI()).Login_API;
+      let body = {};
+
+      if (emailRegex.test(input)) {
+        body = {
+          email: input, // Email login
+          password: password,
+        };
+      } else if (mobileRegex.test(input)) {
+        body = {
+          mobile: input, // Mobile login
+          password: password,
+        };
+      }
+      // let headers = new Headers();
+      // headers.append('Content-Type', 'application/json');
+      // headers.append('Accept', 'application/json');
+      // // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+      // headers.append('Origin','https://payuguru.com');
       const response = await fetch(login_api, {
         method: "POST",
         headers: {
-          accept: "application/json",
+         'Accept': 'application/json',
           "Content-Type": "application/json",
+
+        "Origin":"https://payuguru.com"
         },
-        body: JSON.stringify({
-          mobile: document.getElementById("mobile").value,
-          password: document.getElementById("password").value,
-        }),
+        body: JSON.stringify(body),
       });
 
       const resData = await response.json();
@@ -238,25 +281,28 @@ const Login = () => {
           <div className="row">
             <div className="col-lg-6 col-md-8 col-sm-12 mx-auto">
               <div className="form">
-                <h3 className="text-center">LOGIN FORM</h3>
+                <h3 className="text-center">Sign-In</h3>
                 <p className="text-center">
                   <Link to="/" className="text-white">
                     <img
-                      src="https://i.ibb.co/vzTTh9B/home.png"
+                      src="https://demo.payu.guru/favicon_128.png"
                       alt="home-icon"
                       className="home-icon"
                     />
-                    Home
+                    
                   </Link>
                 </p>
                 <div className="inputbox">
                   <label>Mobile</label>
-                  <input type="mobile" name="mobile" id="mobile"/>
-                  <p className="msg text-warning">{fieldErrors.userMobile}</p>
+                  <input type="text" name="mobile" id="mobileOrEmail"  value={input}
+                  onChange={handleChange}
+                  placeholder="Enter email or mobile number"/>
+                  <p className="msg text-warning">{fieldErrors.userMobile} {message}</p>
                 </div>
                 <div className="inputbox">
                   <label>Password</label>
-                  <input type="Password" name="password" id="password"/>
+                  <input type="password" name="password" id="password"  placeholder="Enter your password" value={password}
+                  onChange={handlePassword}/>
                   <p className="msg text-warning">{fieldErrors.password}</p>
                 </div>
                 <span className="text-warning">{loginErr}</span>

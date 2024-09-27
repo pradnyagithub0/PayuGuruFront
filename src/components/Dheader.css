@@ -28,7 +28,7 @@
     --bg-color: #333333;
     --text-color: #ffffff;
     --heading-color: #dddddd;
-  } */
+  }
   
   body {
     background-color: var(--bg-color);

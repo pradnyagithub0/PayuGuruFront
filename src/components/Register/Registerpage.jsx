@@ -67,12 +67,17 @@ const Register = () => {
 
       console.log("Registration API: ", reg_api);
 
+      // let headers = new Headers();
+      // headers.append('Content-Type', 'application/json');
+      // headers.append('Accept', 'application/json');
+      // // headers.append('Authorization', 'Basic ' + base64.encode(username + ":" +  password));
+      // headers.append('Origin','https://payuguru.com');
          
         const requestOptions = {
           method: "POST",
           headers: {
             accept: "*/*",
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
           },
           body: JSON.stringify({
             name: formData.userName,
@@ -170,15 +175,15 @@ const Register = () => {
             <div className="col-lg-3 col-md-2 col-12 "></div>
             <div className="col-lg-6 col-md-8 col-12">
               <div className="form" onKeyDown={handleKeyDown}>
-                <h3 className="text-center">REGISTRATION FORM</h3>
+                <h3 className="text-center">Sign-Up</h3>
                 <p className="text-center">
                   <Link to="/" className="text-white">
                     <img
-                      src="https://i.ibb.co/vzTTh9B/home.png"
+                      src="https://demo.payu.guru/favicon_128.png"
                       alt="home-icon"
                       className="home-icon"
                     />
-                    Home
+                    
                   </Link>
                 </p>
                 <div className="inputbox">
