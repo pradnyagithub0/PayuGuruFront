@@ -1,18 +1,26 @@
 import React, { useState } from "react";
 import './Header.css';
+import { Stack, Toggle } from 'rsuite';
+// import { ModeToggle } from './mode-toggle';
+import 'rsuite/Toggle/styles/index.css';
+import 'rsuite/Stack/styles/index.css';
 import { Link, useNavigate } from "react-router-dom";
-
+import {useTheme} from "./components/theme-context";
 
 
 
 function Header(){
-    
+    const {theme, toggleTheme} = useTheme();
+
+  const toggleMode = () => {
+    toggleTheme();
+  };
 
     return(
         <div>
-            <header>
+            <header className={`h-theme ${theme} theme-controller`}>
                 <div className="container">
-                    <nav className="container-fluid navbar navbar-expand-lg navbar-light bg-white">
+                    <nav className="container-fluid navbar navbar-expand-lg">
                         <a className="navbar-brand" href="/">
                             <img src="https://i.ibb.co/GTr3w2M/logo.webp" alt="logo" width="160" height="25"/>
                         </a>
@@ -44,6 +52,69 @@ function Header(){
                                 <li className="nav-item">
                                     <a className="nav-link smoothScroll" href="/#support">Support</a>
                                 </li>
+                                <li className="nav-item my-auto items-center">
+                                <div>
+                                <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      width="20"
+                                      height="20"
+                                      viewBox="0 0 24 24"
+                                      fill="none"
+                                      stroke="currentColor"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                      className='sun-icon'
+                                      >
+                                      <circle cx="12" cy="12" r="5" />
+                                      <path
+                                        d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                                    </svg>
+                                </div>
+                            </li>
+                                <li className="nav-item my-auto items-center ">
+                                <div className="mode-switch">
+                                
+                              
+                                {/* <label className="flex cursor-pointer gap-2">
+                              
+                              <input
+                                  type="checkbox"
+                                  onChange={toggleMode}
+                                  checked={theme === "dark"}
+                                />
+                                <span className="slider round"></span>
+                              
+                          </label>     */}
+                                <Stack spacing={10} childrenRenderMode="clone">
+                        {/* <Toggle size="lg">Large</Toggle>
+                        <Toggle size="md">Medium</Toggle> */}
+                              <Toggle size="sm"   onChange={toggleMode}
+                                  checked={theme === "dark"}></Toggle>
+                            </Stack>
+                            
+                              </div>
+                                    
+                            </li>
+                            <li className="nav-item my-auto items-center">
+                            <div>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="20"
+                                  height="20"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                  className='moon-icon'
+                                  >
+                                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                            
+                                </div>
+                            </li>
                             </ul>
                             <div className="form-inline my-2">
                                 <Link className="btn-warning mr-sm-2" to="/Login">Login</Link>

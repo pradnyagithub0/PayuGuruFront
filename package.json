@@ -103,7 +103,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker:build":"docker image buildx -t payuguru/payuguru:latest .",
+    "docker:run":"docker run -p 3000:3000 -d --name payuguru --network=scoobydoo payuguru/payuguru:latest"
   },
   "eslintConfig": {
     "extends": [
