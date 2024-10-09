@@ -2,6 +2,7 @@ import { useTheme } from "../../theme-context";
 import React from "react";
 // import { Clock } from "react-feather";
 import Clock from '../Clock'
+import SearchBox from "../SearchBox";
 const DashboardTopbar = () => {
   const docsModalOpen = () => {
     const myModal = new window.bootstrap.Modal(
@@ -19,11 +20,15 @@ const DashboardTopbar = () => {
   return (
     <>
       <div className={`row mt-0 h-theme ${theme}`}>
-        <div className="col-lg-9 col-md-9 col-12">
+      <div className="col-lg-6 col-md-6 col-sm-12">
+         
+         <SearchBox/>
+       </div>
+        <div className="col-lg-3 col-md-3 col-sm-12">
          
           <Clock/>
         </div>
-        <div className="col-lg-3 col-md-3 col-12">
+        <div className="col-lg-3 col-md-3 col-sm-12">
           <button type="button" className="btn btn-top" onClick={docsModalOpen}>
             Docs Required
           </button>
