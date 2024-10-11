@@ -79,6 +79,13 @@ const RegisterSuccessPage = () => {
     <div>
       <Header />
       <div className="register-success-container">
+        <Link to="/" className="text-white">
+        <img
+          src="https://demo.payu.guru/favicon_512.png"
+          alt="home-icon"
+          className="home-icon"
+        />
+      </Link>
         <h2>Welcome To PayUGuru !</h2>
         <p>Your registration was successful. Thank you for joining us!</p>
         <div className="inputbox text-center">

@@ -1,8 +1,15 @@
 const Dotenv = require('dotenv-webpack');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
     // Other webpack configuration options...
-    module: {
+        module: {
+          optimization: {
+        minimize: true,
+        minimizer: [
+          new CssMinimizerPlugin(),
+        ],
+      },
       rules: [
         // Other rules...
         {

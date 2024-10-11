@@ -34,7 +34,7 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
 
 
   const handleStatusToggle = (rowData) => {
-    rowData.preventDefault();
+    // rowData.preventDefault();
     toggleStatus(rowData); // Call the function from parent
   };
 
@@ -108,35 +108,36 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
         Header: 'Action',
         accessor: '  ',
         Cell: ({ row }) => (
-          // <button
-          //   onClick={(e) => {
-          //     e.preventDefault();
-          //     handleStatusToggle(row.original);
-          //   }}
-          //   style={{
-          //     padding: '5px 10px',
-          //     backgroundColor: row.original.ACstatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
-          //     color: row.original.ACstatus === 'N' ? 'black' : 'white',
-          //     border: 'none',
-          //     borderRadius: '25px',
-          //   }}
-          // >
-          //   {row.original.ACstatus === 'Y' ? 'Active' : 'Disable'}
-          // </button>
-          <div>
-          <Stack spacing={10} childrenRenderMode="clone" alignItems="center" justifyContent="center">
-        {/* <Toggle size="lg">Large</Toggle>
-        <Toggle size="md">Medium</Toggle> */}
-              <Toggle size="md" color="green"  onChange={(e) => {
-            // e.preventDefault();
-            handleStatusToggle(row.original);
-          }}
-          loading={!row.original.ACstatus}
-          defaultChecked={row.original.ACstatus === 'Y'}// Reflects the current status
-          checkedChildren={<CheckIcon />}
-          unCheckedChildren={<CloseIcon />}></Toggle>
-            </Stack>
-        </div>
+          <button
+            onClick={(e) => {
+              // e.preventDefault();
+
+              handleStatusToggle(row.original);
+            }}
+            style={{
+              padding: '5px 10px',
+              backgroundColor: row.original.ACstatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
+              color: row.original.ACstatus === 'N' ? 'black' : 'white',
+              border: 'none',
+              borderRadius: '25px',
+            }}
+          >
+            {row.original.ACstatus === 'Y' ? 'Active' : 'Disable'}
+          </button>
+        //   <div>
+        //   <Stack spacing={10} childrenRenderMode="clone" alignItems="center" justifyContent="center">
+        // {/* <Toggle size="lg">Large</Toggle>
+        // <Toggle size="md">Medium</Toggle> */}
+        //       <Toggle size="md" color="green"  onChange={(e) => {
+        //     // e.preventDefault();
+        //     handleStatusToggle(row.original);
+        //   }}
+        //   loading={!row.original.ACstatus}
+        //   defaultChecked={row.original.ACstatus === 'Y'}// Reflects the current status
+        //   checkedChildren={<CheckIcon />}
+        //   unCheckedChildren={<CloseIcon />}></Toggle>
+        //     </Stack>
+        // </div>
         ),
       },
     ],
@@ -147,7 +148,7 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
     <th
       {...column.getHeaderProps()}
       onClick={(e) => { 
-        e.preventDefault()
+        // e.preventDefault()
        onSort(column.accessor)}}
       className={column.isSortable ? 'sortable' : ''}
       style={{ borderBottom: 'solid 3px red', background: 'aliceblue', color: 'black', fontWeight: 'bold', padding: '5px', textAlign: 'center' }}
@@ -202,7 +203,7 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
                               <button
                                 className="searchIconBtn"
                                 onClick={(e) => {
-                                  e.preventDefault();
+                                  // e.preventDefault();
                                   console.log(search);
                                   handleSearchAcc();
                                 }}
@@ -277,7 +278,7 @@ const VirtualAccountTable = ({ data, toggleStatus ,onSort, sortBy, sortDirection
     {/* </Stack> */}
     
     
-            </>
+      </>
   );
 };
 

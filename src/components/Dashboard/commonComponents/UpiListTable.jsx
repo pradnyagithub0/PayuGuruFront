@@ -41,12 +41,12 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
 
   
 
-  const get_upi = 'http://localhost:3031/api/dashboard/upisearch' || ENDPOINTS.GET_UPI_SEARCH;
+  const get_upi =  ENDPOINTS.SEARCH_UPI_ID;
   const handleSearchUPI = async () => {
     setLoader(true);
 
     try {
-      const response = await fetch(ENDPOINTS.SEARCH_UPI_ID, {
+      const response = await fetch(get_upi, {
         method: "POST",
         headers: {
           accept: "application/json",
@@ -88,7 +88,7 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
 
 
   const handleStatusToggle = (rowData) => {
-  
+    // rowData.preventDefault();
     toggleStatus(rowData); // Call the function from parent
     
     
@@ -98,7 +98,7 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
     <th
       {...column.getHeaderProps()}
       onClick={(e) => {
-        e.preventDefault()
+        // e.preventDefault()
         onSort(column.accessor);
       } }
       className={column.isSortable ? 'sortable' : ''}
@@ -185,35 +185,35 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
         Header: 'Action',
         accessor: '  ',
         Cell: ({ row }) => (
-          // <button
-          //   onClick={(e) => {
-          //     e.preventDefault();
-          //     handleStatusToggle(row.original);
-          //   }}
-          //   style={{
-          //     padding: '5px 10px',
-          //     backgroundColor: row.original.upistatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
-          //     color: row.original.upistatus === 'N' ? 'black' : 'white',
-          //     border: 'none',
-          //     borderRadius: '25px',
-          //   }}
-          // >
-          //   {row.original.upistatus === 'Y' ? 'Active' : 'Disable'}
-          // </button>
-          <div>
-            <Stack spacing={10} childrenRenderMode="clone" alignItems="center" justifyContent="center">
-          {/* <Toggle size="lg">Large</Toggle>
-          <Toggle size="md">Medium</Toggle> */}
-                <Toggle size="md" color="green"  onChange={(e) => {
-              // e.preventDefault();
+          <button
+            onClick={(e) => {
+             
               handleStatusToggle(row.original);
             }}
-            loading={!row.original.upistatus}
-            defaultChecked={row.original.upistatus === 'Y'}// Reflects the current status
-            checkedChildren={<CheckIcon />}
-            unCheckedChildren={<CloseIcon />}></Toggle>
-              </Stack>
-          </div>
+            style={{
+              padding: '5px 10px',
+              backgroundColor: row.original.upistatus === 'Y' ? 'green' : 'linear-gradient(97.38deg, #FD6525 14.66%, #EB780E 55.73%)',
+              color: row.original.upistatus === 'N' ? 'black' : 'white',
+              border: 'none',
+              borderRadius: '25px',
+            }}
+          >
+            {row.original.upistatus === 'Y' ? 'Active' : 'Disable'}
+          </button>
+          // <div>
+          //   <Stack spacing={10} childrenRenderMode="clone" alignItems="center" justifyContent="center">
+          // {/* <Toggle size="lg">Large</Toggle>
+          // <Toggle size="md">Medium</Toggle> */}
+          //       <Toggle size="md" color="green"  onChange={(e) => {
+          //     // e.preventDefault();
+          //     handleStatusToggle(row.original);
+          //   }}
+          //   loading={!row.original.upistatus}
+          //   defaultChecked={row.original.upistatus === 'Y'}// Reflects the current status
+          //   checkedChildren={<CheckIcon />}
+          //   unCheckedChildren={<CloseIcon />}></Toggle>
+          //     </Stack>
+          // </div>
         ),
       },
     ],
@@ -257,7 +257,7 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
                                 <button
                                   className="searchIconBtn"
                                   onClick={(e) => {
-                                    e.preventDefault();
+                                    // e.preventDefault();
                                     console.log(search);
                                     handleSearchUPI();
                                   }}
@@ -319,7 +319,7 @@ const UpiListTable = ({ data, toggleStatus , onSort, sortBy, sortDirection  }) =
               
               </div>
           </div>
-{/* UPI Modal Component */}
+            {/* UPI Modal Component */}
         <UpiModal
                 upiID={upiID}
                 qrCodeURL={qrCodeURL}

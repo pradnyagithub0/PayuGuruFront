@@ -13,6 +13,7 @@ import DateRangeToolBar from './PageToolbar';
 import { HStack, Stack } from "rsuite";
 import 'rsuite/Stack/styles/index.css';
 import CustomButtonGroup from './commonComponents/TableIconButtons';
+import { YearPickerInput } from "./commonComponents/YearPickerInput";
 
 function Invoices(){
     const isInactive = useInactivityTimeout(600000); // 10 minutes
@@ -46,13 +47,14 @@ function Invoices(){
                         <div className= "col-lg-12 col-md-12 col-12">
                                         <HStack>
                                             
-                                            <HStack>
+                                            {/*  <HStack>
                                                     <div className='d-flex mr-3 p-3 center' style={{width: '450px'}}>
                                                     <DateRangeToolBar />
                                                     </div>
                                             </HStack>           
                                             <HStack>
-                                            <div className='d-flex mr-3 p-3 center'>
+                                         
+                                             <div className='d-flex mr-3 p-3 center'>
                                                 <input
                                                         type="text"
                                                         className="searchTerm"
@@ -77,6 +79,16 @@ function Invoices(){
                                                 </div>
                                             </HStack>
                                             <HStack>
+                                         
+                                             <div className='d-flex mr-3 p-3 center'>
+                                                <YearPickerInput  aria-label="YYYY-MM"/>
+                                            </div>
+                                            </HStack>*/}
+                                            
+                                            <HStack>
+                                                    <div className='d-flex mr-3 p-3 center'>
+                                                    <YearPickerInput/>
+                                                </div>
                                                 <CustomButtonGroup appearance="ghost"/>
                                             </HStack>
 

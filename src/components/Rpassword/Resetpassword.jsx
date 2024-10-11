@@ -94,14 +94,14 @@ const Resetpassword = () => {
               <div className="form">
                 <h3 className="text-center">Reset Password</h3>
                 <p className="text-center">
-                  <a href="/" className="text-white">
-                    <img
-                      src="https://i.ibb.co/vzTTh9B/home.png"
-                      alt="home-icon"
-                      className="home-icon"
-                    />{" "}
-                    Home
-                  </a>{" "}
+                <Link to="/" className="text-white">
+                <img
+                  src="https://demo.payu.guru/favicon_128.png"
+                  alt="home-icon"
+                  className="home-icon"
+                />
+                
+              </Link>
                 </p>
 
                 {/* <div className="inputbox">
