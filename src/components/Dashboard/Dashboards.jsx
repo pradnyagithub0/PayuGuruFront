@@ -279,7 +279,7 @@ function Dashboard() {
             <DashboardTopbar />
           </div>
 
-          <div className="row">
+          <div>
             <div className="card account-card mt-4">
               <div className="card-body">
                 <div className="row">

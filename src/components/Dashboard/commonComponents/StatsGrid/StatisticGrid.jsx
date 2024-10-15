@@ -141,18 +141,20 @@ export function StatisticGrid() {
   });
 
   return (
-    <HStack className='col-lg-12 col-md-12 col-auto'>
+    <HStack className='col-lg-12 col-md-12 col-sm-12'>
       <div className={classes.root}>
         <HStack>
-          <div className='col-lg-9 col-md-9 col-auto'>
-            <SimpleGrid cols={{ base: 1, sm: 3 }}>{stats}</SimpleGrid>
-          </div>
-          <div className="col-lg-2 col-md-2 col-auto">
-            <div className="img-bg">
-              <img
-                src="https://i.ibb.co/Fx8FHCd/account-card-img.png"
-                alt="account-card-img"
-              />
+          <div className="row">
+            <div className='col-lg-9 col-md-9 col-sm-12'>
+              <SimpleGrid cols={{ base: 1, sm: 3 }}>{stats}</SimpleGrid>
+            </div>
+            <div className="col-lg-2 col-md-2 col-sm-12">
+              <div className="img-bg">
+                <img
+                  src="https://i.ibb.co/Fx8FHCd/account-card-img.png"
+                  alt="account-card-img"
+                />
+              </div>
             </div>
           </div>
         </HStack>
