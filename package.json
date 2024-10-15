@@ -68,6 +68,7 @@
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.6.1",
     "immer": "^10.1.1",
+    "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",
     "pdf-lib": "^1.17.1",
     "protected-route-react": "^1.0.1",
@@ -104,8 +105,13 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+<<<<<<< HEAD
     "docker:build":"docker image buildx -t payuguru/payuguru:latest .",
     "docker:run":"docker run -p 3000:3000 -d --name payuguru --network=scoobydoo payuguru/payuguru:latest"
+=======
+    "docker:build": "docker image buildx -t payuguru/payuguru:latest .",
+    "docker:run": "docker run -p 3000:3000 -d --name payuguru --network=scoobydoo payuguru/payuguru:latest"
+>>>>>>> 74913e1a891499dabbe6133debcbf0483af7c74e
   },
   "eslintConfig": {
     "extends": [

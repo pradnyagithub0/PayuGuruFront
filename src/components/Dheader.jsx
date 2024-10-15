@@ -1,5 +1,6 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import Dropdown from "react-bootstrap/Dropdown";
+import Cookies from 'js-cookie';
 import { useNavigate, useHistory, useLocation  } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { ENDPOINTS } from "../utils/apiConfig";
@@ -52,6 +53,10 @@ const Header = () => {
         if (resData.StatusCodes === "U00") {
           sessionStorage.removeItem("sessionid");
           localStorage.removeItem('clientId');
+          localStorage.clear();
+          sessionStorage.clear();
+            // Clear cookies
+          Cookies.remove('token'); // Replace 'token' with your cookie name
           navigate(`/login`);
         } else {
           alert(resData.message);
