@@ -207,7 +207,7 @@
     /* margin: 110px 30px; */
     padding: 10px 0px 10px 0px;
     /* margin-bottom: 10px; */
-    position: absolute;
+    position: fixed;
     overflow-y: auto;
   }
   .sidebar h2{
