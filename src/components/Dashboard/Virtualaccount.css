@@ -22,6 +22,13 @@
     text-align: left;
     margin-top: 10px;
 } */
+
+.customPaddng 
+{
+    padding: 5px;
+}
+
+
 .main-content .btn-top {
     text-decoration: none;
     font-size: 14px;
@@ -145,6 +152,11 @@
     .wrap1{
         left: 47%;
         width: 37%;
+    }
+    .customPaddng 
+    {
+        padding-left: 20px;
+        margin-bottom: 20px;
     }
 }
 @media only screen and (min-width: 992px){
