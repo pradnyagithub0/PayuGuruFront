@@ -106,7 +106,8 @@
 [data-theme="light"] {
   --bg-color: #ffffff;
   --bg:#f9fafe;
-  --bg-card:rgba(255, 255, 255, 0.8);
+  /* --bg-card:rgba(255, 255, 255, 0.8); */
+  --bg-card: white;
   --text-color: #333333;
   --sidebar-text: #4E525F;
   --heading-color: #444444;
@@ -136,7 +137,7 @@
 [data-theme="dark"] {
   --bg-color: #333333;
   --bg: #535252;
-  --bg-card:#D9EDFE25;
+  --bg-card:#333333;
   --text-color: #ffffff;
   --sidebar-text:#F5F1FFB7;
   --heading-color: #dddddd;
@@ -206,7 +207,7 @@
     /* margin: 110px 30px; */
     padding: 10px 0px 10px 0px;
     /* margin-bottom: 10px; */
-    position: absolute;
+    position: fixed;
     overflow-y: auto;
   }
   .sidebar h2{
