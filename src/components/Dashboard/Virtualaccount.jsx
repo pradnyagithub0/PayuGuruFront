@@ -8,6 +8,11 @@ import { FetchVirtualAccountList } from "./commonComponents/data";
 import Pagination from "../Pagination";
 import { ENDPOINTS } from "../../utils/apiConfig";
 
+import DateRangeToolBar from "./PageToolbar";
+import { HStack } from "rsuite";
+import { FiSearch } from "react-icons/fi";
+import CustomButtonGroup from "./commonComponents/TableIconButtons";
+
 // import TaskComponent from "../../app/components/Table/TaskPage";
 
 function VirtualAccount() {
@@ -19,14 +24,16 @@ function VirtualAccount() {
   const [remaining, setRemaining] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [isFetching, setIsFetching] = useState(false);
-  const [sortBy, setSortBy] = useState('');
-  const [sortDirection, setSortDirection] = useState('');
+  const [sortBy, setSortBy] = useState("");
+  const [sortDirection, setSortDirection] = useState("");
+
+  const [search, setSearch] = useState("");
 
   const fetchData = useCallback(
     async (page = 1, loadMore = false) => {
       setLoader(true);
       try {
-        const skipItems = (page - 1) * itemsPerPage ;
+        const skipItems = (page - 1) * itemsPerPage;
         const response = await FetchVirtualAccountList(skipItems, itemsPerPage);
 
         const paginationData = await response.data.pagination;
@@ -38,10 +45,7 @@ function VirtualAccount() {
         if (!loadMore) {
           setAcList(JSON.parse(tasksData));
         } else {
-          setAcList((prevList) => [
-            ...prevList,
-            ...JSON.parse(tasksData)
-          ]);
+          setAcList((prevList) => [...prevList, ...JSON.parse(tasksData)]);
         }
       } catch (error) {
         console.error("Error:", error.message);
@@ -91,32 +95,72 @@ function VirtualAccount() {
 
       const resData = await response.json();
       if (resData && resData.StatusCodes === "00") {
-        setAcList((prevList)=>
-         prevList.map((item) => 
-          item.AC_id === accountNumber ? {...item, status: item.status === "enabled" ? "disabled" : "enabled" }
+        setAcList((prevList) =>
+          prevList.map((item) =>
+            item.AC_id === accountNumber
+              ? {
+                  ...item,
+                  status: item.status === "enabled" ? "disabled" : "enabled",
+                }
               : item
           )
         );
         fetchData(currentPage); // Refresh the data after updating the status
       } else {
-        console.log("status code not match")
+        console.log("status code not match");
       }
     } catch (error) {
       console.error("Error:", error);
     }
   };
+
+  const handleSearchAcc = async () => {
+    setLoader(true);
+
+    try {
+      const response = await fetch(ENDPOINTS.SEARCH_VIRTUAL_ACC, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          sessionid: sessionid,
+          AC_id: search,
+        }),
+      });
+
+      const resData = await response.json();
+      console.log("====================================");
+      console.log("Account Search Result: ", resData);
+      console.log("====================================");
+      setLoader(false);
+
+      if (resData.StatusCodes) {
+        if (resData.StatusCodes === "00") {
+          // Convert the single object response to an array
+          const responseArray = [resData.responsed];
+          setAcList(responseArray);
+        } else {
+          console.log(resData.mess.message);
+        }
+      }
+    } catch (error) {
+      setLoader(false);
+      console.error("Error during account search:", error);
+    }
+  };
+
   const handlePageChange = (newPage) => {
     if (newPage !== currentPage && newPage > currentPage) {
       setCurrentPage(newPage);
-    }
-    else{
+    } else {
       setCurrentPage(currentPage - 1);
-      
     }
   };
 
   const handleSort = (column) => {
-    const direction = sortDirection === 'asc' ? 'desc' : 'asc';
+    const direction = sortDirection === "asc" ? "desc" : "asc";
     setSortBy(column);
     setSortDirection(direction);
     fetchData(1, false); // Fetch data with new sorting
@@ -143,7 +187,6 @@ function VirtualAccount() {
 
                   <div className="col-xl-8 col-lg-12 col-md-12 col-12">
                     <div className="d-flex justify-content-end align-items-center pt-2">
-                    
                       <button className="btn  btn1 mr-2 btn-outline-secondary">
                         Add Virtual Account<i className="fa fa-plus ml-2"></i>
                       </button>
@@ -153,24 +196,72 @@ function VirtualAccount() {
                       {/* <button className="btn btn1 bg-dark text-white mr-2">
                         Filter <i className="fa fa-filter ml-2"></i>
                       </button> */}
-                    
                     </div>
                   </div>
                 </div>
                 <div className="card-body p-3">
-                <div className="d-flex mb-2">
-              
-                </div>
+                  <div className="row mt-0">
+                    <div className="col-lg-5 col-sm-12">
+                      <HStack>
+                          <div
+                            className=""
+                            style={{ width: "450px" }}
+                          >
+                            <DateRangeToolBar />
+                          </div>
+                      </HStack>
+                    </div>
+                    <div className="col-lg-4 col-sm-12">
+                      <HStack>
+                          <div className="d-flex p-2">
+                            <input
+                              type="text"
+                              className="searchTerm"
+                              placeholder="Search ID/Ref Number"
+                              value={search}
+                              onChange={(e) => {
+                                setSearch(e.target.value);
+                              }}
+                              style={{
+                                width: "250px !important",
+                                justifyItems: "center",
+                              }}
+                            />
+                            <button
+                              className="searchIconBtn"
+                              onClick={(e) => {
+                                // e.preventDefault();
+                                console.log(search);
+                                handleSearchAcc();
+                              }}
+                            >
+                              <FiSearch />
+                            </button>
+                          </div>
+                        </HStack>
+                    </div>
+                    <div className="col-lg-3 col-md-12 col-sm-12 customPaddng">
+                      <HStack>
+                        <HStack>
+                        <CustomButtonGroup appearance="ghost" />
+                        {/* </Panel> */}
+                        </HStack>
+                      </HStack>
+                    </div>
+                  </div>
+
                   <div className="table-responsive">
                     {loader ? (
                       <div className="text-center p-5">
-                        <div className="spinner-border text-primary" role="status">
+                        <div
+                          className="spinner-border text-primary"
+                          role="status"
+                        >
                           <span className="sr-only">Loading...</span>
                         </div>
                       </div>
                     ) : (
                       <>
-                   
                         <VirtualAccountTable
                           data={acList}
                           toggleStatus={toggleStatus}
@@ -183,11 +274,10 @@ function VirtualAccount() {
                           itemsPerPage={itemsPerPage}
                           totalItems={totalItems}
                           remaining={remaining}
-                          onPageChange={handlePageChange} 
-                        /> 
+                          onPageChange={handlePageChange}
+                        />
 
-
-                         {/* TAILWINDCSS Table Component with shadcn WIP */}
+                        {/* TAILWINDCSS Table Component with shadcn WIP */}
                         {/* <TaskComponent/> */}
                       </>
                     )}

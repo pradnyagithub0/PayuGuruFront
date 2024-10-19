@@ -3,7 +3,10 @@ import React from "react";
 // import { Clock } from "react-feather";
 import Clock from '../Clock'
 import SearchBox from "../SearchBox";
+
+
 const DashboardTopbar = () => {
+  const kyc_status = sessionStorage.getItem("kyc_status");
   const docsModalOpen = () => {
     const myModal = new window.bootstrap.Modal(
       document.getElementById("docsReqModal")
@@ -20,18 +23,23 @@ const DashboardTopbar = () => {
   return (
     <>
       <div className={`row mt-0 h-theme ${theme}`}>
-      <div className="col-lg-6 col-md-6 col-sm-12">
+      <div className="col-xl-6 col-lg-6 col-md-12 col-sm-12">
          
          <SearchBox/>
        </div>
-        <div className="col-lg-3 col-md-3 col-sm-12">
+        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12">
          
           <Clock/>
         </div>
-        <div className="col-lg-3 col-md-3 col-sm-12">
-          <button type="button" className="btn btn-top" onClick={docsModalOpen}>
-            Docs Required
-          </button>
+        <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12">
+        {kyc_status === "N" && (
+            <div className="d-flex justify-content-center">
+            <button type="button" className="btn btn-top" onClick={docsModalOpen}>
+              Docs Required
+            </button>
+            </div>
+          )}
+          
         </div>
       </div>
 
