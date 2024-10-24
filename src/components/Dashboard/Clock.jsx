@@ -98,7 +98,13 @@ const Clock = () => {
     >
       {/* {formatTime(time)} */}
 
-      <HStack spacing={10} childrenRenderMode="clone">
+      {/* <HStack spacing={10} childrenRenderMode="clone"> */}
+        <ClockCustomeButton
+            appearance={"ghost"}
+            formatTime={formatTime}
+            time={time}
+            toggleTimeFormat={toggleTimeFormat}
+          />
         {/* <HStack spacing={15}>
           <div style={{ width: "360px !important" }}>
             {kyc_status === "N" ? (
@@ -124,15 +130,15 @@ const Clock = () => {
             )}
           </div>
         </HStack> */}
-        <HStack>
+        {/* <HStack>
           <ClockCustomeButton
             appearance={"ghost"}
             formatTime={formatTime}
             time={time}
             toggleTimeFormat={toggleTimeFormat}
           />
-        </HStack>
-      </HStack>
+        </HStack> */}
+      {/* </HStack> */}
       {/* <HStack  spacing={10} childrenRenderMode="clone">
                h
               

@@ -22,7 +22,11 @@ function Header(){
                 <div className="container">
                     <nav className="container-fluid navbar navbar-expand-lg">
                         <a className="navbar-brand" href="/">
+                            { theme === "light" ? 
                             <img src="https://i.ibb.co/GTr3w2M/logo.webp" alt="logo" width="160" height="25"/>
+                            :
+                            <img src="https://i.ibb.co/ZzLf3bD/logo-footer.png"  alt="logo" width="160" height="25"/>
+                            }
                         </a>
                         <div className="number ml-auto">
                             <Link className="btn-warning mr-sm-2 p-xy" to="/login">
