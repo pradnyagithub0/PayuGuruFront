@@ -253,7 +253,7 @@ function Upi() {
                           <FiSearch />
                         </button>
                       </div> */}
-                      <button className="btn btn1 mr-2 btn-outline-secondary">
+                      {/* <button className="btn btn1 mr-2 btn-outline-secondary">
                         UPI Prefixes
                         <i className="fa fa-address-book ml-2"></i>
                       </button>
@@ -262,7 +262,7 @@ function Upi() {
                       </button>
                       <button className="btn btn1 bg-dark text-white mr-2">
                         Filter <i className="fa fa-filter ml-2"></i>
-                      </button>
+                      </button> */}
                     </div>
                   </div>
                 </div>
