@@ -28,8 +28,9 @@ const DashboardTopbar = () => {
          <SearchBox/>
        </div>
         <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12">
-         
-          <Clock/>
+         <div className="customClock">
+            <Clock/>
+          </div>
         </div>
         <div className="col-xl-3 col-lg-3 col-md-12 col-sm-12">
         {kyc_status === "N" && (

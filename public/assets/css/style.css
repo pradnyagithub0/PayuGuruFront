@@ -96,7 +96,7 @@ h1{
   word-wrap: break-word;
 }
 h2{
-  color: #1E2A39;
+  /* color: #1E2A39; */
   text-align: center;
   font-size: 32px;
   font-style: normal;
@@ -117,7 +117,7 @@ h4{
   line-height: 125%;
 }
 h5{
-  color:  #1E2A39;
+  /* color:  #1E2A39; */
   font-size: 20px;
   font-weight: 700;
   font-style: normal;
@@ -184,7 +184,7 @@ ul li img{
   padding: 15px 20px!important;
 }
 .pxy-11{
-  color:#4E525F;
+  /* color:#4E525F; */
   text-align: center;
   font-size: 18px;
   font-style: normal;
@@ -192,7 +192,7 @@ ul li img{
   line-height: 32px;
 }
 .f-24{
-  color: var(--p-2, #1E2A39);
+  /* color: var(--p-2, #1E2A39); */
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -266,9 +266,9 @@ ul li img{
   color:#333;
 }
 .upi-card{
-  background-image: url(../img/upi-card.jpg);
+  /* background-image: url(../img/upi-card.jpg);
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
   padding: 20px;
   width: 70%;
   margin: auto;
@@ -415,7 +415,7 @@ ul li img{
   font-weight: 500;
 }
 .card h5{
-  color:#1E2A39;
+  /* color:#1E2A39; */
   font-size: 20px;
   font-weight: 700;
   font-style: normal;
@@ -442,7 +442,7 @@ ul li img{
 }
 
 .payment-section{
-  background-color: #fafbff;
+  /* background-color: #fafbff; */
   margin: 0;
 }
 .payment-section .card h5{
@@ -452,7 +452,7 @@ ul li img{
   font-size: 15px;
 }
 .payment-gateway{
-  background-color: #fbfcff;
+  /* background-color: #fbfcff; */
   margin: 0;
 }
 .payment-gateway .f-24 {
