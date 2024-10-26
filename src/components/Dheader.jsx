@@ -79,14 +79,15 @@ const Header = () => {
       <header className={`h-theme ${theme} theme-controller`}>
        <div>
        <nav className="container-fluid navbar navbar-expand-lg px-5">
-          <div className="navbar-brand" href="">
-            <img
-              src="https://i.ibb.co/GTr3w2M/logo.webp"
-              alt="logo"
-              width="150"
-              height="25"
-            />
-          </div>
+          {/* <div className="navbar-brand" href=""> */}
+          <a className="navbar-brand" href="/">
+                            { theme === "light" ? 
+                            <img src="https://i.ibb.co/GTr3w2M/logo.webp" alt="logo" width="160" height="25"/>
+                            :
+                            <img src="https://i.ibb.co/ZzLf3bD/logo-footer.png"  alt="logo" width="160" height="25"/>
+                            }
+                        </a>
+          {/* </div> */}
 
           <button
             className="navbar-toggler"
