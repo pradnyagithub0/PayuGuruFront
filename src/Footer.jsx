@@ -1,9 +1,15 @@
 import React from "react";
 import './Footer.css';
-
+const packageJson = require('../package.json');
 
 const Footer = () =>{
     const currentYear = new Date().getFullYear(); 
+    let versionToDisplay = "unknown";
+    try {
+        versionToDisplay = packageJson.version; // Assuming VERSION is globally defined, e.g., through a bundler
+    } catch (error) {
+        console.log("Cannot get version of application.");
+    }
     return(
         <div>
         <footer id="support" className="footer-px-5">
@@ -215,7 +221,7 @@ const Footer = () =>{
                 </div>
             </div>
             <div className="footer-copyright d-flex flex-row px-4">
-                <p className="mr-auto footer-left">Copyright © {currentYear} .Arena ITech.</p>
+                <p className="mr-auto footer-left">Copyright © {currentYear} .Arena ITech. | {` Version: ${versionToDisplay}`}</p>
                 <p className="ml-auto footer-right"><a href="/cookiespolicy">Cookies Policy</a> | <a href="/redressalpolicy">Grievance Redressal Policy</a></p>
             </div>
         </div>
@@ -227,7 +233,6 @@ const Footer = () =>{
         <i className="fa fa-phone phone-float"></i>
     </a>
             
-        
         </div>
     )
 }
