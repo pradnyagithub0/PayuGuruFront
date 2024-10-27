@@ -8,6 +8,12 @@
     padding: 10px;
     
   }
+  .customClock
+  {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+  }
   .loaderContainer{
     position: absolute;
     top: 50%;
@@ -58,4 +64,13 @@
   font-size: 20px;
   margin: 0px !important;
   padding: 0px !important;
+}
+
+@media only screen and (max-width: 768px){
+  .customClock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+ }
 }

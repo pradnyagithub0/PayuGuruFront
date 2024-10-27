@@ -3,6 +3,89 @@
     margin: 0;
     padding: 0;
 }
+
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --heading-color: #444444;
+    --text-success: #09a13cdc;
+    --btn-create-upi:   #E7E8FF;
+    --btn-create-ac:  #E7F5FF;
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 20 14.3% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14.3% 4.1%;
+    --primary: 24.6 95% 53.1%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 60 4.8% 95.9%;
+    --secondary-foreground: 24 9.8% 10%;
+    --muted: 60 4.8% 95.9%;
+    --muted-foreground: 25 5.3% 44.7%;
+    --accent: 60 4.8% 95.9%;
+    --accent-foreground: 24 9.8% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 20 5.9% 90%;
+    --input: 20 5.9% 90%;
+    --ring: 24.6 95% 53.1%;
+    --radius: 0.5rem;
+    --notice-btn: #333333;
+    --border-color: #0f172a1a;
+    --bg-sky-30-hover: #38bdf833;
+    --bg-slate-900: #0f172a1a;
+    --bg-account-card: linear-gradient(91.15deg, #4E72F0 10.36%, #8A8BF9 84.51%);
+    --bg-rs-item-card: transparent;
+    --bg-backdrop-zindex: 100 !important;
+	--bg-input: #f4f4f4;
+  }
+  
+  /* Dark mode styles */
+  [data-theme="dark"] {
+    --bg-color: #333333;
+    --text-color: #ffffff;
+    --heading-color: #dddddd;
+    --text-success: #27ec63d6;
+    --btn-create-upi:   #222453;
+    --btn-create-ac:  #04426e;
+    --background: 20 14.3% 4.1%;
+    --foreground: 60 9.1% 97.8%;
+    --card: 20 14.3% 4.1%;
+    --card-foreground: 60 9.1% 97.8%;
+    --popover: 20 14.3% 4.1%;
+    --popover-foreground: 60 9.1% 97.8%;
+    --primary: 20.5 90.2% 48.2%;
+    --primary-foreground: 60 9.1% 97.8%;
+    --secondary: 12 6.5% 15.1%;
+    --secondary-foreground: 60 9.1% 97.8%;
+    --muted: 12 6.5% 15.1%;
+    --muted-foreground: 24 5.4% 63.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 60 9.1% 97.8%;
+    --destructive: 0 72.2% 50.6%;
+    --destructive-foreground: 60 9.1% 97.8%;
+    --border: 12 6.5% 15.1%;
+    --input: 12 6.5% 15.1%;
+    --ring: 20.5 90.2% 48.2%;
+    --notice-btn: #333333;
+    --border-color: #0f172a1a;
+    --bg-slate-900: #0f172abf;
+    --bg-account-card: linear-gradient(91.15deg, #272829 10.36%, #0a0a0a 84.51%);
+    --bg-rs-item-card: transparent;
+    --bg-backdrop-zindex: 100 !important;
+	--bg-input: #2e2d2d;
+  }
+
+  .bgLight{
+    background-color: #ffffff;
+    color: #333333;
+  }
+  .bgDark{
+    background-color: #514e4e;
+    color: #ffffff;
+  }
+
 /* section {
     padding: 20px;
     margin: 20px 20px;
@@ -12,7 +95,7 @@ p {
     font-style: normal;
     font-weight: 500;
     line-height: 28px;
-    color: #4e525f;
+    /* color: #4e525f; */
 }
 h1 {
     color: #1E2A39;
@@ -22,7 +105,7 @@ h1 {
     word-wrap: break-word;
 }
 h2 {
-    color: #1E2A39;
+    /* color: #1E2A39; */
     text-align: center;
     font-size: 32px;
     font-style: normal;
@@ -33,7 +116,7 @@ h2 {
 /* Hero section css start*/
 .jumbotron {
     padding: 5rem 2rem;
-    background-color: #fafbff;
+    /* background-color: #fafbff; */
 }
 .jumbotron h1 {
     font-size: 44px;
@@ -78,7 +161,7 @@ h4 {
     line-height: 125%;
 }
 h5 {
-    color: #1E2A39;
+    /* color: #1E2A39; */
     font-size: 20px;
     font-weight: 700;
     font-style: normal;
@@ -129,7 +212,7 @@ h5 {
 
 /* payment section css start*/
 .payment-section {
-    background-color: #fafbff;
+    /* background-color: #fafbff; */
     margin: 0;
 }
 .h-270 {
@@ -189,7 +272,7 @@ h5 {
 
 /* payment gateway css start*/
     .payment-gateway {
-        background-color: #fbfcff;
+        /* background-color: #fbfcff; */
         margin: 0;
     }
     .pxy-11 {
@@ -278,9 +361,9 @@ h5 {
     clip-path: polygon(-18% 0%, 100% 0, 100% 100%);
   }
   .upi-card {
-    background-image: url("https://i.ibb.co/1qt1X9c/upi-card.jpg");
+    /* background-image: url("https://i.ibb.co/1qt1X9c/upi-card.jpg");
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; */
     padding: 20px;
     width: 70%;
     margin: auto;
