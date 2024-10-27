@@ -3,6 +3,7 @@ import './Footer.css';
 
 
 const Footer = () =>{
+    const currentYear = new Date().getFullYear(); 
     return(
         <div>
         <footer id="support" className="footer-px-5">
@@ -214,7 +215,7 @@ const Footer = () =>{
                 </div>
             </div>
             <div className="footer-copyright d-flex flex-row px-4">
-                <p className="mr-auto footer-left">Copyright @2023.Arena ITech.</p>
+                <p className="mr-auto footer-left">Copyright © {currentYear} .Arena ITech.</p>
                 <p className="ml-auto footer-right"><a href="/cookiespolicy">Cookies Policy</a> | <a href="/redressalpolicy">Grievance Redressal Policy</a></p>
             </div>
         </div>
