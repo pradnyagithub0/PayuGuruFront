@@ -2,6 +2,29 @@
 
 Fron-end application
 
+
+## RELEASE COMMANDS
+
+### Patch Release: Small bug fixes
+
+```bash
+npm run release -- --release-as patch
+```
+
+### Minor Release: New features, backward compatible
+
+```bash
+npm run release -- --release-as minor
+```
+
+### Major Release: Breaking changes
+
+```bash
+npm run release -- --release-as major
+```
+
+
+
 ## RUN APPLICATION
 
 ```bash
