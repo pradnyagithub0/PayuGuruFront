@@ -532,7 +532,7 @@ function Dashboard() {
                   </Row>*/}
                   </div>
 
-                  {/* <div className="table-responsive">
+                  <div className="table-responsive">
                     <table
                       id="example"
                       className="table table-striped table-bordered "
@@ -590,9 +590,9 @@ function Dashboard() {
                         </tr>
                       </tbody>
                     </table>
-                  </div> */}
+                  </div>
 
-                  <div className="table-responsive">
+                  {/* <div className="table-responsive">
                     {loader ? (
                       <div className="text-center p-5">
                         <div
@@ -614,7 +614,7 @@ function Dashboard() {
                         
                       </>
                     )}
-                  </div>
+                  </div> */}
 
                 </div>
               </div>
