@@ -1,6 +1,7 @@
 import React from "react";
 import CopyButtonIcon from "./CopyButtonIcon";
 import QRCodeButton from "./QRCodeIcon";
+import { Link } from "react-router-dom";
 
 const UpiPopup = ({ data, onClose }) => {
   const handleCopy = () => {
@@ -10,34 +11,12 @@ const UpiPopup = ({ data, onClose }) => {
   
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        zIndex: "2000",
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        backgroundColor: "#ffffff",
-        padding: "20px",
-        boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
-        borderRadius: "8px",
-        width: "400px",
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "10px",
-      }}
+    <div className="gridViewUPI"
+      
     >
       {/* 1. UPI ID */}
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "10px",
-          backgroundColor: "#f5f5f5",
-          color: "black",
-          borderRadius: "8px",
-        }}
+        className="popup-item"
       >
         <strong>UPI ID</strong>
         <span>{data.upi_id}</span>
@@ -45,15 +24,7 @@ const UpiPopup = ({ data, onClose }) => {
 
       {/* 2. Copy Option */}
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "10px",
-          backgroundColor: "#f5f5f5",
-          color: "black",
-          borderRadius: "8px",
-        }}
+        className="popup-item"
       >
         <CopyButtonIcon
                 data={
@@ -67,15 +38,7 @@ const UpiPopup = ({ data, onClose }) => {
 
       {/* 3. QR Code */}
       <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "10px",
-          backgroundColor: "#f5f5f5",
-          color: "black",
-          borderRadius: "8px",
-        }}
+        className="popup-item"
       >
        <QRCodeButton
                 data={data.upi_id}
@@ -83,21 +46,23 @@ const UpiPopup = ({ data, onClose }) => {
                 style={{ backgroundColor: "#f8dcdc !important" ,color: "black !!important",}}
               />
       </div>
+      <div
+        className="popup-item"
+      >
+        
+        <Link to="/paymentCollect" className="btn btn1 virtual-btn" 
+        >
+        <strong>Payment Collect</strong>
+      </Link>
+      </div>
+
 
       {/* 4-9. Sample Options */}
-      {["Option 1", "Option 2", "Option 3", "Option 4", "Option 5", "Option 6"].map(
+      {["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"].map(
         (option, index) => (
           <div
             key={index}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              padding: "10px",
-              backgroundColor: "#f5f5f5",
-              color: "black",
-              borderRadius: "8px",
-            }}
+           className="popup-item"
           >
             <strong>{option}</strong>
           </div>
@@ -106,16 +71,7 @@ const UpiPopup = ({ data, onClose }) => {
 
       {/* Close Button */}
       <button
-        style={{
-          gridColumn: "span 3",
-          marginTop: "10px",
-          padding: "8px 12px",
-          backgroundColor: "#007bff",
-          color: "white",
-          border: "none",
-          borderRadius: "4px",
-          cursor: "pointer",
-        }}
+        className="close-Btn"
         onClick={onClose}
       >
         Close

@@ -62,16 +62,18 @@ export async function FetchVirtualAccountList(Skip = 0, currentPageNo = 1, items
          console.log('0. Skip: ', Skip);
         try{
           const response = await axios.post(ENDPOINTS.GET_VIRTUAL_ACCOUNT_LIST, {
-            range: [startDateISO, currentDate],
+            // range: [startDateISO, currentDate],
+            range: ["2024-09-03T21:41:52.439+00:00", "2024-10-22T04:55:46.865+00:00"],
             pagination: {
                 skip: Skip,
                 limit: itemsPerPage,
             },
             sessionid: sessionid,
-            sortBy: 'createdAt',        //sortBy,
-            sortDirection:'desc',//sortDirection,
-            searchText: searchText
+            sortBy: 'createdAt',        
+            sortDirection:'desc',
+            // searchText: searchText
         });
+       
        console.log('====================================');
        console.log('response: ', response.data);
        console.log('====================================');
