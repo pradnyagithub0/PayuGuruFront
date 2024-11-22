@@ -40,10 +40,10 @@ const UpiPopup = ({ data, onClose, opened }) => {
       opened={opened}
       onClose={onClose}
       centered
-      overlayProps={{
-        blur: 3,
-        color: theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2],
-      }}
+      // overlayProps={{
+      //   blur: 3,
+      //   color: theme.colorScheme === "dark" ? theme.colors.dark[9] : theme.colors.gray[2],
+      // }}
       withCloseButton={false} // Removes the close button in the modal header
     >
       <Card withBorder radius="md" p="lg" shadow="sm" style={{ maxWidth: 600, margin: "auto" }}>
