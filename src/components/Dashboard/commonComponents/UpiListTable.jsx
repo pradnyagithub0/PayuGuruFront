@@ -13,6 +13,8 @@ const UpiListTable = ({ data, toggleStatus }) => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupData, setPopupData] = useState(null);
 
+  const [modalOpened, setModalOpened] = useState(false);
+
   const sessionid = sessionStorage.getItem("sessionid");
 
   // Filter data based on search input
@@ -24,16 +26,7 @@ const UpiListTable = ({ data, toggleStatus }) => {
     );
   }, [data, search]);
 
-  const handlePopupOpen = (upiData) => {
-    setPopupData(upiData);
-    setIsPopupOpen(true);
-  };
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    setPopupData(null);
-  };
-
+  
   const columns = React.useMemo(
     () => [
       {
@@ -51,7 +44,8 @@ const UpiListTable = ({ data, toggleStatus }) => {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => handlePopupOpen(row.original)}
+            onClick={() => {setModalOpened(true); setPopupData(row.original)}}
+            // onClick={() => handlePopupOpen(row.original)}
           >
             View UPI
           </Button>
@@ -154,9 +148,12 @@ const UpiListTable = ({ data, toggleStatus }) => {
       </div>
 
       {/* Popup Component */}
-      {isPopupOpen && (
-        <UpiPopup data={popupData} onClose={handlePopupClose} />
-      )}
+      <UpiPopup
+        data={popupData}
+        opened={modalOpened}
+        onClose={() => {setModalOpened(false); setPopupData(null)}}
+      />
+     
     </>
   );
 };

@@ -31,18 +31,11 @@ const VirtualAccountTable = ({
   const sessionid = sessionStorage.getItem("sessionid");
   const [loader, setLoader] = useState(false);
 
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [modalOpened, setModalOpened] = useState(false);
+
   const [popupData, setPopupData] = useState(null);
 
-  const handlePopupOpen = (upiData) => {
-    setPopupData(upiData);
-    setIsPopupOpen(true);
-  };
-
-  const handlePopupClose = () => {
-    setIsPopupOpen(false);
-    setPopupData(null);
-  };
+  
   // Filter data based on search input
   const filteredData = useMemo(() => {
     return data.filter((item) => {
@@ -114,7 +107,8 @@ const VirtualAccountTable = ({
             <Button
             variant="contained"
             color="primary"
-            onClick={() => handlePopupOpen(row.original)}
+            onClick={() => {setModalOpened(true); setPopupData(row.original)}}
+            // onClick={() => handlePopupOpen(row.original)}
           >
             View ACC
           </Button>
@@ -322,9 +316,12 @@ const VirtualAccountTable = ({
       </div>
       {/* </Stack> */}
       {/* Popup Component */}
-      {isPopupOpen && (
-        <VirtualAccPopUp data={popupData} onClose={handlePopupClose} />
-      )} 
+      <VirtualAccPopUp
+        data={popupData}
+        opened={modalOpened}
+        onClose={() => {setModalOpened(false); setPopupData(null)}}
+      />
+      
     </>
   );
 };
