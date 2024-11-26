@@ -12,7 +12,7 @@
   }
   
   .item {
-    text-align: center;
+    text-align: center !important;
     padding: 10px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
